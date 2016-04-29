@@ -54,21 +54,18 @@ ts <- filter(d, Team.Height == "Tree")
 (tsplotno <- ceiling(sum(reps*sites / ts$Team.plants.per.6m, na.rm=T)))
 
 # working with full shade set. Make matrix for blank plot, 8 x 8 m. need to make this a grid of .25 m squares, to accomodate the smaller spacings
-plt <- matrix(nrow = 8 / 0.25, ncol= 8 / 0.25)
+plt <- matrix(nrow = 8 / 0.25 + 1, ncol= 8 / 0.25 + 1)
 # fill in buffer of 1 m, i.e. first four rows, first four cols...
 buff = 1
 plt[1:(buff/0.25),] = 0
 plt[,1:(buff/0.25)] = 0
-plt[(nrow(plt)-buff/0.25):nrow(plt),] = 0
-plt[,(ncol(plt)-buff/0.25):ncol(plt)] = 0
-
+plt[((nrow(plt)+1)-buff/0.25):nrow(plt),] = 0
+plt[,((ncol(plt)+1)-buff/0.25):ncol(plt)] = 0
 
 # make grids of right number of these for each set
 tsplot <- psplot <- fsplot <- vector()
 for(i in 1:fsplotno) {fsplot <- rbind(fsplot, plt)}
-
 for(i in 1:psplotno) {psplot <- rbind(psplot, plt)}
-
 for(i in 1:tsplotno) {tsplot <- rbind(tsplot, plt)}
 
 # make table of all individuals to draw from. Col of all sp, then sites within sp, then reps within site within sp
@@ -81,6 +78,145 @@ dat <- data.frame(
 )
 dat$ind <- with(dat, paste(sp, site, rep, sep="_"))
 dat$set <- d$Team.Height[match(dat$sp, d$sp)]
+dat$space <- d$Team.spacing[match(dat$sp, d$sp)]
 
-# for full shade set, now start filling in 
-fs <- subset(dat, subset = 
+##### start with  sun shrubs
+ps <- subset(dat, set == "Shrub Sun") 
+
+# now draw from this data frame and fill in the matrix, using the size requirement for that species
+# first, shuffle the data frame
+ps <- ps[sample(rownames(ps)),]
+
+# now go row by row through the data frame, filling in as necessary
+for(i in 1:nrow(ps)){ # i = 1
+  fx <- ps[i,]
+  
+  # start filling this in from the top left of first plot
+  start <- min(which(is.na(psplot)))
+
+  # make a buffer around that individual
+  buffspace = (fx$space/0.25) - 1 # this many cells around the individual will be the buffer
+  buffname = "buff"#paste(fx$ind, "\n buff")
+  
+  if(i == 1) {
+    
+    psplot[start] = fx$ind
+    lastrow = max(which(!apply(psplot, 1, function(x) all(is.na(x) | x == "0" | x == buffname)))) 
+    lastcol = max(which(!apply(psplot, 2, function(x) all(is.na(x) | x == "0" | x == buffname)))) 
+    
+    toprow = lastrow-buffspace; if(toprow<0) toprow = 0
+    bottomrow = lastrow+buffspace; if(bottomrow>nrow(psplot)) bottomrow = nrow(psplot)
+    leftcol =  lastcol-buffspace; if(leftcol<0) leftcol = 0
+    rightcol = lastcol+buffspace; if(rightcol>ncol(psplot)) rightcol = ncol(psplot)
+    
+    psplot[toprow:bottomrow, leftcol:rightcol] = buffname
+    psplot[start] = fx$ind
+  }
+  
+  if(i != 1) { # if not the first one in this set, need to check buffer space
+    
+    # see if this start space will work
+    psplot[start] = fx$ind
+    lastrow = which(apply(psplot, 1, function(x) any(x == fx$ind)))
+    lastcol = which(apply(psplot, 2, function(x) any(x == fx$ind)))
+    
+    toprow = lastrow-buffspace; if(toprow<0) toprow = 0
+    bottomrow = lastrow+buffspace; if(bottomrow>nrow(psplot)) bottomrow = nrow(psplot)
+    leftcol =  lastcol-buffspace; if(leftcol<0) leftcol = 0
+    rightcol = lastcol+buffspace; if(rightcol>ncol(psplot)) rightcol = ncol(psplot)
+    
+    buffrange = psplot[toprow:bottomrow, leftcol:rightcol]
+    
+    # if there is another individual in the proposed buffer, need to offset
+    if(!all(buffrange == "buff" | buffrange == "0" | is.na(buffrange) | buffrange == fx$ind)){
+      
+      bufflastrow = which(apply(buffrange, 1, function(x) any(x == ps[i-1,"ind"])))
+      bufflastcol = which(apply(buffrange, 2, function(x) any(x == ps[i-1,"ind"])))
+      
+      offsetrc = which(c(bufflastrow, bufflastcol)==min(c(bufflastrow, bufflastcol))) # 1 row, 2 = col
+      
+      if(offsetrc == 1) {
+        start = start+bufflastrow
+      } # end of offset by row 
+    }
+    psplot[toprow:bottomrow, leftcol:rightcol] = buffname
+    psplot[start] = fx$ind
+  } # end not first one 
+  
+} # end 
+
+
+
+
+##### Trees
+ts <- subset(dat, set == "Tree") 
+
+# shuffle the data frame
+ts <- ts[sample(rownames(ts)),]
+
+# now go row by row through the data frame, filling in as necessary
+for(i in 1:nrow(ts)){ # i = 1
+  fx <- ts[i,]
+  
+  # start filling this in from the top left of first plot
+  start <- min(which(is.na(tsplot)))
+  
+  # make a buffer around that individual
+  buffspace = (fx$space/0.25) - 1 # this many cells around the individual will be the buffer
+  buffname = "buff"#paste(fx$ind, "\n buff")
+  
+  if(i == 1) {
+    
+    tsplot[start] = fx$ind
+    lastrow = max(which(!apply(tsplot, 1, function(x) all(is.na(x) | x == "0" | x == buffname)))) 
+    lastcol = max(which(!apply(tsplot, 2, function(x) all(is.na(x) | x == "0" | x == buffname)))) 
+    
+    toprow = lastrow-buffspace; if(toprow<0) toprow = 0
+    bottomrow = lastrow+buffspace; if(bottomrow>nrow(tsplot)) bottomrow = nrow(tsplot)
+    leftcol =  lastcol-buffspace; if(leftcol<0) leftcol = 0
+    rightcol = lastcol+buffspace; if(rightcol>ncol(tsplot)) rightcol = ncol(tsplot)
+    
+    tsplot[toprow:bottomrow, leftcol:rightcol] = buffname
+    tsplot[start] = fx$ind
+  }
+  
+  if(i != 1) { # if not the first one in this set, need to check buffer space
+    
+    # see if this start space will work
+    tsplot[start] = fx$ind
+    lastrow = which(apply(tsplot, 1, function(x) any(x == fx$ind)))
+    lastcol = which(apply(tsplot, 2, function(x) any(x == fx$ind)))
+    
+    toprow = lastrow-buffspace; if(toprow<0) toprow = 0
+    bottomrow = lastrow+buffspace; if(bottomrow>nrow(tsplot)) bottomrow = nrow(tsplot)
+    leftcol =  lastcol-buffspace; if(leftcol<0) leftcol = 0
+    rightcol = lastcol+buffspace; if(rightcol>ncol(tsplot)) rightcol = ncol(tsplot)
+    
+    buffrange = tsplot[toprow:bottomrow, leftcol:rightcol]
+    
+    # if there is another individual in the proposed buffer, need to offset
+    if(!all(buffrange == "buff" | buffrange == "0" | is.na(buffrange) | buffrange == fx$ind)){
+      
+    ###### TODO ###############################
+       bufflastrow = max(which(apply(buffrange, 1, function(x) any(match(x, ts[-i,"ind"])))))
+       bufflastcol = max(which(apply(buffrange, 2, function(x) any(match(x, ts[-i,"ind"])))))
+    ###### TODO ###############################
+  
+      # This works if the n-1 individual is present in the buffer, but not otherwise (e.g., when not on the first column any more.)
+      
+      # bufflastrow = which(apply(buffrange, 1, function(x) any(x == ts[i-1,"ind"])))
+      # bufflastcol = which(apply(buffrange, 2, function(x) any(x == ts[i-1,"ind"])))
+      
+      offsetrc = which(c(bufflastrow, bufflastcol)==min(c(bufflastrow, bufflastcol))) # 1 row, 2 = col
+      
+      if(offsetrc == 1) {
+        start = start+bufflastrow
+      } # end of offset by row 
+    }
+    tsplot[toprow:bottomrow, leftcol:rightcol] = buffname
+    tsplot[start] = fx$ind
+  } # end not first one 
+  
+} # end 
+
+
