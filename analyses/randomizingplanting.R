@@ -87,6 +87,8 @@ ps <- subset(dat, set == "Shrub Sun")
 # first, shuffle the data frame
 ps <- ps[sample(rownames(ps)),]
 
+xy <- vector() # for position
+
 # now go row by row through the data frame, filling in as necessary
 for(i in 1:nrow(ps)){ # i = 1
   fx <- ps[i,]
@@ -144,6 +146,14 @@ for(i in 1:nrow(ps)){ # i = 1
   } # end not first one 
   
 } # end 
+
+write.csv(psplot, row.names=F, file = "Shrub Sun Map.csv")
+
+# did we use all of them? 
+
+length(unique(psplot[psplot != "buff" & psplot != 0 & !is.na(psplot)])) == nrow(ps)
+
+# Make an list of the xy locations based on this map.
 
 
 
