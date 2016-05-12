@@ -8,9 +8,9 @@ library(dplyr)
 rm(list=ls()) 
 options(stringsAsFactors = FALSE)
 
-setwd("~/Documents/git/projects/treegarden/wildhellgarden/analyses")
-
 # Set own wd as needed
+if(length(grep("danflynn", getwd()))==0){ setwd("~/Documents/git/projects/treegarden/wildhellgarden/analyses") }
+
 if(length(grep("danflynn", getwd()))>0){ setwd("~/Documents/git/wildhellgarden/analyses") }
 
 plantneeds <- read.csv("input/Commongardenspeciesrequirements_27Apr2016.csv")
@@ -21,7 +21,6 @@ plantneeds$sp = paste(unlist(lapply(strsplit(plantneeds$Species, " "), function(
 
 d <- filter(plantneeds, Keep == "Y") # 20 core species, work on this first
 # d <- filter(plantneeds, Keep != "") # 26 species, full set
-
 
 # plantneeds %>% 
 #   filter(Keep, Keep != "")
@@ -65,8 +64,17 @@ plt[,((ncol(plt)+1)-buff/0.25):ncol(plt)] = 0
 # make grids of right number of these for each set
 tsplot <- psplot <- fsplot <- vector()
 for(i in 1:fsplotno) {fsplot <- rbind(fsplot, plt)}
+# fill in the NAs with index values
+for(i in 1:length(fsplot)){ if(is.na(fsplot[i])) fsplot[i] = i }
+
 for(i in 1:psplotno) {psplot <- rbind(psplot, plt)}
+# fill in the NAs with index values
+for(i in 1:length(psplot)){ if(is.na(psplot[i])) psplot[i] = i }
+
 for(i in 1:tsplotno) {tsplot <- rbind(tsplot, plt)}
+# fill in the NAs with index values
+for(i in 1:length(tsplot)){ if(is.na(tsplot[i])) tsplot[i] = i }
+
 
 # make table of all individuals to draw from. Col of all sp, then sites within sp, then reps within site within sp
 lengthout = nrow(d)*reps*sites
@@ -94,7 +102,7 @@ for(i in 1:nrow(ps)){ # i = 1
   fx <- ps[i,]
   
   # start filling this in from the top left of first plot
-  start <- min(which(is.na(psplot)))
+  start <- min(which(psplot!=0 & psplot != buffname & !psplot %in% ps[-1,"ind"]))
 
   # make a buffer around that individual
   buffspace = (fx$space/0.25) - 1 # this many cells around the individual will be the buffer
@@ -103,8 +111,8 @@ for(i in 1:nrow(ps)){ # i = 1
   if(i == 1) {
     
     psplot[start] = fx$ind
-    lastrow = max(which(!apply(psplot, 1, function(x) all(is.na(x) | x == "0" | x == buffname)))) 
-    lastcol = max(which(!apply(psplot, 2, function(x) all(is.na(x) | x == "0" | x == buffname)))) 
+    lastrow = which(apply(psplot, 1, function(x) any(x == fx$ind)))
+    lastcol = which(apply(psplot, 2, function(x) any(x == fx$ind)))
     
     toprow = lastrow-buffspace; if(toprow<0) toprow = 0
     bottomrow = lastrow+buffspace; if(bottomrow>nrow(psplot)) bottomrow = nrow(psplot)
@@ -129,8 +137,8 @@ for(i in 1:nrow(ps)){ # i = 1
     
     buffrange = psplot[toprow:bottomrow, leftcol:rightcol]
     
-    # if there is another individual in the proposed buffer, need to offset
-    if(!all(buffrange == "buff" | buffrange == "0" | is.na(buffrange) | buffrange == fx$ind)){
+    # if there is another individual in the proposed buffer, need to offset. Easy test: is the value shorter than 10 characters
+    if(!all(buffrange == fx$ind | nchar(buffrange) < 10)){
       
       bufflastrow = which(apply(buffrange, 1, function(x) any(x == ps[i-1,"ind"])))
       bufflastcol = which(apply(buffrange, 2, function(x) any(x == ps[i-1,"ind"])))
@@ -144,27 +152,33 @@ for(i in 1:nrow(ps)){ # i = 1
     psplot[toprow:bottomrow, leftcol:rightcol] = buffname
     psplot[start] = fx$ind
   } # end not first one 
+
+  # find the xy coordinates for this position
+  rowx = which(apply(psplot, 1, function(x) any(x == fx$ind)))
+  colx = which(apply(psplot, 2, function(x) any(x == fx$ind)))
+  
+  xy <- rbind(data.frame(ind = fx$ind, row = rowx, col = colx))
   
 } # end 
 
 write.csv(psplot, row.names=F, file = "Shrub Sun Map.csv")
 
+write.csv(xy, row.names=F, file = "Shrub Sun Location.csv")
+
 # did we use all of them? 
 
-length(unique(psplot[psplot != "buff" & psplot != 0 & !is.na(psplot)])) == nrow(ps)
+length(unique(psplot[nchar(psplot) > 10])) == nrow(ps)
 
-# Make an list of the xy locations based on this map.
-
-
+### FIRST ONE GETTING OVERWRITTEN  ?? Fix. Problem came when changing from NA to numeric index. ####
 
 
 ##### Trees
-ts <- subset(dat, set == "Tree") 
-
-# shuffle the data frame
+# This works if the n-1 individual is present in the buffer, but not otherwise (e.g., when not on the first column any more.)
+      
 ts <- ts[sample(rownames(ts)),]
 
-# now go row by row through the data frame, filling in as necessary
+xy <- vector() # for position
+
 for(i in 1:nrow(ts)){ # i = 1
   fx <- ts[i,]
   
@@ -207,26 +221,41 @@ for(i in 1:nrow(ts)){ # i = 1
     # if there is another individual in the proposed buffer, need to offset
     if(!all(buffrange == "buff" | buffrange == "0" | is.na(buffrange) | buffrange == fx$ind)){
       
-    ###### TODO ###############################
-       bufflastrow = max(which(apply(buffrange, 1, function(x) any(match(x, ts[-i,"ind"])))))
-       bufflastcol = max(which(apply(buffrange, 2, function(x) any(match(x, ts[-i,"ind"])))))
-    ###### TODO ###############################
-  
-      # This works if the n-1 individual is present in the buffer, but not otherwise (e.g., when not on the first column any more.)
+      # find the max row which is occupied by another individual
+      bufflastrow = max(which( apply(buffrange, 1, function(x) any(match(x, ts[-i,"ind"]))) ))
+      # same for columns
+      bufflastcol = max(which(apply(buffrange, 2, function(x) any(match(x, ts[-i,"ind"])))))
       
-      # bufflastrow = which(apply(buffrange, 1, function(x) any(x == ts[i-1,"ind"])))
-      # bufflastcol = which(apply(buffrange, 2, function(x) any(x == ts[i-1,"ind"])))
+      # which is smaller of these two. either move down or move over, depending on row or column the smaller one to adjust
+      offsetrc = which(c(bufflastrow, bufflastcol) == min(c(bufflastrow, bufflastcol))) # 1 row, 2 = col
       
-      offsetrc = which(c(bufflastrow, bufflastcol)==min(c(bufflastrow, bufflastcol))) # 1 row, 2 = col
+      # moving down rows is easy. Moving over columns is trickier
+      tsplot[start]
+      dim(tsplot)
       
-      if(offsetrc == 1) {
-        start = start+bufflastrow
-      } # end of offset by row 
+      which(tsplot[lastrow, lastcol+bufflastcol])
+      start = ifelse(offsetrc == 1,
+             start+bufflastrow,
+             start+bufflastcol)
+      
     }
     tsplot[toprow:bottomrow, leftcol:rightcol] = buffname
     tsplot[start] = fx$ind
   } # end not first one 
   
+  # find the xy coordinates for this position
+  rowx = which(apply(tsplot, 1, function(x) any(x == fx$ind)))
+  colx = which(apply(tsplot, 2, function(x) any(x == fx$ind)))
+  
+  xy <- rbind(data.frame(ind = fx$ind, row = rowx, col = colx))
+  
 } # end 
 
+write.csv(tsplot, row.names=F, file = "Trees Map.csv")
+
+write.csv(xy, row.names=F, file = "Trees Location.csv")
+
+# did we use all of them? 
+
+length(unique(tsplot[tsplot != "buff" & tsplot != 0 & !is.na(tsplot)])) == nrow(ps)
 
