@@ -86,6 +86,12 @@ ps <- ps[sample(rownames(ps)),]
 
 xy <- vector() # for position
 
+psplot <- vector()
+for(i in 1:psplotno) {psplot <- rbind(psplot, plt)}
+# fill in the NAs with index values
+for(i in 1:length(psplot)){ if(is.na(psplot[i])) psplot[i] = i }
+
+
 # now go row by row through the data frame, filling in as necessary
 for(i in 1:nrow(ps)){ # i = 1
   fx <- ps[i,]
@@ -157,13 +163,43 @@ write.csv(psplot, row.names=F, file = "Shrub Sun Map.csv")
 write.csv(xy, row.names=F, file = "Shrub Sun Location.csv")
 
 # did we use all of them? 
-  all(unique(psplot[nchar(psplot) > 10]) == ps$ind)
-  
-##### TREES. Huh. used up the whole thing in 172 rows?? 
+
+length(unique(psplot[nchar(psplot) > 5 & !is.na(psplot)])) == nrow(ps)
+
+
+##### TREES. Huh. used up the whole thing in 172 rows?? Make circular buffers instead
+mask3 = matrix(c(NA, NA, NA, NA, NA, "b","b",NA, NA, NA, NA, NA,
+                 NA, NA, NA, "b","b","b","b","b","b", NA, NA, NA,
+                 NA, NA, "b", "b","b","b","b","b","b","b",NA, NA,
+                 NA, "b", "b", "b","b","b","b","b","b","b","b", NA,
+                 NA, "b", "b", "b","b","b","b","b","b","b","b", NA,
+                 "b","b", "b", "b","b","b","b","b","b","b","b", "b",
+                 "b","b", "b", "b","b","b","b","b","b","b","b", "b",
+                 NA, "b", "b", "b","b","b","b","b","b","b","b", NA,
+                 NA, "b", "b", "b","b","b","b","b","b","b","b", NA,
+                 NA, NA, "b", "b","b","b","b","b","b","b",NA, NA,
+                 NA, NA, NA, "b","b","b","b","b","b", NA, NA, NA,
+                 NA, NA, NA, NA, NA, "b","b",NA, NA, NA, NA, NA)
+                 , nrow = 3/0.25, ncol = 3/0.25)
+
+mask15 = matrix(c(NA, NA, "b", "b", NA, NA,
+                  NA, "b", "b", "b", "b", NA,
+                  "b", "b", "b", "b", "b", "b",
+                  "b", "b", "b", "b", "b", "b",
+                  NA, "b", "b", "b", "b", NA,
+                  NA, NA, "b", "b", NA, NA)
+               , nrow = 1.5/0.25, ncol = 1.5/0.25)
+
+mask1 = matrix(c(NA, "b", "b", NA, 
+                 "b", "b", "b", "b",
+                 "b", "b", "b", "b",
+                 NA, "b", "b", NA)
+                , nrow = 1/0.25, ncol = 1/0.25)
+
+
   ts <- subset(dat, set == "Tree") 
   ts <- ts[sample(rownames(ts)),]
   
-    
   tsplot <- vector() # make the grid
   for(i in 1:tsplotno) {tsplot <- rbind(tsplot, plt)}
   # fill in the NAs with index values
@@ -172,7 +208,7 @@ write.csv(xy, row.names=F, file = "Shrub Sun Location.csv")
 xy <- vector() # for position
 
 # now go row by row through the data frame, filling in as necessary
-for(i in 1:172){#1:nrow(ts)){ # i = 1
+for(i in 1:50){#nrow(ts)){ # i = 51
   fx <- ts[i,]
   
   # make a buffer around that individual
@@ -188,22 +224,13 @@ for(i in 1:172){#1:nrow(ts)){ # i = 1
     lastrow = which(apply(tsplot, 1, function(x) any(x == fx$ind)))
     lastcol = which(apply(tsplot, 2, function(x) any(x == fx$ind)))
     
-    # draw a circle of buffer space, not a square!
-    
-    
     toprow = lastrow-buffspace; if(toprow<0) toprow = 0
     bottomrow = lastrow+buffspace; if(bottomrow>nrow(tsplot)) bottomrow = nrow(tsplot)
     leftcol =  lastcol-buffspace; if(leftcol<0) leftcol = 0
     rightcol = lastcol+buffspace; if(rightcol>ncol(tsplot)) rightcol = ncol(tsplot)
     
     buffzone = tsplot[toprow:bottomrow, leftcol:rightcol] #buffname
-    # now find all the cells which are buffspace away from ind
-    
-    dist(buffzone)
-    # which cells are adjacent to this ind?
-    
-    
-    
+
     tsplot[start] = fx$ind
   }
   
@@ -214,19 +241,11 @@ for(i in 1:172){#1:nrow(ts)){ # i = 1
     lastrow = which(apply(tsplot, 1, function(x) any(x == fx$ind)))
     lastcol = which(apply(tsplot, 2, function(x) any(x == fx$ind)))
     
-    toprow = lastrow-buffspace; if(toprow<0) toprow = 0
-    bottomrow = lastrow+buffspace; if(bottomrow>nrow(tsplot)) bottomrow = nrow(tsplot)
-    leftcol =  lastcol-buffspace; if(leftcol<0) leftcol = 0
-    rightcol = lastcol+buffspace; if(rightcol>ncol(tsplot)) rightcol = ncol(tsplot)
-    
     buffrange = tsplot[toprow:bottomrow, leftcol:rightcol]
     
     # if there is another individual in the proposed buffer, need to offset. Easy test: is the value shorter than 10 characters
     if(!all(buffrange == fx$ind | nchar(buffrange) < 10)){
       
-#       bufflastrow = which(apply(buffrange, 1, function(x) any(x == ts[i-1,"ind"])))
-#       bufflastcol = which(apply(buffrange, 2, function(x) any(x == ts[i-1,"ind"])))
-             
       # find the max row which is occupied by another individual
       bufflastrow = max(which( apply(buffrange, 1, function(x) any(match(x, ts[-i,"ind"]))) ))
       # same for columns
@@ -235,22 +254,15 @@ for(i in 1:172){#1:nrow(ts)){ # i = 1
       # which is smaller of these two. either move down or move over, depending on row or column the smaller one to adjust
       offsetrc = which(c(bufflastrow, bufflastcol) == min(c(bufflastrow, bufflastcol))) # 1 row, 2 = col
       
-      # moving down rows is easy. Moving over columns is trickier
-      tsplot[start]
-      dim(tsplot)
-      
-      #which(tsplot[lastrow, lastcol+bufflastcol])
-#       start = ifelse(offsetrc == 1,
-#                      start+bufflastrow,
-#                      start+bufflastcol)
-#       
-      
-      offsetrc = which(c(bufflastrow, bufflastcol)==min(c(bufflastrow, bufflastcol))) # 1 row, 2 = col
       
       if(offsetrc == 1) {
         start = start+bufflastrow
       } # end of offset by row 
-    }
+      if(offsetrc == 2) {
+        start = buffrange[,buffspace-bufflastcol]
+      }
+        
+      }
     
     tsplot[toprow:bottomrow, leftcol:rightcol] = buffname
     tsplot[start] = fx$ind
