@@ -16,7 +16,7 @@ plantneeds <- as_data_frame(plantneeds) # put in dplyr format
 # make 6 letter code
 plantneeds$sp = paste(unlist(lapply(strsplit(plantneeds$Species, " "), function(x) toupper(substr(x[1], 1,3)))), unlist(lapply(strsplit(plantneeds$Species, " "), function(x) toupper(substr(x[2], 1,3)))), sep ="")
 
-d <- filter(plantneeds, Keep != "N") # 20 core species, work on this first
+d <- filter(plantneeds, Keep != "N") # 20 core species, 24 total 
 
 # Jehane measured otut 40 8x8 plots 21-22 April. We have three groups of plants in terms of shade, and four kinds of spacing, 0.75, 1, 1.5, and 3 m per individual.
 # Divide up in to full-life shade, partial-life shade, and full sun species. Within each shade set, randomize position of individuals of species according to their spacing. Put all three sets together, and sum up the total indivdiduals per species, per site.
@@ -42,7 +42,7 @@ ts <- filter(d, Team.Height == "Tree")
 (tsplotno <- ceiling(sum(reps*sites / ts$Team.plants.per.6m, na.rm=T)))
 
 # make table of all individuals to draw from. Col of all sp, then sites within sp, then reps within site within sp
-lengthout = nrow(d)*reps*sites # 720
+lengthout = nrow(d)*reps*sites # 720 with core, 1728 exteneded
 
 dat <- data.frame(
   sp = gl(nrow(d), reps*sites, length = lengthout, labels = d$sp),
@@ -81,11 +81,47 @@ ts <- subset(dat, set == "Tree")
 ts <- ts[sample(rownames(ts)),]
 ts$order = 1:nrow(ts)
 
+tsplots = c(1, 2, 3, 5, 6, 9, 12, 15, 16, 17, 18, 19,
+            21, 22, 24, 25, 27, 28, 29,
+            30, 31, 32, 34, 37, 38, 39, 40)
+
+tsplotno <- vector()
+tsplotarea <- vector()
+
+for(i in 1:nrow(ts)){
+  
+  tsplotarea <- c(tsplotarea, ts[i,'space'])
+  
+  if(sum(tsplotarea) >= 42) { tsplots = tsplots[-1]; tsplotarea = vector() }
+  
+  tsplotno <- c(tsplotno, tsplots[1])
+}
+
+ts$plotno = tsplotno
+
 fs <- subset(dat, set == "Shrub Shade") 
 fs <- fs[sample(rownames(fs)),]
 fs$order = 1:nrow(fs)
 
+fsplots = c(7, 10, 13, 23, 33)
+
+fsplotno <- vector()
+fsplotarea <- vector()
+
+for(i in 1:nrow(fs)){
+  
+  fsplotarea <- c(fsplotarea, fs[i,'space'])
+  
+  if(sum(fsplotarea) >= 49) { fsplots = fsplots[-1]; fsplotarea = vector() }
+  
+  fsplotno <- c(fsplotno, fsplots[1])
+}
+
+fs$plotno = fsplotno
+
+
 dat2 <- rbind(ps, ts, fs)
+
 write.csv(dat2, file = "Inds for Planting.csv", row.names=F)
 
 
