@@ -9,8 +9,9 @@ rm(list=ls())
 options(stringsAsFactors = FALSE)
 
 # Set own wd as needed
-if(length(grep("danflynn", getwd()))==0){ setwd("~/Documents/git/projects/treegarden/wildhellgarden/analyses") }
+if(length(grep("danflynn", getwd()))!=0){ setwd("~/Documents/git/wildhellgarden/analyses") }
 
+# Lizzie wd
 setwd("~/Documents/git/projects/treegarden/wildhellgarden/analyses")
 
 plantneeds <- read.csv("input/Commongardenspeciesrequirements_27Apr2016.csv")
@@ -204,11 +205,18 @@ mask1 = matrix(c(NA, "b", "b", NA,
   for(i in 1:tsplotno) {tsplot <- rbind(tsplot, plt)}
   # fill in the NAs with index values
   for(i in 1:length(tsplot)){ if(is.na(tsplot[i])) tsplot[i] = i }
-  
+
+  # manually make buffer masks for 1.5, 1, and 3m
+  maks1.5 = matrix(nrow = )
+    
 xy <- vector() # for position
 
 # now go row by row through the data frame, filling in as necessary
+<<<<<<< Updated upstream
 for(i in 1:50){#nrow(ts)){ # i = 51
+=======
+for(i in 1:50){#1:nrow(ts)){ # i = 1
+>>>>>>> Stashed changes
   fx <- ts[i,]
   
   # make a buffer around that individual
@@ -230,6 +238,12 @@ for(i in 1:50){#nrow(ts)){ # i = 51
     rightcol = lastcol+buffspace; if(rightcol>ncol(tsplot)) rightcol = ncol(tsplot)
     
     buffzone = tsplot[toprow:bottomrow, leftcol:rightcol] #buffname
+<<<<<<< Updated upstream
+=======
+    # now find all the cells which are buffspace away from ind
+    # which cells are adjacent to this ind?
+    
+>>>>>>> Stashed changes
 
     tsplot[start] = fx$ind
   }
