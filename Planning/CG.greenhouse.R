@@ -48,3 +48,4 @@ d<- clean %>%
   group_by(Site) %>%
   count(Species) %>%
   arrange(Species)
+write.csv(d, file ="inds.csv")
