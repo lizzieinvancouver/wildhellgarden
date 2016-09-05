@@ -21,7 +21,7 @@ ipak(packages)
 
 # Integrate Phenology Data and compare methodologies
 # Set Working Directory
-setwd("~/Documents/Temporal Ecology/Common Garden")
+setwd("~/Documents/git/wildhellgarden/Planning")
 
 gh <- read.csv("gh.data.csv", header=TRUE, sep=",")
 attach(gh)
@@ -32,7 +32,7 @@ gh <- gh %>%
 clean <- gh %>%
   separate(ID, c("Individual", "Site"))
 
-clean$Species <- substring(gh1[,1], 1, 6) 
+clean$Species <- substring(clean[,1], 1, 6) 
 
 ## Filter to only show included species
 target <- c("ACEPEN", "ACESPI", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP",
