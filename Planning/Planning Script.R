@@ -4,6 +4,7 @@
 ### Super simple version. Randomize. Figure out how many individuals of each size to go into each plot, assign to plots. Then manually locate in Excel.
 
 library(dplyr)
+library(tidyr)
 rm(list=ls()) 
 options(stringsAsFactors = FALSE)
 
@@ -38,7 +39,6 @@ ipak <- function(pkg){
 packages <- c("ggplot2", "rshape2", "dplyr", "tidyr")
 ipak(packages)
 
-# Integrate Phenology Data and compare methodologies
 # Set Working Directory
 setwd("~/Documents/git/wildhellgarden/Planning")
 
@@ -94,3 +94,19 @@ plot <- planning %>%
   select(Individual, Plotno)
 cleaner <- d %>%
   separate(Individual, c("Individual", "Site", "Number"))
+
+###########################
+# Set Working Directory
+setwd("~/Documents/git/wildhellgarden/Planning")
+
+final<-read.csv("Common Garden List.csv", sep=",", header=TRUE)
+attach(final)
+
+cg<-as.data.frame(table(final$Location))
+
+# Get the site by getting the last two characters of the undercomp rownames
+spp <- final %>%
+  separate(ID, c("Species", "Site", "Number"))
+
+spec<-as.data.frame(table(spp$Species))
+site<-as.data.frame(table(spp$Site))
