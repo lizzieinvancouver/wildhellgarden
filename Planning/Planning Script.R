@@ -110,3 +110,14 @@ spp <- final %>%
 
 spec<-as.data.frame(table(spp$Species))
 site<-as.data.frame(table(spp$Site))
+
+missing<- spp%>%
+  filter(Location == "none")
+
+sp.miss<-as.data.frame(table(missing$Species))
+site.miss<-as.data.frame(table(missing$Site))
+
+specie<-c("ACESPI","AMECAN","BETPAP","SORAME","SPITOM")
+missing.more <-filter(missing, Species %in% specie)
+missing.more<-missing.more[order(missing.more$Species, missing.more$Site),]
+
