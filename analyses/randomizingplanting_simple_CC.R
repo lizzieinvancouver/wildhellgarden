@@ -24,7 +24,7 @@ d <- filter(plantneeds, Keep != "N") # 20 core species, 24 total
 # Jehane measured otut 40 8x8 plots 21-22 April. We have three groups of plants in terms of shade, and four kinds of spacing, 0.75, 1, 1.5, and 3 m per individual.
 # Divide up in to full-life shade, partial-life shade, and full sun species. Within each shade set, randomize position of individuals of species according to their spacing. Put all three sets together, and sum up the total indivdiduals per species, per site.
 
-reps = 6 # individuals per species per sie
+reps = 9 # individuals per species per sie
 sites = 4 # total number of sites
 sitez = c("HF","SH","GR","WM") # 4 sites
 
@@ -125,5 +125,5 @@ fs$plotno = fsplotno
 
 dat2 <- rbind(ps, ts, fs)
 
-write.csv(dat2, file = "Inds for Planting six reps.csv", row.names=F)
+write.csv(dat2, file = "Inds for Planting CC.csv", row.names=F)
 
