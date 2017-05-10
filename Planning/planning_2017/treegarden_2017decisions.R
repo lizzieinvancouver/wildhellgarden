@@ -13,7 +13,7 @@ options(stringsAsFactors = FALSE)
 
 # Set working directory: 
 setwd("~/Documents/git/projects/treegarden/wildhellgarden/Planning/planning_2017")
-setwd("~/Documents/git/wildhellgarden/Planning/planning_2017")
+#setwd("~/Documents/git/wildhellgarden/Planning/planning_2017")
 
 # Get files
 gh <- read.csv("input/GH7 Inventory - Spring 2017.csv", header=TRUE)
