@@ -1,8 +1,11 @@
-## Started 23 Aopr 2017 ##
+## Started 23 Apr 2017 ##
 ## By Lizzie ##
 
 ## Making decisions on what to plant in common garden onward ##
-## A bit of a pain but hopefully gets the job done. ## 
+## A bit of a pain but hopefully gets the job done. ##
+
+# Updated 9 May 2017 #
+# With new info from Kea #
 
 ## housekeeping
 rm(list=ls()) 
@@ -110,3 +113,17 @@ cg.present.bind <- subset(cg.present, select=c("spsite", "species", "site"))
 addme.bind <- subset(addme, select=c("spsite", "species", "site"))
 cg.2017 <- rbind(cg.present.bind, addme.bind)
 table(cg.2017$species, cg.2017$site)
+
+## One last issue! Here's what Kea sees in the raised beds as of 9 May 2017 #
+# I also remembered that there are some new (last season) plants in the raised beds - I assume these will be moving into the common garden:
+# 3 BETPAP GR
+# 1 BETPAP SH
+# 1 ACESPI SH
+# 1 ACESPI WM
+# 1 SPIALB WM
+# 1 SPIALB SH
+# 2 SORAME SH
+# 2 AMECAN SH
+
+# Which is not quite what we have noted (but similar)
+subset(cg.all, Location=="RB")
