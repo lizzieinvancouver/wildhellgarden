@@ -1,5 +1,5 @@
 Started 7 April 2018
-Last updated: 9 April 2018
+Last updated: 10 May 2018
 
 <><><><><><><><><><><><><><><><><><><><><>
 <> Quick count of replacement plantings: <>
@@ -9,66 +9,88 @@ Last updated: 9 April 2018
 38 not dead yet in plots 10-11 to potentially move
 
 <><><><><><><><><><><><><><><>
+<> Our species list ... <>
+<><><><><><><><><><><><><><><>
+(0) ACEPEN: 6 HF/6 WM -- most are now dead!
+
+(1) ACESPI: 2 WM/4GR/4SH
+(2) ALNINC: 31 -- 4 sites
+(3) AMECAN: GR/SH/1WM, not so balanced
+(4) AROMEL: 6 HF/6 WM
+(5) BETALL: 24 HF/SH/GR looks balanced
+(6) BETPAP: 6 HF/7 GR/2 SH
+(7) BETPOP: 24 HF/GR/WM looks balanced
+(8) DIELON: 8 HF /4 WM / 8 GR/ 8 SH  
+(9) MYRGAL: 6 WM/4 GR/ 6 SH
+(10) SAMRAC: 6 HF/ 9 GR
+(11) SORAME: 6 GR/7 SH
+(12) SPIALB: 37 4 sites looks balanced
+(13) SPITOM: 32 4 sites looks balanced
+(14) VIBCAS: 24 WM/GR/SH looks balanced
+
+(X) QUERUB: 2 HF/2 WM
+(Y) VACMYR 2 WM/ 2 GR
+
+<><><><><><><><><><><><><><><>
 <> Based on my reading ... <>
 <><><><><><><><><><><><><><><>
 
-9 ACEPEN have died and we do NOT have replacements
-5 AROMEL have died and we potentially can replace 4/5 from HF from the raised beds (the other dead one is from WM)
+9 ACEPEN have died and we do NOT have replacements 
+5 AROMEL have died and we potentially can replace 1/5 from WM from the raised beds (the other 4 dead are from HF -- double check the raised beds for these!)
 1 BETALL has died and we have a replacement (plus extras)
-1 BETPAP has died but we do NOT have a *correct* replacement (we need GR, we have HF)
-4 DIELON have died and we have replacements for all of these (plus more!)
-2 SAMRAC has died, and we have a replacement 
-7 SORAME have died and we have replacements
-2 SPIALB have died and we have replacements
-4 SPITOM have died and we have replacements
+1 BETPAP has died but we do NOT have a replacement 
+4 DIELON have died and we have replacements for 3/4 (2 GR, 1 SH -- need 1 more GR)
+2 SAMRAC has died, and we have replacements
+5-7 SORAME have died and we have 2 replacements (from SH)
+2 SPIALB have died and we NOT have replacements for correct site (we have WM, we have SH)
+4 SPITOM have died and we have NOT replacements
 2 VACMYR have died and we do NOT have replacements
+
+TOTAL replacements:
+1 AROMEL
+1 BETALL
+3 DIELON
+2 SAMRAC
+2 SORAME
+= 10 plants!
+
+Total dead with no replacements:
+9 ACEPEN SH/HF/WM
+4 AROMEL (need 4 HF)
+1 BETPAP GR
+1 DIELON GR
+3 SORAME GR
+2 SPIALB WM
+3-4 SPITOM HF/SH
+2 VACMYR GR/WM
 
 <><><><><><><><>
 <> Questions <>
 <><><><><><><><>
 - Should we move all the ones in plots 10 and 11?
-- There are some species with LOTS of extras and some sites with LOTS of extras, I think these could be worth planting for someone. 
+
 
 <><><><><><><><><><><><><><><><><><><>
 <> What to plant from raised beds? <>
 <><><><><><><><><><><><><><><><><><><>
 * I think when I say 'X number at X sites' I mean 'X number at each of X sites' but check...
 
-- 2 backups where we have them...
-	- VIBCAS (yes for 3/3 sites, plus we have at least 18 extra at 3 sites)
-	- ALNINC (yes for 3/4 sites, plus 15 extra at two sites)
-	- SORAME (yes for 1/2 sites plus 15 extra at 1 site)
-	- MYRGAL (yes for 2/3 sites, not many extra)
-	- DIELON (yes for 3/3 sites, and maybe 15 extra for 2 sites; it died a lot though so perhaps plant 4 backups?)
-	- SPIALB (yes for 4/4 sites and 12-40 extra for 3 sites)
-	- SPITOM (yes for perhaps 4/4 sites, need to check replacements, and lots extra for at least 2 sites)
-	- BETALL (yes for 2/4 sites, not many extra)
-	- BETPOP (yes for 2/3 sites, 8 left over at 2 sites)
-	- AROMEL (yes for 1/2 sites, not many extra)
-	- SAMRAC (yes for 1/2 sites, with lots left over at 1 site)
+- Backups where we have them...
+	- ALNINC - plant one more of each site --> 4
+	- BETALL - plant one more of each 3 sites (GR/WM/SH) --> 3
+	- BETPOP - have at GR/HF/WM in CG, could add 1 GR/WM --> 2
+	- DIELON - need WM
+	- 1 FAGGRA, sadly it's too few
+	- MYRGAL - plant one more from each of 3 sites (GR/WM/SH) --> 3
+	- VIBCAS - plant one more from each of 3 sites (GR/WM/SH) --> 3
+= TOTAL of 15 more
 
-
-<><><><><><><><><><><><><><><>
-<> Notes by site on extras <>
-<><><><><><><><><><><><><><><>
-* See above for breakdown by species *
-
-6-7 sp from GR you could get 8 or more of 
-HF not so great
-4 sp from WM you could get 10 or more of 
-5 sp from GR you could get 14 or more of (plus 6 of MYRGAl potentially)
-
-
-<><><><><><><><><><><><><><><><><><><>
-Species in RB, not in CG
-<><><><><><><><><><><><><><><><><><><>
-	- LONCAN (10 from GR)
-	- AMECAN (9 from GR)
-	- ILEMUC (5 total from two sites)
-	- HAMVIR (2 total)
+- We could also back up AROMEL *if* we have 1 more of WM and HF.
 
 
 
 <><><><><><><><><><><><><><><><><><><>
-And 1 each of SAMBUCUS, VACMYR, ACEPEN, KALANG, LYOLIG 
+Species in RB, not in CG 
 <><><><><><><><><><><><><><><><><><><>
+	- ILEMUC (9 WM)
+	- QUEALB (3 HF)
