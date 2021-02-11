@@ -27,14 +27,19 @@ clim <- clim[(clim$climatetype=="weldhill"),]
 clim <- clim[(clim$year>=2017),]
 clim <- clim[!duplicated(clim),]
 
-spring <- clim[(clim$doy>=1 & clim$doy<=140),]
+spring <- clim[(clim$doy>=60 & clim$doy<=181),]
+spring <- spring[(spring$year>=2018),]
+
+winter <- clim[(clim$doy>=244 | clim$doy<=60),]
+winter <- winter[!(winter$doy<=60 & winter$year==2017),]
+winter$chillyr <- ifelse(winter$doy>=244, (winter$year + 1), winter$year)
 
 climate <- ggplot(spring, aes(x=doy, y=tmean, col=as.factor(year))) + #geom_point(aes(col=as.factor(year)), alpha=0.1) +
   geom_smooth(aes(col=as.factor(year), fill=as.factor(year)), stat="smooth", method="loess", se=TRUE, span=0.9) + 
   scale_color_manual(name = "Year", values=cols, labels = c("2018", "2019", "2020")) +
   scale_fill_manual(name = "Year", values=cols, labels = c("2018", "2019", "2020")) +
   theme_classic() + xlab("Day of Year") + ylab("Mean \n Temperature (°C)") +
-  coord_cartesian(ylim=c(-8, 18), expand=0) + scale_x_continuous(breaks = seq(min(0), max(140), by=30)) +
+  coord_cartesian(ylim=c(-8, 18), expand=0) + scale_x_continuous(breaks = seq(min(60), max(140), by=15)) +
   scale_y_continuous(breaks=seq(min(-8), max(18), by=4)) + theme(panel.spacing = unit(c(0,0,5,5),"cm"),
                                                                  legend.text = element_text(size=7),
                                                                  legend.title = element_text(size=8),
@@ -42,6 +47,22 @@ climate <- ggplot(spring, aes(x=doy, y=tmean, col=as.factor(year))) + #geom_poin
 
 #quartz()
 #climate
+
+winter$doy2 <- ifelse(winter$doy<=60, winter$doy+365, winter$doy)
+winclim <- ggplot(winter, aes(x=doy2, y=tmin, col=as.factor(chillyr))) + #geom_point(aes(col=as.factor(year)), alpha=0.1) +
+  geom_smooth(aes(col=as.factor(chillyr), fill=as.factor(chillyr)), stat="smooth", method="loess", se=TRUE, span=0.9) + 
+  scale_color_manual(name = "Year", values=cols, labels = c("2018", "2019", "2020")) +
+  scale_fill_manual(name = "Year", values=cols, labels = c("2018", "2019", "2020")) +
+  theme_classic() + xlab("Day of Year") + ylab("Mean \n Temperature (°C)") +
+  coord_cartesian(ylim=c(-8, 24), expand=0) + scale_x_continuous(breaks = seq(min(245), max(425), by=30),
+                                                                 labels = c(245, 275, 305, 335, 365, 30, 60))+
+  scale_y_continuous(breaks=seq(min(-8), max(24), by=4)) + theme(panel.spacing = unit(c(0,0,5,5),"cm"),
+                                                                 legend.text = element_text(size=7),
+                                                                 legend.title = element_text(size=8),
+                                                                 legend.key.size = unit(0.8,"line"))
+
+#quartz()
+#winclim
 
 clim2018 <- ggplot(spring[(spring$year==2018),], aes(x=doy, y=tmean), col=cols[1]) + #geom_point(aes(col=as.factor(year)), alpha=0.1) +
   geom_smooth(col=cols[1], fill=cols[1], stat="smooth", method="loess", se=TRUE, span=0.9) + 
@@ -82,10 +103,7 @@ clim2020 <- ggplot(spring[(spring$year==2020),], aes(x=doy, y=tmean), col=cols[3
 #quartz()
 #climall <- ggarrange(clim2018, clim2019, clim2020,  ncol=3)
 
-winter <- clim[(clim$doy>=240 | clim$doy<=60),]
-winter <- winter[!(winter$doy<=60 & winter$year==2017),]
-winter$chillyr <- ifelse(winter$doy>=240, (winter$year + 1), winter$year)
-winter$mwt <- ave(winter$tmean, winter$chillyr)
+winter$mwt <- ave(winter$tmin, winter$chillyr)
 spring$mst <- ave(spring$tmean, spring$year)
 
 ###### Now let's add in the clean bbch data
@@ -96,6 +114,8 @@ bbch$flowering <- bbch$flowers - bbch$flobudburst
 bbch$fruiting <- bbch$ripefruit - bbch$fruit
 bbch$allflofruit <- bbch$ripefruit - bbch$flobudburst
 
+bbch$fls <- bbch$flowers - bbch$leafout
+
 mst <- subset(spring, select=c("year", "mst"))
 mst <- mst[!duplicated(mst),]
 
@@ -105,6 +125,7 @@ mwt <- mwt[!duplicated(mwt),]
 bbchmst <- full_join(bbch, mst)
 bbchmt <- full_join(bbchmst, mwt)
 
+if(FALSE){
 dvr.stan <- subset(bbchmt, select=c("spp", "year", "site", "ind", "plot", "dvr", "mst", "mwt"))
 dvr.stan <- dvr.stan[complete.cases(dvr.stan),]
 
@@ -129,6 +150,33 @@ datalist.dvr.pop <- with(dvr.stan,
 m3l.ni = stan('stan/nointer_3levelwpop_dvr_ncp.stan', data = datalist.dvr.pop,
               iter = 2000, warmup=1500, chains=4, control=list(adapt_delta=0.999,max_treedepth = 15))
 
+}
+
+
+
+fls.stan <- subset(bbchmt, select=c("spp", "year", "site", "ind", "plot", "fls", "mst", "mwt"))
+fls.stan <- fls.stan[complete.cases(fls.stan),]
+
+
+getpop <- paste(fls.stan$spp, fls.stan$site)
+fls.stan$pophere <- as.numeric(as.factor(getpop))
+fls.stan$spp <- as.numeric(as.factor(fls.stan$spp))
+
+datalist.fls.pop <- with(fls.stan, 
+                         list(y = fls,  
+                              mst = mst,
+                              mwt = mwt,
+                              sp = spp,
+                              pop = pophere,
+                              N = nrow(fls.stan),
+                              n_sp = length(unique(fls.stan$spp)),
+                              n_pop = length(unique(fls.stan$pophere))
+                         )
+)
+
+
+m3l.ni = stan('stan/nointer_3levelwpop_dvr_ncp.stan', data = datalist.fls.pop,
+              iter = 2000, warmup=1500, chains=4, control=list(adapt_delta=0.999,max_treedepth = 15))
 
 
 
