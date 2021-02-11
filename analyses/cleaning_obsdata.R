@@ -113,66 +113,7 @@ cg18clean <- full_join(cg18clean, ripe)
 cg18clean<-full_join(cg18clean, bset)
 cg18clean$risk<-cg18clean$leafout-cg18clean$budburst 
 cg18clean$year <- 2018
-#write.csv(cg18, file="output/clean_cg_2018.csv", row.names=FALSE)
-
-if(FALSE){
-dvr<-na.omit(dvr)
-### Starting here, need to check code... ####
-dvr<- dvr[order(dvr$Ind, dvr$risk), ]
-dvr$Ind<-paste(dvr$Ind, dvr$Plot, sep="_")
-dvr$ind.risk<-paste(dvr$Ind, dvr$risk, sep=",")
-days.btw <- Map(seq, dvr$budburst, dvr$leafout, by = 1)
-
-dxx <- data.frame(ind.risk = rep.int(dvr$ind.risk, vapply(days.btw, length, 1L)), 
-                  doy = do.call(c, days.btw))
-
-dxx$Ind<-gsub(",.*", "", dxx$ind.risk)
-dxx$risk<-gsub(".*,", "", dxx$ind.risk)
-dxx<-dplyr::select(dxx, -ind.risk)
-dxx$budburst<-ave(dxx$doy, dxx$Ind, FUN=min)
-dxx$leafout<-ave(dxx$doy, dxx$Ind, FUN=max)
-
-dvr<-dplyr::select(dvr, Ind, Plot)
-
-dvr<-full_join(dxx, dvr)
-dvr$doy <- NULL
-dvr <- dvr[!duplicated(dvr),]
-dvr$year <- 2018
-dvr <- dvr %>% rename(id = Ind)
-
-dvr <- separate(data = dvr, col = id, into = c("spp", "site", "ind", "plot"), sep = "\\_")
-
-## fix warning
-dvr[is.na(dvr$plot), c("ind", "plot")] <- dvr[is.na(dvr$plot), c("plot", "ind")] 
-
-dvr$year <- 2018
-#dvr$last.obs <- 274
-dvr$Plot <- NULL
-dvr$risk <- as.numeric(dvr$risk)
-
-#write.csv(dvr, file="output/dvr_cg_2018.csv", row.names=FALSE)
-
-
-### Let's add in traits data now!### 
-traits<-read.csv("output/clean_traits.csv", header=TRUE)
-
-traits$d.index<-traits$perim/(2*sqrt(traits$area*pi))
-traits$Ind<-paste(traits$species, traits$site, traits$ind, traits$plot, sep="_")
-traits$d.index<-ave(traits$d.index, traits$Ind)
-traits$plot <- as.character(traits$plot)
-
-traits.clean<-full_join(dvr, traits)
-traits.clean$sla<-traits.clean$area/traits.clean$dr.wt
-
-traits.clean<-subset(traits.clean, select=c("id","budburst", "leafout", "risk", "d.index", "species", "area", "sla"))
-traits.clean<-traits.clean[!duplicated(traits.clean),]
-traits.clean<-traits.clean[!(traits.clean$risk<0),]
-traits.clean<-na.omit(traits.clean)
-traits.clean$area<-ave(traits.clean$area, traits.clean$id)
-traits.clean$sla<-ave(traits.clean$sla, traits.clean$id)
-traits.clean$d.index<-ave(traits.clean$d.index, traits.clean$id)
-traits.clean<-traits.clean[!duplicated(traits.clean),]
-}
+#write.csv(cg18clean, file="output/clean_cg_2018.csv", row.names=FALSE)
 
 ### Now some starter code for 2019!
 # Set Working Directory
@@ -475,7 +416,7 @@ cg20fruits$fruit <- NA
 for(i in c(unique(cg20fruits$spindplot))){ 
   
   fruit <- cg20fruits$fru[i==cg20fruits$spindplot][1]
-  cg20flowers$fruit[i==cg20fruits$spindplot] <- fruit
+  cg20fruits$fruit[i==cg20fruits$spindplot] <- fruit
   
 }
 cg20fruits$ripefruit <- cg20fruits$ripe
@@ -519,16 +460,15 @@ cgclean$provenance.long <- ifelse(cgclean$site == "GR", -71.146683, cgclean$prov
 cgclean$provenance.lat <- ifelse(cgclean$site == "SH", 45.932675, cgclean$provenance.lat)
 cgclean$provenance.long <- ifelse(cgclean$site == "SH", -74.025070, cgclean$provenance.long)
 
+#write.csv(cgclean, file="~/Documents/git/wildhellgarden/analyses/output/clean_obs_allyrs.csv", row.names=FALSE)
 
-#write.csv(cg, file="~/Documents/git/CGtraits/analyses/output/clean_obs_bothyears.csv", row.names=FALSE)
-#write.csv(cg, file="~/Documents/git/CGtraits/analyses/output/clean_obs_allyrs.csv", row.names=FALSE)
-
-
+if(FALSE){
 cgclean$dvr <- cgclean$leafout - cgclean$budburst
 
 foo <- subset(cgclean, select=c("spp", "year", "site", "ind", "plot", "dvr"))
 foo <- foo[!duplicated(foo),]
 foo <- foo[complete.cases(foo),]
 
-moddvr <- rstanarm::stan_glmer(dvr ~ as.factor(year) + (as.factor(year) | spp/site), data=foo)
+#moddvr <- rstanarm::stan_glmer(dvr ~ as.factor(year) + (as.factor(year) | spp/site), data=foo)
 
+}
