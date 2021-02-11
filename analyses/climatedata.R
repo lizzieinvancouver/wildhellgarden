@@ -4,6 +4,7 @@
 # Clear workspace
 rm(list=ls()) # remove everything currently held in the R memory
 options(stringsAsFactors=FALSE)
+options(mc.cores = parallel::detectCores())
 graphics.off()
 
 # Load libraries
@@ -27,7 +28,7 @@ clim <- clim[(clim$climatetype=="weldhill"),]
 clim <- clim[(clim$year>=2017),]
 clim <- clim[!duplicated(clim),]
 
-spring <- clim[(clim$doy>=60 & clim$doy<=181),]
+spring <- clim[(clim$doy>=0 & clim$doy<=150),]
 spring <- spring[(spring$year>=2018),]
 
 winter <- clim[(clim$doy>=244 | clim$doy<=60),]
@@ -126,7 +127,7 @@ bbchmst <- full_join(bbch, mst)
 bbchmt <- full_join(bbchmst, mwt)
 
 if(FALSE){
-dvr.stan <- subset(bbchmt, select=c("spp", "year", "site", "ind", "plot", "dvr", "mst", "mwt"))
+dvr.stan <- subset(bbchmt, select=c("spp", "year", "site", "ind", "plot", "dvr", "mst"))
 dvr.stan <- dvr.stan[complete.cases(dvr.stan),]
 
 
@@ -137,7 +138,7 @@ dvr.stan$spp <- as.numeric(as.factor(dvr.stan$spp))
 datalist.dvr.pop <- with(dvr.stan, 
                         list(y = dvr,  
                              mst = mst,
-                             mwt = mwt,
+                             #mwt = mwt,
                              sp = spp,
                              pop = pophere,
                              N = nrow(dvr.stan),
@@ -147,8 +148,8 @@ datalist.dvr.pop <- with(dvr.stan,
 )
 
 
-m3l.ni = stan('stan/nointer_3levelwpop_dvr_ncp.stan', data = datalist.dvr.pop,
-              iter = 2000, warmup=1500, chains=4, control=list(adapt_delta=0.999,max_treedepth = 15))
+m3l.ni = stan('stan/nointer_3levelwpop_dvr_mst_ncp.stan', data = datalist.dvr.pop,
+              iter = 2000, warmup=1500, chains=2)
 
 }
 
