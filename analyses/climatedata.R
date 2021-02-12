@@ -28,7 +28,7 @@ clim <- clim[(clim$climatetype=="weldhill"),]
 clim <- clim[(clim$year>=2017),]
 clim <- clim[!duplicated(clim),]
 
-spring <- clim[(clim$doy>=0 & clim$doy<=150),]
+spring <- clim[(clim$doy>=60 & clim$doy<=181),]
 spring <- spring[(spring$year>=2018),]
 
 winter <- clim[(clim$doy>=244 | clim$doy<=60),]
@@ -148,7 +148,7 @@ datalist.dvr.pop <- with(dvr.stan,
 )
 
 
-m3l.ni = stan('stan/nointer_3levelwpop_dvr_mst_ncp.stan', data = datalist.dvr.pop,
+m3l.ni = stan('stan/nointer_3levelwpop_mst_ncp.stan', data = datalist.dvr.pop,
               iter = 2000, warmup=1500, chains=2)
 
 }
@@ -176,7 +176,7 @@ datalist.fls.pop <- with(fls.stan,
 )
 
 
-m3l.ni = stan('stan/nointer_3levelwpop_dvr_ncp.stan', data = datalist.fls.pop,
+m3l.ni = stan('stan/nointer_3levelwpop_mst&mwt_ncp.stan', data = datalist.fls.pop,
               iter = 2000, warmup=1500, chains=4, control=list(adapt_delta=0.999,max_treedepth = 15))
 
 
