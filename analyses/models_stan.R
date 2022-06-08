@@ -13,6 +13,7 @@ library(gridExtra)
 library(ggplot2)
 library(viridis)
 library(rstan)
+library(dplyr)
 
 # Set Working Directory
 setwd("~/Documents/git/wildhellgarden/analyses")
@@ -25,17 +26,24 @@ cg <- read.csv("output/clean_obsdata_phases.csv")
 bb.stan <- subset(cg, select=c("spp", "year", "site", "ind", "plot", "budburst"))
 bb.stan <- bb.stan[complete.cases(bb.stan),]
 
-getpop <- paste(bb.stan$spp, bb.stan$site)
-bb.stan$pophere <- as.numeric(as.factor(getpop))
-bb.stan$spp <- as.numeric(as.factor(bb.stan$spp))
+###DB tries remove species without 3 or more populations represented
+bb.stan<-filter(bb.stan, !spp %in% c("ACEPEN","ACESPI","AROMEL","QUERUB","QURALB","SAMRAC","SORAME","VACMYR"))
 
-datalist.bb.pop <- with(bb.stan, 
+bb.stan2018<-dplyr::filter(bb.stan,year=="2018")
+### do yearifying here.
+getpop <- paste(bb.stan2018$spp, bb.stan2018$site)
+bb.stan2018$pophere <- as.numeric(as.factor(getpop))
+bb.stan2018$latbi<-bb.stan2018$spp
+bb.stan2018$spp <- as.numeric(as.factor(bb.stan2018$spp))
+
+
+datalist.bb.pop <- with(bb.stan2018, 
                          list(y = budburst,  
                               sp = spp,
                               pop = pophere,
-                              N = nrow(bb.stan),
-                              n_sp = length(unique(bb.stan$spp)),
-                              n_pop = length(unique(bb.stan$pophere))
+                              N = nrow(bb.stan2018),
+                              n_sp = length(unique(bb.stan2018$spp)),
+                              n_pop = length(unique(bb.stan2018$pophere))
                          )
 )
 
@@ -48,8 +56,171 @@ mod.sum <- summary(modelhere)$summary
 modtosave <- mod.sum[c(1:4),]
 mod.sum[grep("sigma", rownames(mod.sum)),] 
 
+tidybayes::get_variables(m3l.ni.bb)
+mod.sum[grep("a_sppop\\[", rownames(mod.sum)),] 
+esto<-mod.sum[grep("a_sppop0\\[", rownames(mod.sum)),] 
+## Get pop conversion
+getpopall <- subset(bb.stan2018, select=c("spp", "site", "pophere"))
+getpop <- getpopall[!duplicated(getpopall),]
 
-###### Leafout model
+concordance<-dplyr::select(bb.stan2018,spp,latbi)
+concordance <- concordance[!duplicated(concordance),]
+
+outy1<-left_join(getpop,concordance)
+  outy1<-cbind(outy1,esto)
+
+  level_order <- c("HF", "GR", "WM","SH")
+pdf("figures/bb2018.pdf")  
+  ggplot(outy1,aes(x=factor(site,level=level_order),mean))+geom_point()+geom_errorbar(aes(ymin=`25%`,ymax=`75%`))+facet_wrap(~latbi,scales = "free_y")
+  dev.off()
+  ggplot(outy1,aes(x=factor(site,level=level_order),mean))+geom_point()
+
+###2019
+  bb.stan2019<-dplyr::filter(bb.stan,year=="2019")
+  ### do yearifying here.
+  getpop <- paste(bb.stan2019$spp, bb.stan2019$site)
+  bb.stan2019$pophere <- as.numeric(as.factor(getpop))
+  bb.stan2019$latbi<-bb.stan2019$spp
+  bb.stan2019$spp <- as.numeric(as.factor(bb.stan2019$spp))
+  
+  
+  datalist.bb.pop <- with(bb.stan2019, 
+                          list(y = budburst,  
+                               sp = spp,
+                               pop = pophere,
+                               N = nrow(bb.stan2019),
+                               n_sp = length(unique(bb.stan2019$spp)),
+                               n_pop = length(unique(bb.stan2019$pophere))
+                          )
+  )
+  
+  
+  m3l.ni.bb = stan('stan/nointer_3levelwpop_pheno_ncp.stan', data = datalist.bb.pop,
+                   iter = 5000, warmup=4000, chains=4, control=list(adapt_delta=0.999, max_treedepth = 15))
+  
+  modelhere <- m3l.ni.bb
+  mod.sum <- summary(modelhere)$summary
+  modtosave <- mod.sum[c(1:4),]
+  mod.sum[grep("sigma", rownames(mod.sum)),] 
+  
+  tidybayes::get_variables(m3l.ni.bb)
+  mod.sum[grep("a_sppop\\[", rownames(mod.sum)),] 
+  esto19<-mod.sum[grep("a_sppop0\\[", rownames(mod.sum)),] 
+  ## Get pop conversion
+  getpopall <- subset(bb.stan2019, select=c("spp", "site", "pophere"))
+  getpop <- getpopall[!duplicated(getpopall),]
+  
+  concordance<-dplyr::select(bb.stan2019,spp,latbi)
+  concordance <- concordance[!duplicated(concordance),]
+  
+  outy2<-left_join(getpop,concordance)
+  outy2<-cbind(outy2,esto19)
+  
+  level_order <- c("HF", "GR", "WM","SH")
+  pdf("figures/bb2019.pdf") 
+   ggplot()+geom_point(data=outy2,aes(x=factor(site,level=level_order),mean),color="blue")+geom_errorbar(data=outy2,aes(x=factor(site,level=level_order),ymin=`25%`,ymax=`75%`),color="blue")+facet_wrap(~latbi,scales = "free_y")
+  
+  dev.off()  
+  ggplot(outy2,aes(x=factor(site,level=level_order),mean))+geom_point()
+  
+  ###2020
+  bb.stan2020<-dplyr::filter(bb.stan,year=="2020")
+  ### do yearifying here.
+  getpop <- paste(bb.stan2020$spp, bb.stan2020$site)
+  bb.stan2020$pophere <- as.numeric(as.factor(getpop))
+  bb.stan2020$latbi<-bb.stan2020$spp
+  bb.stan2020$spp <- as.numeric(as.factor(bb.stan2020$spp))
+  
+  
+  datalist.bb.pop <- with(bb.stan2020, 
+                          list(y = budburst,  
+                               sp = spp,
+                               pop = pophere,
+                               N = nrow(bb.stan2020),
+                               n_sp = length(unique(bb.stan2020$spp)),
+                               n_pop = length(unique(bb.stan2020$pophere))
+                          )
+  )
+  
+  
+  m3l.ni.bb = stan('stan/nointer_3levelwpop_pheno_ncp.stan', data = datalist.bb.pop,
+                   iter = 5000, warmup=4000, chains=4, control=list(adapt_delta=0.999, max_treedepth = 15))
+  
+  modelhere <- m3l.ni.bb
+  mod.sum <- summary(modelhere)$summary
+  modtosave <- mod.sum[c(1:4),]
+  mod.sum[grep("sigma", rownames(mod.sum)),] 
+  
+  tidybayes::get_variables(m3l.ni.bb)
+  mod.sum[grep("a_sppop\\[", rownames(mod.sum)),] 
+  esto20<-mod.sum[grep("a_sppop0\\[", rownames(mod.sum)),] 
+  ## Get pop conversion
+  getpopall <- subset(bb.stan2020, select=c("spp", "site", "pophere"))
+  getpop <- getpopall[!duplicated(getpopall),]
+  
+  concordance<-dplyr::select(bb.stan2020,spp,latbi)
+  concordance <- concordance[!duplicated(concordance),]
+  
+  outy3<-left_join(getpop,concordance)
+  outy3<-cbind(outy3,esto20)
+  
+  level_order <- c("HF", "GR", "WM","SH")
+  pdf("figures/bb2020.pdf") 
+  ggplot()+geom_point(data=outy3,aes(x=factor(site,level=level_order),mean),color="red")+geom_errorbar(data=outy3,aes(x=factor(site,level=level_order),ymin=`25%`,ymax=`75%`),color="red")+facet_wrap(~latbi,scales = "free_y")
+  
+  dev.off()
+  
+  
+####Dan's going to do the same with bud set  
+  bset.stan <- subset(cg, select=c("spp", "year", "site", "ind", "plot", "budset"))
+  bset.stan <- bset.stan[complete.cases(bset.stan),]
+  
+  bset.stan2018<-dplyr::filter(bset.stan,year=="2019")
+  ### do yearifying here.
+  getpop <- paste(bset.stan2018$spp, bset.stan2018$site)
+  bset.stan2018$pophere <- as.numeric(as.factor(getpop))
+  bset.stan2018$latbi<-bset.stan2018$spp
+  bset.stan2018$spp <- as.numeric(as.factor(bset.stan2018$spp))
+  
+  
+  datalist.bset.pop <- with(bset.stan2018, 
+                            list(y = budset,  
+                                 sp = spp,
+                                 pop = pophere,
+                                 N = nrow(bset.stan2018),
+                                 n_sp = length(unique(bset.stan2018$spp)),
+                                 n_pop = length(unique(bset.stan2018$pophere))
+                            )
+  )
+  
+  
+  m3l.ni.bset = stan('stan/nointer_3levelwpop_pheno_ncp.stan', data = datalist.bset.pop,
+                     iter = 4000, warmup=3500, chains=4, control=list(adapt_delta=0.999, max_treedepth = 15))
+  
+  modelhere <- m3l.ni.bset
+  mod.sum <- summary(modelhere)$summary
+  modtosave <- mod.sum[c(1:4),]
+  mod.sum[grep("sigma", rownames(mod.sum)),] 
+  
+  tidybayes::get_variables(m3l.ni.bset)
+  mod.sum[grep("a_sppop\\[", rownames(mod.sum)),] 
+  esto18bset<-mod.sum[grep("a_sppop0\\[", rownames(mod.sum)),] 
+  ## Get pop conversion
+  getpopall <- subset(bset.stan2018, select=c("spp", "site", "pophere"))
+  getpop <- getpopall[!duplicated(getpopall),]
+  
+  concordance<-dplyr::select(bset.stan2018,spp,latbi)
+  concordance <- concordance[!duplicated(concordance),]
+  
+  outy4<-left_join(getpop,concordance)
+  outy4<-cbind(outy4,esto18bset)
+  pdf("figures/bset2019.pdf") 
+  ggplot()+geom_point(data=outy4,aes(x=factor(site,level=level_order),mean),color="black")+geom_errorbar(data=outy4,aes(x=factor(site,level=level_order),ymin=`25%`,ymax=`75%`),color="black")+facet_wrap(~latbi,scales = "free_y")
+  dev.off()
+  
+  
+  
+  ###### Leafout model
 lo.stan <- subset(cg, select=c("spp", "year", "site", "ind", "plot", "leafout"))
 lo.stan <- lo.stan[complete.cases(lo.stan),]
 
@@ -131,31 +302,6 @@ modtosave <- mod.sum[c(1:4),]
 mod.sum[grep("sigma", rownames(mod.sum)),] 
 
 ###### Budset model
-bset.stan <- subset(cg, select=c("spp", "year", "site", "ind", "plot", "budset"))
-bset.stan <- bset.stan[complete.cases(bset.stan),]
-
-getpop <- paste(bset.stan$spp, bset.stan$site)
-bset.stan$pophere <- as.numeric(as.factor(getpop))
-bset.stan$spp <- as.numeric(as.factor(bset.stan$spp))
-
-datalist.bset.pop <- with(bset.stan, 
-                         list(y = budset,  
-                              sp = spp,
-                              pop = pophere,
-                              N = nrow(bset.stan),
-                              n_sp = length(unique(bset.stan$spp)),
-                              n_pop = length(unique(bset.stan$pophere))
-                         )
-)
-
-
-m3l.ni.bset = stan('stan/nointer_3levelwpop_pheno_ncp.stan', data = datalist.bset.pop,
-                  iter = 4000, warmup=3500, chains=4, control=list(adapt_delta=0.999, max_treedepth = 15))
-
-modelhere <- m3l.ni.bset
-mod.sum <- summary(modelhere)$summary
-modtosave <- mod.sum[c(1:4),]
-mod.sum[grep("sigma", rownames(mod.sum)),] 
 
 
 ##### DVR model
@@ -277,7 +423,7 @@ mod.sum[grep("sigma", rownames(mod.sum)),]
 ##### Growing Season model
 gs.stan <- subset(cg, select=c("spp", "year", "site", "ind", "plot", "gs"))
 gs.stan <- gs.stan[complete.cases(gs.stan),]
-
+gs.stan<-dplyr::filter(gs.stan,year=="2020")
 
 getpop <- paste(gs.stan$spp, gs.stan$site)
 gs.stan$pophere <- as.numeric(as.factor(getpop))
@@ -301,6 +447,22 @@ modelhere <- m3l.ni.gs
 mod.sum <- summary(modelhere)$summary
 modtosave <- mod.sum[c(1:4),]
 mod.sum[grep("sigma", rownames(mod.sum)),] 
+
+tidybayes::get_variables(m3l.ni.gs)
+mod.sum[grep("a_sppop\\[", rownames(mod.sum)),] 
+gs18<-mod.sum[grep("a_sppop0\\[", rownames(mod.sum)),] 
+## Get pop conversion
+getpopall <- subset(gs.stan, select=c("spp", "site", "pophere"))
+getpop <- getpopall[!duplicated(getpopall),]
+
+concordance<-dplyr::select(gs.stan,spp,latbi)
+concordance <- concordance[!duplicated(concordance),]
+
+outygs2018<-left_join(getpop,concordance)
+outygs2018<-cbind(outygs2018,gs18)
+pdf("figures/bset2019.pdf") 
+ggplot(data=outygs2018,aes(x=factor(site,level=level_order),mean))+geom_point()+geom_errorbar(aes(x=factor(site,level=level_order),ymin=`25%`,ymax=`75%`),color="black")+facet_wrap(~latbi,scales = "free_y")
+dev.off()
 
 
 
