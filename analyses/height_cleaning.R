@@ -39,46 +39,89 @@ wildhell_2022 <- read_csv("Documents/WL2022/WildHell/height_2022.csv")
 
 # clean height data
 
+## trying with my own measurements ##
+# 1ft = 0.305m
+1/0.305
+# conversion factor is 3.2787
+
+## -----------------------------------------------------------------------------------------------------------##
 # first compare the actual conversions with our rod conversions in m
 # 1ft = 3.2808m
 
-4/3.2808 # = 1.219215m
+#4/3.2808 # = 1.219215m
 # our rod conversion is 1.14m
-5.6/3.2808 # = 1.706901
+#5.6/3.2808 # = 1.706901
 #our rod conversion is 1.61
-7/3.2808 # = 2.133626m
+#7/3.2808 # = 2.133626m
 # our rod conversion is 2.02m #### DOUBLE CHECK THIS###
-7.2/3.2808 # = 2.194587
+#7.2/3.2808 # = 2.194587
 # our rod conversion is 2.07m
-7.3/3.2808 # = 2.225067
+#7.3/3.2808 # = 2.225067
 # our rod conversion is 2.11m
 
 # for 4ft
-1.219215 - 1.14 # 0.079215
+#1.219215 - 1.14 # 0.079215
 
 #for 5.6ft
-1.706901 - 1.61 # 0.096901
+#1.706901 - 1.61 # 0.096901
 
 #for 7ft
-2.133626 - 2.02 # 0.11362
+#2.133626 - 2.02 # 0.11362
 
 #for 7.2ft
-2.194587 - 2.07 # 0.124587
+#2.194587 - 2.07 # 0.124587
 
 #for 7.3ft
-2.225067 - 2.11 # 0.115067
+#2.225067 - 2.11 # 0.115067
 
-x <- c(2, 3, 4, 5.6, 7, 7.2, 7.3)
-y <- c(0.08961, 0.0944, 0.079215, 0.096901, 0.11362, 0.124587, 0.115067)
-conversion <- cbind(x, y)
-plot(conversion)
+#x <- c(2, 3, 4, 5.6, 7, 7.2, 7.3)
+#y <- c(0.08961, 0.0944, 0.079215, 0.096901, 0.11362, 0.124587, 0.115067)
+#conversion <- cbind(x, y)
+#plot(conversion)
 
-ft <- c(2, 3, 4, 5.6, 7, 7.2, 7.3)
-change_in_m <- c(0.293984, 0.309744, 0.2599, 0.3179, 0.3728, 0.408744, 0.377512 )
-ft_m <- cbind(ft, change_in_m)
-plot(ft_m)
+#ft <- c(2, 3, 4, 5.6, 7, 7.2, 7.3)
+#change_in_m <- c(0.293984, 0.309744, 0.2599, 0.3179, 0.3728, 0.408744, 0.377512 )
+#ft_m <- cbind(ft, change_in_m)
+#plot(ft_m)
 
-2 - (0.52*3.2808)
+#2 - (0.52*3.2808)
 
+#5.6/5.282
 
-## plotting data ##
+## attempting a new stragety ##
+
+# converting our given m values to ft
+# 1.14m = 3.74ft
+# 1.61m = 5.282ft
+# 2.02m = 6.627ft
+# 2.07m = 6.791ft
+# 2.11m = 6.922ft
+
+# finding conversion factor
+# for 4ft
+#4/3.74 #1.0695
+
+# for 5.6ft
+#5.6/5.282 #1.0602
+
+# for 7ft
+#7/6.627 #1.0563
+
+# for 7.2ft
+#7.2/6.791 #1.0602
+
+# for 7.3ft
+#7.3/6.922 #1.0546
+
+#conversion factor is somewhere between 1.054 and 1.07
+#a <- c(1.0695, 1.0602, 1.0563, 1.0602, 1.0546)
+#summary(a)
+
+# average is 1.060 so we can use 1.060 to convert the height
+
+## trying with my own measurements ##
+# 1ft = 0.305m
+#1/0.305
+# conversion factor is 3.2787
+
+#11/3.2787
