@@ -105,7 +105,7 @@ print(xtable(mdl.out , caption="Summary of the intercept only model for SLA in 2
 
 <<label=figSLA22, echo= FALSE, fig=TRUE >>=
 
-plot(mdlSLA22, pars = c("alpha","mu_a_sp", "sigma_a_sp", "sigma_a_pop", "sigma_y","a_sp[1]","a_sp[2]","a_sp[3]","a_sp[4]","a_sp[5]","a_sp[6]","a_sp[7]","a_sp[8]","a_sp[9]","a_sp[10]","a_sp[11]","a_sp[12]","a_sp[13]","a_sp[14]","a_sp[15]","a_sp[16]","a_sp[17]","a_sp[18]","a_sppop[1]","a_sppop[2]","a_sppop[3]","a_sppop[4]"))
+plot(mdlSLA22, pars = c("alpha","mu_a_sp", "sigma_a_sp", "sigma_a_pop", "sigma_y","a_sp[1]","a_sp[2]","a_sp[3]","a_sp[4]","a_sp[5]","a_sp[6]","a_sp[7]","a_sp[8]","a_sp[9]","a_sp[10]","a_sp[11]","a_sp[12]","a_sp[13]","a_sppop[1]","a_sppop[2]","a_sppop[3]","a_sppop[4]"))
 
 @
 \newpage
@@ -160,7 +160,7 @@ print(xtable(mdl.out , caption="Summary of the intercept only model for LDMC in 
 
 <<label=figLDMC22, echo= FALSE, fig=TRUE >>=
 
-plot(mdlLDMC, pars = c("alpha","mu_a_sp", "sigma_a_sp", "sigma_a_pop", "sigma_y","a_sp[1]","a_sp[2]","a_sp[3]","a_sp[4]","a_sp[5]","a_sp[6]","a_sp[7]","a_sp[8]","a_sp[9]","a_sp[10]","a_sp[11]","a_sp[12]","a_sp[13]","a_sp[14]","a_sp[15]","a_sp[16]","a_sp[17]","a_sp[18]","a_sppop[1]","a_sppop[2]","a_sppop[3]","a_sppop[4]"))
+plot(mdlLDMC22, pars = c("alpha","mu_a_sp", "sigma_a_sp", "sigma_a_pop", "sigma_y","a_sp[1]","a_sp[2]","a_sp[3]","a_sp[4]","a_sp[5]","a_sp[6]","a_sp[7]","a_sp[8]","a_sp[9]","a_sp[10]","a_sp[11]","a_sp[12]","a_sp[13]","a_sppop[1]","a_sppop[2]","a_sppop[3]","a_sppop[4]"))
 
 @
 \newpage
@@ -215,7 +215,7 @@ print(xtable(mdl.out , caption="Summary of the intercept only model for plant he
 
 <<label=figHt21, echo= FALSE, fig=TRUE >>=
 
-plot(mdlHt21, pars = c("alpha","mu_a_sp", "sigma_a_sp", "sigma_a_pop", "sigma_y","a_sp[1]","a_sp[2]","a_sp[3]","a_sp[4]","a_sp[5]","a_sp[6]","a_sp[7]","a_sp[8]","a_sp[9]","a_sp[10]","a_sp[11]","a_sp[12]","a_sp[13]","a_sp[14]","a_sp[15]","a_sp[16]","a_sp[17]","a_sp[18]","a_sppop[1]","a_sppop[2]","a_sppop[3]","a_sppop[4]"))
+plot(mdlHt21, pars = c("alpha","mu_a_sp", "sigma_a_sp", "sigma_a_pop", "sigma_y","a_sp[1]","a_sp[2]","a_sp[3]","a_sp[4]","a_sp[5]","a_sp[6]","a_sp[7]","a_sp[8]","a_sp[9]","a_sp[10]","a_sp[11]","a_sp[12]","a_sp[13]","a_sp[14]","a_sp[15]","a_sp[16]","a_sppop[1]","a_sppop[2]","a_sppop[3]","a_sppop[4]"))
 
 @
 \newpage
@@ -242,7 +242,7 @@ print(xtable(mdl.out , caption="Summary of the intercept only model for plant he
 
 <<label=figHt22, echo= FALSE, fig=TRUE >>=
 
-plot(mdlHt22, pars = c("alpha","mu_a_sp", "sigma_a_sp", "sigma_a_pop", "sigma_y","a_sp[1]","a_sp[2]","a_sp[3]","a_sp[4]","a_sp[5]","a_sp[6]","a_sp[7]","a_sp[8]","a_sp[9]","a_sp[10]","a_sp[11]","a_sp[12]","a_sp[13]","a_sp[14]","a_sp[15]","a_sp[16]","a_sp[17]","a_sp[18]","a_sppop[1]","a_sppop[2]","a_sppop[3]","a_sppop[4]"))
+plot(mdlHt22, pars = c("alpha","mu_a_sp", "sigma_a_sp", "sigma_a_pop", "sigma_y","a_sp[1]","a_sp[2]","a_sp[3]","a_sp[4]","a_sp[5]","a_sp[6]","a_sp[7]","a_sp[8]","a_sp[9]","a_sp[10]","a_sp[11]","a_sp[12]","a_sp[13]","a_sp[14]","a_sppop[1]","a_sppop[2]","a_sppop[3]","a_sppop[4]"))
 
 @
 \newpage
@@ -270,7 +270,7 @@ print(xtable(mdl.out , caption="Summary of the intercept only model for plant SS
 
 <<label=figSSD22, echo= FALSE, fig=TRUE >>=
 
-plot(mdlSSD, pars = c("alpha","mu_a_sp", "sigma_a_sp", "sigma_a_pop", "sigma_y","a_sp[1]","a_sp[2]","a_sp[3]","a_sp[4]","a_sp[5]","a_sp[6]","a_sp[7]","a_sp[8]","a_sp[9]","a_sp[10]","a_sp[11]","a_sp[12]","a_sp[13]","a_sp[14]","a_sp[15]","a_sp[16]","a_sp[17]","a_sp[18]","a_sppop[1]","a_sppop[2]","a_sppop[3]","a_sppop[4]"))
+plot(mdlSSD, pars = c("alpha","mu_a_sp", "sigma_a_sp", "sigma_a_pop", "sigma_y","a_sp[1]","a_sp[2]","a_sp[3]","a_sp[4]","a_sp[5]","a_sp[6]","a_sp[7]","a_sp[8]","a_sp[9]","a_sp[10]","a_sp[11]","a_sp[12]","a_sppop[1]","a_sppop[2]","a_sppop[3]","a_sppop[4]"))
 
 @
 
