@@ -1,9 +1,20 @@
+# code written by Tolu A., summer of 2022
+# edited by Deirdre on Sept 1, 2022
+rm(list=ls())
+options(stringsAsFactors = FALSE)
+
 library(tidyr)
 library(ggplot2)
 library(readr)
 library(dplyr)
 
-
+if(length(grep("deirdreloughnan", getwd())>0)) {
+  setwd("~/Documents/github/wildhellgarden")
+} else if(length(grep("Lizzie", getwd())>0)) {
+  setwd("~/Documents/git/projects/others/deirdre/synchrony")
+} else{
+  setwd("/home/deirdre/wildhellgarden") # for midge
+}
 #Could you clean and combine all the different height data files into one?
 # 1. There is height data from 2019 which is clean and in m: analyses/2019_data/2019_heightanddbh.csv
 # Could you convert this file to just be ind, plot, and height columns without the blank rows?
