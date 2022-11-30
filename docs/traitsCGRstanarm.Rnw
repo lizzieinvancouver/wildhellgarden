@@ -78,11 +78,22 @@ slaMdl %>%
   geom_pointinterval()
 @
 
+Rstanarm SLA model for all years of data (2019 and 2022) 
+
+<<label=table1, echo=FALSE , results=tex>>=
+require(xtable)
+slaOut <- slaMdl %>%
+    spread_draws(b[,group]) %>%
+  group_by(group) %>%       # this line not necessary (done by spread_draws)
+  median_qi(b) 
+slaOut <- data.frame(slaOut)
+print(xtable(slaOut , caption="Summary of the intercept only model for plant SLA in 2019 and 2022 with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+
+@
 \newpage
 
-
-
 \subsection*{Leaf dry matter content}
+
 <<label=figldmc, echo= FALSE, fig=TRUE >>=
 load("..//analyses/output/ldmcMdlRstanarm.Rda")
 
@@ -93,9 +104,23 @@ ldmcMdl %>%
   geom_pointinterval()
 @
 
+LDMC model with all years (2019 and 2022) combined for all species (n=18)
+
+<<label=table2, echo=FALSE , results=tex>>=
+require(xtable)
+#load("..//analyses/output/ldmcMdlRstanarm.Rda")
+ldmcOut <- ldmcMdl %>%
+    spread_draws(b[,group]) %>%
+  group_by(group) %>%       # this line not necessary (done by spread_draws)
+  median_qi(b) 
+ldmcOut <- data.frame(ldmcOut)
+print(xtable(ldmcOut , caption="Summary of the intercept only model for plant LDMC in 2019 and 2022 with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+
+@
 \newpage
 
 \subsection*{Height}
+
 <<label=figheight, echo= FALSE, fig=TRUE >>=
 load("..//analyses/output/heightMdlRstanarm.Rda")
 
@@ -104,6 +129,19 @@ htMdl %>%
   median_qi(condition_mean = `(Intercept)` + b, .width = c(.95, .66)) %>%
   ggplot(aes(y = group, x = condition_mean, xmin = .lower, xmax = .upper)) +
   geom_pointinterval()
+@
+
+Height model with all years (2019, 2020, 2022) combined for all species (n=18)
+
+<<label=table8, echo=FALSE , results=tex>>=
+require(xtable)
+htOut <- htMdl %>%
+    spread_draws(b[,group]) %>%
+  group_by(group) %>%       # this line not necessary (done by spread_draws)
+  median_qi(b) 
+htOut <- data.frame(htOut)
+print(xtable(htOut , caption="Summary of the intercept only model for plant height from 2019 to 2022 with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+
 @
 \newpage
 
@@ -116,6 +154,17 @@ ssdMdl %>%
   median_qi(condition_mean = `(Intercept)` + b, .width = c(.95, .66)) %>%
   ggplot(aes(y = group, x = condition_mean, xmin = .lower, xmax = .upper)) +
   geom_pointinterval()
+@
+
+<<label=table8, echo=FALSE , results=tex>>=
+require(xtable)
+ssdOut <- ssdMdl %>%
+    spread_draws(b[,group]) %>%
+  group_by(group) %>%       # this line not necessary (done by spread_draws)
+  median_qi(b) 
+ssdOut <- data.frame(ssdOut)
+print(xtable(ssdOut , caption="Summary of the intercept only model for plant SSD in 2022 (n = 240) with species (n = 14) and population (n = 5)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+
 @
 
 \end{document}
