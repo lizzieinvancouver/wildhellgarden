@@ -582,6 +582,8 @@ save(mdlLDMCFull14, file="output/mdlLDMCFull14.Rda")
 stem <- read.csv("input/SSD_trait.csv")
 
 ssdData <- stem[complete.cases(stem$ssd),]
+ssdData <- subset(ssdData, site != "XX")
+
 ssdData$sppFact <- as.numeric(as.factor(ssdData$species))
 ssdData$popFact <- as.numeric(as.factor(ssdData$site))
 datalistSSD <- with(ssdData, 

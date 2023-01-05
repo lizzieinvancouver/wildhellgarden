@@ -53,7 +53,14 @@
 \begin{document}
 \SweaveOpts{concordance=TRUE}
 
-\section*{Running Cat's models}
+\section*{Running a simple model with no ncp etc}
+
+\begin{enumerate}
+\item SLA: variation due to sppecies is much greater than pop, hf has a negative population effect
+\item LDMC: Very large population level estimates, all very similar. Larger population effects than species level, about double.
+\item Height: Species variation is greater than population level variation, HF and WM both have positive population level effects (like RGR).
+\item Relative Growth Rate: Species variation greater than population, small population level estimates, HF and WM have positive effects other two populations are negative
+\end{enumerate}
 
 \subsection*{Specific leaf area}
 <<label=table1, echo=FALSE , results=tex>>=
@@ -61,15 +68,19 @@ require(xtable)
 require(rstan)
 load("..//analyses/output/mdlSLAFull.Rda")
 
+pop <- c("GR", "HF", "SH", "WM")
+spp <- c("ACEPEN", "ACESPI", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "QUEALB", "QUERUB", "SAMRAC", "SORAME", "SPIALB", "SPITOM", "VACMYR", "VIBCAS")
+
 sumer <- summary(mdlSLAFull)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp
+mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
 alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 
 sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 
-mdl.out <- rbind( alpha,mu_a_sp, sigma_a_sp, sigma_a_pop, sigma_y)
+mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
 print(xtable(mdl.out , caption="Summary of the intercept only model for SLA across the two years of data (2019 and 2022) (n = 599) with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
@@ -90,18 +101,20 @@ require(xtable)
 require(rstan)
 load("..//analyses/output/mdlSLAFull14.Rda")
 
+spp13 <- c("ACEPEN", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "SAMRAC", "SPIALB", "SPITOM", "VIBCAS")
 sumer <- summary(mdlSLAFull14)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp13
+mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
 alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 
 sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 
-mdl.out <- rbind( alpha,mu_a_sp, sigma_a_sp, sigma_a_pop, sigma_y)
+mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for SLA in 2022 (n = 446) with species (n = 13) and population (n = 5)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(mdl.out , caption="Summary of the intercept only model for SLA in 2022 (n = 446) with species (n = 13) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
 
@@ -119,17 +132,18 @@ require(rstan)
 load("..//analyses/output/mdlLDMCFull.Rda")
 
 sumer <- summary(mdlLDMCFull)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp
 alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
 
 sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 
-mdl.out <- rbind( alpha,mu_a_sp, sigma_a_sp, sigma_a_pop, sigma_y)
+mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for LDMC in 2019 (n = 599) with species (n = 18) and population (n = 5)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(mdl.out , caption="Summary of the intercept only model for LDMC in 2019 (n = 599) with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
 
@@ -146,14 +160,15 @@ require(rstan)
 load("..//analyses/output/mdlLDMCFull14.Rda")
 
 sumer <- summary(mdlLDMCFull14)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp13
 alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
 
 sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 
-mdl.out <- rbind( alpha,mu_a_sp, sigma_a_sp, sigma_a_pop, sigma_y)
+mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
 print(xtable(mdl.out , caption="Summary of the intercept only model for LDMC in 2019 and 2022 (n = 446) with species (n = 13) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
@@ -174,17 +189,18 @@ require(rstan)
 load("..//analyses/output/mdlHtFullTrait.Rda")
 
 sumer <- summary(mdlHtFull)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp
 alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
 
 sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 
-mdl.out <- rbind( alpha,mu_a_sp, sigma_a_sp, sigma_a_pop, sigma_y)
+mdl.out <- rbind( alpha, mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for plant height in 2019 (n = 302) with species (n = 18) and population (n = 5)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(mdl.out , caption="Summary of the intercept only model for plant height in 2019 (n = 302) with species (n = 18) and population (4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
 
@@ -200,18 +216,21 @@ require(xtable)
 require(rstan)
 load("..//analyses/output/mdlHtFull14.Rda")
 
+spp14 <- c("ACEPEN", "ALNINC", "AMECAN","BETPAP", "BETPOP", "BETALL",  "VIBCAS", "SPIALB", "SPITOM", "MYRGAL", "AROMEL", "SAMRAC", "DIELON", "SORAME")
+
 sumer <- summary(mdlHtFull14)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp14
 alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
 
 sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 
-mdl.out <- rbind( alpha,mu_a_sp, sigma_a_sp, sigma_a_pop, sigma_y)
+mdl.out <- rbind( alpha, mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for plant height in 2021 (n = 257) with species (n = 16) and population (n = 5)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(mdl.out , caption="Summary of the intercept only model for plant height in 2021 (n = 257) with species (n = 14) and population (4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
 
@@ -229,18 +248,20 @@ require(xtable)
 require(rstan)
 load("..//analyses/output/mdlSSD2022.Rda")
 
+spp12 <-c("ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "SAMRAC", "SPIALB", "SPITOM", "VIBCAS")
 sumer <- summary(mdlSSD)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp12
 alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
 
 sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 
-mdl.out <- rbind( alpha,mu_a_sp, sigma_a_sp, sigma_a_pop, sigma_y)
+mdl.out <- rbind( alpha, mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for plant SSD in 2022 (n = 240) with species (n = 14) and population (n = 5)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(mdl.out , caption="Summary of the intercept only model for plant SSD in 2022 (n = 240) with species (n = 12) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
 
@@ -256,18 +277,20 @@ require(xtable)
 require(rstan)
 load("..//analyses/output/mdlRelGrowthRate.Rda")
 
+spp14 <- c("ACEPEN", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "SAMRAC", "SORAME", "SPIALB", "SPITOM","VIBCAS")
 sumer <- summary(mdlRelGrow)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp14
 alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
 
 sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 
-mdl.out <- rbind( alpha,mu_a_sp, sigma_a_sp, sigma_a_pop, sigma_y)
+mdl.out <- rbind( alpha, mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for plant relative growth rate averaged over 3 years (n = 222) with species (n = 14) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(mdl.out , caption="Summary of the intercept only model for plant relative growth rate averaged over 3 years (n = 222) with species (n = 12) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
 
