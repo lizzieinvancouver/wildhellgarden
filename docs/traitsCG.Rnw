@@ -57,7 +57,7 @@
 
 
 
-\subsection*{Specific leaf area}
+\subsection*{Specific leaf area - all species}
 
 \begin{enumerate}
 \item Variation due to sppecies is much greater than pop
@@ -99,6 +99,7 @@ plot(mdlSLAFull, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1]
 
 @
 \newpage
+\subsection*{Specific leaf area - only species alive by 2022}
 
 \begin{enumerate}
 \item Similar overall trend with samller spp subset, but slightly stronger responses
@@ -133,7 +134,7 @@ plot(mdlSLAFull14, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[
 @
 \newpage
 
-\subsection*{Leaf dry matter content}
+\subsection*{Leaf dry matter content - all species}
 \begin{enumerate}
 \item variation due to population is twice as great as species
 \item There are no strong differences across populations, but estimate is oddly large
@@ -170,6 +171,7 @@ plot(mdlLDMCFull, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1
 @
 \newpage
 
+\subsection*{Leaf Dry Matter Content - only species alive by 2022}
 \begin{enumerate}
 \item Variation due to population is about twice that due to species
 \item Again all populations have similar estimaes
@@ -204,7 +206,7 @@ plot(mdlLDMCFull14, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp
 @
 \newpage
 
-\subsection*{Height}
+\subsection*{Height - all species}
 \begin{enumerate}
 \item variation due to sppecies is much greater than pop, about three times
 \item  Harvard forest and white mountain are positive (the two more southern sites)
@@ -241,6 +243,7 @@ plot(mdlHtFull, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1]"
 @
 \newpage
 
+\subsection{Height - only species alive by 2022}
 \begin{enumerate}
 \item variation due to sppecies is still much greater than pop
 \item  population level estimates are similar to the full species model
@@ -279,7 +282,7 @@ plot(mdlHtFull14, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1
 \newpage
 
 
-\subsection*{Stem specific density}
+\subsection*{Stem specific density - only species alive by 2022}
 
 \begin{enumerate}
 \item variation due to sppecies is much greater than pop; but values are very small
@@ -319,7 +322,7 @@ plot(mdlSSD, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1]","m
 
 \newpage
 
-\subsection*{Relative Growth Rate}
+\subsection*{Relative Growth Rate - only species alive by 2022}
 
 \begin{enumerate}
 \item Variation due to sppecies is much greater than pop, about four times
