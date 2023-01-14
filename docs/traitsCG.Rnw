@@ -55,14 +55,18 @@
 
 \section*{Running a simple model with no ncp etc}
 
-\begin{enumerate}
-\item SLA: variation due to sppecies is much greater than pop, hf has a negative population effect
-\item LDMC: Very large population level estimates, all very similar. Larger population effects than species level, about double.
-\item Height: Species variation is greater than population level variation, HF and WM both have positive population level effects (like RGR).
-\item Relative Growth Rate: Species variation greater than population, small population level estimates, HF and WM have positive effects other two populations are negative
-\end{enumerate}
+
 
 \subsection*{Specific leaf area}
+
+\begin{enumerate}
+\item Variation due to sppecies is much greater than pop
+\item  Harvard forest has a negative population effect - most souther
+\item St. Hippolyte (most northern) is positive, but Grant has the largest population effect
+\item Spitom has the largest positive species effect, Vibcas the most negative
+\item No clear divide between shrubs and tree species
+\end{enumerate}
+
 <<label=table1, echo=FALSE , results=tex>>=
 require(xtable)
 require(rstan)
@@ -96,6 +100,10 @@ plot(mdlSLAFull, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1]
 @
 \newpage
 
+\begin{enumerate}
+\item Similar overall trend with samller spp subset, but slightly stronger responses
+\item Species level estimates are different though
+\end{enumerate}
 <<label=table2, echo=FALSE , results=tex>>=
 require(xtable)
 require(rstan)
@@ -114,7 +122,7 @@ sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_ef
 mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for SLA in 2022 (n = 446) with species (n = 13) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(mdl.out , caption="Summary of the intercept only model for SLA in 2022 (n = 446) with species still alive by 2022(n = 13) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
 
@@ -126,6 +134,14 @@ plot(mdlSLAFull14, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[
 \newpage
 
 \subsection*{Leaf dry matter content}
+\begin{enumerate}
+\item variation due to population is twice as great as species
+\item There are no strong differences across populations, but estimate is oddly large
+\item Spitom has the largest positive species effect, Vibcas the most negative
+\item Quite a lot of species level variaiton, ranging from very negative for Samrac to greater positive values for Querub
+\end{enumerate}
+
+
 <<label=table3, echo=FALSE , results=tex>>=
 require(xtable)
 require(rstan)
@@ -143,7 +159,7 @@ sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_ef
 mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for LDMC in 2019 (n = 599) with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(mdl.out , caption="Summary of the intercept only model for LDMC in 2019 and 2022 (n = 599) with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
 
@@ -154,6 +170,12 @@ plot(mdlLDMCFull, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1
 @
 \newpage
 
+\begin{enumerate}
+\item Variation due to population is about twice that due to species
+\item Again all populations have similar estimaes
+\item species level estiamtes are different from the full species model in variable ways across species
+\end{enumerate}
+ 
 <<label=table4, echo=FALSE , results=tex>>=
 require(xtable)
 require(rstan)
@@ -171,7 +193,7 @@ sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_ef
 mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for LDMC in 2019 and 2022 (n = 446) with species (n = 13) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(mdl.out , caption="Summary of the intercept only model for LDMC in 2019 and 2022 (n = 446) with species still alive by 2022 (n = 13) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
 
@@ -183,6 +205,14 @@ plot(mdlLDMCFull14, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp
 \newpage
 
 \subsection*{Height}
+\begin{enumerate}
+\item variation due to sppecies is much greater than pop, about three times
+\item  Harvard forest and white mountain are positive (the two more southern sites)
+\item but grant has a much stronger negative effect than St. Hippolyte
+\item Betpop has the strongest positive response and Vacmyr the strongest negative response
+\item No clear divide between shrubs and tree species, but possible weak clade differences (all Acer Betula, Quercus, and Spirea have the same sign at least)
+\end{enumerate}
+
 <<label=table5, echo=FALSE , results=tex>>=
 require(xtable)
 require(rstan)
@@ -200,7 +230,7 @@ sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_ef
 mdl.out <- rbind( alpha, mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for plant height in 2019 (n = 302) with species (n = 18) and population (4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(mdl.out , caption="Summary of the intercept only model for plant height in 2019, 2021, 2022 (n = 302) with species (n = 18) and population (4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
 
@@ -210,6 +240,13 @@ plot(mdlHtFull, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1]"
 
 @
 \newpage
+
+\begin{enumerate}
+\item variation due to sppecies is still much greater than pop
+\item  population level estimates are similar to the full species model
+\item Species level estimates are quite different
+\end{enumerate}
+
 
 <<label=table6, echo=FALSE , results=tex>>=
 require(xtable)
@@ -230,7 +267,7 @@ sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_ef
 mdl.out <- rbind( alpha, mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for plant height in 2021 (n = 257) with species (n = 14) and population (4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(mdl.out , caption="Summary of the intercept only model for plant height (n = 257) with species still alive by 2022 (n = 14) and population (4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
 
@@ -243,6 +280,15 @@ plot(mdlHtFull14, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1
 
 
 \subsection*{Stem specific density}
+
+\begin{enumerate}
+\item variation due to sppecies is much greater than pop; but values are very small
+\item  Population estimates are essentailly 0
+\item Very weak effects across species relative to other species
+\item More of a divide, mostly shrubs are negative, trees are positive, but estimates are small
+\end{enumerate}
+
+
 <<label=table8, echo=FALSE , results=tex>>=
 require(xtable)
 require(rstan)
@@ -271,7 +317,17 @@ plot(mdlSSD, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1]","m
 
 @
 
+\newpage
+
 \subsection*{Relative Growth Rate}
+
+\begin{enumerate}
+\item Variation due to sppecies is much greater than pop, about four times
+\item  The two southern sites are positive, but two more northern sites are negative
+\item Again Grant has a more negative effect that St. Hippolyte, but effect sizes are small across populations
+\item There might be some divide, with shrubs having negative estimates, but there are not many trees in this dataset (which excludes any indiviudal that had negative growth over the years)
+\end{enumerate}
+
 <<label=table8, echo=FALSE , results=tex>>=
 require(xtable)
 require(rstan)
@@ -290,7 +346,7 @@ sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_ef
 mdl.out <- rbind( alpha, mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for plant relative growth rate averaged over 3 years (n = 222) with species (n = 12) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(mdl.out , caption="Summary of the intercept only model for plant relative growth rate averaged over 3 years (n = 222) with species (n = 12) and population (n = 4). For this analysis I excluded any individual that had negative growth rates."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
 
