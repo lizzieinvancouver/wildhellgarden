@@ -7,3 +7,4 @@
 *.Rhistory
 
 analyses/.Rhistory
+*.Rda
