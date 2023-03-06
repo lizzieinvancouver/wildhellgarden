@@ -364,6 +364,23 @@ p5<-ggplot(gs.siteout,aes(r_site,reorder(site,provenance.lat)))+
   ylab("")+
   ggthemes::theme_few()
 
+bb.siteout %>% group_by(site) %>% summarise(meangs=mean(r_site))
+0.722+.668 ##1.5
+
+bs.siteout %>% group_by(site) %>% summarise(meangs=mean(r_site))
+1.99+1.37 ##3-4 days diff
+gs.siteout %>% group_by(site) %>% summarise(meangs=mean(r_site))
+1.29+2.52 #### 3-4day difference
+
+
+bb.sppout %>% group_by(spp) %>% summarise(meangs=mean(r_spp))
+11.3+10.1 ##21. 4 days
+
+bs.sppout %>% group_by(spp) %>% summarise(meangs=mean(r_spp))
+10.7+16.3## 27 days
+
+gs.sppout %>% group_by(spp) %>% summarise(meangs=mean(r_spp))
+10.5+11 #(21 daty)
 
 p4<-ggpubr::ggarrange(p1,p3,ncol=2,labels = c("b)","c)"))
 
