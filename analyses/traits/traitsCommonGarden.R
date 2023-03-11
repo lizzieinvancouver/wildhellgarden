@@ -375,12 +375,21 @@ datalistSlaFull <- with(slaFull,
                          pop = popFact,
                          N = nrow(slaFull),
                          n_sp = length(unique(slaFull$spp)),
-                         n_pop = length(unique(slaFull$pop))
+                         n_pop = length(unique(slaFull$pop)),
+                         prior_mu_grand_mu = 0,
+                         prior_mu_grand_sigma = 20,
+                         prior_sigma_sp_mu = 0,
+                         prior_sigma_sp_sigma = 10,
+                         prior_sigma_pop_mu = 0,
+                         prior_sigma_pop_sigma = 10,
+                         prior_sigma_y_mu = 0,
+                         prior_sigma_y_sigma = 10
                     )
 )
 
-mdlSLAFull = stan('stan/trait_3levelwpop.stan',
-                   data = datalistSlaFull, iter = 5000, warmup= 4000,
+
+mdlSLAFull = stan('stan/trait_3levelwpop_ldmc.stan',
+                   data = datalistSlaFull, iter = 8000, warmup= 7000,
                    chains=4,
                    control=list(adapt_delta=0.999,max_treedepth = 15)
                    #adapt_delta=0.999,
@@ -422,14 +431,22 @@ datalistSlaFull <- with(slaFull14,
                              pop = popFact,
                              N = nrow(slaFull14),
                              n_sp = length(unique(slaFull14$spp)),
-                             n_pop = length(unique(slaFull14$pop))
+                             n_pop = length(unique(slaFull14$pop)),
+                             prior_mu_grand_mu = 0,
+                             prior_mu_grand_sigma = 20,
+                             prior_sigma_sp_mu = 0,
+                             prior_sigma_sp_sigma = 10,
+                             prior_sigma_pop_mu = 0,
+                             prior_sigma_pop_sigma = 10,
+                             prior_sigma_y_mu = 0,
+                             prior_sigma_y_sigma = 10
                         )
 )
 
 
-mdlSLAFull14 = stan('stan/trait_3levelwpop.stan', 
-                  data = datalistSlaFull, iter = 5000, warmup= 4000, 
-                  chains=4, 
+mdlSLAFull14 = stan('stan/trait_3levelwpop_ldmc.stan',
+                  data = datalistSlaFull, iter = 8000, warmup= 7000,
+                  chains=4,
                   control=list(adapt_delta=0.999, max_treedepth = 15)
 )
 save(mdlSLAFull14, file="output/mdlSLAFull14.Rda")
@@ -450,9 +467,9 @@ save(mdlSLAFull14, file="output/mdlSLAFull14.Rda")
 ldmcData <- leaf[complete.cases(leaf$LDMC),]
 unique(ldmcData$year)
 ldmcData <- subset(ldmcData, pop != "XX")
-
+unique(ldmcData$pop)
 # 2019
-# ldmcData2019 <- subset(ldmcData, year == "2019")
+ldmcData2019 <- subset(ldmcData, year == "2019")
 # ldmcData2019$sppFact <- as.numeric(as.factor(ldmcData2019$spp))
 # ldmcData2019$popFact <- as.numeric(as.factor(ldmcData2019$pop))
 # datalistLdmc <- with(ldmcData2019, 
@@ -497,7 +514,7 @@ ldmcData <- subset(ldmcData, pop != "XX")
 # outLDMC <- data.frame(sumLDMC[param, c("mean","2.5%", "97.5%", "n_eff", "Rhat")])
 
 # 2022
-# ldmcData2022 <- subset(ldmcData, year == "2022")
+ldmcData2022 <- subset(ldmcData, year == "2022")
 # ldmcData2022$sppFact <- as.numeric(as.factor(ldmcData2022$spp))
 # ldmcData2022$popFact <- as.numeric(as.factor(ldmcData2022$pop))
 # datalistLdmc <- with(ldmcData2022, 
@@ -539,43 +556,60 @@ ldmcData <- subset(ldmcData, pop != "XX")
 #############################################################
 # Full ldmc mdl:
 ldmcDataFull <- ldmcData
-ldmcDataFull$sppFact <- as.numeric(as.factor(ldmcDataFull$spp))
+ldmcDataFull$sppFact <- as.numeric(as.factor(ldmcDataFull$spp)) #18 spp
 ldmcDataFull$popFact <- as.numeric(as.factor(ldmcDataFull$pop))
+
 datalistLdmc <- with(ldmcDataFull, 
                      list(y = LDMC,  
                           sp = sppFact,
                           pop = popFact,
                           N = nrow(ldmcDataFull),
                           n_sp = length(unique(ldmcDataFull$spp)),
-                          n_pop = length(unique(ldmcDataFull$pop))
+                          n_pop = length(unique(ldmcDataFull$pop)),
+                          prior_mu_grand_mu = 300,
+                          prior_mu_grand_sigma = 50,
+                          prior_sigma_sp_mu = 50,
+                          prior_sigma_sp_sigma = 20,
+                          prior_sigma_pop_mu = 0,
+                          prior_sigma_pop_sigma = 10,
+                          prior_sigma_y_mu = 50,
+                          prior_sigma_y_sigma = 10
                      )
 )
 
-mdlLDMCFull = stan('stan/trait_3levelwpop.stan',
-               data = datalistLdmc, iter = 6000, warmup= 4000,
-               chains=4, control=list(adapt_delta=0.99, max_treedepth = 15)
-)
-save(mdlLDMCFull, file="output/mdlLDMCFull.Rda")
+mdlLDMC = stan('stan/trait_3levelwpop_ldmc.stan',
+               data = datalistLdmc, iter = 8000, warmup = 7000, chains = 4,
+               control = list(max_treedepth = 15,adapt_delta = 0.99))
 
 ldmcData2022 <- subset(ldmcData, year == "2022")
+spp22 <- unique(ldmcData2022$spp)
 ldmcDataFull14 <- ldmcData[ldmcData$spp %in% spp22, ]
 ldmcDataFull14$sppFact <- as.numeric(as.factor(ldmcDataFull14$spp))
 ldmcDataFull14$popFact <- as.numeric(as.factor(ldmcDataFull14$pop))
-datalistLdmc <- with(ldmcDataFull14, 
+datalistLdmc14<- with(ldmcDataFull14, 
                      list(y = LDMC,  
                           sp = sppFact,
                           pop = popFact,
                           N = nrow(ldmcDataFull14),
                           n_sp = length(unique(ldmcDataFull14$spp)),
-                          n_pop = length(unique(ldmcDataFull14$pop))
+                          n_pop = length(unique(ldmcDataFull14$pop)),
+                          prior_mu_grand_mu = 300,
+                          prior_mu_grand_sigma = 50,
+                          prior_sigma_sp_mu = 50,
+                          prior_sigma_sp_sigma = 20,
+                          prior_sigma_pop_mu = 0,
+                          prior_sigma_pop_sigma = 10,
+                          prior_sigma_y_mu = 50,
+                          prior_sigma_y_sigma = 10
                      )
 )
 
-mdlLDMCFull14 = stan('stan/trait_3levelwpop.stan',
-                   data = datalistLdmc, iter = 6000, warmup= 4000,
-                   chains=4, control=list(adapt_delta=0.99, max_treedepth = 15)
+
+mdlLDMCFull14 = stan('stan/trait_3levelwpop_ldmc.stan',
+                   data = datalistLdmc14, iter = 8000, warmup = 7000,
+                   chains=4, control=list(adapt_delta = 0.99, max_treedepth = 15)
 )
-save(mdlLDMCFull14, file="output/mdlLDMCFull14.Rda")
+ save(mdlLDMCFull14, file="output/mdlLDMCFull14.Rda")
 ################# SSD ############################################
 
 # read in stem trait data: only one year of data
@@ -586,16 +620,32 @@ ssdData <- subset(ssdData, site != "XX")
 
 ssdData$sppFact <- as.numeric(as.factor(ssdData$species))
 ssdData$popFact <- as.numeric(as.factor(ssdData$site))
+# datalistSSD <- with(ssdData, 
+#                     list(y = ssd,  
+#                          sp = sppFact,
+#                          pop = popFact,
+#                          N = nrow(ssdData),
+#                          n_sp = length(unique(ssdData$species)),
+#                          n_pop = length(unique(ssdData$site))
+#                     )
+# )
 datalistSSD <- with(ssdData, 
-                    list(y = ssd,  
-                         sp = sppFact,
-                         pop = popFact,
-                         N = nrow(ssdData),
-                         n_sp = length(unique(ssdData$species)),
-                         n_pop = length(unique(ssdData$site))
-                    )
+     list(y = ssd,  
+          sp = sppFact,
+          pop = popFact,
+          N = nrow(ssdData),
+          n_sp = length(unique(ssdData$spp)),
+          n_pop = length(unique(ssdData$pop)),
+          prior_mu_grand_mu = 0,
+          prior_mu_grand_sigma = 1,
+          prior_sigma_sp_mu = 0,
+          prior_sigma_sp_sigma = 1,
+          prior_sigma_pop_mu = 0,
+          prior_sigma_pop_sigma = 1,
+          prior_sigma_y_mu = 0,
+          prior_sigma_y_sigma = 10
+     )
 )
-
 
 mdlSSD = stan('stan/trait_3levelwpop.stan',
               data = datalistSSD, iter = 4000, warmup= 3000,
@@ -604,7 +654,14 @@ mdlSSD = stan('stan/trait_3levelwpop.stan',
               max_treedepth = 19)
 )
 
-save(mdlSSD, file="output/mdlSSD2022.Rda")
+mdlSSDSmall = stan('stan/trait_3levelwpop_ldmc.stan',
+              data = datalistSSD, iter = 4000, warmup= 3000,
+              chains=4,
+              control=list(adapt_delta=0.99,
+                           max_treedepth = 15)
+)
+# 
+# save(mdlSSD, file="output/mdlSSD2022.Rda")
 # 2 div trans
 # sumSSD <- summary(mdlSSD)$summary
 # 
@@ -664,81 +721,156 @@ datalistRGR <- with(relGrow,
                      )
 )
 
-mdlRelGrow = stan('stan/trait_3levelwpop.stan',
-                   data = datalistRGR, iter = 5000, warmup= 4000,
-                   chains=4,
-                   control=list(adapt_delta=0.999,max_treedepth = 15)
-                   #adapt_delta=0.999,
-                   
+# mdlRelGrow = stan('stan/trait_3levelwpop.stan',
+#                    data = datalistRGR, iter = 5000, warmup= 4000,
+#                    chains=4,
+#                    control=list(adapt_delta=0.999,max_treedepth = 15)
+#                    #adapt_delta=0.999,
+#                    
+# )
+# 
+# save(mdlRelGrow, file="output/mdlRelGrowthRate.Rda")
+# ################################################
+# # rstanarm:
+# 
+# require(rstanarm)
+# library(magrittr)
+# library(dplyr)
+# library(purrr)
+# library(forcats)
+# library(tidyr)
+# library(modelr)
+# library(ggdist)
+# library(tidybayes)
+# library(ggplot2)
+# library(cowplot)
+# library(RColorBrewer)
+# 
+# 
+# #slaMdl <- stan_glmer(SLA ~ (1|sppFact/popFact), data = slaFull)
+# slaMdl <- stan_glmer(SLA ~ (1|sppFact)  + (1 | popFact), data = slaFull)
+# 
+# slaMdl %>%
+#   spread_draws(`(Intercept)`, b[,group]) %>%
+#   median_qi(condition_mean = `(Intercept)` + b, .width = c(.95, .66)) %>%
+#   ggplot(aes(y = group, x = condition_mean, xmin = .lower, xmax = .upper)) +
+#   geom_pointinterval()
+# 
+# save(slaMdl, file="..//analyses/output/slaMdlRstanarm.Rda")
+# 
+# # LDMC
+# #ldmcMdl <- stan_glmer(LDMC ~ (1|sppFact/popFact), data = ldmcDataFull)
+# ldmcMdl <- stan_glmer(LDMC ~ (1|sppFact) + (1|popFact), data = ldmcDataFull)
+# 
+# ldmcMdl %>%
+#   spread_draws(`(Intercept)`, b[,group]) %>%
+#   median_qi(condition_mean = `(Intercept)` + b, .width = c(.95, .66)) %>%
+#   ggplot(aes(y = group, x = condition_mean, xmin = .lower, xmax = .upper)) +
+#   geom_pointinterval()
+# 
+# save(ldmcMdl, file="..//analyses/output/ldmcMdlRstanarm.Rda")
+# 
+# # Height
+# #htMdl <- stan_glmer(Height ~ (1|sppFact/popFact), data = htFull)
+# 
+# htMdl <- stan_glmer(Height ~ (1|sppFact) + (1|popFact), data = htFull)
+# 
+# htMdl %>%
+#   spread_draws(`(Intercept)`, b[,group]) %>%
+#   median_qi(condition_mean = `(Intercept)` + b, .width = c(.95, .66)) %>%
+#   ggplot(aes(y = group, x = condition_mean, xmin = .lower, xmax = .upper)) +
+#   geom_pointinterval()
+# 
+# save(htMdl, file="..//analyses/output/heightMdlRstanarm.Rda")
+# 
+# ## SSD
+# #ssdMdl <- stan_glmer(ssd ~ (1|sppFact/popFact), data = ssdData)
+# ssdMdl <- stan_glmer(ssd ~ (1|sppFact)  + (1| popFact), data = ssdData)
+# 
+# ssdMdl %>%
+#   spread_draws(`(Intercept)`, b[,group]) %>%
+#   median_qi(condition_mean = `(Intercept)` + b, .width = c(.95, .66)) %>%
+#   ggplot(aes(y = group, x = condition_mean, xmin = .lower, xmax = .upper)) +
+#   geom_pointinterval()
+# 
+# save(ssdMdl, file="..//analyses/output/ssdMdlRstanarm.Rda")
+# 
+# ssdMdl %>%
+#   spread_draws(b[,group]) %>%
+#   group_by(group) %>%       # this line not necessary (done by spread_draws)
+#   median_qi(b) 
+# 
+# 
+load("output/mdlLDMCNCPSite.Rda")
+#ldmcMdl <- summary(mdlLDMCFull)$summary
+post <- rstan::extract(mdlLDMC)
+# 
+load("output/mdlSLAFull.Rda")
+#slaMdl <- summary(mdlSLAFull)$summary
+post <- rstan::extract(mdlSLAFull)
+
+# load("output/mdlHtFullTrait.Rda")
+# #slaMdl <- summary(mdlSLAFull)$summary
+# post <- rstan::extract(mdlHtFull)
+# 
+# load("output/mdlSSD2022.Rda")
+# post <- rstan::extract(mdlSSD)
+# 
+# mu_sp ~ normal(0, sigma_sp);
+# mu_pop ~ normal(0, sigma_pop);
+# 
+# mu_grand ~ normal(0, 10);
+# sigma_sp ~ normal(0, 10);
+# sigma_pop ~ normal(0, 10);
+# sigma_y ~ normal(0, 10);
+pdf("postPrior.pdf", height = 10, width = 10)
+par(mfrow = c(2,2))
+h1 <- hist(rnorm(1000, 0,20), col=rgb(0,0,1,1/4))
+hist(post$mu_grand,  col=rgb(1,0,1,1/4), add = T)
+
+h1 <- hist(rnorm(1000,0,10), col=rgb(0,0,1,1/4))
+hist(post$sigma_sp, add = T,  col=rgb(1,0,1,1/4))
+
+h1 <- hist(rnorm(1000, 0,10), col=rgb(0,0,1,1/4))
+hist(post$sigma_pop,  col=rgb(1,0,1,1/4), add =T)
+
+h1 <- hist(rnorm(1000, 0,10), col=rgb(0,0,1,1/4))
+hist(post$sigma_y, col=rgb(1,0,1,1/4), add = T)
+
+hist(post$mu_grand,  col=rgb(1,0,1,1/4))
+# Fix the issues with LDMC
+datalistLdmc <- with(ldmcDataFull, 
+                     list(y = LDMC,  
+                          sp = sppFact,
+                          pop = popFact,
+                          N = nrow(ldmcDataFull),
+                          n_sp = length(unique(ldmcDataFull$spp)),
+                          n_pop = length(unique(ldmcDataFull$pop)),
+                          prior_mu_grand_mu = 300,
+                          prior_mu_grand_sigma = 50,
+                          prior_sigma_sp_mu = 50,
+                          prior_sigma_sp_sigma = 20,
+                          prior_sigma_pop_mu = 0,
+                          prior_sigma_pop_sigma = 10,
+                          prior_sigma_y_mu = 50,
+                          prior_sigma_y_sigma = 10
+                     )
 )
 
-save(mdlRelGrow, file="output/mdlRelGrowthRate.Rda")
-################################################
-# rstanarm:
 
-require(rstanarm)
-library(magrittr)
-library(dplyr)
-library(purrr)
-library(forcats)
-library(tidyr)
-library(modelr)
-library(ggdist)
-library(tidybayes)
-library(ggplot2)
-library(cowplot)
-library(RColorBrewer)
+mdlLDMC = stan('stan/trait_3levelwpop_ldmc.stan',
+                   data = datalistLdmc, iter = 8000, warmup= 7000, chains = 4,
+                  control = list(max_treedepth = 15,adapt_delta =0.99))
 
+save(mdlLDMC, file="output/mdlLDMC.Rda")
 
-#slaMdl <- stan_glmer(SLA ~ (1|sppFact/popFact), data = slaFull)
-slaMdl <- stan_glmer(SLA ~ (1|sppFact)  + (1 | popFact), data = slaFull)
+load("output/mdlLDMCFull.Rda")
+ldmcMdl <- data.frame(summary(mdlLDMC)$summary)
 
-slaMdl %>%
-  spread_draws(`(Intercept)`, b[,group]) %>%
-  median_qi(condition_mean = `(Intercept)` + b, .width = c(.95, .66)) %>%
-  ggplot(aes(y = group, x = condition_mean, xmin = .lower, xmax = .upper)) +
-  geom_pointinterval()
+pdf("ldmcPairs.pdf", width = 10, height = 10)
+pairs(mdlLDMCncp, pars = c("mu_grand","mu_pop","sigma_sp",
+                         "sigma_y",
+                         "sigma_pop", "lp__"))
+dev.off()
 
-save(slaMdl, file="..//analyses/output/slaMdlRstanarm.Rda")
-
-# LDMC
-#ldmcMdl <- stan_glmer(LDMC ~ (1|sppFact/popFact), data = ldmcDataFull)
-ldmcMdl <- stan_glmer(LDMC ~ (1|sppFact) + (1|popFact), data = ldmcDataFull)
-
-ldmcMdl %>%
-  spread_draws(`(Intercept)`, b[,group]) %>%
-  median_qi(condition_mean = `(Intercept)` + b, .width = c(.95, .66)) %>%
-  ggplot(aes(y = group, x = condition_mean, xmin = .lower, xmax = .upper)) +
-  geom_pointinterval()
-
-save(ldmcMdl, file="..//analyses/output/ldmcMdlRstanarm.Rda")
-
-# Height
-#htMdl <- stan_glmer(Height ~ (1|sppFact/popFact), data = htFull)
-
-htMdl <- stan_glmer(Height ~ (1|sppFact) + (1|popFact), data = htFull)
-
-htMdl %>%
-  spread_draws(`(Intercept)`, b[,group]) %>%
-  median_qi(condition_mean = `(Intercept)` + b, .width = c(.95, .66)) %>%
-  ggplot(aes(y = group, x = condition_mean, xmin = .lower, xmax = .upper)) +
-  geom_pointinterval()
-
-save(htMdl, file="..//analyses/output/heightMdlRstanarm.Rda")
-
-## SSD
-#ssdMdl <- stan_glmer(ssd ~ (1|sppFact/popFact), data = ssdData)
-ssdMdl <- stan_glmer(ssd ~ (1|sppFact)  + (1| popFact), data = ssdData)
-
-ssdMdl %>%
-  spread_draws(`(Intercept)`, b[,group]) %>%
-  median_qi(condition_mean = `(Intercept)` + b, .width = c(.95, .66)) %>%
-  ggplot(aes(y = group, x = condition_mean, xmin = .lower, xmax = .upper)) +
-  geom_pointinterval()
-
-save(ssdMdl, file="..//analyses/output/ssdMdlRstanarm.Rda")
-
-ssdMdl %>%
-  spread_draws(b[,group]) %>%
-  group_by(group) %>%       # this line not necessary (done by spread_draws)
-  median_qi(b) 
+temp <- (ldmcMdl[grep("mu_sp", rownames(ldmcMdl)), c("mean","2.5%", "97.5%", "n_eff", "Rhat")])
