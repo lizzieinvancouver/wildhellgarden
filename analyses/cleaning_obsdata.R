@@ -68,7 +68,26 @@ dx$ripefruit<-ifelse(dx$first==79 | dx$second==79 | dx$third==79, dx$doy, dx$rip
 dx$budset<-NA
 dx$budset<-ifelse(dx$first=="102" | dx$second=="102" | dx$third=="102", dx$doy, dx$budset)
 
-drisk<-dx%>%dplyr::select(Ind, Plot, bb, lo, flobuds, flobudburst, flowers, fruit, ripefruit, budset, species)
+if(FALSE){
+### Some checks added by Cat 2 May 2023 - all about the same amount of data so adding both
+### Check to see leaf coloration (92) vs leaf drop (93, 95, 97)
+nrow(dx[dx$first==92,]) #532
+nrow(dx[dx$second==92,]) # 9800
+
+## Leaf drop
+nrow(dx[dx$first==93,]); nrow(dx[dx$first==95,]); nrow(dx[dx$first==97,]) #426, 481, 353
+nrow(dx[dx$second==93,]); nrow(dx[dx$second==95,]); nrow(dx[dx$second==97,]) # 9748, 9729, 9698
+}
+
+
+dx$leafcolor<-NA
+dx$leafcolor<-ifelse(dx$first==92 | dx$second==92 | dx$third==92, dx$doy, dx$leafcolor)
+
+dx$leafdrop<-NA
+dx$leafdrop<-ifelse(dx$first%in%c(93:97) | dx$second%in%c(93:97) | dx$third%in%c(93:97), dx$doy, dx$leafdrop)
+
+
+drisk<-dx%>%dplyr::select(Ind, Plot, bb, lo, flobuds, flobudburst, flowers, fruit, ripefruit, budset, leafcolor, leafdrop, species)
 #drisk<-drisk[!(is.na(drisk$bb) & is.na(drisk$lo)),]
 
 bb<-drisk[!is.na(drisk$bb),]
@@ -88,7 +107,7 @@ fbb$flobudburst<- ave(fbb$flobudburst, fbb$Ind, fbb$Plot, FUN=min)
 fbb<-subset(fbb, select=c("Ind", "Plot", "flobudburst"))
 fbb<-fbb[!duplicated(fbb),]
 flos<-drisk[!is.na(drisk$flowers),]
-flos$flowers<- ave(flos$flowers, lo$Ind, lo$Plot, FUN=min) 
+flos$flowers<- ave(flos$flowers, flos$Ind, flos$Plot, FUN=min) 
 flos<-subset(flos, select=c("Ind", "Plot", "flowers"))
 flos<-flos[!duplicated(flos),]
 fru<-drisk[!is.na(drisk$fruit),]
@@ -96,13 +115,21 @@ fru$fruit<- ave(fru$fruit, fru$Ind, fru$Plot, FUN=min)
 fru<-subset(fru, select=c("Ind", "Plot", "fruit"))
 fru<-fru[!duplicated(fru),]
 ripe<-drisk[!is.na(drisk$ripefruit),]
-ripe$ripefruit<- ave(ripe$ripefruit, lo$Ind, lo$Plot, FUN=min) 
+ripe$ripefruit<- ave(ripe$ripefruit, ripe$Ind, ripe$Plot, FUN=min) 
 ripe<-subset(ripe, select=c("Ind", "Plot", "ripefruit"))
 ripe<-ripe[!duplicated(ripe),]
 bset<-drisk[!is.na(drisk$budset),]
-bset$budset<- ave(bset$budset, lo$Ind, lo$Plot, FUN=min) 
+bset$budset<- ave(bset$budset, bset$Ind, bset$Plot, FUN=min) 
 bset<-subset(bset, select=c("Ind", "Plot", "budset"))
 bset<-bset[!duplicated(bset),]
+lcolor<-drisk[!is.na(drisk$leafcolor),]
+lcolor$leafcolor<- ave(lcolor$leafcolor, lcolor$Ind, lcolor$Plot, FUN=min) 
+lcolor<-subset(lcolor, select=c("Ind", "Plot", "leafcolor"))
+lcolor<-lcolor[!duplicated(lcolor),]
+ldrop<-drisk[!is.na(drisk$leafdrop),]
+ldrop$leafdrop<- ave(ldrop$leafdrop, ldrop$Ind, ldrop$Plot, FUN=min) 
+ldrop<-subset(ldrop, select=c("Ind", "Plot", "leafdrop"))
+ldrop<-ldrop[!duplicated(ldrop),]
 
 cg18clean<-full_join(bb, lo)
 cg18clean <- full_join(cg18clean, fbud)
@@ -111,6 +138,8 @@ cg18clean <- full_join(cg18clean, flos)
 cg18clean <- full_join(cg18clean, fru)
 cg18clean <- full_join(cg18clean, ripe)
 cg18clean<-full_join(cg18clean, bset)
+cg18clean<-full_join(cg18clean, lcolor)
+cg18clean<-full_join(cg18clean, ldrop)
 cg18clean$risk<-cg18clean$leafout-cg18clean$budburst 
 cg18clean$year <- 2018
 #write.csv(cg18clean, file="output/clean_cg_2018.csv", row.names=FALSE)
@@ -265,6 +294,40 @@ cg19fruits$plot <- as.character(cg19fruits$plot)
 
 cg19fruits <- cg19fruits[!duplicated(cg19fruits),]
 cg19clean <- full_join(cg19clean, cg19fruits)
+
+
+cg19fall <- cg19[(cg19$Phase=="Fall Colors"),]
+
+cg19fall <- subset(cg19fall, select=c("id", "doy", "bbch"))
+cg19fall <- separate(data = cg19fall, col = id, into = c("spp", "site", "ind", "plot"), sep = "\\_")
+cg19fall$ind <- ifelse(is.na(cg19fall$ind), substr(cg19fall$spp, 7,8), cg19fall$ind)
+cg19fall$ind <- ifelse(cg19fall$ind=="", "XX", cg19fall$ind)
+cg19fall$spp <- substr(cg19fall$spp, 0, 6)
+cg19fall$year <- 2019
+
+cg19fall<-cg19fall[!duplicated(cg19fall),]
+
+cg19fall$bbch <- gsub("\\.", "\\,", cg19fall$bbch)
+cg19fall <- separate(data = cg19fall, col = bbch, into = c("bbch", "bbchmf"), sep = "\\,")
+
+cg19fall$leafcolor <- ifelse(cg19fall$bbch%in%c(90:99), cg19fall$doy, NA)
+
+cg19fall$spindplot <- paste(cg19fall$spp, cg19fall$site, cg19fall$ind, cg19fall$plot)
+cg19fall$lcolor <- NA
+for(i in c(unique(cg19fall$spindplot))){ 
+  
+  lcolor <- cg19fall$leafcolor[i==cg19fall$spindplot][1]
+  cg19fall$lcolor[i==cg19fall$spindplot] <- lcolor
+  
+}
+cg19fall$leafcolor <- cg19fall$lcolor
+
+cg19fall <- subset(cg19fall, select=c("spp", "year", "site", "ind", "leafcolor", "plot"))
+cg19fall$plot <- as.character(cg19fall$plot)
+
+cg19fall <- cg19fall[!duplicated(cg19fall),]
+cg19clean <- full_join(cg19clean, cg19fall)
+
 
 cg18clean <- separate(data = cg18clean, col = Ind, into = c("spp", "site", "ind"), sep = "\\_")
 cg18clean$plot <- as.character(cg18clean$Plot)
@@ -427,9 +490,48 @@ cg20fruits$plot <- as.character(cg20fruits$plot)
 cg20fruits <- cg20fruits[!duplicated(cg20fruits),]
 cg20clean <- full_join(cg20clean, cg20fruits)
 
+
+cg20fall <- cg20[(cg20$Phase%in%c("Leaves", "Flowers")),]
+
+cg20fall <- subset(cg20fall, select=c("id", "doy", "bbch"))
+cg20fall <- separate(data = cg20fall, col = id, into = c("spp", "site", "ind", "plot"), sep = "\\_")
+cg20fall$ind <- ifelse(is.na(cg20fall$ind), substr(cg20fall$spp, 7,8), cg20fall$ind)
+cg20fall$ind <- ifelse(cg20fall$ind=="", "XX", cg20fall$ind)
+cg20fall$spp <- substr(cg20fall$spp, 0, 6)
+cg20fall$year <- 2020
+
+cg20fall<-cg20fall[!duplicated(cg20fall),]
+
+cg20fall$bbch <- gsub("\\.", "\\,", cg20fall$bbch)
+cg20fall <- separate(data = cg20fall, col = bbch, into = c("bbch", "bbchmf"), sep = "\\,")
+
+cg20fall$leafcolor <- ifelse(cg20fall$bbch%in%c(90:99), cg20fall$doy, NA)
+
+cg20fall$spindplot <- paste(cg20fall$spp, cg20fall$site, cg20fall$ind, cg20fall$plot)
+cg20fall$lcolor <- NA
+cg20fall <- cg20fall[!is.na(cg20fall$leafcolor),]
+for(i in c(unique(cg20fall$spindplot))){ 
+  
+  lcolor <- cg20fall$leafcolor[i==cg20fall$spindplot][1]
+  cg20fall$lcolor[i==cg20fall$spindplot] <- lcolor
+  
+}
+cg20fall$leafcolor <- cg20fall$lcolor
+
+cg20fall <- subset(cg20fall, select=c("spp", "year", "site", "ind", "leafcolor", "plot"))
+cg20fall$plot <- as.character(cg20fall$plot)
+
+cg20fall <- cg20fall[!duplicated(cg20fall),]
+cg20clean <- full_join(cg20clean, cg20fall)
+
+
+
 cg <- full_join(cg, cg20clean)
 cg$Plot <- NULL
 cg$risk <- NULL
+
+
+
 
 lookupbb <- aggregate(cg[c("budburst")], cg[c("spp", "year", "site", "ind", "plot")], FUN=mean, na.rm=TRUE)
 lookupflowers <- aggregate(cg[c("flowers")], cg[c("spp", "year", "site", "ind", "plot")], FUN=mean, na.rm=TRUE)
@@ -439,6 +541,7 @@ lookupfbb <- aggregate(cg[c("flobudburst")], cg[c("spp", "year", "site", "ind", 
 lookupfru <- aggregate(cg[c("fruit")], cg[c("spp", "year", "site", "ind", "plot")], FUN=mean, na.rm=TRUE)
 lookupripe <- aggregate(cg[c("ripefruit")], cg[c("spp", "year", "site", "ind", "plot")], FUN=mean, na.rm=TRUE)
 lookupbset <- aggregate(cg[c("budset")], cg[c("spp", "year", "site", "ind", "plot")], FUN=mean, na.rm=TRUE)
+lookuplcolor <- aggregate(cg[c("leafcolor")], cg[c("spp", "year", "site", "ind", "plot")], FUN=mean, na.rm=TRUE)
 
 cgclean <- merge(lookupbb, lookupflowers, by=c("spp", "year", "site", "ind", "plot"), all.x=TRUE, all.y=TRUE)
 cgclean <- merge(cgclean, lookuplo, by=c("spp", "year", "site", "ind", "plot"), all.x=TRUE, all.y=TRUE)
@@ -447,6 +550,7 @@ cgclean <- merge(cgclean, lookupfbb, by=c("spp", "year", "site", "ind", "plot"),
 cgclean <- merge(cgclean, lookupfru, by=c("spp", "year", "site", "ind", "plot"), all.x=TRUE, all.y=TRUE)
 cgclean <- merge(cgclean, lookupripe, by=c("spp", "year", "site", "ind", "plot"), all.x=TRUE, all.y=TRUE)
 cgclean <- merge(cgclean, lookupbset, by=c("spp", "year", "site", "ind", "plot"), all.x=TRUE, all.y=TRUE)
+cgclean <- merge(cgclean, lookuplcolor, by=c("spp", "year", "site", "ind", "plot"), all.x=TRUE, all.y=TRUE)
 
 cgclean$provenance.lat <- NA
 cgclean$provenance.long <- NA
