@@ -55,6 +55,11 @@
 
 \section*{Running a simple model with no ncp etc}
 
+<<label=runcode1,  echo=FALSE>>=
+
+source("..//analyses/traits/wildHellTraitValues.R")
+@
+
 \begin{figure}[h!]
     \centering
      \includegraphics[width=\textwidth]{..//analyses/traits/figures/traitPop.pdf}
@@ -73,36 +78,80 @@
 \subsection*{Specific leaf area - all species}
 
 \begin{enumerate}
-\item Variation due to sppecies is much greater than pop
-\item  Harvard forest has a negative population effect - most souther
-\item St. Hippolyte (most northern) is positive, but Grant has the largest population effect
+\item Variation due to species (\Sexpr{sigSpSLA}, 50\% UI: \Sexpr{sigSpSLA25}, \Sexpr{sigSpSLA75}) is much greater than pop (\Sexpr{sigPopSLA}, 50\% UI: \Sexpr{sigPopSLA25}, \Sexpr{sigPopSLA75}) 
+\item  Harvard forest has a negative population effect - most southern (\Sexpr{hfPopMSLA}, 50\% UI: \Sexpr{hfPop25SLA}, \Sexpr{hfPop75SLA}) 
+\item St. Hippolyte (most northern) is positive (\Sexpr{shPopMSLA}, 50\% UI: \Sexpr{shPop25SLA}, \Sexpr{shPop75SLA}) , but Grant has the largest population effect  (\Sexpr{grPopMSLA}, 50\% UI: \Sexpr{grPop25SLA}, \Sexpr{grPop75SLA})---sh UI crosses zero 
 \item Spitom has the largest positive species effect, Vibcas the most negative
 \item No clear divide between shrubs and tree species
 \end{enumerate}
 
+
 <<label=table1, echo=FALSE , results=tex>>=
-require(xtable)
+  require(xtable)
 require(rstan)
 load("..//analyses/output/mdlSLAFull.Rda")
 
 pop <- c("GR", "HF", "SH", "WM")
 spp <- c("ACEPEN", "ACESPI", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "QUEALB", "QUERUB", "SAMRAC", "SORAME", "SPIALB", "SPITOM", "VACMYR", "VIBCAS")
-
+# "mean", "25%", "75%", "n_eff", "Rhat"
 sumer <- summary(mdlSLAFull)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp
-mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
-alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+mu_a_sp <- data.frame(sumer[grep("mu_sp", rownames(sumer)), c("mean")]); rownames(mu_a_sp) <- spp; names(mu_a_sp) <- c("mean")
+mu_a_pop <- data.frame(sumer[grep("mu_pop", rownames(sumer)), c("mean")]); rownames(mu_a_pop) <- pop; names(mu_a_pop) <- c("mean")
+alpha<-data.frame(sumer[grep("mu_grand", rownames(sumer)), c("mean")]); rownames(alpha) <- "alpha"; names(alpha) <- c("mean")
 
-sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+sigma_a_sp <- data.frame(sumer[grep("sigma_sp", rownames(sumer)), c("mean")]); rownames(sigma_a_sp) <- "sigma_sp"; names(sigma_a_sp) <- c("mean")
+sigma_a_pop <- data.frame(sumer[grep("sigma_pop", rownames(sumer)), c("mean")]); rownames(sigma_a_pop) <- "sigma_pop"; names(sigma_a_pop) <- c("mean")
+sigma_y <- data.frame(sumer[grep("sigma_y", rownames(sumer)), c("mean")]); rownames(sigma_y) <- "sigma_y"; names(sigma_y) <- c("mean")
+
+load("..//analyses/output/mdlSLAFull14.Rda")
+
+spp13 <- c("ACEPEN", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "SAMRAC", "SPIALB", "SPITOM", "VIBCAS")
+sumer13 <- summary(mdlSLAFull14)$summary
+mu_a_sp13 <- data.frame(sumer13[grep("mu_sp", rownames(sumer13)), c("mean")]); rownames(mu_a_sp13) <- spp13; names(mu_a_sp13) <- c("mean")
+mu_a_pop13 <- data.frame(sumer13[grep("mu_pop", rownames(sumer13)), c("mean")]); rownames(mu_a_pop13) <- pop; names(mu_a_pop13) <- c("mean")
+alpha13<- data.frame(sumer13[grep("mu_grand", rownames(sumer13)), c("mean")]); rownames(alpha13) <- "alpha"; names(alpha13) <- c("mean")
+
+sigma_a_sp13 <- data.frame(sumer13[grep("sigma_sp", rownames(sumer13)), c("mean")]); rownames(sigma_a_sp13) <- "sigma_sp"; names(sigma_a_sp13) <- c("mean")
+sigma_a_pop13 <- data.frame(sumer13[grep("sigma_pop", rownames(sumer13)), c("mean")]); rownames(sigma_a_pop13) <- "sigma_pop"; names(sigma_a_pop13) <- c("mean")
+sigma_y13 <- data.frame(sumer13[grep("sigma_y", rownames(sumer13)), c("mean")]); rownames(sigma_y13) <- "sigma_y"; names(sigma_y13) <- c("mean")
+
 
 mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
+mdl.out$spp <- rownames(mdl.out)
+mdl.out13 <- rbind( alpha13,mu_a_sp13, mu_a_pop13, sigma_a_sp13, sigma_a_pop13, sigma_y13)
+mdl.out13$spp <- rownames(mdl.out13)
 
+slaOut <- merge(mdl.out, mdl.out13, by = "spp", all = T)
+slaOut$Difference <- slaOut$mean.x-slaOut$mean.y
+names(slaOut) <- c("Species","Full mdl", "Sub. spp mdl", "Esti. diff")
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for SLA across the two years of data (2019 and 2022) (n = 599) with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(slaOut , caption="Summary of the intercept only model for SLA across the two years of data (2019 and 2022) (n = 599) with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
+
+% <<label=table1, echo=FALSE , results=tex>>=
+% require(xtable)
+% require(rstan)
+% load("..//analyses/output/mdlSLAFull.Rda")
+% 
+% pop <- c("GR", "HF", "SH", "WM")
+% spp <- c("ACEPEN", "ACESPI", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "QUEALB", "QUERUB", "SAMRAC", "SORAME", "SPIALB", "SPITOM", "VACMYR", "VIBCAS")
+% 
+% sumer <- summary(mdlSLAFull)$summary
+% mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp
+% mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
+% alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% 
+% sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% 
+% mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
+% 
+% 
+% print(xtable(mdl.out , caption="Summary of the intercept only model for SLA across the two years of data (2019 and 2022) (n = 599) with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+% 
+% @
 
 <<label=figSLA19, echo= FALSE, fig=TRUE >>=
 
@@ -118,27 +167,27 @@ plot(mdlSLAFull, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1]
 \item Similar overall trend with samller spp subset, but slightly stronger responses
 \item Species level estimates are different though
 \end{enumerate}
-<<label=table2, echo=FALSE , results=tex>>=
-require(xtable)
-require(rstan)
-load("..//analyses/output/mdlSLAFull14.Rda")
-
-spp13 <- c("ACEPEN", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "SAMRAC", "SPIALB", "SPITOM", "VIBCAS")
-sumer <- summary(mdlSLAFull14)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp13
-mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
-alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-
-sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-
-mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
-
-
-print(xtable(mdl.out , caption="Summary of the intercept only model for SLA in 2022 (n = 446) with species still alive by 2022(n = 13) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
-
-@
+% <<label=table2, echo=FALSE , results=tex>>=
+% require(xtable)
+% require(rstan)
+% load("..//analyses/output/mdlSLAFull14.Rda")
+% 
+% spp13 <- c("ACEPEN", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "SAMRAC", "SPIALB", "SPITOM", "VIBCAS")
+% sumer <- summary(mdlSLAFull14)$summary
+% mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp13
+% mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
+% alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% 
+% sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% 
+% mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
+% 
+% 
+% print(xtable(mdl.out , caption="Summary of the intercept only model for SLA in 2022 (n = 446) with species still alive by 2022(n = 13) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+% 
+% @
 
 <<label=figSLA22, echo= FALSE, fig=TRUE >>=
 
@@ -149,33 +198,75 @@ plot(mdlSLAFull14, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[
 
 \subsection*{Leaf dry matter content - all species}
 \begin{enumerate}
-\item variation due to population is twice as great as species
-\item There are no strong differences across populations, but estimate is oddly large
+\item variation due to population (\Sexpr{sigPopLDMC}, 50\% UI: \Sexpr{sigPopLDMC25}, \Sexpr{sigPopLDMC75}) is twice as great as species (\Sexpr{sigSpLDMC}, 50\% UI: \Sexpr{sigSpLDMC25}, \Sexpr{sigSpLDMC75})
+\item There are no strong differences across populations (Harvard Forest: \Sexpr{hfPopMLDMC}, 50\% UI: \Sexpr{hfPop25LDMC}, \Sexpr{hfPop75LDMC}; Grant: \Sexpr{grPopMLDMC}, 50\% UI: \Sexpr{grPop25LDMC}, \Sexpr{grPop75LDMC}; White Mountain: \Sexpr{wmPopMLDMC}, 50\% UI: \Sexpr{wmPop25LDMC}, \Sexpr{wmPop75LDMC}; St.Hippolyte: \Sexpr{shPopMLDMC}, 50\% UI: \Sexpr{shPop25LDMC}, \Sexpr{shPop75LDMC})---all UI cross zero
 \item Spitom has the largest positive species effect, Vibcas the most negative
 \item Quite a lot of species level variaiton, ranging from very negative for Samrac to greater positive values for Querub
 \end{enumerate}
 
-
-<<label=table3, echo=FALSE , results=tex>>=
-require(xtable)
+  <<label=table1, echo=FALSE , results=tex>>=
+  require(xtable)
 require(rstan)
 load("..//analyses/output/mdlLDMCFull.Rda")
 
-sumer <- summary(mdlLDMC)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp
-alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
+pop <- c("GR", "HF", "SH", "WM")
+spp <- c("ACEPEN", "ACESPI", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "QUEALB", "QUERUB", "SAMRAC", "SORAME", "SPIALB", "SPITOM", "VACMYR", "VIBCAS")
 
-sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+sumer <- summary(mdlLDMCFull)$summary
+mu_a_sp <- data.frame(sumer[grep("mu_sp", rownames(sumer)), c("mean")]); rownames(mu_a_sp) <- spp; names(mu_a_sp) <- c("mean")
+mu_a_pop <- data.frame(sumer[grep("mu_pop", rownames(sumer)), c("mean")]); rownames(mu_a_pop) <- pop; names(mu_a_pop) <- c("mean")
+alpha<-data.frame(sumer[grep("mu_grand", rownames(sumer)), c("mean")]); rownames(alpha) <- "alpha"; names(alpha) <- c("mean")
+
+sigma_a_sp <- data.frame(sumer[grep("sigma_sp", rownames(sumer)), c("mean")]); rownames(sigma_a_sp) <- "sigma_sp"; names(sigma_a_sp) <- c("mean")
+sigma_a_pop <- data.frame(sumer[grep("sigma_pop", rownames(sumer)), c("mean")]); rownames(sigma_a_pop) <- "sigma_pop"; names(sigma_a_pop) <- c("mean")
+sigma_y <- data.frame(sumer[grep("sigma_y", rownames(sumer)), c("mean")]); rownames(sigma_y) <- "sigma_y"; names(sigma_y) <- c("mean")
+
+load("..//analyses/output/mdlLDMCFull14.Rda")
+
+spp13 <- c("ACEPEN", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "SAMRAC", "SPIALB", "SPITOM", "VIBCAS")
+sumer13 <- summary(mdlLDMCFull14)$summary
+mu_a_sp13 <- data.frame(sumer13[grep("mu_sp", rownames(sumer13)), c("mean")]); rownames(mu_a_sp13) <- spp13; names(mu_a_sp13) <- c("mean")
+mu_a_pop13 <- data.frame(sumer13[grep("mu_pop", rownames(sumer13)), c("mean")]); rownames(mu_a_pop13) <- pop; names(mu_a_pop13) <- c("mean")
+alpha13<- data.frame(sumer13[grep("mu_grand", rownames(sumer13)), c("mean")]); rownames(alpha13) <- "alpha"; names(alpha13) <- c("mean")
+
+sigma_a_sp13 <- data.frame(sumer13[grep("sigma_sp", rownames(sumer13)), c("mean")]); rownames(sigma_a_sp13) <- "sigma_sp"; names(sigma_a_sp13) <- c("mean")
+sigma_a_pop13 <- data.frame(sumer13[grep("sigma_pop", rownames(sumer13)), c("mean")]); rownames(sigma_a_pop13) <- "sigma_pop"; names(sigma_a_pop13) <- c("mean")
+sigma_y13 <- data.frame(sumer13[grep("sigma_y", rownames(sumer13)), c("mean")]); rownames(sigma_y13) <- "sigma_y"; names(sigma_y13) <- c("mean")
+
 
 mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
+mdl.out$spp <- rownames(mdl.out)
+mdl.out13 <- rbind( alpha13,mu_a_sp13, mu_a_pop13, sigma_a_sp13, sigma_a_pop13, sigma_y13)
+mdl.out13$spp <- rownames(mdl.out13)
 
+LDMCOut <- merge(mdl.out, mdl.out13, by = "spp", all = T)
+LDMCOut$Difference <- LDMCOut$mean.x-LDMCOut$mean.y
+names(LDMCOut) <- c("Species","Full mdl", "Sub. spp mdl", "Esti. diff")
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for LDMC in 2019 and 2022 (n = 599) with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+print(xtable(LDMCOut , caption="Summary of the intercept only model for LDMC across the two years of data (2019 and 2022) (n = 599) with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
+% 
+% <<label=table3, echo=FALSE , results=tex>>=
+% require(xtable)
+% require(rstan)
+% load("..//analyses/output/mdlLDMCFull.Rda")
+% 
+% sumer <- summary(mdlLDMC)$summary
+% mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp
+% alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
+% 
+% sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% 
+% mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
+% 
+% 
+% print(xtable(mdl.out , caption="Summary of the intercept only model for LDMC in 2019 and 2022 (n = 599) with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+% 
+% @
 
 <<label=figLDMC19, echo= FALSE, fig=TRUE >>=
 
@@ -191,29 +282,29 @@ plot(mdlLDMC, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1]","
 \item species level estiamtes are different from the full species model in variable ways across species
 \end{enumerate}
  
-<<label=table4, echo=FALSE , results=tex>>=
-require(xtable)
-require(rstan)
-load("..//analyses/output/mdlLDMCFull14.Rda")
-
-sumer <- summary(mdlLDMCFull14)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp13
-alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
-
-sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-
-mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
-
-
-print(xtable(mdl.out , caption="Summary of the intercept only model for LDMC in 2019 and 2022 (n = 446) with species still alive by 2022 (n = 13) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
-
-@
+% <<label=table4, echo=FALSE , results=tex>>=
+% require(xtable)
+% require(rstan)
+% load("..//analyses/output/mdlLDMCFull14.Rda")
+% 
+% sumer <- summary(mdlLDMCFull14)$summary
+% mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp13
+% alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
+% 
+% sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% 
+% mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
+% 
+% 
+% print(xtable(mdl.out , caption="Summary of the intercept only model for LDMC in 2019 and 2022 (n = 446) with species still alive by 2022 (n = 13) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+% 
+% @
 
 <<label=figLDMC22, echo= FALSE, fig=TRUE >>=
-
+load("..//analyses/output/mdlLDMCFull14.Rda")
 plot(mdlLDMCFull14, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1]","mu_sp[2]","mu_sp[3]","mu_sp[4]","mu_sp[5]","mu_sp[6]","mu_sp[7]","mu_sp[8]","mu_sp[9]","mu_sp[10]","mu_sp[11]","mu_sp[12]","mu_sp[13]","mu_pop[1]","mu_pop[2]","mu_pop[3]","mu_pop[4]"))
 
 @
@@ -221,33 +312,79 @@ plot(mdlLDMCFull14, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp
 
 \subsection*{Height - all species}
 \begin{enumerate}
-\item variation due to sppecies is much greater than pop, about three times
-\item  Harvard forest and white mountain are positive (the two more southern sites)
-\item but grant has a much stronger negative effect than St. Hippolyte
+\item variation due to species (\Sexpr{sigSpHt}, 50\% UI: \Sexpr{sigSpHt25}, \Sexpr{sigSpHt75}) is much greater than pop (\Sexpr{sigPopHt}, 50\% UI: \Sexpr{sigPopHt25}, \Sexpr{sigPopHt75}), about three times
+\item  Harvard forest (\Sexpr{hfPopMHt}, 50\% UI: \Sexpr{hfPop25Ht}, \Sexpr{hfPop75Ht}) and white mountain are positive (\Sexpr{wmPopMHt}, 50\% UI: \Sexpr{wmPop25Ht}, \Sexpr{wmPop75Ht}) (the two more southern sites)---wm UI crosses zero
+\item but grant (\Sexpr{grPopMHt}, 50\% UI: \Sexpr{grPop25Ht}, \Sexpr{grPop75Ht}) has a much stronger negative effect than St. Hippolyte (\Sexpr{shPopMHt}, 50\% UI: \Sexpr{shPop25Ht}, \Sexpr{shPop75Ht})---sh UI crosses zero
 \item Betpop has the strongest positive response and Vacmyr the strongest negative response
 \item No clear divide between shrubs and tree species, but possible weak clade differences (all Acer Betula, Quercus, and Spirea have the same sign at least)
 \end{enumerate}
 
-<<label=table5, echo=FALSE , results=tex>>=
-require(xtable)
+
+<<label=table1, echo=FALSE , results=tex>>=
+  require(xtable)
 require(rstan)
-load("..//analyses/output/mdlHtFullTrait.Rda")
+load("..//analyses/output/mdlHtFull.Rda")
 
+pop <- c("GR", "HF", "SH", "WM")
+spp <- c("ACEPEN", "ACESPI", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "QUEALB", "QUERUB", "SAMRAC", "SORAME", "SPIALB", "SPITOM", "VACMYR", "VIBCAS")
+# "mean", "25%", "75%", "n_eff", "Rhat"
 sumer <- summary(mdlHtFull)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp
-alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
+mu_a_sp <- data.frame(sumer[grep("mu_sp", rownames(sumer)), c("mean")]); rownames(mu_a_sp) <- spp; names(mu_a_sp) <- c("mean")
+mu_a_pop <- data.frame(sumer[grep("mu_pop", rownames(sumer)), c("mean")]); rownames(mu_a_pop) <- pop; names(mu_a_pop) <- c("mean")
+alpha<-data.frame(sumer[grep("mu_grand", rownames(sumer)), c("mean")]); rownames(alpha) <- "alpha"; names(alpha) <- c("mean")
 
-sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+sigma_a_sp <- data.frame(sumer[grep("sigma_sp", rownames(sumer)), c("mean")]); rownames(sigma_a_sp) <- "sigma_sp"; names(sigma_a_sp) <- c("mean")
+sigma_a_pop <- data.frame(sumer[grep("sigma_pop", rownames(sumer)), c("mean")]); rownames(sigma_a_pop) <- "sigma_pop"; names(sigma_a_pop) <- c("mean")
+sigma_y <- data.frame(sumer[grep("sigma_y", rownames(sumer)), c("mean")]); rownames(sigma_y) <- "sigma_y"; names(sigma_y) <- c("mean")
 
-mdl.out <- rbind( alpha, mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
+load("..//analyses/output/mdlHtFull14.Rda")
+
+spp13 <- c("ACEPEN", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "SAMRAC", "SPIALB", "SPITOM", "VIBCAS")
+sumer13 <- summary(mdlHtFull14)$summary
+mu_a_sp13 <- data.frame(sumer13[grep("mu_sp", rownames(sumer13)), c("mean")]); rownames(mu_a_sp13) <- spp13; names(mu_a_sp13) <- c("mean")
+mu_a_pop13 <- data.frame(sumer13[grep("mu_pop", rownames(sumer13)), c("mean")]); rownames(mu_a_pop13) <- pop; names(mu_a_pop13) <- c("mean")
+alpha13<- data.frame(sumer13[grep("mu_grand", rownames(sumer13)), c("mean")]); rownames(alpha13) <- "alpha"; names(alpha13) <- c("mean")
+
+sigma_a_sp13 <- data.frame(sumer13[grep("sigma_sp", rownames(sumer13)), c("mean")]); rownames(sigma_a_sp13) <- "sigma_sp"; names(sigma_a_sp13) <- c("mean")
+sigma_a_pop13 <- data.frame(sumer13[grep("sigma_pop", rownames(sumer13)), c("mean")]); rownames(sigma_a_pop13) <- "sigma_pop"; names(sigma_a_pop13) <- c("mean")
+sigma_y13 <- data.frame(sumer13[grep("sigma_y", rownames(sumer13)), c("mean")]); rownames(sigma_y13) <- "sigma_y"; names(sigma_y13) <- c("mean")
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for plant height in 2019, 2021, 2022 (n = 302) with species (n = 18) and population (4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
+mdl.out$spp <- rownames(mdl.out)
+mdl.out13 <- rbind( alpha13,mu_a_sp13, mu_a_pop13, sigma_a_sp13, sigma_a_pop13, sigma_y13)
+mdl.out13$spp <- rownames(mdl.out13)
+
+HtOut <- merge(mdl.out, mdl.out13, by = "spp", all = T)
+HtOut$Difference <- HtOut$mean.x-HtOut$mean.y
+names(HtOut) <- c("Species","Full mdl", "Sub. spp mdl", "Esti. diff")
+
+print(xtable(HtOut , caption="Summary of the intercept only model for Ht across the two years of data (2019 and 2022) (n = 599) with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
+  
+
+% 
+% <<label=table5, echo=FALSE , results=tex>>=
+% require(xtable)
+% require(rstan)
+% load("..//analyses/output/mdlHtFullTrait.Rda")
+% 
+% sumer <- summary(mdlHtFull)$summary
+% mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp
+% alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
+% 
+% sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% 
+% mdl.out <- rbind( alpha, mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
+% 
+% 
+% print(xtable(mdl.out , caption="Summary of the intercept only model for plant height in 2019, 2021, 2022 (n = 302) with species (n = 18) and population (4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+% 
+% @
 
 <<label=figHt19, echo= FALSE, fig=TRUE >>=
 
@@ -258,34 +395,34 @@ plot(mdlHtFull, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1]"
 
 \subsection{Height - only species alive by 2022}
 \begin{enumerate}
-\item variation due to sppecies is still much greater than pop
+\item variation due to species is still much greater than pop
 \item  population level estimates are similar to the full species model
 \item Species level estimates are quite different
 \end{enumerate}
 
-
-<<label=table6, echo=FALSE , results=tex>>=
-require(xtable)
-require(rstan)
-load("..//analyses/output/mdlHtFull14.Rda")
-
-spp14 <- c("ACEPEN", "ALNINC", "AMECAN","BETPAP", "BETPOP", "BETALL",  "VIBCAS", "SPIALB", "SPITOM", "MYRGAL", "AROMEL", "SAMRAC", "DIELON", "SORAME")
-
-sumer <- summary(mdlHtFull14)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp14
-alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
-
-sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-
-mdl.out <- rbind( alpha, mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
-
-
-print(xtable(mdl.out , caption="Summary of the intercept only model for plant height (n = 257) with species still alive by 2022 (n = 14) and population (4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
-
-@
+% 
+% <<label=table6, echo=FALSE , results=tex>>=
+% require(xtable)
+% require(rstan)
+% load("..//analyses/output/mdlHtFull14.Rda")
+% 
+% spp14 <- c("ACEPEN", "ALNINC", "AMECAN","BETPAP", "BETPOP", "BETALL",  "VIBCAS", "SPIALB", "SPITOM", "MYRGAL", "AROMEL", "SAMRAC", "DIELON", "SORAME")
+% 
+% sumer <- summary(mdlHtFull14)$summary
+% mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp14
+% alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
+% 
+% sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% 
+% mdl.out <- rbind( alpha, mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
+% 
+% 
+% print(xtable(mdl.out , caption="Summary of the intercept only model for plant height (n = 257) with species still alive by 2022 (n = 14) and population (4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+% 
+% @
 
 <<label=figHt21, echo= FALSE, fig=TRUE >>=
 
@@ -298,34 +435,80 @@ plot(mdlHtFull14, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1
 \subsection*{Stem specific density - only species alive by 2022}
 
 \begin{enumerate}
-\item variation due to sppecies is much greater than pop; but values are very small
-\item  Population estimates are essentailly 0
+\item variation due to species (\Sexpr{sigSpSSD}, 50\% UI: \Sexpr{sigSpSSD25}, \Sexpr{sigSpSSD75}) is greater than pop (\Sexpr{sigPopSSD}, 50\% UI: \Sexpr{sigPopSSD25}, \Sexpr{sigPopSSD75}); but values are very small
+\item  Population estimates are essentailly 0 (Harvard Forest: \Sexpr{hfPopMSSD}, 50\% UI: \Sexpr{hfPop25SSD}, \Sexpr{hfPop75SSD}; Grant: \Sexpr{grPopMSSD}, 50\% UI: \Sexpr{grPop25SSD}, \Sexpr{grPop75SSD}; White Mountain: \Sexpr{wmPopMSSD}, 50\% UI: \Sexpr{wmPop25SSD}, \Sexpr{wmPop75SSD}; St.Hippolyte: \Sexpr{shPopMSSD}, 50\% UI: \Sexpr{shPop25SSD}, \Sexpr{shPop75SSD}) 
 \item Very weak effects across species relative to other species
 \item More of a divide, mostly shrubs are negative, trees are positive, but estimates are small
 \end{enumerate}
 
 
-<<label=table8, echo=FALSE , results=tex>>=
-require(xtable)
+<<label=table1, echo=FALSE , results=tex>>=
+  require(xtable)
 require(rstan)
-load("..//analyses/output/mdlSSD2022.Rda")
+load("..//analyses/output/mdlHtFull.Rda")
 
-spp12 <-c("ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "SAMRAC", "SPIALB", "SPITOM", "VIBCAS")
-sumer <- summary(mdlSSD)$summary
-mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp12
-alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
+pop <- c("GR", "HF", "SH", "WM")
+spp <- c("ACEPEN", "ACESPI", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "QUEALB", "QUERUB", "SAMRAC", "SORAME", "SPIALB", "SPITOM", "VACMYR", "VIBCAS")
+# "mean", "25%", "75%", "n_eff", "Rhat"
+sumer <- summary(mdlSSDFull)$summary
+mu_a_sp <- data.frame(sumer[grep("mu_sp", rownames(sumer)), c("mean")]); rownames(mu_a_sp) <- spp; names(mu_a_sp) <- c("mean")
+mu_a_pop <- data.frame(sumer[grep("mu_pop", rownames(sumer)), c("mean")]); rownames(mu_a_pop) <- pop; names(mu_a_pop) <- c("mean")
+alpha<-data.frame(sumer[grep("mu_grand", rownames(sumer)), c("mean")]); rownames(alpha) <- "alpha"; names(alpha) <- c("mean")
 
-sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
-sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+sigma_a_sp <- data.frame(sumer[grep("sigma_sp", rownames(sumer)), c("mean")]); rownames(sigma_a_sp) <- "sigma_sp"; names(sigma_a_sp) <- c("mean")
+sigma_a_pop <- data.frame(sumer[grep("sigma_pop", rownames(sumer)), c("mean")]); rownames(sigma_a_pop) <- "sigma_pop"; names(sigma_a_pop) <- c("mean")
+sigma_y <- data.frame(sumer[grep("sigma_y", rownames(sumer)), c("mean")]); rownames(sigma_y) <- "sigma_y"; names(sigma_y) <- c("mean")
 
-mdl.out <- rbind( alpha, mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
+load("..//analyses/output/mdlSSDFull14.Rda")
+
+spp13 <- c("ACEPEN", "ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "SAMRAC", "SPIALB", "SPITOM", "VIBCAS")
+sumer13 <- summary(mdlSSDFull14)$summary
+mu_a_sp13 <- data.frame(sumer13[grep("mu_sp", rownames(sumer13)), c("mean")]); rownames(mu_a_sp13) <- spp13; names(mu_a_sp13) <- c("mean")
+mu_a_pop13 <- data.frame(sumer13[grep("mu_pop", rownames(sumer13)), c("mean")]); rownames(mu_a_pop13) <- pop; names(mu_a_pop13) <- c("mean")
+alpha13<- data.frame(sumer13[grep("mu_grand", rownames(sumer13)), c("mean")]); rownames(alpha13) <- "alpha"; names(alpha13) <- c("mean")
+
+sigma_a_sp13 <- data.frame(sumer13[grep("sigma_sp", rownames(sumer13)), c("mean")]); rownames(sigma_a_sp13) <- "sigma_sp"; names(sigma_a_sp13) <- c("mean")
+sigma_a_pop13 <- data.frame(sumer13[grep("sigma_pop", rownames(sumer13)), c("mean")]); rownames(sigma_a_pop13) <- "sigma_pop"; names(sigma_a_pop13) <- c("mean")
+sigma_y13 <- data.frame(sumer13[grep("sigma_y", rownames(sumer13)), c("mean")]); rownames(sigma_y13) <- "sigma_y"; names(sigma_y13) <- c("mean")
 
 
-print(xtable(mdl.out , caption="Summary of the intercept only model for plant SSD in 2022 (n = 240) with species (n = 12) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+mdl.out <- rbind( alpha,mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
+mdl.out$spp <- rownames(mdl.out)
+mdl.out13 <- rbind( alpha13,mu_a_sp13, mu_a_pop13, sigma_a_sp13, sigma_a_pop13, sigma_y13)
+mdl.out13$spp <- rownames(mdl.out13)
+
+SSDOut <- merge(mdl.out, mdl.out13, by = "spp", all = T)
+SSDOut$Difference <- SSDOut$mean.x-SSDOut$mean.y
+names(SSDOut) <- c("Species","Full mdl", "Sub. spp mdl", "Esti. diff")
+
+print(xtable(SSDOut , caption="Summary of the intercept only model for SSD across the two years of data (2019 and 2022) (n = 599) with species (n = 18) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
 
 @
+  
+
+
+% 
+% <<label=table8, echo=FALSE , results=tex>>=
+% require(xtable)
+% require(rstan)
+% load("..//analyses/output/mdlSSD2022.Rda")
+% 
+% spp12 <-c("ALNINC", "AMECAN", "AROMEL", "BETALL", "BETPAP", "BETPOP", "DIELON", "MYRGAL", "SAMRAC", "SPIALB", "SPITOM", "VIBCAS")
+% sumer <- summary(mdlSSD)$summary
+% mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp12
+% alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
+% 
+% sigma_a_sp <- sumer[grep("sigma_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_a_pop <- sumer[grep("sigma_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% sigma_y <- sumer[grep("sigma_y", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
+% 
+% mdl.out <- rbind( alpha, mu_a_sp, mu_a_pop, sigma_a_sp, sigma_a_pop, sigma_y)
+% 
+% 
+% print(xtable(mdl.out , caption="Summary of the intercept only model for plant SSD in 2022 (n = 240) with species (n = 12) and population (n = 4)."), include.rownames= T, caption.placement="top", hline.after=c(-1,0))
+% 
+% @
 
 <<label=figSSD22, echo= FALSE, fig=TRUE >>=
 
@@ -338,7 +521,7 @@ plot(mdlSSD, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1]","m
 \subsection*{Relative Growth Rate - only species alive by 2022}
 
 \begin{enumerate}
-\item Variation due to sppecies is much greater than pop, about four times
+\item Variation due to species is much greater than pop, about four times
 \item  The two southern sites are positive, but two more northern sites are negative
 \item Again Grant has a more negative effect that St. Hippolyte, but effect sizes are small across populations
 \item There might be some divide, with shrubs having negative estimates, but there are not many trees in this dataset (which excludes any indiviudal that had negative growth over the years)
