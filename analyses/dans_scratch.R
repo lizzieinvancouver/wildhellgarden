@@ -113,11 +113,13 @@ Med8<-filter(cg, spp %in% c(All4,GR.SH.WM))
 
 Med10<-filter(cg, spp %in% c(All4,GR.SH.WM,GR.HF.SH,GR.HF.WM))
 
+
 table(is.na(Med10$budburst)) #575 obs
 table(is.na(Med10$leafout)) # 739
 table(is.na(Med10$flowers)) #267
 table(is.na(Med10$budset)) # 525
-table(is.na(Big5$fruit)) # 228
+table(is.na(Med10$gs)) # 514
+
 
 table(is.na(cg$budburst)) #674 obs
 table(is.na(cg$leafout)) # 885
@@ -135,61 +137,66 @@ ggpubr::ggarrange(one,two,three,four)
 dev.off()
 
 ###try a crossed model first
+####do it with all species for now if we are interested in species level variation
 
-mod.bb.10<-brm(budburst~year+(1|spp)+(1|site),data=Med10,
-               warmup=3000,iter=4000, control=list(adapt_delta=.99))
+Med10a<-filter(Med10,!is.na(gs))
+Med10a<-filter(Med10a,spp!="ACESPI")
+#mod.bb.10<-brm(budburst~year+(1|spp)+(1|site),data=Med10,
+ #              warmup=3000,iter=4000, control=list(adapt_delta=.99))
 
-coef(mod.bb.10)$site
-mod.bb.10.fix<-brm(budburst~year+spp+(spp|site),data=Med10,
-                   warmup=4000,iter=5000, control=list(adapt_delta=.99))
+#coef(mod.bb.10)$site
+#mod.bb.10.fix<-brm(budburst~year+spp+(spp|site),data=Med10,
+                #   warmup=4000,iter=5000, control=list(adapt_delta=.99))
 
+use.data<-filter(cg,!is.na(gs))
+use.data<-filter(use.data,!spp %in% c("ACEPEN","ACESPI","QUEALB","QUERUB","VACMYR")) ##remove species with less than 10 data points
+table(use.data$spp)
+#summary(mod.bb.10.fix,probs=c(.25,.75))
+mod.lo.10<-brm(leafout~as.factor(year)+(1|spp)+(1|site),data=use.data,
+              warmup=4000,iter=5000, control=list(adapt_delta=.99))
 
-summary(mod.bb.10.fix,probs=c(.25,.75))
-mod.lo.10<-brm(leafout~year+(1|spp)+(1|site),data=Med10,
-              warmup=3000,iter=4000, control=list(adapt_delta=.99))
+#mod.lo.10.fix<-brm(leafout~year+spp+(spp|site),data=Med10,
+ #              warmup=3000,iter=4000, control=list(adapt_delta=.99))
 
-mod.lo.10.fix<-brm(leafout~year+spp+(spp|site),data=Med10,
-               warmup=3000,iter=4000, control=list(adapt_delta=.99))
-
-summary(mod.lo.10.fix,probs=c(.25,.75))
+#summary(mod.lo.10.fix,probs=c(.25,.75))
 #mod.lo.cg<-brm(leafout~(1|spp)+(1|site)+(1|plot)+(1|year),data=cg,
           #     warmup=3000,iter=4000, control=list(adapt_delta=.99))
 
-mod.bs.10<-brm(budset~year+(1|spp)+(1|site),data=Med10,
-               warmu=4000,iter=5000, control=list(adapt_delta=.99))
+mod.bs.10<-brm(budset~as.factor(year)+(1|spp)+(1|site),data=use.data,
+               warmup=4000,iter=5000, control=list(adapt_delta=.99))
 
-mod.bs.10.fix<-brm(budset~year+spp+(spp|site),data=Med10,
-               warmu=4000,iter=5000, control=list(adapt_delta=.99))
+#mod.bs.10.fix<-brm(budset~year+spp+(spp|site),data=Med10,
+ #              warmu=4000,iter=5000, control=list(adapt_delta=.99))
 
 
-mod.gs.10<-brm(gs~year+(1|spp)+(1|site),data=Med10,
+mod.gs.10<-brm(gs~as.factor(year)+(1|spp)+(1|site),data=use.data,
                warmup=4000,iter=5000, control=list(adapt_delta=.99))
 
 
 
+save.image("dansscratch.Rda")
 
 
 
-summary(mod.bb.10.fix,probs=c(.25,.75))
-mod.lo.10<-brm(leafout~year+(1|spp)+(1|site),data=Med10,
-               warmup=3000,iter=4000, control=list(adapt_delta=.99))
+#mod.lo.10<-brm(leafout~year+(1|spp)+(1|site),data=Med10,
+ #              warmup=3000,iter=4000, control=list(adapt_delta=.99))
 
-mod.lo.10.fix<-brm(leafout~year+spp+(spp|site),data=Med10,
-                   warmup=3000,iter=4000, control=list(adapt_delta=.99))
+#mod.lo.10.fix<-brm(leafout~year+spp+(spp|site),data=Med10,
+ #                  warmup=3000,iter=4000, control=list(adapt_delta=.99))
 
-summary(mod.lo.10.fix,probs=c(.25,.75))
+#summary(mod.lo.10.fix,probs=c(.25,.75))
 #mod.lo.cg<-brm(leafout~(1|spp)+(1|site)+(1|plot)+(1|year),data=cg,
 #     warmup=3000,iter=4000, control=list(adapt_delta=.99))
 
-mod.bs.10<-brm(budset~year+(1|spp)+(1|site),data=Med10,
-               warmu=4000,iter=5000, control=list(adapt_delta=.99))
+#mod.bs.10<-brm(budset~year+(1|spp)+(1|site),data=Med10,
+   #            warmu=4000,iter=5000, control=list(adapt_delta=.99))
 
-mod.bs.10.fix<-brm(budset~year+spp+(spp|site),data=Med10,
-                   warmu=4000,iter=5000, control=list(adapt_delta=.99))
+#mod.bs.10.fix<-brm(budset~year+spp+(spp|site),data=Med10,
+  #                 warmu=4000,iter=5000, control=list(adapt_delta=.99))
 
 
-mod.gs.10<-brm(gs~year+(1|spp)+(1|site),data=Med10,
-               warmup=4000,iter=5000, control=list(adapt_delta=.99))
+#mod.gs.10<-brm(gs~year+(1|spp)+(1|site),data=Med10,
+ #              warmup=4000,iter=5000, control=list(adapt_delta=.99))
 
 
 #mod.fl.10<-brm(flowers~(1|spp)+(1|site)+(1|plot)+(1|year),data=Med10,
@@ -205,14 +212,16 @@ lat<-dplyr::select(cg,provenance.lat,site)
 lat<-distinct(lat)
 
 
-bb.sppout<-mod.bb.10 %>% spread_draws(r_spp[spp,Intercept])
+unique(use.data$spp)
+shrub<-c("ACEPEN" ,"ACESPI", "AMECAN" ,"AROMEL","DIELON","MYRGAL","SAMRAC" ,"SORAME", "SPIALB" ,"SPITOM" ,"VACMYR", "VIBCAS")
+FLS<-c("ALNINC","AMECAN","BETALL","BETPAP","BETPOP","MYRGAL")
+
+
+bb.sppout<-mod.lo.10 %>% spread_draws(r_spp[spp,Intercept])
 bb.sppout$type<-ifelse(bb.sppout$spp %in% shrub,"shrub","tree")
 bb.sppout$FLS<-ifelse(bb.sppout$spp %in% FLS,"flower-first","leaf-first")
 
 
-unique(Med10$spp)
-shrub<-c("ACESPI","AMECAN","DIELON","MRYGALE","SPIALB","SPITOM","VIBCAS")
-FLS<-c("ALNINC","AMECAN","BETALL","BETPAP","BETPOP","MYRGAL")
 
 p1s<-ggplot(bb.sppout,aes(r_spp,reorder(spp,r_spp)))+
   stat_halfeye(.width = c(.5),fill="lightgreen",alpha=0.6)+geom_vline(xintercept=0)+xlim(-15,15)+
@@ -281,7 +290,7 @@ ylab("")+
 
 pFLS1<-ggplot(bb.sppout,aes(r_spp,FLS))+
   stat_interval(.width = c(.5,.8,.975),fill="brown",alpha=0.6)+geom_vline(xintercept=0)+
-  xlim(-35,35)+xlab("budburst")+
+  xlim(-35,35)+xlab("leafout")+
   ylab("")+
   ggthemes::theme_few()
 
@@ -295,9 +304,9 @@ ggpubr::ggarrange(pFLS1,pFLS2,common.legend=TRUE,ncol=1)
 
 
 
-T1<-ggplot(bb.sppout,aes(r_spp,type))+
+T1<-ggplot(bs.sppout,aes(r_spp,type))+
   stat_interval(.width = c(.5,.8,.975),fill="brown",alpha=0.6)+geom_vline(xintercept=0)+
-  xlim(-35,35)+xlab("budburst")+
+  xlim(-35,35)+xlab("leafout")+
   ylab("")+
   ggthemes::theme_few()
 
@@ -330,11 +339,11 @@ p4s<-ggpubr::ggarrange(p1s,p3s,ncol=2,labels = c("b)","c)"))
 jpeg("figures/sppplots.jpeg",width=8,height=8,units = "in",res=300)
 ggpubr::ggarrange(p5a,p4s,nrow=2,labels=c("a)"))
 dev.off()
-
+cor(use.data$budburst,use.data$budset,use = "complete.obs")
 
 
 #####species effects
-bb.siteout<-mod.bb.10 %>% spread_draws(r_site[site,Intercept])
+bb.siteout<-mod.lo.10 %>% spread_draws(r_site[site,Intercept])
 bb.siteout<-left_join(bb.siteout,lat)
 p1<-ggplot(bb.siteout,aes(r_site,reorder(site,provenance.lat)),)+
   stat_halfeye(.width = c(.5),fill="lightgreen",alpha=0.6)+geom_vline(xintercept=0)+xlim(-2.5,2.5)+
@@ -392,8 +401,8 @@ dev.off()
 
 
 
-bb.pop<-mod.bb.10 %>% spread_draws(sd_site__Intercept)
-bb.sp<-mod.bb.10 %>% spread_draws(sd_spp__Intercept)
+bb.pop<-mod.lo.10 %>% spread_draws(sd_site__Intercept)
+bb.sp<-mod.lo.10 %>% spread_draws(sd_spp__Intercept)
 #bb.yr<-mod.bb.10 %>% spread_draws(sd_year__Intercept)
 #bb.plot<-mod.bb.10 %>% spread_draws(sd_plot__Intercept)
 colnames(bb.pop)[4]<-"sd"
@@ -441,7 +450,7 @@ bs.sp$var<-"spp"
 var.bs<-rbind(bs.sp,bs.pop)#,bs.yr,bs.plot)
 var$phenophases<-"season length"
 var.bs$phenophases<-"budset"
-var.bb$phenophases<-"budburst"
+var.bb$phenophases<-"leafout"
 var.veg<-rbind(var.bs,var.bb)
 ggplot(var.veg,aes(sd,var))+stat_halfeye(aes(fill=phenophases,color=phenophases),alpha=0.5)+xlim(0,30)+ggthemes::theme_few()
 ggplot(var.bs,aes(sd,var))+stat_halfeye()
