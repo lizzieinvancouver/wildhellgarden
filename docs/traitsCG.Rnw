@@ -55,7 +55,20 @@
 
 \section*{Running a simple model with no ncp etc}
 
+\begin{figure}[h!]
+    \centering
+     \includegraphics[width=\textwidth]{..//analyses/traits/figures/traitPop.pdf}
+     \caption{Population-level variation ($\mu_pop$) across traits: (a) height, (b) Specific leaf area, (c) Leaf dry matter content, (d) Specific stem density. }
+    \label{fig:popDiff}
+\end{figure}
 
+\begin{figure}[h!]
+    \centering
+     \includegraphics[width=\textwidth]{..//analyses/traits/figures/traitSpeciesType.pdf}
+     \caption{Species-level variation ($\mu_sp$) across traits: (a) height, (b) Specific leaf area, (c) Leaf dry matter content, (d) Specific stem density. Species are coloured by their architecture, with shrub species shown in red and trees in blue. }
+    \label{fig:popDiff}
+\end{figure}
+\newpage
 
 \subsection*{Specific leaf area - all species}
 
@@ -148,7 +161,7 @@ require(xtable)
 require(rstan)
 load("..//analyses/output/mdlLDMCFull.Rda")
 
-sumer <- summary(mdlLDMCFull)$summary
+sumer <- summary(mdlLDMC)$summary
 mu_a_sp <-sumer[grep("mu_sp", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_sp) <- spp
 alpha<-sumer[grep("mu_grand", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]
 mu_a_pop <-sumer[grep("mu_pop", rownames(sumer)), c("mean", "25%", "75%", "n_eff", "Rhat")]; rownames(mu_a_pop) <- pop
@@ -166,7 +179,7 @@ print(xtable(mdl.out , caption="Summary of the intercept only model for LDMC in 
 
 <<label=figLDMC19, echo= FALSE, fig=TRUE >>=
 
-plot(mdlLDMCFull, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1]","mu_sp[2]","mu_sp[3]","mu_sp[4]","mu_sp[5]","mu_sp[6]","mu_sp[7]","mu_sp[8]","mu_sp[9]","mu_sp[10]","mu_sp[11]","mu_sp[12]","mu_sp[13]","mu_sp[14]","mu_sp[15]","mu_sp[16]","mu_sp[17]","mu_sp[18]","mu_pop[1]","mu_pop[2]","mu_pop[3]","mu_pop[4]"))
+plot(mdlLDMC, pars = c("mu_grand", "sigma_sp","sigma_pop","sigma_y","mu_sp[1]","mu_sp[2]","mu_sp[3]","mu_sp[4]","mu_sp[5]","mu_sp[6]","mu_sp[7]","mu_sp[8]","mu_sp[9]","mu_sp[10]","mu_sp[11]","mu_sp[12]","mu_sp[13]","mu_sp[14]","mu_sp[15]","mu_sp[16]","mu_sp[17]","mu_sp[18]","mu_pop[1]","mu_pop[2]","mu_pop[3]","mu_pop[4]"))
 
 @
 \newpage
