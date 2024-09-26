@@ -18,6 +18,8 @@
 %\setlength{\parskip}{0.5pt} % 1ex plus 0.5ex minus 0.2ex}
 \setlength{\parindent}{0pt}
 
+%cjc2024Sept25: I think Lizzie and Deirdre already hit the highlights for the Intro for now. I agree that there are paragraphs that need to be moved to the Results and Discussion (anything that includes the figures). I also think you need to set up the experiement a bit better in why it's so cool. A little more development on the latitudinal gradient would be good, even if the results aren't exciting, it'd be great to set up our initial hypothesis more. And maybe get into trees vs shrubs and interannual variation. This was a massive endeavor, I want the reader to be excited about it. 
+
 \section{Introduction}
 Carbon uptake by terrestrial plants is a major determinant of Earth's climate system \citep{} (say more precisely). In mid and high latitudes, the net carbon uptake is primarily determined by the length of the growing season \citep{}. Because climate change has advanced spring leafout, widely considered the start of the growing season \citep{} it has been suggested that earlier start of season should translate into a longer growing season and, therefore, more net carbon uptake by terrestrial ecosystems \citep{}. However we haven't really seen this in the data \citep{}. % Quantifying carbon uptake by terrestrial plants is a critical aspect of climate forecasting, and therefore it is critical to understand the relationship between phenology, growing seasons and carbon storage.
 
@@ -57,11 +59,13 @@ This study offers insights into physiology that will allow us to scale from ecos
 
 \section{Methods}
 \subsubsection{The common garden at Weld Hill}
-In 2014-2015, we collected seeds of 18 species woody plants from four field sites in eastern Northern America spanning a Y degree latitudinal gradient. The four field sites included Harvard Forest (42.55$^{\circ}$N, 72.20$^{\circ}$W), the White mountains (44.11$^{\circ}$N, 52.14$^{\circ}$W), Second College Grant of Dartmouth College (44.79$^{\circ}$N, 50.66$^{\circ}$W), and St. Hippolyte, CN (45.98$^{\circ}$N, 74.01$^{\circ}$W). We transported all seed back the the Weld Hill Research Building at the Arnold Arboretum in Boston MA (lat long) where we germinated seeds following standard germination protocols, and grew them to seedling stages for a year or so in the research green house. In Spring of 2017 we planted them out to establish the common garden at Weld hill. Plantings were randomized between 16 plot blocks. Individuals that were too small to survive outside were maintained in the growth facilities for an additional year and out planted in the early spring of 2018 (i think). Plots were divided between tree plots which included species x,y,z and shrub plots which included species a,b,c,d and shade cloth (Table \ref{listSp}). Plots were regularly weeded and watered throughout the duration of the study.
+In 2014-2015, we collected seeds of 18 species woody plants from four field sites in eastern Northern America spanning a Y degree latitudinal gradient. The four field sites included Harvard Forest (42.55$^{\circ}$N, 72.20$^{\circ}$W), the White mountains (44.11$^{\circ}$N, 52.14$^{\circ}$W), Second College Grant of Dartmouth College (44.79$^{\circ}$N, 50.66$^{\circ}$W), and St. Hippolyte, CN (45.98$^{\circ}$N, 74.01$^{\circ}$W). We transported all seed back the the Weld Hill Research Building at the Arnold Arboretum in Boston MA (lat long) where we germinated seeds following standard germination protocols, and grew them to seedling stages for a year or so in the research green house. In Spring of 2017 we planted them out to establish the common garden at Weld hill. Plantings were randomized between 16 plot blocks. Individuals that were too small to survive outside were maintained in the growth facilities for an additional year and out planted in the early spring of 2018 (i think - yeah that's right!). Plots were divided between tree plots which included species x,y,z and shrub plots which included species a,b,c,d and shade cloth (Table \ref{listSp}). Plots were regularly weeded and watered throughout the duration of the study.
 %dl2024Sept20 Added lat longs and started a table for the spp, seems better than listing in text IMO
 
 \subsubsection{Phenological monitoring:}
-For the years of 2018-2019, we made phenological observations of all individuals in the common garden twice per week from February to December. In 2020 due to the COVID 19 pandemic we did it a bit less, but Cat can say how much. We describe phenological stages using a modified bbch scale \citep{} a common metrics for quantify woody plant phenological progression. We observed all major vegetative stages (budburst, bbch 07, leafout bbch 15, end of leaf expansion bbch 19, budset bbch X, and leaf coloration/drop bbch z, and reproductive phases flowering (60-65) and fruiting and fruit drop(). 
+For the years of 2018-2019, we made phenological observations of all individuals in the common garden twice per week from February to December. In 2020 due to the COVID 19 pandemic we did it a bit less, but Cat can say how much.
+%cjc2024Sept25: Oh goodness!! It was 1-2x weekly I believe and seems to be confirmed when I look at the spreadsheet. 
+We describe phenological stages using a modified bbch scale \citep{} a common metrics for quantify woody plant phenological progression. We observed all major vegetative stages (budburst, bbch 07, leafout bbch 15, end of leaf expansion bbch 19, budset bbch X, and leaf coloration/drop bbch z, and reproductive phases flowering (60-65) and fruiting and fruit drop(). 
 
 \subsubsection{Data analysis}
 To better understand the role that variation in leafout and budset phenology play in determining calendar growing season length among species populations and years we fit a Bayesian hierarchical with a Gaussian probability distribution. We calculated growing season duration by subtracting the day of leafout from the day of budset. We fit an intercept only model with phenophase timing (leafout, budset or growing season duration) as the response variable and partial pooling across species, populations and years. We only included observations with both budset and leafout observed on the same plant in this analysis ($n$= 595).
@@ -89,6 +93,7 @@ The lower levels of variance among year in growing season length we observed rel
 We found that later leafout resulted in a shorter calendar growing season (Figure \ref{fig:thermcal}a) and that this relationship was consistent across species, though varying strength  (Figure \ref{fig:thermcal}b).
 %dl2024Sept20 I could see some readers struggling here: there is a stronger effect in earlier spp for individuals that leafout later---stronger meaning what exactly? That the latest individuals of early species have the longest thermal growing seasons? I think it is explained well in the figure caption, but maybe needs more elaboration in the text.
 In contrast, we found that a generally later leafout resulted in a longer thermal growing season (Figure \ref{fig:thermcal}c) in our study. This effect was stronger for species that typically leaf out earlier in the spring relative to others like \emph{Sambucus racemosa}, \emph{Viburnum cassiodes}, \emph{Spirea alba}, \emph{Diervella lonicera}, \emph{Aronia melanocarpa} \emph{Spirea tomentosa} and \emph{Betula populifolia} and was weaker in later species like \emph{Betula papyrifera}, \emph{Betula allegheniensis} and \emph{Alnus incana}(Figure \ref{fig:thermcal}d).
+%cjc2024Sept25: I feel curious about upper temperature thresholds and what may be considered "too hot" for some species' productivity. Based on anecdotal evidence from Tree Spotters and these common garden observations, I remember some individuals dropping leaves in late summer before bud set because of drought-like conditions. I don't know if we can always assume that higher temperatures necessarily correlate to higher productivity - I'm thinking about assimilation curves and how they hit a peak at certain temperatures but begin to drop again with higher temps. 
 
 
 \section{Discussion}
@@ -96,6 +101,7 @@ In contrast, we found that a generally later leafout resulted in a longer therma
 Our multi-species common garden study showed that for already early leafing species, earlier leafout does not extend their thermal growing season---a proxy for potential carbon uptake period---despite extending the calendar growing season. In fact, we found that for these early leafing taxa, delayed leafout resulted in a longer thermal growing season. This relationship was in part explained by phenological carry-over between leafout and budset where later leafing individuals also set buds later, extending their growth into that later part of the season when thermal conditions were more favorable.  For later leafing species, earlier leafout did not substantially reduce their thermal growing season. This is likely because for them, even an earlier relative leafout still occurred in thermally favorable times of the season, and a relatively small advance in calendar time resulting in a proportionately large gain in thermal sums.
 
 The dynamics may help to explain why phenology advances with climate change have not clearly translated into higher levels of primary productive \citep{}. Our results show that there is little advantage from a carbon or primary productive perspective for leafing out too early in the season, as thermal conditions are not favorable for photosynthesis and assimilation. Many of the species that are most phenologically sensitive to climate change are already among the earliest species to leaf out in temperate plant communities \citep{}, implying there may be little to gain from a carbon perspective.
+%cjc2024Sept25: I love this above paragraph!! It's a thoughtful hypothesis that could explain so much. 
 
 %emw2024Sep19 -- This seems a necessary paragraph but I would shorten the part about assembly to 1-2 sentences and make the paragraph more about BIOTIC consequences in general (these are generally ignored by many earth system models) by adding a sentence about the possibility of increase disease or pest damage with longer seasons.
 %emw2024Sep19 -- another hypothesis from my colleagues in Europe is that this is a NEW problem and maybe before early species were more like late species and early WAS still good. I think that might be worth mentioning. 
@@ -123,6 +129,7 @@ The low levels of phenological variance between populations in our common garden
 
 %dl2024Sept20 would we want to add color to these plots to add more context: eg. a. color by tree/shrubs b. color gradient for latitudes or order them from high to low latitude, c. to me it would be more intuitive to have 2018 at the top
 %dl2024Sept20 may want to also add bars for 90\% UI
+%cjc2024Sept25: one thing that stands out for me in this figure is how similar the budset trends are to growing season lengths - maybe we want to highlight this a bit more in the results/discussion. 
 \begin{figure}[h!]
     \centering
  \includegraphics[width=.7\textwidth]{..//analyses/figures/var_parts.jpeg}
@@ -131,6 +138,7 @@ The low levels of phenological variance between populations in our common garden
 \end{figure}
 
 %dl2024Sept20 such a cool result! 
+%cjc2024Sept25 - agreed, this is awesome!
 \begin{figure}[h!]
     \centering
  \includegraphics[width=.7\textwidth]{..//analyses/figures/primarygrowingseason_modplots.jpeg}
@@ -138,6 +146,31 @@ The low levels of phenological variance between populations in our common garden
     \label{fig:thermcal}
 \end{figure}
 
-\begin{table}[ht]\centering\caption{Species list} \label{listSp}\begin{tabular}{lr}  \hlineSpecies & functional group \\   \hline  \emph{Acer pensylvanicum} & tree    \\   \emph{Acer spicatum} & tree   \\    \emph{Alnus incana} & shrub  \\    \emph{Amelanchier canadensis} &  shrub  \\   \emph{Aronia melanocarpa} & shrub \\   \emph{Betula alleghaniensis} &  tree\\   \emph{Betula papyrifera} &   tree\\   \emph{Betula populifolia} &  tree \\   \emph{Diervilla lonicera} &  shrub \\   \emph{Myrica gale} &  shrub\\   \emph{Sambucus racemosa} &  shrub\\   \emph{Sorbus americana} &  shrub\\
-  \emph{Spiraea alba} &  shrub \\   \emph{Spiraea tomentosa} &   shrub\\   \emph{Viburnum cassinoides} &  shrub \\   \end{tabular}\end{table}
+
+% cjc2024Sept25: maybe we consider including sample sizes across the populations?
+\begin{table}[ht]
+\centering
+\caption{Species list} 
+\label{listSp}
+\begin{tabular}{lr}
+  \hline
+Species & functional group \\ 
+  \hline
+  \emph{Acer pensylvanicum} & tree    \\ 
+  \emph{Acer spicatum} & tree   \\ 
+   \emph{Alnus incana} & shrub  \\ 
+   \emph{Amelanchier canadensis} &  shrub  \\ 
+  \emph{Aronia melanocarpa} & shrub \\ 
+  \emph{Betula alleghaniensis} &  tree\\ 
+  \emph{Betula papyrifera} &   tree\\ 
+  \emph{Betula populifolia} &  tree \\ 
+  \emph{Diervilla lonicera} &  shrub \\ 
+  \emph{Myrica gale} &  shrub\\ 
+  \emph{Sambucus racemosa} &  shrub\\ 
+  \emph{Sorbus americana} &  shrub\\
+  \emph{Spiraea alba} &  shrub \\ 
+  \emph{Spiraea tomentosa} &   shrub\\ 
+  \emph{Viburnum cassinoides} &  shrub \\ 
+  \end{tabular}
+\end{table}
 \end{document}
