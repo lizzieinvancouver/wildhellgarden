@@ -1,0 +1,29 @@
+\begin{thebibliography}{3}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+
+\bibitem[{Norby(2021)}]{Norby2021}
+Norby, R.~J. (2021).
+\newblock Comment on ``increased growing-season productivity drives earlier
+  autumn leaf senescence in temperate trees''.
+\newblock \emph{Science}, 371, eabg1438.
+
+\bibitem[{Zani \emph{et~al.}(2020)Zani, Crowther, Mo, Renner \&
+  Zohner}]{Zani2020}
+Zani, D., Crowther, T.~W., Mo, L., Renner, S.~S. \& Zohner, C.~M. (2020).
+\newblock Increased growing-season productivity drives earlier autumn leaf
+  senescence in temperate trees.
+\newblock \emph{Science}, 370, 1066--1071.
+
+\bibitem[{Zohner \emph{et~al.}(2023)Zohner, Mirzagholi, Renner, Mo, Rebindaine,
+  Bucher, Palou{\v s}, Vitasse, Fu, Stocker \& Crowther}]{Zohner2023}
+Zohner, C.~M., Mirzagholi, L., Renner, S.~S., Mo, L., Rebindaine, D., Bucher,
+  R., Palou{\v s}, D., Vitasse, Y., Fu, Y.~H., Stocker, B.~D. \& Crowther,
+  T.~W. (2023).
+\newblock Effect of climate warming on the timing of autumn leaf senescence
+  reverses after the summer solstice.
+\newblock \emph{Science}, 381, eadf5098.
+
+\end{thebibliography}

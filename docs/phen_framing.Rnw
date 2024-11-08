@@ -32,9 +32,8 @@
 
 \author{Dan, Cat, Deidre and Lizzie}
 
-\usepackage{Sweave}
 \begin{document}
-\input{phen_framing-concordance}
+\SweaveOpts{concordance=TRUE}
 
 \maketitle
 %\setlength{\parskip}{0.5pt} % 1ex plus 0.5ex minus 0.2ex}

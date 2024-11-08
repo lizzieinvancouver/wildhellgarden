@@ -22,9 +22,10 @@ library(lubridate)
 library("pollen")
 # Set Working Directory
 
-#load("cgseasonmods.Rda")
+
 
 setwd("~/Documents/git/wildhellgarden/analyses")
+load("cgseasonmods.Rda")
 cg <- read.csv("output/clean_obs_allyrs.csv")### this is the updated data with leaf color
 
 ###calculate primary growth season and full growing seasion in days
