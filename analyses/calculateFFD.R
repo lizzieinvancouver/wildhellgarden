@@ -2,6 +2,8 @@
 # aim: to use tmin data from daymet to calculate frost free days for our four common garden sites
 # note: daymet data downloaded in check_daymet.R
 require(sharpshootR)
+require(ggplot2)
+
 rm(list = ls())
 options(stringsAsFactors = FALSE)
 
@@ -39,3 +41,44 @@ for(s in 1: length(coords)){
 f <- cbind(frostFree, ffdData)
 
 write.csv(f, "analyses/daymetData/frostFreeDays.csv", row.names = F)
+
+siteOrder <- c("Harvard forest", "White Mountain","Grant", "St. Hippolyte" )
+
+pdf("analyses/figures/ffdBySite.pdf", width =6, height = 5)
+ggplot(f, aes(x = factor(site, levels = siteOrder), y = ffd.90, fill= factor(site, siteOrder))) +
+        geom_boxplot() + geom_point() +
+        labs ( x = "Site", y = "FFD", fill = "Site") +
+        theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.key=element_blank()) 
+dev.off()
+
+spring <- ggplot(f, aes(x = factor(site, levels = siteOrder), y = spring.90)) +
+  geom_boxplot() + geom_point() +
+  labs ( x = "Site", y = "Spring FFD") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.key=element_rect(fill="white")) 
+
+fall <- ggplot(f, aes(x = factor(site, levels = siteOrder), y = fall.90)) +
+  geom_boxplot() + geom_point() +
+  labs ( x = "Site", y = "Fall FFD") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.key=element_rect(fill="white")) 
+
+pdf("analyses/figures/ffdOverTime.pdf", width =12, height = 5)
+ggplot(f, aes(x = year, y = ffd.90, fill= factor(site, siteOrder))) + 
+  geom_point() +
+  geom_smooth(method='lm', col = "black") +
+  labs ( x = "Year", y = "FFD", fill = "Site") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.key=element_blank()) +
+  facet_wrap(~ factor(site, siteOrder), ncol = 4)
+dev.off()
+
+
+
+
+
