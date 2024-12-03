@@ -1,8 +1,71 @@
-\begin{thebibliography}{3}
+\begin{thebibliography}{14}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
 \expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+
+\bibitem[{AUGSPURGER \emph{et~al.}(2005)AUGSPURGER, CHEESEMAN \&
+  SALK}]{AUGSPURGER2005}
+AUGSPURGER, C.~K., CHEESEMAN, J.~M. \& SALK, C.~F. (2005).
+\newblock Light gains and physiological capacity of understorey woody plants
+  during phenological avoidance of canopy shade.
+\newblock \emph{Functional Ecology}, 19, 537--546.
+
+\bibitem[{Churkina \emph{et~al.}(2005)Churkina, Schimel, Braswell \&
+  Xiao}]{Churkina2005}
+Churkina, G., Schimel, D., Braswell, B.~H. \& Xiao, X. (2005).
+\newblock Spatial analysis of growing season length control over net ecosystem
+  exchange.
+\newblock \emph{Global Change Biology}, 11, 1777--1787.
+
+\bibitem[{Keenan \emph{et~al.}(2014)Keenan, Gray, Friedl, Toomey, Bohrer,
+  Hollinger, Munger, O'Keefe, Schmid, Wing, Yang \& Richardson}]{Keenan2014}
+Keenan, T.~F., Gray, J., Friedl, M.~A., Toomey, M., Bohrer, G., Hollinger,
+  D.~Y., Munger, J.~W., O'Keefe, J., Schmid, H.~P., Wing, I.~S., Yang, B. \&
+  Richardson, A.~D. (2014).
+\newblock Net carbon uptake has increased through warming-induced changes in
+  temperate forest phenology.
+\newblock \emph{Nature Climate Change}, 4, 598--604.
+
+\bibitem[{Keenan \& Richardson(2015)}]{Keenan2015}
+Keenan, T.~F. \& Richardson, A.~D. (2015).
+\newblock The timing of autumn senescence is affected by the timing of spring
+  phenology: implications for predictive models.
+\newblock \emph{Global Change Biology}, 21, 2634--2641.
+
+\bibitem[{K{\"o}rner \emph{et~al.}(2023)K{\"o}rner, M{\"o}hl \&
+  Hiltbrunner}]{Korner2023}
+K{\"o}rner, C., M{\"o}hl, P. \& Hiltbrunner, E. (2023).
+\newblock Four ways to define the growing season.
+\newblock \emph{Ecology Letters}, 26, 1277--1292.
+
+\bibitem[{Liu \emph{et~al.}(2010)Liu, Henderson, Zhang \& Xu}]{Liu2010}
+Liu, B., Henderson, M., Zhang, Y. \& Xu, M. (2010).
+\newblock Spatiotemporal change in china's climatic growing season: 1955--2000.
+\newblock \emph{Climatic Change}, 99, 93--118.
+
+\bibitem[{Liu \emph{et~al.}(2016)Liu, Fu, Zhu, Liu, Liu, Huang, Janssens \&
+  Piao}]{Liu2016}
+Liu, Q., Fu, Y.~H., Zhu, Z., Liu, Y., Liu, Z., Huang, M., Janssens, I.~A. \&
+  Piao, S. (2016).
+\newblock Delayed autumn phenology in the northern hemisphere is related to
+  change in both climate and spring phenology.
+\newblock \emph{Global Change Biology}, 22, 3702--3711.
+
+\bibitem[{Menzel \& Fabian(1999)}]{Menzel1999}
+Menzel, A. \& Fabian, P. (1999).
+\newblock Growing season extended in europe.
+\newblock \emph{Nature}, 397, 659--659.
+
+\bibitem[{Morales-Castilla \emph{et~al.}(2024)Morales-Castilla, Davies,
+  Legault, Buonaiuto, Chamberlain, Ettinger, Garner, Jones, Loughnan, Pearse,
+  Sodhi \& Wolkovich}]{Morales-Castilla2024}
+Morales-Castilla, I., Davies, T.~J., Legault, G., Buonaiuto, D.~M.,
+  Chamberlain, C.~J., Ettinger, A.~K., Garner, M., Jones, F. A.~M., Loughnan,
+  D., Pearse, W.~D., Sodhi, D.~S. \& Wolkovich, E.~M. (2024).
+\newblock Phylogenetic estimates of species-level phenology improve ecological
+  forecasting.
+\newblock \emph{Nature Climate Change}, 14, 989--995.
 
 \bibitem[{Norby(2021)}]{Norby2021}
 Norby, R.~J. (2021).
@@ -10,12 +73,25 @@ Norby, R.~J. (2021).
   autumn leaf senescence in temperate trees''.
 \newblock \emph{Science}, 371, eabg1438.
 
+\bibitem[{White \emph{et~al.}(1999)White, Running \& Thornton}]{White1999}
+White, M.~A., Running, S.~W. \& Thornton, P.~E. (1999).
+\newblock The impact of growing-season length variability on carbon
+  assimilation and evapotranspiration over 88 years in the eastern us deciduous
+  forest.
+\newblock \emph{International Journal of Biometeorology}, 42, 139--145.
+
 \bibitem[{Zani \emph{et~al.}(2020)Zani, Crowther, Mo, Renner \&
   Zohner}]{Zani2020}
 Zani, D., Crowther, T.~W., Mo, L., Renner, S.~S. \& Zohner, C.~M. (2020).
 \newblock Increased growing-season productivity drives earlier autumn leaf
   senescence in temperate trees.
 \newblock \emph{Science}, 370, 1066--1071.
+
+\bibitem[{Zeng \& Wolkovich(2024)}]{Zeng2024}
+Zeng, Z.~A. \& Wolkovich, E.~M. (2024).
+\newblock Weak evidence of provenance effects in spring phenology across europe
+  and north america.
+\newblock \emph{New Phytologist}, 242, 1957--1964.
 
 \bibitem[{Zohner \emph{et~al.}(2023)Zohner, Mirzagholi, Renner, Mo, Rebindaine,
   Bucher, Palou{\v s}, Vitasse, Fu, Stocker \& Crowther}]{Zohner2023}
