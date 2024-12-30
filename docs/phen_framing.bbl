@@ -1,8 +1,13 @@
-\begin{thebibliography}{14}
+\begin{thebibliography}{22}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
 \expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+
+\bibitem[{Aitken \& Bemmels(2016)}]{aitken2016}
+Aitken, S.~N. \& Bemmels, J.~B. (2016).
+\newblock Time to get moving: assisted gene flow of forest trees.
+\newblock \emph{Evol Appl}, 9, 271--90.
 
 \bibitem[{AUGSPURGER \emph{et~al.}(2005)AUGSPURGER, CHEESEMAN \&
   SALK}]{AUGSPURGER2005}
@@ -11,12 +16,48 @@ AUGSPURGER, C.~K., CHEESEMAN, J.~M. \& SALK, C.~F. (2005).
   during phenological avoidance of canopy shade.
 \newblock \emph{Functional Ecology}, 19, 537--546.
 
+\bibitem[{Bauerle \emph{et~al.}(2012)Bauerle, Oren, Way, Qian, Stoy, Thornton,
+  Bowden, Hoffman \& Reynolds}]{bauerle2012photoperiodic}
+Bauerle, W.~L., Oren, R., Way, D.~A., Qian, S.~S., Stoy, P.~C., Thornton,
+  P.~E., Bowden, J.~D., Hoffman, F.~M. \& Reynolds, R.~F. (2012).
+\newblock Photoperiodic regulation of the seasonal pattern of photosynthetic
+  capacity and the implications for carbon cycling.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 109,
+  8612--8617.
+
+\bibitem[{Camarero \emph{et~al.}(2022)Camarero, Campelo, Colangelo, Valeriano,
+  Knorre, Sol{\'e} \& Rubio-Cuadrado}]{camarero2022decoupled}
+Camarero, J.~J., Campelo, F., Colangelo, M., Valeriano, C., Knorre, A.,
+  Sol{\'e}, G. \& Rubio-Cuadrado, {\'A}. (2022).
+\newblock Decoupled leaf-wood phenology in two pine species from contrasting
+  climates: Longer growing seasons do not mean more radial growth.
+\newblock \emph{Agricultural and Forest Meteorology}, 327, 109223.
+
 \bibitem[{Churkina \emph{et~al.}(2005)Churkina, Schimel, Braswell \&
   Xiao}]{Churkina2005}
 Churkina, G., Schimel, D., Braswell, B.~H. \& Xiao, X. (2005).
 \newblock Spatial analysis of growing season length control over net ecosystem
   exchange.
 \newblock \emph{Global Change Biology}, 11, 1777--1787.
+
+\bibitem[{{\v{C}}ufar \emph{et~al.}(2015){\v{C}}ufar, De~Luis, Prislan,
+  Gri{\v{c}}ar, {\v{C}}repin{\v{s}}ek, Merela \&
+  Kajfe{\v{z}}-Bogataj}]{cufar2015variations}
+{\v{C}}ufar, K., De~Luis, M., Prislan, P., Gri{\v{c}}ar, J.,
+  {\v{C}}repin{\v{s}}ek, Z., Merela, M. \& Kajfe{\v{z}}-Bogataj, L. (2015).
+\newblock {Do variations in leaf phenology affect radial growth variations in
+  \emph{Fagus sylvatica}?}
+\newblock \emph{International journal of biometeorology}, 59, 1127--1132.
+
+\bibitem[{Dow \emph{et~al.}(2022)Dow, Kim, D'Orangeville, Gonzalez-Akre,
+  Helcoski, Herrmann, Harley, Maxwell, McGregor, McShea
+  \emph{et~al.}}]{dow2022warm}
+Dow, C., Kim, A.~Y., D'Orangeville, L., Gonzalez-Akre, E.~B., Helcoski, R.,
+  Herrmann, V., Harley, G.~L., Maxwell, J.~T., McGregor, I.~R., McShea, W.~J.
+  \emph{et~al.} (2022).
+\newblock Warm springs alter timing but not total growth of temperate deciduous
+  trees.
+\newblock \emph{Nature}, 608, 552--557.
 
 \bibitem[{Keenan \emph{et~al.}(2014)Keenan, Gray, Friedl, Toomey, Bohrer,
   Hollinger, Munger, O'Keefe, Schmid, Wing, Yang \& Richardson}]{Keenan2014}
@@ -67,11 +108,32 @@ Morales-Castilla, I., Davies, T.~J., Legault, G., Buonaiuto, D.~M.,
   forecasting.
 \newblock \emph{Nature Climate Change}, 14, 989--995.
 
-\bibitem[{Norby(2021)}]{Norby2021}
-Norby, R.~J. (2021).
+\bibitem[{Norby(2021{\natexlab{a}})}]{Norby2021}
+Norby, R.~J. (2021{\natexlab{a}}).
 \newblock Comment on ``increased growing-season productivity drives earlier
   autumn leaf senescence in temperate trees''.
 \newblock \emph{Science}, 371, eabg1438.
+
+\bibitem[{Norby(2021{\natexlab{b}})}]{norby2021comment}
+Norby, R.~J. (2021{\natexlab{b}}).
+\newblock Comment on ``increased growing-season productivity drives earlier
+  autumn leaf senescence in temperate trees''.
+\newblock \emph{Science}, 371, eabg1438.
+
+\bibitem[{Silvestro \emph{et~al.}(2023)Silvestro, Zeng, Butt{\`o}, Sylvain,
+  Drolet, Mencuccini, Thiffault, Yuan \& Rossi}]{silvestro2023longer}
+Silvestro, R., Zeng, Q., Butt{\`o}, V., Sylvain, J.-D., Drolet, G., Mencuccini,
+  M., Thiffault, N., Yuan, S. \& Rossi, S. (2023).
+\newblock A longer wood growing season does not lead to higher carbon
+  sequestration.
+\newblock \emph{Scientific reports}, 13, 4059.
+
+\bibitem[{Soolanayakanahally \emph{et~al.}(2013)Soolanayakanahally, Guy, Silim
+  \& Song}]{soolanayakanahally2013timing}
+Soolanayakanahally, R.~Y., Guy, R.~D., Silim, S.~N. \& Song, M. (2013).
+\newblock Timing of photoperiodic competency causes phenological mismatch in
+  balsam poplar (populus balsamifera l.).
+\newblock \emph{Plant, cell \& environment}, 36, 116--127.
 
 \bibitem[{White \emph{et~al.}(1999)White, Running \& Thornton}]{White1999}
 White, M.~A., Running, S.~W. \& Thornton, P.~E. (1999).

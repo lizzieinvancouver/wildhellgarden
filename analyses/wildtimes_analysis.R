@@ -23,7 +23,7 @@ library(tidyr)
 
 # source("source/combineWeather.R")
 # source("source/conceptualFigure.R")
-
+load("cgseasonmods.Rda")
 goober <- read.csv("output/gddData.csv")
 cg <- read.csv("output/clean_obs_allyrs.csv")### this is the updated data with leaf color
 
@@ -235,16 +235,27 @@ dev.off()
 
 use.data<-dplyr::filter(cg,!is.na(pgs))
 cor.test(use.data$leafout,use.data$budset)
+round(cor.test(use.data$leafout,use.data$budset)[4]$estimate,2)
+round(cor.test(use.data$leafout,use.data$budset)[9]$conf.int[1],2)
+round(cor.test(use.data$leafout,use.data$budset)[9]$conf.int[2],2)
 
 ###note you can ignore treedepth warnings as it affects model run efficiency not the posterior estimates
 #### leafout varience partitioning
 mod.lo<-brm(leafout~(1|spp)+(1|site)+(1|year),data=use.data,
                warmup=4000,iter=5000, control=list(adapt_delta=.99))
-summary(mod.lo)
+summary(mod.lo)[17]$random$spp[3]
+summary(mod.lo)[17]$random$year[1]
+
+gumbo<-summary(mod.lo)
 
 ### budset variance partitioning
 mod.bs<-brm(budset~(1|spp)+(1|site)+(1|year),data=use.data,
             warmup=4000,iter=5000, control=list(adapt_delta=.99)) 
+
+summary(mod.bs)[17]$random$spp
+
+summary(mod.lo)[17]$random$year[1]
+
 
 #primary growing season variance partitioning
 mod.pgs<-brm(pgs~(1|spp)+(1|site)+(1|year),data=use.data,
@@ -418,13 +429,49 @@ save.image("cgseasonmods.Rda")
 new.daterz<-data.frame(spp=rep(unique(bb.sppout$spp),each=4),site=rep(unique(lo.siteout$site),13))
 lopred<- mod.lo %>% 
   epred_draws(newdata =new.daterz,ndraws = 1000,re_formula = ~(1|spp)+(1|site))
+
+
+
+bspred<- mod.bs %>% 
+  epred_draws(newdata =new.daterz,ndraws = 1000,re_formula = ~(1|spp)+(1|site))
+
 library(tidybayes)
 pd<-position_dodge(.5)
-ggplot(lopred,aes(spp,.epred))+stat_pointinterval(aes(color=site),.width = c(.5),position=pd)
+ggplot
+
+raw1<-ggplot()+stat_summary(data=use.data,aes(x=spp,y=leafout,color=site),position=pd)+
+geom_point(data=use.data,aes(x=spp,y=leafout,color=site),position=pd,size=.1)+coord_cartesian(ylim=c(110,150))+
+  xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()
+
+raw2<-ggplot()+stat_summary(data=use.data,aes(x=spp,y=budset,color=site),position=pd)+
+  geom_point(data=use.data,aes(x=spp,y=budset,color=site),position=pd,size=.1)+coord_cartesian(ylim=c(230,290))+
+  xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()
+
+jpeg("figures/rawpopulations.jpeg",width = 12,height=6,unit='in',res=200)
+ggpubr::ggarrange(raw1,raw2,ncol=1,common.legend=TRUE)
+dev.off()
+pop1<-ggplot()+
+  stat_pointinterval(data=lopred,aes(x=spp,y=.epred,color=site),.width = c(.5,.9),position=pd)+
+  geom_point(data=use.data,aes(x=spp,y=leafout,color=site),position=pd,size=0.1)+coord_cartesian(ylim=c(110,150))+ylab("leafout")+
+  xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()
+
+
+pop2<-ggplot()+
+  stat_pointinterval(data=bspred,aes(x=spp,y=.epred,color=site),.width = c(.5,.9),position=pd)+
+  geom_point(data=use.data,aes(x=spp,y=budset,color=site),position=pd,size=0.1)+ylab("budset")+coord_cartesian(ylim=c(230,290))+
+  xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()
+
+jpeg("figures/fittedpopulations.jpeg",width = 12,height=6,unit='in',res=200)
+ggpubr::ggarrange(pop1,pop2,ncol=1,common.legend=TRUE)
+dev.off()
+
+ ggplot(lopred,aes(spp,.epred))
+ggplot(bspred,aes(spp,.epred))+stat_pointinterval(aes(color=site),.width = c(.5),position=pd)
 
 jpeg("figures/SPxPOP.jpeg")
-ggplot(lopred,aes(spp,.epred))+stat_pointinterval(aes(color=site),.width = c(.5),position=pd)
+ggplot(lopred,aes(site,.epred))+stat_pointinterval(.width = c(.5,.9))+facet_wrap(~spp,scales="free")
 dev.off()
+ggplot(bspred,aes(site,.epred))+stat_pointinterval(.width = c(.5,.9))+facet_wrap(~spp,scales="free")
 
 ### quesiton, does indiviudal variation cahnge things?
 use.data$indy<-paste(use.data$spp,use.data$site,use.data$ind,use.data$plot)### give and unique identifier
