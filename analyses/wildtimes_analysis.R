@@ -262,6 +262,9 @@ mod.pgs<-brm(pgs~(1|spp)+(1|site)+(1|year),data=use.data,
                warmup=4000,iter=5000, control=list(adapt_delta=.995))
 
 
+spsum<-use.data %>% group_by(spp) %>% summarise(mean_lo=mean(leafout),mean_bs=mean(budset)) %>% arrange(mean_lo)
+
+
 ##make leafout plots
 bb.sppout<-mod.lo %>% spread_draws(r_spp[spp,Intercept])
 bb.sppout$species<-NA
