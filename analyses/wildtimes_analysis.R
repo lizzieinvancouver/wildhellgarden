@@ -427,20 +427,28 @@ ggpubr::ggarrange(spcis,sties,yrs,ncol=1,labels=c("a)","b)","c)"),heights=c(2,1.
 dev.off()
 
 save.image("cgseasonmods.Rda")
-
-
 new.daterz<-data.frame(spp=rep(unique(bb.sppout$spp),each=4),site=rep(unique(lo.siteout$site),13))
+
 lopred<- mod.lo %>% 
   epred_draws(newdata =new.daterz,ndraws = 1000,re_formula = ~(1|spp)+(1|site))
 
+new.daterz2<-data.frame(year=rep(unique(lo.yearout$year),each=4),site=rep(unique(lo.siteout$site),3))
+
+lopred<- mod.lo %>% 
+  epred_draws(newdata =new.daterz,ndraws = 1000,re_formula = ~(1|spp)+(1|site))
+
+lopred2<- mod.lo %>% 
+  epred_draws(newdata=new.daterz2,ndraws = 1000,re_formula = ~(1|year)+(1|site))
 
 
 bspred<- mod.bs %>% 
   epred_draws(newdata =new.daterz,ndraws = 1000,re_formula = ~(1|spp)+(1|site))
 
+bspred2<- mod.bs %>% 
+  epred_draws(newdata =new.daterz2,ndraws = 1000,re_formula = ~(1|year)+(1|site))
+
 library(tidybayes)
 pd<-position_dodge(.5)
-ggplot
 
 raw1<-ggplot()+stat_summary(data=use.data,aes(x=spp,y=leafout,color=site),position=pd)+
 geom_point(data=use.data,aes(x=spp,y=leafout,color=site),position=pd,size=.1)+coord_cartesian(ylim=c(110,150))+
@@ -453,19 +461,47 @@ raw2<-ggplot()+stat_summary(data=use.data,aes(x=spp,y=budset,color=site),positio
 jpeg("figures/rawpopulations.jpeg",width = 12,height=6,unit='in',res=200)
 ggpubr::ggarrange(raw1,raw2,ncol=1,common.legend=TRUE)
 dev.off()
+tag<-paste(use.data$spp,use.data$site)
+tag<-as.data.frame(tag)
+tagy<-distinct(tag)
+
+lopred$tag<-paste(lopred$spp,lopred$site)
+lopred<-filter(lopred,tag %in% c(tagy$tag))
+
+#lopred2$tag<-paste(lopred2$spp,lopred2$site)
+#lopred2<-filter(lopred2,tag %in% c(tagy$tag))
+
+
+bspred$tag<-paste(bspred$spp,bspred$site)
+bspred<-filter(bspred,tag %in% c(tagy$tag))
+
+#bspred2$tag<-paste(bspred2$spp,bspred2$site)
+#bspred2<-filter(bspred2,tag %in% c(tagy$tag))
+
 pop1<-ggplot()+
-  stat_pointinterval(data=lopred,aes(x=spp,y=.epred,color=site),.width = c(.5,.9),position=pd)+
-  geom_point(data=use.data,aes(x=spp,y=leafout,color=site),position=pd,size=0.1)+coord_cartesian(ylim=c(110,150))+ylab("leafout")+
+  stat_pointinterval(data=lopred,aes(x=spp,y=.epred,color=site),.width = c(.5,.9),position=pd)+coord_cartesian(ylim=c(110,150))+ylab("leafout")+
+  xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()
+
+pop1a<-ggplot()+
+  stat_pointinterval(data=lopred2,aes(x=as.factor(year),y=.epred,color=site),.width = c(.5,.9),position=pd)+coord_cartesian(ylim=c(110,150))+ylab("leafout")+
   xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()
 
 
 pop2<-ggplot()+
   stat_pointinterval(data=bspred,aes(x=spp,y=.epred,color=site),.width = c(.5,.9),position=pd)+
-  geom_point(data=use.data,aes(x=spp,y=budset,color=site),position=pd,size=0.1)+ylab("budset")+coord_cartesian(ylim=c(230,290))+
+  ylab("budset")+coord_cartesian(ylim=c(230,290))+
+  xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()
+
+po21a<-ggplot()+
+  stat_pointinterval(data=bspred2,aes(x=as.factor(year),y=.epred,color=site),.width = c(.5,.9),position=pd)+coord_cartesian(ylim=c(230,290))+ylab("buset")+
   xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()
 
 jpeg("figures/fittedpopulations.jpeg",width = 12,height=6,unit='in',res=200)
 ggpubr::ggarrange(pop1,pop2,ncol=1,common.legend=TRUE)
+dev.off()
+
+jpeg("figures/fittedpopulations_x_year.jpeg",width = 12,height=6,unit='in',res=200)
+ggpubr::ggarrange(pop1a,po21a,ncol=1,common.legend=TRUE)
 dev.off()
 
  ggplot(lopred,aes(spp,.epred))
