@@ -483,8 +483,8 @@ pop1<-ggplot()+
   xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()
 
 pop1a<-ggplot()+
-  stat_pointinterval(data=lopred2,aes(x=as.factor(year),y=.epred,color=site),.width = c(.5,.9),position=pd)+coord_cartesian(ylim=c(110,150))+ylab("leafout")+
-  xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()
+  stat_pointinterval(data=lopred2,aes(x=0,y=.epred,shape=site,color=as.factor(year)),.width = c(.5,.9),position=pd)+coord_cartesian(ylim=c(110,150))+ylab("leafout")+
+  xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()+scale_x_discrete()
 
 
 pop2<-ggplot()+
@@ -493,15 +493,15 @@ pop2<-ggplot()+
   xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()
 
 po21a<-ggplot()+
-  stat_pointinterval(data=bspred2,aes(x=as.factor(year),y=.epred,color=site),.width = c(.5,.9),position=pd)+coord_cartesian(ylim=c(230,290))+ylab("buset")+
-  xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()
+  stat_pointinterval(data=bspred2,aes(x=0,y=.epred,shape=site,color=as.factor(year)),.width = c(.5,.9),position=pd)+coord_cartesian(ylim=c(230,290))+ylab("buset")+
+  xlab("")+ggthemes::theme_few()+scale_colour_viridis_d()+scale_x_discrete()
 
 jpeg("figures/fittedpopulations.jpeg",width = 12,height=6,unit='in',res=200)
 ggpubr::ggarrange(pop1,pop2,ncol=1,common.legend=TRUE)
 dev.off()
 
-jpeg("figures/fittedpopulations_x_year.jpeg",width = 12,height=6,unit='in',res=200)
-ggpubr::ggarrange(pop1a,po21a,ncol=1,common.legend=TRUE)
+jpeg("figures/fittedpopulations_x_year.jpeg",width = 6,height=6,unit='in',res=200)
+ggpubr::ggarrange(pop1a,po21a,ncol=2,common.legend=TRUE)
 dev.off()
 
  ggplot(lopred,aes(spp,.epred))
