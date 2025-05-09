@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: phen_framing.aux
+The style file: ..//refs/styles/ecoletters.bst.bst
+Database file #1: ..//refs/wildhell.bib
+Warning--I didn't find a database entry for ""
+Warning--I didn't find a database entry for "Rhode2011"
+You've used 33 entries,
+            2860 wiz_defined-function locations,
+            908 strings with 15709 characters,
+and the built_in function-call counts, 23095 in all, are:
+= -- 1898
+> -- 1970
+< -- 7
++ -- 756
+- -- 714
+* -- 2441
+:= -- 4381
+add.period$ -- 99
+call.type$ -- 33
+change.case$ -- 402
+chr.to.int$ -- 32
+cite$ -- 33
+duplicate$ -- 683
+empty$ -- 1055
+format.name$ -- 819
+if$ -- 4133
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 33
+newline$ -- 172
+num.names$ -- 132
+pop$ -- 363
+preamble$ -- 1
+purify$ -- 369
+quote$ -- 0
+skip$ -- 398
+stack$ -- 0
+substring$ -- 1135
+swap$ -- 156
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 297
+warning$ -- 0
+while$ -- 145
+width$ -- 0
+write$ -- 435
+(There were 2 warnings)
