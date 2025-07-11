@@ -24,6 +24,11 @@ library(tidyr)
 # source("source/combineWeather.R")
 # source("source/conceptualFigure.R")
 load("cgseasonmods.Rda")
+
+
+couM<-cg1 %>% filter(year==2020) %>% group_by(spp) %>%count()
+
+
 goober <- read.csv("output/gddData.csv")
 cg <- read.csv("output/clean_obs_allyrs.csv")### this is the updated data with leaf color
 
@@ -86,6 +91,11 @@ cg_wgdd <- merge(cg2, cg1, by = c("spp", "year", "site", "ind", "plot"), all = T
 pgsGDD.mod<-brm(pgsGDD~leafout_cent+(leafout_cent|spp),data=cg1,control = list(adapt_delta=.95),warmup=3000,iter=4000)
 
 pgs.mod<-brm(pgs~leafout_cent+(leafout_cent|spp),data=cg1,control = list(adapt_delta=.95),warmup=3000,iter=4000)
+pgs.mod.goo<-brm(pgs~leafout_cent+(leafout_cent|spp)+(leafout_cent|indy),data=cg1,control = list(adapt_delta=.95),warmup=3000,iter=4000)
+
+pgsGDD.mod.goo<-brm(pgsGDD~leafout_cent+(leafout_cent|spp)+(leafout_cent|year),data=cg1,control = list(adapt_delta=.95),warmup=3000,iter=4000)
+pgsGDD.mod.goo<-brm(pgsGDD~leafout_cent+(leafout_cent|spp)+(leafout_cent|indy),data=cg1,control = list(adapt_delta=.95),warmup=3000,iter=4000)
+coef(pgsGDD.mod.goo)
 
 ## check basic marginal effects
 conditional_effects(pgsGDD.mod)

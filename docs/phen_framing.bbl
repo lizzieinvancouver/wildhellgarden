@@ -1,4 +1,4 @@
-\begin{thebibliography}{33}
+\begin{thebibliography}{44}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -25,6 +25,11 @@ Bauerle, W.~L., Oren, R., Way, D.~A., Qian, S.~S., Stoy, P.~C., Thornton,
 \newblock \emph{Proceedings of the National Academy of Sciences}, 109,
   8612--8617.
 
+\bibitem[{B{\"u}rkner(2018)}]{Burkner2018}
+B{\"u}rkner, P.-C. (2018).
+\newblock Advanced bayesian multilevel modeling with the r package brms.
+\newblock \emph{R Journal}, 10, 395--411.
+
 \bibitem[{Camarero \emph{et~al.}(2022)Camarero, Campelo, Colangelo, Valeriano,
   Knorre, Sol{\'e} \& Rubio-Cuadrado}]{camarero2022decoupled}
 Camarero, J.~J., Campelo, F., Colangelo, M., Valeriano, C., Knorre, A.,
@@ -33,12 +38,25 @@ Camarero, J.~J., Campelo, F., Colangelo, M., Valeriano, C., Knorre, A.,
   climates: Longer growing seasons do not mean more radial growth.
 \newblock \emph{Agricultural and Forest Meteorology}, 327, 109223.
 
+\bibitem[{Chuine(2000)}]{CHUINE2000337}
+Chuine, I. (2000).
+\newblock A unified model for budburst of trees.
+\newblock \emph{Journal of Theoretical Biology}, 207, 337--347.
+
 \bibitem[{Churkina \emph{et~al.}(2005)Churkina, Schimel, Braswell \&
   Xiao}]{Churkina2005}
 Churkina, G., Schimel, D., Braswell, B.~H. \& Xiao, X. (2005).
 \newblock Spatial analysis of growing season length control over net ecosystem
   exchange.
 \newblock \emph{Global Change Biology}, 11, 1777--1787.
+
+\bibitem[{Cleland \emph{et~al.}(2012)Cleland, Allen, Crimmins, Dunne, Pau,
+  Travers, Zavaleta \& Wolkovich}]{Cleland2012}
+Cleland, E.~E., Allen, J.~M., Crimmins, T.~M., Dunne, J.~A., Pau, S., Travers,
+  S.~E., Zavaleta, E.~S. \& Wolkovich, E.~M. (2012).
+\newblock Phenological tracking enables positive species responses to climate
+  change.
+\newblock \emph{Ecology}, 93, 1765--1771.
 
 \bibitem[{{\v{C}}ufar \emph{et~al.}(2015){\v{C}}ufar, De~Luis, Prislan,
   Gri{\v{c}}ar, {\v{C}}repin{\v{s}}ek, Merela \&
@@ -82,10 +100,35 @@ Dow, C., Kim, A.~Y., D'Orangeville, L., Gonzalez-Akre, E.~B., Helcoski, R.,
   trees.
 \newblock \emph{Nature}, 608, 552--557.
 
+\bibitem[{Farquhar \emph{et~al.}(1980)Farquhar, von Caemmerer \&
+  Berry}]{Farquhar:1980vm}
+Farquhar, G.~D., von Caemmerer, S. \& Berry, J.~A. (1980).
+\newblock A biochemical model of photosynthetic co2 assimilation in leaves of
+  c3 species.
+\newblock \emph{Planta}, 149, 78--90.
+
 \bibitem[{Finn \emph{et~al.}(2007)Finn, Straszewski \& Peterson}]{Finn2007}
 Finn, G., Straszewski, A. \& Peterson, V. (2007).
 \newblock A general growth stage key for describing trees and woody plants.
 \newblock \emph{Annals of Applied Biology}, 151, 127--131.
+
+\bibitem[{Gallinat \emph{et~al.}(2015)Gallinat, Primack \&
+  Wagner}]{GALLINAT2015}
+Gallinat, A.~S., Primack, R.~B. \& Wagner, D.~L. (2015).
+\newblock Autumn, the neglected season in climate change research.
+\newblock \emph{Trends in Ecology & Evolution}, 30, 169--176.
+
+\bibitem[{Geng \emph{et~al.}(2020)Geng, Fu, Hao, Zhou, Zhang, Yin, Vitasse,
+  Piao, Niu, De~Boeck, Menzel \& Pe{\~n}uelas}]{Geng2020}
+Geng, X., Fu, Y.~H., Hao, F., Zhou, X., Zhang, X., Yin, G., Vitasse, Y., Piao,
+  S., Niu, K., De~Boeck, H.~J., Menzel, A. \& Pe{\~n}uelas, J. (2020).
+\newblock Climate warming increases spring phenological differences among
+  temperate trees.
+\newblock \emph{Global Change Biology}, 26, 5979--5987.
+
+\bibitem[{{Jakub Nowosad}({2019})}]{Nowosad2019}
+{Jakub Nowosad} ({2019}).
+\newblock \emph{{pollen: Analysis of Aerobiological Data}}.
 
 \bibitem[{Keenan \emph{et~al.}(2014)Keenan, Gray, Friedl, Toomey, Bohrer,
   Hollinger, Munger, O'Keefe, Schmid, Wing, Yang \& Richardson}]{Keenan2014}
@@ -150,6 +193,12 @@ Michelson, I.~H., Ingvarsson, P.~K., Robinson, K.~M., Edlund, E., Eriksson,
 \newblock Autumn senescence in aspen is not triggered by day length.
 \newblock \emph{Physiologia Plantarum}, 162, 123--134.
 
+\bibitem[{Moore \& Remais(2014)}]{Moore:2014wl}
+Moore, J.~L. \& Remais, J.~V. (2014).
+\newblock Developmental models for estimating ecological responses to
+  environmental variability: Structural, parametric, and experimental issues.
+\newblock \emph{Acta Biotheoretica}, 62, 69--90.
+
 \bibitem[{Morales-Castilla \emph{et~al.}(2024)Morales-Castilla, Davies,
   Legault, Buonaiuto, Chamberlain, Ettinger, Garner, Jones, Loughnan, Pearse,
   Sodhi \& Wolkovich}]{Morales-Castilla2024}
@@ -184,6 +233,11 @@ Polgar, C.~A. \& Primack, R.~B. (2011).
   ecosystems.
 \newblock \emph{New Phytologist}, 191, 926--941.
 
+\bibitem[{{{R Core Team}}({2021})}]{R2021}
+{{R Core Team}} ({2021}).
+\newblock \emph{{R: A Language and Environment for Statistical Computing}}.
+\newblock {R Foundation for Statistical Computing}, {Vienna, Austria}.
+
 \bibitem[{Roe \emph{et~al.}(2021)Roe, Streck, Beach, Busch, Chapman, Daioglou,
   Deppermann, Doelman, Emmet-Booth, Engelmann, Fricko, Frischmann, Funk,
   Grassi, Griscom, Havlik, Hanssen, Humpen{\"o}der, Landholm, Lomax, Lehmann,
@@ -205,6 +259,14 @@ Shanley, C.~S., Graves, R.~A., Drever, C.~R., Schindel, M., Robertson, J.~C.,
   Case, M.~J. \& Biswas, T. (2024).
 \newblock Mapping forest-based natural climate solutions.
 \newblock \emph{Communications Earth \& Environment}, 5, 502.
+
+\bibitem[{Shen \emph{et~al.}(2014)Shen, Tang, Chen, Yang, Wang, Cui, Yang, Han,
+  Li, Du, Zhang \& Cong}]{Shen2014}
+Shen, M., Tang, Y., Chen, J., Yang, X., Wang, C., Cui, X., Yang, Y., Han, L.,
+  Li, L., Du, J., Zhang, G. \& Cong, N. (2014).
+\newblock Earlier-season vegetation has greater temperature sensitivity of
+  spring phenology in northern hemisphere.
+\newblock \emph{PLOS ONE}, 9, 1--11.
 
 \bibitem[{Silvestro \emph{et~al.}(2023)Silvestro, Zeng, Butt{\`o}, Sylvain,
   Drolet, Mencuccini, Thiffault, Yuan \& Rossi}]{silvestro2023longer}
@@ -234,6 +296,12 @@ White, M.~A., Running, S.~W. \& Thornton, P.~E. (1999).
   assimilation and evapotranspiration over 88 years in the eastern us deciduous
   forest.
 \newblock \emph{International Journal of Biometeorology}, 42, 139--145.
+
+\bibitem[{Yang \emph{et~al.}(1995)Yang, Logan \& Coffey}]{YANG199561}
+Yang, S., Logan, J. \& Coffey, D.~L. (1995).
+\newblock Mathematical formulae for calculating the base temperature for
+  growing degree days.
+\newblock \emph{Agricultural and Forest Meteorology}, 74, 61--74.
 
 \bibitem[{Zani \emph{et~al.}(2020)Zani, Crowther, Mo, Renner \&
   Zohner}]{Zani2020}
