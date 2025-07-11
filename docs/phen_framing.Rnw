@@ -261,6 +261,9 @@ We define the thermal growing season as the cumulative growing degree day heat s
 
 All models were fit in the R package ``brms" \citep{Burkner2018} on 4 chains with a 4000 iteration warm-up and 1000 sampling iterations on each chain for a total of 4,000 sampling iterations across all chains. We evaluated model fit, with no divergent transitions, rhats less than 1.01 and high effective sample sizes. We performed all analyses in R version 4.1.2 \citep{R2021}.
 
+\section{Aknowledgements:}
+Thanks to Kea Woodruff and Lee Toomey for the help planting and caring for the Weld Hill Common Garden. Thanks to Meghan Blumstein for her thoughts and comments.
+
 \newpage
 \section{Figures} %emw2024Sep19 -- I really like the figures! But I think if you put the first one last you can introduce as a fundamentally new and important view of early seasons as calendar days versus thermal days that wraps up the whole paper. I might then make the last figure first -- big take-home shocking message given first in figures and text! Then break down the variance and data in the other figure. 
 %emwNov4 -- I moved first figure to third. 
