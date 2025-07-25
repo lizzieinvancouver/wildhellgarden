@@ -3,47 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: phen_framing.aux
 The style file: ..//refs/styles/ecoletters.bst.bst
 Database file #1: ..//refs/wildhell.bib
-Warning--I didn't find a database entry for "Soolanayakanahally2013"
-Warning--I didn't find a database entry for "Rhode2011"
-You've used 44 entries,
+You've used 45 entries,
             2860 wiz_defined-function locations,
-            998 strings with 18419 characters,
-and the built_in function-call counts, 29078 in all, are:
-= -- 2427
-> -- 2368
+            1004 strings with 18619 characters,
+and the built_in function-call counts, 29632 in all, are:
+= -- 2477
+> -- 2402
 < -- 12
-+ -- 912
-- -- 855
-* -- 3004
-:= -- 5519
-add.period$ -- 131
-call.type$ -- 44
-change.case$ -- 502
-chr.to.int$ -- 43
-cite$ -- 44
-duplicate$ -- 903
-empty$ -- 1389
-format.name$ -- 987
-if$ -- 5234
++ -- 925
+- -- 867
+* -- 3059
+:= -- 5622
+add.period$ -- 134
+call.type$ -- 45
+change.case$ -- 511
+chr.to.int$ -- 44
+cite$ -- 45
+duplicate$ -- 924
+empty$ -- 1421
+format.name$ -- 1002
+if$ -- 5337
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 42
-newline$ -- 226
-num.names$ -- 176
-pop$ -- 455
+missing$ -- 43
+newline$ -- 231
+num.names$ -- 180
+pop$ -- 463
 preamble$ -- 1
-purify$ -- 460
+purify$ -- 468
 quote$ -- 0
-skip$ -- 534
+skip$ -- 546
 stack$ -- 0
-substring$ -- 1446
-swap$ -- 200
+substring$ -- 1478
+swap$ -- 205
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 396
+type$ -- 405
 warning$ -- 0
-while$ -- 190
+while$ -- 194
 width$ -- 0
-write$ -- 575
-(There were 2 warnings)
+write$ -- 588

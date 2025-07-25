@@ -1,4 +1,4 @@
-\begin{thebibliography}{44}
+\begin{thebibliography}{45}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -252,6 +252,13 @@ Roe, S., Streck, C., Beach, R., Busch, J., Chapman, M., Daioglou, V.,
 \newblock Land-based measures to mitigate climate change: Potential and
   feasibility by country.
 \newblock \emph{Global Change Biology}, 27, 6025--6058.
+
+\bibitem[{Rohde \emph{et~al.}(2011)Rohde, Bastien, Boerjan \&
+  Thomas}]{Rohde2011}
+Rohde, A., Bastien, C., Boerjan, W. \& Thomas, S. (2011).
+\newblock Temperature signals contribute to the timing of photoperiodic growth
+  cessation and bud set in poplar.
+\newblock \emph{Tree Physiology}, 31, 472--482.
 
 \bibitem[{Shanley \emph{et~al.}(2024)Shanley, Graves, Drever, Schindel,
   Robertson, Case \& Biswas}]{shanley2024}
