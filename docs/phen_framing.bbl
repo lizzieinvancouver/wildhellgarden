@@ -1,4 +1,4 @@
-\begin{thebibliography}{45}
+\begin{thebibliography}{44}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -164,14 +164,6 @@ Liu, Q., Fu, Y.~H., Zhu, Z., Liu, Y., Liu, Z., Huang, M., Janssens, I.~A. \&
   change in both climate and spring phenology.
 \newblock \emph{Global Change Biology}, 22, 3702--3711.
 
-\bibitem[{Ma \emph{et~al.}(2022)Ma, Zhu, Xie, Jin, Zhou, Luo, Liu, Tian \&
-  Zhao}]{ma2022}
-Ma, X., Zhu, X., Xie, Q., Jin, J., Zhou, Y., Luo, Y., Liu, Y., Tian, J. \&
-  Zhao, Y. (2022).
-\newblock Monitoring nature's calendar from space: Emerging topics in land
-  surface phenology and associated opportunities for science applications.
-\newblock \emph{Global Change Biology}, 28, 7186--7204.
-
 \bibitem[{McKown \emph{et~al.}(2014)McKown, Guy, Kl{\'a}p{\v s}t{\v e},
   Geraldes, Friedmann, Cronk, El-Kassaby, Mansfield \& Douglas}]{mckown2014}
 McKown, A.~D., Guy, R.~D., Kl{\'a}p{\v s}t{\v e}, J., Geraldes, A., Friedmann,
@@ -290,6 +282,14 @@ Soolanayakanahally, R.~Y., Guy, R.~D., Silim, S.~N. \& Song, M. (2013).
   balsam poplar (populus balsamifera l.).
 \newblock \emph{Plant, cell \& environment}, 36, 116--127.
 
+\bibitem[{{Vander Mijnsbrugge} \emph{et~al.}(2016){Vander Mijnsbrugge},
+  Depypere, Michiels \& {De Cuyper}}]{Vander2016}
+{Vander Mijnsbrugge}, K., Depypere, L., Michiels, B. \& {De Cuyper}, B. (2016).
+\newblock Genetic and temporal plastic variation in bud burst, bud set and
+  flower opening responses of local versus non-local provenances of prunus
+  spinosa in a provenance trial.
+\newblock \emph{Basic and Applied Ecology}, 17, 262--272.
+
 \bibitem[{Vico \emph{et~al.}(2021)Vico, Karacic, Adler, Richards \&
   Weih}]{vico2021}
 Vico, G., Karacic, A., Adler, A., Richards, T. \& Weih, M. (2021).
@@ -316,12 +316,6 @@ Zani, D., Crowther, T.~W., Mo, L., Renner, S.~S. \& Zohner, C.~M. (2020).
 \newblock Increased growing-season productivity drives earlier autumn leaf
   senescence in temperate trees.
 \newblock \emph{Science}, 370, 1066--1071.
-
-\bibitem[{Zeng \& Wolkovich(2024)}]{Zeng2024}
-Zeng, Z.~A. \& Wolkovich, E.~M. (2024).
-\newblock Weak evidence of provenance effects in spring phenology across europe
-  and north america.
-\newblock \emph{New Phytologist}, 242, 1957--1964.
 
 \bibitem[{Zohner \emph{et~al.}(2023)Zohner, Mirzagholi, Renner, Mo, Rebindaine,
   Bucher, Palou{\v s}, Vitasse, Fu, Stocker \& Crowther}]{Zohner2023}

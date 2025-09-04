@@ -686,6 +686,7 @@ GDDgs.siteout<-rbind(GDDpgs.siteout,GDDfgs.siteout)
 
 
 
+
 ssite<-ggplot(start.siteout,aes(r_site,population))+
   stat_halfeye(aes(fill=growing_season,color=growing_season),.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
   xlab("start phase")+
