@@ -1,7 +1,7 @@
 ## Loking at each major phase individually running stan
 ## Look at inter vs intra specific variation, is there local adaptation??
 ### Dan May 2022
-
+#Updated by Dan Sept 2025
 # Clear workspace
 rm(list=ls()) # remove everything currently held in the R memory
 options(stringsAsFactors=FALSE)
@@ -94,9 +94,7 @@ pgs.mod<-brm(pgs~leafout_cent+(leafout_cent|spp),data=cg1,control = list(adapt_d
 
 
 
-
-
-###do the same models for full growing season
+###do the same models for full growing season (using leaf coloration)
 cg2$fgsGDD_cent<-cg2$fgsGDD-mean(cg2$fgsGDD)
 cg2$leafout_cent<-cg2$leafout-mean(cg2$leafout)
 
@@ -221,14 +219,14 @@ ggpubr::ggarrange(c,d,ncol=1)
 
 aa<-ggplot()+geom_point(data=cg1,aes(x=leafout_cent,pgs),size=0.1)+
 geom_line(data=P2,size=0.01,aes(group=.draw,x=leafout_cent,y=.epred))+
-  geom_smooth(data=P2,aes(x=leafout_cent,y=.epred),method="lm")+ylab("Primary calander growing season")+
+  geom_smooth(data=P2,aes(x=leafout_cent,y=.epred),method="lm")+ylab("Calendar growing season")+
   ggthemes::theme_few()+coord_cartesian(xlim=c(-20,20))+xlab("")
 
 
 bb<-ggplot()+geom_point(data=cg1,aes(x=leafout_cent,pgsGDD),size=0.1)+
   geom_line(data=PGDD2,size=0.01,aes(group=.draw,x=leafout_cent,y=.epred))+
-  geom_smooth(data=PGDD2,aes(x=leafout_cent,y=.epred),method="lm")+ylab("Primary thermal growing season")+
-  ggthemes::theme_few()+coord_cartesian(xlim=c(-20,20))+xlab("SoS anomaly \n(days)")
+  geom_smooth(data=PGDD2,aes(x=leafout_cent,y=.epred),method="lm")+ylab("Thermal growing season")+
+  ggthemes::theme_few()+coord_cartesian(xlim=c(-20,20))+xlab("leafout anomaly \n(days)")
 
 
 ## This is figure 3
@@ -240,13 +238,13 @@ dev.off()
 
 a<-ggplot()+geom_point(data=cg2,aes(x=leafout_cent,fgs),size=0.1)+
   geom_line(data=F2,size=0.01,aes(group=.draw,x=leafout_cent,y=.epred))+
-  geom_smooth(data=F2,aes(x=leafout_cent,y=.epred),method="lm")+ylab("Full calander growing season")+
+  geom_smooth(data=F2,aes(x=leafout_cent,y=.epred),method="lm")+ylab("Calendar growing season")+
   ggthemes::theme_few()+coord_cartesian(xlim=c(-20,20))+xlab("")
 
 b<-ggplot()+geom_point(data=cg2,aes(x=leafout_cent,fgsGDD),size=0.1)+
   geom_line(data=FGDD2,size=0.01,aes(group=.draw,x=leafout_cent,y=.epred))+
-  geom_smooth(data=FGDD2,aes(x=leafout_cent,y=.epred),method="lm")+ylab("Full thermal growing season")+
-  ggthemes::theme_few()+coord_cartesian(xlim=c(-20,20))+xlab("SoS anomaly \n(days)")
+  geom_smooth(data=FGDD2,aes(x=leafout_cent,y=.epred),method="lm")+ylab("Thermal growing season")+
+  ggthemes::theme_few()+coord_cartesian(xlim=c(-20,20))+xlab("leafout anomaly \n(days)")
 
 c<-ggplot(FGGD2,aes(leafout_cent,.epred))+geom_line(size=0.01,aes(group=grouper))+geom_smooth(method="lm")+
   ylab("")+xlab("leafout anomaly \n(days)")+
@@ -264,16 +262,16 @@ dev.off()
 
 
 
-ee<-ggplot(cg,aes(budset,leafout))+geom_jitter(width=3,height=3,size=.5)+geom_smooth(method='lm')+ggthemes::theme_few()+ylab("SoS")+xlab("EoS \n(primary growth)")
+#ee<-ggplot(cg,aes(budset,leafout))+geom_jitter(width=3,height=3,size=.5)+geom_smooth(method='lm')+ggthemes::theme_few()+ylab("SoS")+xlab("EoS \n(primary growth)")
 
 
-ff<-ggplot(cg,aes(leafcolor,leafout))+geom_jitter(width=3,height=3,size=.5)+geom_smooth(method='lm')+ggthemes::theme_few()+ylab("SoS")+xlab("EoS \n(secondary growth)")
-cor.test(cg$leafout,cg$leafcolor)
+#ff<-ggplot(cg,aes(leafcolor,leafout))+geom_jitter(width=3,height=3,size=.5)+geom_smooth(method='lm')+ggthemes::theme_few()+ylab("SoS")+xlab("EoS \n(secondary growth)")
+#cor.test(cg$leafout,cg$leafcolor)
 
 
-jpeg("figures/SoSEoS.jpeg", height=8,width=7,unit='in',res=200)
-ggpubr::ggarrange(ee,ff,ncol=1)
-dev.off()
+#jpeg("figures/SoSEoS.jpeg", height=8,width=7,unit='in',res=200)
+#ggpubr::ggarrange(ee,ff,ncol=1)
+#dev.off()
 
 ### next variance partitiional models
 ####
@@ -346,6 +344,10 @@ mod.fgs<-brm(fgs~(1|spp)+(1|site)+(1|year),data=use.data2,
 
 mod.fgsGDD<-brm(fgsGDD~(1|spp)+(1|site)+(1|year),data=use.data2,
              warmup=4000,iter=5000, control=list(adapt_delta=.995))
+
+
+
+
 
 ##make leafout plots
 bb.sppout<-mod.lo %>% spread_draws(r_spp[spp,Intercept])
@@ -573,25 +575,25 @@ speciesVar<-ggpubr::ggarrange(splot,eplot,gplot,ggplot,nrow=1,common.legend = TR
 
 plotdur<-ggplot(pgs.sppout,aes(r_spp,species))+
   stat_halfeye(.width = c(.5),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("primary calendar growing season")+
+  xlab("calendar growing season")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+theme(axis.text.y = element_blank(),
                                                                      axis.ticks.y = element_blank())
 plotdurGDD<-ggplot(GDDpgs.sppout,aes(r_spp,species))+
   stat_halfeye(.width = c(.5),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("primary thermal growing season")+
+  xlab("thermal growing season")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+theme(axis.text.y = element_blank(),
                                                                      axis.ticks.y = element_blank())
 
 
 plotdurF<-ggplot(fgs.sppout,aes(r_spp,species))+
   stat_halfeye(.width = c(.5),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("full calendar growing season")+
+  xlab("calendar growing season")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+theme(axis.text.y = element_blank(),
                                                                      axis.ticks.y = element_blank())
 
 plotdurGDDF<-ggplot(GDDfgs.sppout,aes(r_spp,species))+
   stat_halfeye(.width = c(.5),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("full thermal growing season")+
+  xlab("thermal growing season")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+theme(axis.text.y = element_blank(),
                                                                      axis.ticks.y = element_blank())
 
@@ -755,7 +757,7 @@ lcsite<-ggplot(lc.siteout,aes(r_site,population))+
 
 pgssite<-ggplot(pgs.siteout,aes(r_site,population))+
   stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("primary calendar growing season")+
+  xlab("calendar growing season")+
   ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
                                                                               axis.ticks.y = element_blank())
@@ -763,7 +765,7 @@ pgssite<-ggplot(pgs.siteout,aes(r_site,population))+
 
 fgssite<-ggplot(fgs.siteout,aes(r_site,population))+
   stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("full calendar growing season")+
+  xlab("calendar growing season")+
   ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
                                                                               axis.ticks.y = element_blank())
@@ -771,14 +773,14 @@ fgssite<-ggplot(fgs.siteout,aes(r_site,population))+
 
 GDDpgssite<-ggplot(GDDpgs.siteout,aes(r_site,population))+
   stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("primary thermal growing season")+
+  xlab("thermal growing season")+
   ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
                                                                               axis.ticks.y = element_blank())
 
 GDDfgssite<-ggplot(GDDfgs.siteout,aes(r_site,population))+
   stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("full thermal growing season")+
+  xlab("thermal growing season")+
   ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
                                                                               axis.ticks.y = element_blank())
@@ -885,21 +887,21 @@ lcyear<-ggplot(lc.yearout,aes(r_year,as.factor(year)))+
 
 pgsyear<-ggplot(pgs.yearout,aes(r_year,as.factor(year)))+
   stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("primary calendar growing season")+
+  xlab("calendar growing season")+
   ylab("")+xlim(-20,20)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+theme(axis.text.y = element_blank(),
                                                                            axis.ticks.y = element_blank())
 
 fgsyear<-ggplot(fgs.yearout,aes(r_year,as.factor(year)))+
   stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("full calendar growing season")+
+  xlab("calendar growing season")+
   ylab("")+xlim(-40,40)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+theme(axis.text.y = element_blank(),
                                                                            axis.ticks.y = element_blank())
                                                                            
 pgsyearGDD<-ggplot(GDDpgs.yearout,aes(r_year,as.factor(year)))+
   stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("primary thermal growing season")+
+  xlab("thermal growing season")+
   ylab("")+xlim(-400,400)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+theme(axis.text.y = element_blank(),
                                                                            axis.ticks.y = element_blank())
