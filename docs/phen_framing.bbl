@@ -1,4 +1,4 @@
-\begin{thebibliography}{44}
+\begin{thebibliography}{46}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -67,28 +67,23 @@ Cleland, E.~E., Allen, J.~M., Crimmins, T.~M., Dunne, J.~A., Pau, S., Travers,
   \emph{Fagus sylvatica}?}
 \newblock \emph{International journal of biometeorology}, 59, 1127--1132.
 
-\bibitem[{Delpierre \emph{et~al.}(2024)Delpierre, Garnier, Treuil-Dussouet,
-  Hufkens, Lin, Beier, Bell, Berveiller, Cuntz, Curioni, Dahlin, Denham, Desai,
-  Domec, Hart, Ibrom, Joetzjer, King, Klosterhalfen, Koebsch, McHale, Morfin,
-  Munger, Noormets, Pilegaard, Pohl, Rebmann, Richardson, Rothstein, Schwartz,
-  Wilkinson \& Soudani}]{delpierre2024}
-Delpierre, N., Garnier, S., Treuil-Dussouet, H., Hufkens, K., Lin, J., Beier,
-  C., Bell, M., Berveiller, D., Cuntz, M., Curioni, G., Dahlin, K., Denham,
-  S.~O., Desai, A.~R., Domec, J.-C., Hart, K.~M., Ibrom, A., Joetzjer, E.,
-  King, J., Klosterhalfen, A., Koebsch, F., McHale, P., Morfin, A., Munger,
-  J.~W., Noormets, A., Pilegaard, K., Pohl, F., Rebmann, C., Richardson, A.~D.,
-  Rothstein, D., Schwartz, M.~D., Wilkinson, M. \& Soudani, K. (2024).
-\newblock Phenology across scales: An intercontinental analysis of leaf-out
-  dates in temperate deciduous tree communities.
-\newblock \emph{Global Ecology and Biogeography}, 33, e13910.
+\bibitem[{Cuny \emph{et~al.}(2012)Cuny, Rathgeber, Lebourgeois, Fortin \&
+  Fournier}]{cuny2012life}
+Cuny, H.~E., Rathgeber, C.~B., Lebourgeois, F., Fortin, M. \& Fournier, M.
+  (2012).
+\newblock Life strategies in intra-annual dynamics of wood formation: example
+  of three conifer species in a temperate forest in north-east france.
+\newblock \emph{Tree physiology}, 32, 612--625.
 
-\bibitem[{Donnelly \emph{et~al.}(2017)Donnelly, Yu, Caffarra, Hanes, Liang,
-  Desai, Liu \& Schwartz}]{donnelly2017}
-Donnelly, A., Yu, R., Caffarra, A., Hanes, J., Liang, L., Desai, A.~R., Liu, L.
-  \& Schwartz, M.~D. (2017).
-\newblock Interspecific and interannual variation in the duration of spring
-  phenophases in a northern mixed forest.
-\newblock \emph{Agricultural and Forest Meteorology}, 243, 55--67.
+\bibitem[{Davies \emph{et~al.}(2013)Davies, Wolkovich, Kraft, Salamin, Allen,
+  Ault, Betancourt, Bolmgren, Cleland, Cook, Crimmins, Mazer, McCabe, Pau,
+  Regetz, Schwartz \& Travers}]{phenophylo}
+Davies, T.~J., Wolkovich, E.~M., Kraft, N. J.~B., Salamin, N., Allen, J.~M.,
+  Ault, T.~R., Betancourt, J.~L., Bolmgren, K., Cleland, E.~E., Cook, B.~I.,
+  Crimmins, T.~M., Mazer, S.~J., McCabe, G.~J., Pau, S., Regetz, J., Schwartz,
+  M.~D. \& Travers, S.~E. (2013).
+\newblock Phylogenetic conservatism in plant phenology.
+\newblock \emph{Journal of Ecology}, 101, 1520--1530.
 
 \bibitem[{Dow \emph{et~al.}(2022)Dow, Kim, D'Orangeville, Gonzalez-Akre,
   Helcoski, Herrmann, Harley, Maxwell, McGregor, McShea
@@ -126,6 +121,12 @@ Geng, X., Fu, Y.~H., Hao, F., Zhou, X., Zhang, X., Yin, G., Vitasse, Y., Piao,
   temperate trees.
 \newblock \emph{Global Change Biology}, 26, 5979--5987.
 
+\bibitem[{Grime(1977)}]{Grime:1977sw}
+Grime, J.~P. (1977).
+\newblock Evidence for existence of 3 primary strategies in plants and its
+  relevance to ecological and evolutionary theory.
+\newblock \emph{American Naturalist}, 111, 1169--1194.
+
 \bibitem[{{Jakub Nowosad}({2019})}]{Nowosad2019}
 {Jakub Nowosad} ({2019}).
 \newblock \emph{{pollen: Analysis of Aerobiological Data}}.
@@ -138,12 +139,6 @@ Keenan, T.~F., Gray, J., Friedl, M.~A., Toomey, M., Bohrer, G., Hollinger,
 \newblock Net carbon uptake has increased through warming-induced changes in
   temperate forest phenology.
 \newblock \emph{Nature Climate Change}, 4, 598--604.
-
-\bibitem[{Keenan \& Richardson(2015)}]{Keenan2015}
-Keenan, T.~F. \& Richardson, A.~D. (2015).
-\newblock The timing of autumn senescence is affected by the timing of spring
-  phenology: implications for predictive models.
-\newblock \emph{Global Change Biology}, 21, 2634--2641.
 
 \bibitem[{K{\"o}rner \emph{et~al.}(2023)K{\"o}rner, M{\"o}hl \&
   Hiltbrunner}]{Korner2023}
@@ -164,19 +159,18 @@ Liu, Q., Fu, Y.~H., Zhu, Z., Liu, Y., Liu, Z., Huang, M., Janssens, I.~A. \&
   change in both climate and spring phenology.
 \newblock \emph{Global Change Biology}, 22, 3702--3711.
 
-\bibitem[{McKown \emph{et~al.}(2014)McKown, Guy, Kl{\'a}p{\v s}t{\v e},
-  Geraldes, Friedmann, Cronk, El-Kassaby, Mansfield \& Douglas}]{mckown2014}
-McKown, A.~D., Guy, R.~D., Kl{\'a}p{\v s}t{\v e}, J., Geraldes, A., Friedmann,
-  M., Cronk, Q. C.~B., El-Kassaby, Y.~A., Mansfield, S.~D. \& Douglas, C.~J.
-  (2014).
-\newblock Geographical and environmental gradients shape phenotypic trait
-  variation and genetic structure in opulus trichocarpa.
-\newblock \emph{New Phytologist}, 201, 1263--1276.
-
 \bibitem[{Menzel \& Fabian(1999)}]{Menzel1999}
 Menzel, A. \& Fabian, P. (1999).
 \newblock Growing season extended in europe.
 \newblock \emph{Nature}, 397, 659--659.
+
+\bibitem[{Michelot \emph{et~al.}(2012)Michelot, Simard, Rathgeber, Dufr{\^e}ne
+  \& Damesin}]{michelot2012comparing}
+Michelot, A., Simard, S., Rathgeber, C., Dufr{\^e}ne, E. \& Damesin, C. (2012).
+\newblock {Comparing the intra-annual wood formation of three European species
+  (\emph{Fagus sylvatica, Quercus petraea and Pinus sylvestris}) as related to
+  leaf phenology and non-structural carbohydrate dynamics}.
+\newblock \emph{Tree physiology}, 32, 1033--1045.
 
 \bibitem[{Michelson \emph{et~al.}(2018)Michelson, Ingvarsson, Robinson, Edlund,
   Eriksson, Nilsson \& Jansson}]{Michelson2018}
@@ -219,11 +213,24 @@ Olsen, J.~E., Lee, Y. \& Junttila, O. (2014).
   bud set and subsequent bud burst in long days in norway spruce.
 \newblock \emph{Frontiers in Plant Science}, 5.
 
-\bibitem[{Polgar \& Primack(2011)}]{polgar2011}
-Polgar, C.~A. \& Primack, R.~B. (2011).
-\newblock Leaf-out phenology of temperate woody plants: from trees to
-  ecosystems.
-\newblock \emph{New Phytologist}, 191, 926--941.
+\bibitem[{Pettorelli \emph{et~al.}(2005)Pettorelli, Vik, Mysterud, Gaillard,
+  Tucker \& Stenseth}]{Pettorelli:2005ns}
+Pettorelli, N., Vik, J.~O., Mysterud, A., Gaillard, J.~M., Tucker, C.~J. \&
+  Stenseth, N.~C. (2005).
+\newblock Using the satellite-derived ndvi to assess ecological responses to
+  environmental change.
+\newblock \emph{Trends in Ecology \& Evolution}, 20, 503--510.
+
+\bibitem[{P{\"o}rtner \emph{et~al.}(2022)P{\"o}rtner, Roberts, Tignor,
+  Poloczanska, Mintenbeck, Alegr{\'\i}a, Craig, Langsdorf, L{\"o}schke,
+  M{\"o}ller, Okem \& Rama}]{ipcc2022}
+P{\"o}rtner, H.~O., Roberts, D.~C., Tignor, M., Poloczanska, E.~S., Mintenbeck,
+  K., Alegr{\'\i}a, A., Craig, M., Langsdorf, S., L{\"o}schke, S., M{\"o}ller,
+  V., Okem, A. \& Rama, B. (2022).
+\newblock \emph{Climate Change 2022: Impacts, Adaptation and Vulnerability.
+  Contribution of Working Group II to the Sixth Assessment Report of the
+  Intergovernmental Panel on Climate Change}.
+\newblock Cambridge University Press.
 
 \bibitem[{{{R Core Team}}({2021})}]{R2021}
 {{R Core Team}} ({2021}).
@@ -282,14 +289,6 @@ Soolanayakanahally, R.~Y., Guy, R.~D., Silim, S.~N. \& Song, M. (2013).
   balsam poplar (populus balsamifera l.).
 \newblock \emph{Plant, cell \& environment}, 36, 116--127.
 
-\bibitem[{{Vander Mijnsbrugge} \emph{et~al.}(2016){Vander Mijnsbrugge},
-  Depypere, Michiels \& {De Cuyper}}]{Vander2016}
-{Vander Mijnsbrugge}, K., Depypere, L., Michiels, B. \& {De Cuyper}, B. (2016).
-\newblock Genetic and temporal plastic variation in bud burst, bud set and
-  flower opening responses of local versus non-local provenances of prunus
-  spinosa in a provenance trial.
-\newblock \emph{Basic and Applied Ecology}, 17, 262--272.
-
 \bibitem[{Vico \emph{et~al.}(2021)Vico, Karacic, Adler, Richards \&
   Weih}]{vico2021}
 Vico, G., Karacic, A., Adler, A., Richards, T. \& Weih, M. (2021).
@@ -303,6 +302,14 @@ White, M.~A., Running, S.~W. \& Thornton, P.~E. (1999).
   assimilation and evapotranspiration over 88 years in the eastern us deciduous
   forest.
 \newblock \emph{International Journal of Biometeorology}, 42, 139--145.
+
+\bibitem[{Wolkovich \emph{et~al.}({\emph{in press}})Wolkovich, Ettinger, Chin,
+  Chamberlain, Baumgarten, Pradhan \& Manzanedo}]{grephon2025}
+Wolkovich, E.~M., Ettinger, A.~K., Chin, A., Chamberlain, C.~J., Baumgarten,
+  F., Pradhan, K. \& Manzanedo, R. D. Hille Ris~Lambers, J. ({\emph{in
+  press}}).
+\newblock Why longer seasons with climate change may not increase tree growth.
+\newblock \emph{Nature Climate Change}.
 
 \bibitem[{Yang \emph{et~al.}(1995)Yang, Logan \& Coffey}]{YANG199561}
 Yang, S., Logan, J. \& Coffey, D.~L. (1995).
@@ -325,5 +332,13 @@ Zohner, C.~M., Mirzagholi, L., Renner, S.~S., Mo, L., Rebindaine, D., Bucher,
 \newblock Effect of climate warming on the timing of autumn leaf senescence
   reverses after the summer solstice.
 \newblock \emph{Science}, 381, eadf5098.
+
+\bibitem[{Zweifel \emph{et~al.}(2021)Zweifel, Sterck, Braun, Buchmann, Eugster,
+  Gessler, H{\"a}ni, Peters, Walthert, Wilhelm
+  \emph{et~al.}}]{zweifel2021trees}
+Zweifel, R., Sterck, F., Braun, S., Buchmann, N., Eugster, W., Gessler, A.,
+  H{\"a}ni, M., Peters, R.~L., Walthert, L., Wilhelm, M. \emph{et~al.} (2021).
+\newblock Why trees grow at night.
+\newblock \emph{New Phytologist}, 231, 2174--2185.
 
 \end{thebibliography}

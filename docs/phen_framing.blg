@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: phen_framing.aux
+The style file: ..//refs/styles/ecoletters.bst.bst
+White space in argument---line 41 of file phen_framing.aux
+ : \citation{cuny2012life
+ :                        michelot2012comparing,Zani2020}
+I'm skipping whatever remains of this command
+Database file #1: ..//refs/wildhell.bib
+Warning--I didn't find a database entry for "chen1999effects"
+You've used 46 entries,
+            2860 wiz_defined-function locations,
+            1004 strings with 18403 characters,
+and the built_in function-call counts, 29929 in all, are:
+= -- 2507
+> -- 2404
+< -- 10
++ -- 924
+- -- 867
+* -- 3077
+:= -- 5680
+add.period$ -- 137
+call.type$ -- 46
+change.case$ -- 514
+chr.to.int$ -- 45
+cite$ -- 46
+duplicate$ -- 948
+empty$ -- 1456
+format.name$ -- 997
+if$ -- 5392
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 45
+newline$ -- 236
+num.names$ -- 184
+pop$ -- 472
+preamble$ -- 1
+purify$ -- 471
+quote$ -- 0
+skip$ -- 561
+stack$ -- 0
+substring$ -- 1487
+swap$ -- 210
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 411
+warning$ -- 0
+while$ -- 199
+width$ -- 0
+write$ -- 599
+(There was 1 error message)
