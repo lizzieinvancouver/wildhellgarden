@@ -2,6 +2,7 @@
 ## Look at inter vs intra specific variation, is there local adaptation??
 ### Dan May 2022
 #Updated by Dan Sept 2025
+##This was all re-run by dan 5 Nov 2025
 # Clear workspace
 rm(list=ls()) # remove everything currently held in the R memory
 options(stringsAsFactors=FALSE)
@@ -40,6 +41,7 @@ cg$fgs<-cg$leafcolor-cg$leafout
 cg1<-filter(cg,!is.na(pgs)) #This is datasheet for "primary growing season (leafout to budset)
 
 cg2<-filter(cg,!is.na(fgs)) #This is datasheet for "full growing season (leafout to leaf color)
+
 
 ###round any fraction doys to closest full doy 
 cg1$leafout<-round(cg1$leafout)
@@ -86,6 +88,10 @@ cg_wgdd <- merge(cg2, cg1, by = c("spp", "year", "site", "ind", "plot"), all = T
 
 #ggplot(cg_wgdd,aes(leafcolor,budset))+geom_point()+geom_abline()
 
+round(max(cg1$pgs)/min(cg1$pgs),2)
+round(max(cg1$pgsGDD)/min(cg1$pgsGDD),2)
+
+cg1 %>%filter(year==2020) %>% group_by(spp) %>% count()%>% ungroup() %>% summarise(median(n))
 ####par II models
 ###model is growing season duration ~ dat of leafout centered with partial pooling on species  for slope and intercept
 
@@ -108,26 +114,22 @@ new.data<-data.frame(leafout_cent=rep(c(-20,0,20),each=18),spp=rep(unique(cg1$sp
 
 FGDD<-epred_draws(fgsGDD.mod,newdata = new.data,ndraws = 1000)### prediction thermal model for each species
 Fp<-epred_draws(fgs.mod,newdata = new.data,ndraws = 1000)### prediction for calaendar each species
+
 FGDD2<-epred_draws(fgsGDD.mod,newdata = new.data,ndraws = 1000,re_formula = NA)### prediction thermal model for each species
 F2<-epred_draws(fgs.mod,newdata = new.data,ndraws = 1000,re_formula = NA)### prediction for calaendar each species
-
-FGDD$grouper<-paste(FGDD$spp,FGDD$.draw) ## dummy variable to group each posterior draw for plotting
-Fp$grouper<-paste(Fp$spp,Fp$.draw)
 
 
 ###same thing for primary growing season
 PGDD<-epred_draws(pgsGDD.mod,newdata = new.data,ndraws = 1000)
 Pp<-epred_draws(pgs.mod,newdata = new.data,ndraws = 1000)
-PGDD2<-epred_draws(pgsGDD.mod,newdata = new.data,ndraws = 1000,re_formula = NA)
-PGDD$grouper<-paste(PGDD$spp,PGDD$.draw)
-Pp$grouper<-paste(Pp$spp,Pp$.draw)
 
+PGDD2<-epred_draws(pgsGDD.mod,newdata = new.data,ndraws = 1000,re_formula = NA)
 P2<-epred_draws(pgs.mod,newdata = new.data,ndraws = 1000,re_formula = NA)
 
-order<-c("SAMRAC","VIBCAS","SPIALB","AMECAN","DIELON","AROMEL","SPITOM","BETPOP","MYRGAL","BETPAP","BETALL","ALNINC","SORAME")
+species_order<-c("SAMRAC","VIBCAS","SPIALB","AMECAN","DIELON","AROMEL","SPITOM","BETPOP","MYRGAL","BETPAP","BETALL","ALNINC","SORAME")
 
-Pp2<-filter(Pp,spp %in% order)
-Fp2<-filter(Fp,spp %in% order)
+Pp2<-filter(Pp,spp %in% species_order)
+Fp2<-filter(Fp,spp %in% species_order)
 
 
 Pp2$species<-NA
@@ -161,10 +163,8 @@ Fp2$species<-ifelse(Fp2$spp=="ALNINC","A. incana",Fp2$species)
 Fp2$species<-ifelse(Fp2$spp=="SORAME","S. americana",Fp2$species)
 
 
-aa<-ggplot(PGDD2,aes(leafout_cent,.epred))+geom_line(size=0.01,aes(group=.draw))+geom_smooth(method="lm")+ylab("Thermal growing season \n(primary)")+
-  ggthemes::theme_few()
 
-PGGD2<-filter(PGDD,spp %in% order)
+PGGD2<-filter(PGDD,spp %in% species_order)
 PGGD2$species<-NA
 PGGD2$species<-ifelse(PGGD2$spp=="SAMRAC","S. racemosa",PGGD2$species)
 PGGD2$species<-ifelse(PGGD2$spp=="VIBCAS","V. cassinoides",PGGD2$species)
@@ -181,7 +181,7 @@ PGGD2$species<-ifelse(PGGD2$spp=="ALNINC","A. incana",PGGD2$species)
 PGGD2$species<-ifelse(PGGD2$spp=="SORAME","S. americana",PGGD2$species)
 
 
-FGGD2<-filter(FGDD,spp %in% order)
+FGGD2<-filter(FGDD,spp %in% species_order)
 FGGD2$species<-NA
 FGGD2$species<-ifelse(FGGD2$spp=="SAMRAC","S. racemosa",FGGD2$species)
 FGGD2$species<-ifelse(FGGD2$spp=="VIBCAS","V. cassinoides",FGGD2$species)
@@ -198,36 +198,82 @@ FGGD2$species<-ifelse(FGGD2$spp=="ALNINC","A. incana",FGGD2$species)
 FGGD2$species<-ifelse(FGGD2$spp=="SORAME","S. americana",FGGD2$species)
 
 
-order<-c("S. racemosa","V. cassinoides","S. alba","A. canadensis","D. lonicera","A. melanocarpa","S. tomentosa","B. populifolia","M. gale","B. papyrifera","B. alleghaniensis","A. incana","S. americana")
-
-cc<-ggplot(PGGD2,aes(leafout_cent,.epred))+geom_line(size=0.01,aes(group=grouper))+geom_smooth(method="lm")+
-  ylab("")+xlab("leafout anomaly \n(days)")+
-  ggthemes::theme_few(base_size = 11)+facet_wrap(~factor(species, levels=order)) + theme(strip.text = element_text(face = "italic"))
-
-dd<-ggplot(Pp2,aes(leafout_cent,.epred))+geom_line(size=0.01,aes(group=grouper))+geom_smooth(method="lm")+
-  ylab("")+xlab("")+
-  ggthemes::theme_few(base_size = 11)+facet_wrap(~factor(species, levels=order)) + theme(strip.text = element_text(face = "italic"))
 
 
+PGDD2_summ <- PGDD2 %>%
+  group_by(spp, leafout_cent) %>%
+  mean_qi(.epred, .width = 0.90)
 
-ggpubr::ggarrange(cc,dd,ncol=1)
-ggpubr::ggarrange(c,d,ncol=1)
+P2_summ <- P2 %>%
+  group_by(spp, leafout_cent) %>%
+  mean_qi(.epred, .width = 0.90)
+
+PGGD2_summ <- PGGD2 %>%
+  group_by(species, leafout_cent) %>%
+  mean_qi(.epred, .width = 0.90)
+
+Pp2_summ <- Pp2 %>%
+  group_by(species, leafout_cent) %>%
+  mean_qi(.epred, .width = 0.90)
 
 
 
 
 
-aa<-ggplot()+geom_point(data=cg1,aes(x=leafout_cent,pgs),size=0.1)+
-geom_line(data=P2,size=0.01,aes(group=.draw,x=leafout_cent,y=.epred))+
-  geom_smooth(data=P2,aes(x=leafout_cent,y=.epred),method="lm")+ylab("Calendar growing season")+
-  ggthemes::theme_few()+coord_cartesian(xlim=c(-20,20))+xlab("")
 
 
-bb<-ggplot()+geom_point(data=cg1,aes(x=leafout_cent,pgsGDD),size=0.1)+
-  geom_line(data=PGDD2,size=0.01,aes(group=.draw,x=leafout_cent,y=.epred))+
-  geom_smooth(data=PGDD2,aes(x=leafout_cent,y=.epred),method="lm")+ylab("Thermal growing season")+
-  ggthemes::theme_few()+coord_cartesian(xlim=c(-20,20))+xlab("leafout anomaly \n(days)")
+aa <- ggplot() +
+  geom_point(data = cg1,
+             aes(x = leafout_cent, y = pgs), size = 0.1) +
+  geom_ribbon(data = P2_summ,
+              aes(x = leafout_cent,
+                  ymin = .lower, ymax = .upper),
+              alpha = 0.5) +
+  geom_line(data = P2_summ,
+            aes(x = leafout_cent, y = .epred),
+            size = 1) +
+  ylab("Calendar growing season") +
+  coord_cartesian(xlim = c(-20, 20)) +
+  ggthemes::theme_few() +
+  xlab("")
 
+
+
+bb <- ggplot() +
+  geom_point(data = cg1,
+             aes(x = leafout_cent, y = pgsGDD),
+             size = 0.1) +
+  geom_ribbon(data = PGDD2_summ,
+              aes(x = leafout_cent,
+                  ymin = .lower, ymax = .upper),
+              alpha = 0.5) +
+  geom_line(data = PGDD2_summ,
+            aes(x = leafout_cent, y = .epred),
+            size = 1) +
+  ylab("Thermal growing season") +
+  coord_cartesian(xlim = c(-20, 20)) +
+  ggthemes::theme_few() +
+  xlab("leafout anomaly \n(days)")
+
+
+cc <- ggplot(PGGD2_summ,
+             aes(leafout_cent, .epred)) +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.5) +
+  geom_line(size = 0.8) +
+  facet_wrap(~factor(species, levels = species_order)) +
+  ylab("") + xlab("leafout anomaly \n(days)") +
+  ggthemes::theme_few(base_size = 11) +
+  theme(strip.text = element_text(face = "italic"))
+
+
+dd <- ggplot(Pp2_summ,
+             aes(leafout_cent, .epred)) +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.5) +
+  geom_line(size = 0.8) +
+  facet_wrap(~factor(species, levels =species_order)) +
+  ylab("") + xlab("") +
+  ggthemes::theme_few(base_size = 11) +
+  theme(strip.text = element_text(face = "italic"))
 
 ## This is figure 3
 jpeg("figures/primarygrowingseason_modplots.jpeg", height=8,width=9,unit='in',res=200)
@@ -236,23 +282,78 @@ dev.off()
 
 ####This is figure Suppliment)
 
-a<-ggplot()+geom_point(data=cg2,aes(x=leafout_cent,fgs),size=0.1)+
-  geom_line(data=F2,size=0.01,aes(group=.draw,x=leafout_cent,y=.epred))+
-  geom_smooth(data=F2,aes(x=leafout_cent,y=.epred),method="lm")+ylab("Calendar growing season")+
-  ggthemes::theme_few()+coord_cartesian(xlim=c(-20,20))+xlab("")
 
-b<-ggplot()+geom_point(data=cg2,aes(x=leafout_cent,fgsGDD),size=0.1)+
-  geom_line(data=FGDD2,size=0.01,aes(group=.draw,x=leafout_cent,y=.epred))+
-  geom_smooth(data=FGDD2,aes(x=leafout_cent,y=.epred),method="lm")+ylab("Thermal growing season")+
-  ggthemes::theme_few()+coord_cartesian(xlim=c(-20,20))+xlab("leafout anomaly \n(days)")
+FGDD2_summ <- FGDD2 %>%
+  group_by(spp, leafout_cent) %>%
+  mean_qi(.epred, .width = 0.90)
 
-c<-ggplot(FGGD2,aes(leafout_cent,.epred))+geom_line(size=0.01,aes(group=grouper))+geom_smooth(method="lm")+
-  ylab("")+xlab("leafout anomaly \n(days)")+
-  ggthemes::theme_few(base_size = 11)+facet_wrap(~factor(species, levels=order)) + theme(strip.text = element_text(face = "italic"))
+F2_summ <- F2 %>%
+  group_by(spp, leafout_cent) %>%
+  mean_qi(.epred, .width = 0.90)
 
-d<-ggplot(Fp2,aes(leafout_cent,.epred))+geom_line(size=0.01,aes(group=grouper))+geom_smooth(method="lm")+
-  ylab("")+xlab("")+
-  ggthemes::theme_few(base_size = 11)+facet_wrap(~factor(species, levels=order)) + theme(strip.text = element_text(face = "italic"))
+FGGD2_summ <- FGGD2 %>%
+  group_by(species, leafout_cent) %>%
+  mean_qi(.epred, .width = 0.90)
+
+Fp2_summ <- Fp2 %>%
+  group_by(species, leafout_cent) %>%
+  mean_qi(.epred, .width = 0.90)
+
+
+a <- ggplot() +
+  geom_point(data = cg2,
+             aes(x = leafout_cent, y = fgs), size = 0.1) +
+  geom_ribbon(data = F2_summ,
+              aes(x = leafout_cent,
+                  ymin = .lower, ymax = .upper),
+              alpha = 0.5) +
+  geom_line(data = F2_summ,
+            aes(x = leafout_cent, y = .epred),
+            size = 1) +
+  ylab("Calendar growing season") +
+  coord_cartesian(xlim = c(-20, 20)) +
+  ggthemes::theme_few() +
+  xlab("")
+
+
+
+b <- ggplot() +
+  geom_point(data = cg2,
+             aes(x = leafout_cent, y = fgsGDD),
+             size = 0.1) +
+  geom_ribbon(data = FGDD2_summ,
+              aes(x = leafout_cent,
+                  ymin = .lower, ymax = .upper),
+              alpha = 0.5) +
+  geom_line(data = FGDD2_summ,
+            aes(x = leafout_cent, y = .epred),
+            size = 1) +
+  ylab("Thermal growing season") +
+  coord_cartesian(xlim = c(-20, 20)) +
+  ggthemes::theme_few() +
+  xlab("leafout anomaly \n(days)")
+
+
+c <- ggplot(FGGD2_summ,
+             aes(leafout_cent, .epred)) +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.5) +
+  geom_line(size = 0.8) +
+  facet_wrap(~factor(species, levels = species_order)) +
+  ylab("") + xlab("leafout anomaly \n(days)") +
+  ggthemes::theme_few(base_size = 11) +
+  theme(strip.text = element_text(face = "italic"))
+
+
+d <- ggplot(Fp2_summ,
+             aes(leafout_cent, .epred)) +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.5) +
+  geom_line(size = 0.8) +
+  facet_wrap(~factor(species, levels =species_order)) +
+  ylab("") + xlab("") +
+  ggthemes::theme_few(base_size = 11) +
+  theme(strip.text = element_text(face = "italic"))
+
+
 
 
 jpeg("figures/fullgrowingseason_modplots.jpeg", height=8,width=9,unit='in',res=200)
@@ -289,35 +390,35 @@ use.data2<-dplyr::filter(cg2,!is.na(fgs))
 mod.lo<-brm(leafout~(1|spp)+(1|site)+(1|year),data=use.data,
                warmup=4000,iter=5000, control=list(adapt_delta=.99))
 
-use.data$interval_leafout<-ifelse(use.data$year==2020,use.data$leafout-7,use.data$leafout-3.5)
+#use.data$interval_leafout<-ifelse(use.data$year==2020,use.data$leafout-7,use.data$leafout-3.5)
 
-mod.lo.censor<-brm(bf(interval_leafout|cens('interval',leafout)~(1|spp)+(1|site)+(1|year)),data=use.data,
-            warmup=4000,iter=5000, control=list(adapt_delta=.99))
+#mod.lo.censor<-brm(bf(interval_leafout|cens('interval',leafout)~(1|spp)+(1|site)+(1|year)),data=use.data,
+ #           warmup=4000,iter=5000, control=list(adapt_delta=.99))
 
-summary(mod.lo)[17]$random$spp[3]
-summary(mod.lo)[17]$random$year[1]
+#summary(mod.lo)[17]$random$spp[3]
+#summary(mod.lo)[17]$random$year[1]
 
-gumbo<-summary(mod.lo)
+#gumbo<-summary(mod.lo)
 
-summary(mod.lo)
-summary(mod.lo.censor)
+#summary(mod.lo)
+#summary(mod.lo.censor)
 ### budset variance partitioning
 mod.bs<-brm(budset~(1|spp)+(1|site)+(1|year),data=use.data,
             warmup=4000,iter=5000, control=list(adapt_delta=.99)) 
 
-use.data$interval_budeset<-ifelse(use.data$year==2020,use.data$budset-7,use.data$budset-3)
+#use.data$interval_budeset<-ifelse(use.data$year==2020,use.data$budset-7,use.data$budset-3)
 
-prior_summary(mod.bs.cens)
+#prior_summary(mod.bs.cens)
 
-mod.bs.cens<-brm(bf(interval_budeset2|cens('interval',budset2)~(1|spp)+(1|site)+(1|year)),data=use.data,
-            warmup=4000,iter=5000, control=list(adapt_delta=.99),chains=1)
+#mod.bs.cens<-brm(bf(interval_budeset2|cens('interval',budset2)~(1|spp)+(1|site)+(1|year)),data=use.data,
+#            warmup=4000,iter=5000, control=list(adapt_delta=.99),chains=1)
 
-use.data$interval_budeset2<-use.data$interval_budeset-100
-use.data$budset2<-use.data$budset-100
+#use.data$interval_budeset2<-use.data$interval_budeset-100
+#use.data$budset2<-use.data$budset-100
 
-summary(mod.bs)[17]$random$spp
+#summary(mod.bs)[17]$random$spp
 
-summary(mod.lo)[17]$random$year[1]
+#summary(mod.lo)[17]$random$year[1]
 
 
 #primary growing season variance partitioning
@@ -365,7 +466,7 @@ bb.sppout$species<-ifelse(bb.sppout$spp=="BETPAP","B. papyrifera",bb.sppout$spec
 bb.sppout$species<-ifelse(bb.sppout$spp=="BETALL","B. alleghaniensis",bb.sppout$species)
 bb.sppout$species<-ifelse(bb.sppout$spp=="ALNINC","A. incana",bb.sppout$species)
 bb.sppout$species<-ifelse(bb.sppout$spp=="SORAME","S. americana",bb.sppout$species)
-bb.sppout<-filter(bb.sppout, species %in% order)
+bb.sppout<-filter(bb.sppout, species %in% species_order)
 
 bs.sppout<-mod.bs %>% spread_draws(r_spp[spp,Intercept])
 bs.sppout$species<-NA
@@ -382,7 +483,7 @@ bs.sppout$species<-ifelse(bs.sppout$spp=="BETPAP","B. papyrifera",bs.sppout$spec
 bs.sppout$species<-ifelse(bs.sppout$spp=="BETALL","B. alleghaniensis",bs.sppout$species)
 bs.sppout$species<-ifelse(bs.sppout$spp=="ALNINC","A. incana",bs.sppout$species)
 bs.sppout$species<-ifelse(bs.sppout$spp=="SORAME","S. americana",bs.sppout$species)
-bs.sppout<-filter(bs.sppout, species %in% order)
+bs.sppout<-filter(bs.sppout, species %in% species_order)
 
 pgs.sppout<-mod.pgs %>% spread_draws(r_spp[spp,Intercept])
 pgs.sppout$species<-NA
@@ -399,7 +500,7 @@ pgs.sppout$species<-ifelse(pgs.sppout$spp=="BETPAP","B. papyrifera",pgs.sppout$s
 pgs.sppout$species<-ifelse(pgs.sppout$spp=="BETALL","B. alleghaniensis",pgs.sppout$species)
 pgs.sppout$species<-ifelse(pgs.sppout$spp=="ALNINC","A. incana",pgs.sppout$species)
 pgs.sppout$species<-ifelse(pgs.sppout$spp=="SORAME","S. americana",pgs.sppout$species)
-pgs.sppout<-filter(pgs.sppout, species %in% order)
+pgs.sppout<-filter(pgs.sppout, species %in% species_order)
 
 GDDpgs.sppout<-mod.pgsGDD %>% spread_draws(r_spp[spp,Intercept])
 GDDpgs.sppout$species<-NA
@@ -416,7 +517,7 @@ GDDpgs.sppout$species<-ifelse(GDDpgs.sppout$spp=="BETPAP","B. papyrifera",GDDpgs
 GDDpgs.sppout$species<-ifelse(GDDpgs.sppout$spp=="BETALL","B. alleghaniensis",GDDpgs.sppout$species)
 GDDpgs.sppout$species<-ifelse(GDDpgs.sppout$spp=="ALNINC","A. incana",GDDpgs.sppout$species)
 GDDpgs.sppout$species<-ifelse(GDDpgs.sppout$spp=="SORAME","S. americana",GDDpgs.sppout$species)
-GDDpgs.sppout<-filter(GDDpgs.sppout, species %in% order)
+GDDpgs.sppout<-filter(GDDpgs.sppout, species %in% species_order)
 
 
 ####now full growing season
@@ -436,7 +537,7 @@ fbb.sppout$species<-ifelse(fbb.sppout$spp=="BETPAP","B. papyrifera",fbb.sppout$s
 fbb.sppout$species<-ifelse(fbb.sppout$spp=="BETALL","B. alleghaniensis",fbb.sppout$species)
 fbb.sppout$species<-ifelse(fbb.sppout$spp=="ALNINC","A. incana",fbb.sppout$species)
 fbb.sppout$species<-ifelse(fbb.sppout$spp=="SORAME","S. americana",fbb.sppout$species)
-fbb.sppout<-filter(fbb.sppout, species %in% order)
+fbb.sppout<-filter(fbb.sppout, species %in% species_order)
 
 
 lc.sppout<-fmod.lc %>% spread_draws(r_spp[spp,Intercept])
@@ -454,7 +555,7 @@ lc.sppout$species<-ifelse(lc.sppout$spp=="BETPAP","B. papyrifera",lc.sppout$spec
 lc.sppout$species<-ifelse(lc.sppout$spp=="BETALL","B. alleghaniensis",lc.sppout$species)
 lc.sppout$species<-ifelse(lc.sppout$spp=="ALNINC","A. incana",lc.sppout$species)
 lc.sppout$species<-ifelse(lc.sppout$spp=="SORAME","S. americana",lc.sppout$species)
-lc.sppout<-filter(lc.sppout, species %in% order)
+lc.sppout<-filter(lc.sppout, species %in% species_order)
 
 
 fgs.sppout<-mod.fgs %>% spread_draws(r_spp[spp,Intercept])
@@ -472,7 +573,7 @@ fgs.sppout$species<-ifelse(fgs.sppout$spp=="BETPAP","B. papyrifera",fgs.sppout$s
 fgs.sppout$species<-ifelse(fgs.sppout$spp=="BETALL","B. alleghaniensis",fgs.sppout$species)
 fgs.sppout$species<-ifelse(fgs.sppout$spp=="ALNINC","A. incana",fgs.sppout$species)
 fgs.sppout$species<-ifelse(fgs.sppout$spp=="SORAME","S. americana",fgs.sppout$species)
-fgs.sppout<-filter(fgs.sppout, species %in% order)
+fgs.sppout<-filter(fgs.sppout, species %in% species_order)
 
 
 GDDfgs.sppout<-mod.fgsGDD %>% spread_draws(r_spp[spp,Intercept])
@@ -490,111 +591,65 @@ GDDfgs.sppout$species<-ifelse(GDDfgs.sppout$spp=="BETPAP","B. papyrifera",GDDfgs
 GDDfgs.sppout$species<-ifelse(GDDfgs.sppout$spp=="BETALL","B. alleghaniensis",GDDfgs.sppout$species)
 GDDfgs.sppout$species<-ifelse(GDDfgs.sppout$spp=="ALNINC","A. incana",GDDfgs.sppout$species)
 GDDfgs.sppout$species<-ifelse(GDDfgs.sppout$spp=="SORAME","S. americana",GDDfgs.sppout$species)
-GDDfgs.sppout<-filter(GDDfgs.sppout, species %in% order)
+GDDfgs.sppout<-filter(GDDfgs.sppout, species %in% species_order)
 
 
 
 loplot<-ggplot(bb.sppout,aes(r_spp,reorder(species,r_spp)))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+xlim(-15,15)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+xlim(-15,15)+
   xlab("leafout")+
   ylab("")+ggthemes::theme_few()+theme(axis.text.y = element_text(face = "italic"))
 
-floplot<-ggplot(fbb.sppout,aes(r_spp,species))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+xlim(-15,15)+
+
+
+floplot<-ggplot(fbb.sppout,aes(r_spp,species))+stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("leafout")+
   ylab("")+ggthemes::theme_few()+theme(axis.text.y = element_text(face = "italic"))+
-  scale_y_discrete(name="",limits=order)
+  scale_y_discrete(name="",limits=species_order)
 
-
-bb.sppout$growing_season<-"primary"
-fbb.sppout$growing_season<-"full"
-
-start.sppout<-rbind(bb.sppout,fbb.sppout)
-
-splot<-ggplot(start.sppout,aes(r_spp,species))+
-  stat_halfeye(aes(fill=growing_season,color=growing_season),.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlim(-20,15)+xlab("start phase")+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+
-  scale_fill_viridis_d(name=" growing season",begin = .4,end=.8)+
-  scale_color_viridis_d(name=" growing season",begin = .45,end=.85)
 
 
 
 bsplot<-ggplot(bs.sppout,aes(r_spp,species))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlim(-30,20)+xlab("budset")+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+theme(axis.text.y = element_blank(),
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
+  xlab("budset")+
+  ggthemes::theme_few()+scale_y_discrete(name="",limits=species_order)+theme(axis.text.y = element_blank(),
                                                                      axis.ticks.y = element_blank())
 
 lcplot<-ggplot(lc.sppout,aes(r_spp,species))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlim(-30,20)+xlab("leaf color")+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+theme(axis.text.y = element_blank(),
+  ggthemes::theme_few()+scale_y_discrete(name="",limits=species_order)+theme(axis.text.y = element_blank(),
                                                                      axis.ticks.y = element_blank())
 
-bs.sppout$growing_season<-"primary"
-lc.sppout$growing_season<-"full"
 
-end.sppout<-rbind(bs.sppout,lc.sppout)
 
-eplot<-ggplot(end.sppout,aes(r_spp,species))+
-  stat_halfeye(aes(fill=growing_season,color=growing_season),.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlim(-30,20)+xlab("end phase")+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+theme(axis.text.y = element_blank(),
-                                                                     axis.ticks.y = element_blank())+
-  scale_fill_viridis_d(name=" growing season",begin = .4,end=.8)+
-  scale_color_viridis_d(name=" growing season",begin = .45,end=.85)
 
-pgs.sppout$growing_season<-"primary"
-fgs.sppout$growing_season<-"full"
-
-gs.sppout<-rbind(pgs.sppout,fgs.sppout)
-gplot<-ggplot(gs.sppout,aes(r_spp,species))+
-  stat_halfeye(aes(fill=growing_season,color=growing_season),.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlim(-30,30)+xlab("calendar growing season")+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+theme(axis.text.y = element_blank(),
-                                                                     axis.ticks.y = element_blank())+
-  scale_fill_viridis_d(name=" growing season",begin = .4,end=.8)+
-  scale_color_viridis_d(name=" growing season",begin = .45,end=.85)
-                                                                     
-GDDpgs.sppout$growing_season<-"primary"
-GDDfgs.sppout$growing_season<-"full"
-GDDgs.sppout<-rbind(GDDpgs.sppout,GDDfgs.sppout)
-
-ggplot<-ggplot(GDDgs.sppout,aes(r_spp,species))+
-  stat_halfeye(aes(fill=growing_season,color=growing_season),.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlim(-200,200)+xlab("thermal growing season")+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+theme(axis.text.y = element_blank(),
-                                                                     axis.ticks.y = element_blank())+
-  scale_fill_viridis_d(name=" growing season",begin = .4,end=.8)+
-  scale_color_viridis_d(name=" growing season",begin = .45,end=.85)
-
-speciesVar<-ggpubr::ggarrange(splot,eplot,gplot,ggplot,nrow=1,common.legend = TRUE,widths = c(3,2,2,2))
 
 
 
 plotdur<-ggplot(pgs.sppout,aes(r_spp,species))+
-  stat_halfeye(.width = c(.5),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("calendar growing season")+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+theme(axis.text.y = element_blank(),
+  ggthemes::theme_few()+scale_y_discrete(name="",limits=species_order)+theme(axis.text.y = element_blank(),
                                                                      axis.ticks.y = element_blank())
 plotdurGDD<-ggplot(GDDpgs.sppout,aes(r_spp,species))+
-  stat_halfeye(.width = c(.5),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("thermal growing season")+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+theme(axis.text.y = element_blank(),
+  ggthemes::theme_few()+scale_y_discrete(name="",limits=species_order)+theme(axis.text.y = element_blank(),
                                                                      axis.ticks.y = element_blank())
 
 
 plotdurF<-ggplot(fgs.sppout,aes(r_spp,species))+
-  stat_halfeye(.width = c(.5),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("calendar growing season")+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+theme(axis.text.y = element_blank(),
+  ggthemes::theme_few()+scale_y_discrete(name="",limits=species_order)+theme(axis.text.y = element_blank(),
                                                                      axis.ticks.y = element_blank())
 
 plotdurGDDF<-ggplot(GDDfgs.sppout,aes(r_spp,species))+
-  stat_halfeye(.width = c(.5),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("thermal growing season")+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=order)+theme(axis.text.y = element_blank(),
+  ggthemes::theme_few()+scale_y_discrete(name="",limits=species_order)+theme(axis.text.y = element_blank(),
                                                                      axis.ticks.y = element_blank())
 
 
@@ -689,66 +744,28 @@ GDDgs.siteout<-rbind(GDDpgs.siteout,GDDfgs.siteout)
 
 
 
-ssite<-ggplot(start.siteout,aes(r_site,population))+
-  stat_halfeye(aes(fill=growing_season,color=growing_season),.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("start phase")+
-  ylab("")+coord_cartesian(xlim = c(-2,2))+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+scale_fill_viridis_d(name=" growing season",begin = .4,end=.8)+
-  scale_color_viridis_d(name=" growing season",begin = .45,end=.85)+theme(legend.position = "none")
-
-
-esite<-ggplot(end.siteout,aes(r_site,population))+
-  stat_halfeye(aes(fill=growing_season,color=growing_season),.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("end phase")+
-  ylab("")+coord_cartesian(xlim = c(-10,10))+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
-                                                                              axis.ticks.y = element_blank())+scale_fill_viridis_d(name=" growing season",begin = .4,end=.8)+
-  scale_color_viridis_d(name=" growing season",begin = .45,end=.85)+theme(legend.position = "none")
-
-
-gsite<-ggplot(gs.siteout,aes(r_site,population))+
-  stat_halfeye(aes(fill=growing_season,color=growing_season),.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("calendar growing season")+
-  ylab("")+coord_cartesian(xlim = c(-10,10))+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
-                                                                              axis.ticks.y = element_blank())+
-  scale_fill_viridis_d(name=" growing season",begin = .4,end=.8)+
-  scale_color_viridis_d(name=" growing season",begin = .45,end=.85)+theme(legend.position = "none")
-
-ggsite<-ggplot(GDDgs.siteout,aes(r_site,population))+
-  stat_halfeye(aes(fill=growing_season,color=growing_season),.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("thermal growing season")+
-  ylab("")+ coord_cartesian(xlim = c(-100,100))+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
-                                                                              axis.ticks.y = element_blank())+
-  scale_fill_viridis_d(name=" growing season",begin = .4,end=.8)+
-  scale_color_viridis_d(name=" growing season",begin = .45,end=.85)+theme(legend.position = "none")
-
-sitesVar<-ggpubr::ggarrange(ssite,esite,gsite,ggsite,nrow=1,widths = c(4,2,2,2))
-
-
 losite<-ggplot(lo.siteout,aes(r_site,population))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("leafout")+
   ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))
 
 flosite<-ggplot(flo.siteout,aes(r_site,population))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("leafout")+
   ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))
 
 
 bssite<-ggplot(bs.siteout,aes(r_site,population))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("budset")+
   ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
                                                                               axis.ticks.y = element_blank())
 
 lcsite<-ggplot(lc.siteout,aes(r_site,population))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("leaf color")+
   ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
@@ -756,7 +773,7 @@ lcsite<-ggplot(lc.siteout,aes(r_site,population))+
 
 
 pgssite<-ggplot(pgs.siteout,aes(r_site,population))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("calendar growing season")+
   ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
@@ -764,7 +781,7 @@ pgssite<-ggplot(pgs.siteout,aes(r_site,population))+
 
 
 fgssite<-ggplot(fgs.siteout,aes(r_site,population))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("calendar growing season")+
   ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
@@ -772,14 +789,14 @@ fgssite<-ggplot(fgs.siteout,aes(r_site,population))+
 
 
 GDDpgssite<-ggplot(GDDpgs.siteout,aes(r_site,population))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+    stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("thermal growing season")+
   ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
                                                                               axis.ticks.y = element_blank())
 
 GDDfgssite<-ggplot(GDDfgs.siteout,aes(r_site,population))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("thermal growing season")+
   ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
@@ -802,112 +819,58 @@ GDDfgs.yearout<-mod.fgsGDD %>% spread_draws(r_year[year,Intercept])
 yorder<-c("2018","2019","2020")
 
 
-lo.yearout$growing_season<-"primary"
-flo.yearout$growing_season<-"full"
-syearout<-rbind(lo.yearout,flo.yearout)
 
-syear<-ggplot(syearout,aes(r_year,as.factor(year)))+
-  stat_halfeye(aes(fill=growing_season,color=growing_season),.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("start phase")+
-  ylab("")+xlim(-30,30)+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+  scale_fill_viridis_d(name=" growing season",begin = .4,end=.8)+
-  scale_color_viridis_d(name=" growing season",begin = .45,end=.85)+theme(legend.position = "none")
-
-bs.yearout$growing_season<-"primary"
-lc.yearout$growing_season<-"full"
-eyearout<-rbind(bs.yearout,lc.yearout)
-
-eyear<-ggplot(eyearout,aes(r_year,as.factor(year)))+
-  stat_halfeye(aes(fill=growing_season,color=growing_season),.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("end phase")+
-  ylab("")+xlim(-70,60)+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+  scale_fill_viridis_d(name=" growing season",begin = .4,end=.8)+
-  scale_color_viridis_d(name=" growing season",begin = .45,end=.85)+theme(axis.text.y = element_blank(),
-                                                                          axis.ticks.y = element_blank())+theme(legend.position = "none")
-
-
-pgs.yearout$growing_season<-"primary"
-fgs.yearout$growing_season<-"full"
-gyearout<-rbind(pgs.yearout,fgs.yearout)
-
-gyear<-ggplot(gyearout,aes(r_year,as.factor(year)))+
-  stat_halfeye(aes(fill=growing_season,color=growing_season),.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("calendar growing season")+
-  ylab("")+xlim(-40,40)+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+  scale_fill_viridis_d(name=" growing season",begin = .4,end=.8)+
-  scale_color_viridis_d(name=" growing season",begin = .45,end=.85)+theme(axis.text.y = element_blank(),
-                                                                          axis.ticks.y = element_blank())+theme(legend.position = "none")
-
-
-GDDpgs.yearout$growing_season<-"primary"
-GDDfgs.yearout$growing_season<-"full"
-ggyearout<-rbind(GDDpgs.yearout,GDDfgs.yearout)
-
-
-ggyear<-ggplot(ggyearout,aes(r_year,as.factor(year)))+
-  stat_halfeye(aes(fill=growing_season,color=growing_season),.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
-  xlab("thermal growing season")+
-  ylab("")+xlim(-700,600)+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+  scale_fill_viridis_d(name=" growing season",begin = .4,end=.8)+
-  scale_color_viridis_d(name=" growing season",begin = .45,end=.85)+theme(axis.text.y = element_blank(),
-                                                                          axis.ticks.y = element_blank())+theme(legend.position = "none")
-
-yearVar<-ggpubr::ggarrange(syear,eyear,gyear,ggyear,nrow=1,widths = c(2.5,2,2,2))
-
-jpeg("figures/bothseasons_var_parts.jpeg", height=8,width=11,unit='in',res=200)
-ggpubr::ggarrange(speciesVar,sitesVar,yearVar,common.legend = TRUE,ncol=1,heights=c(2,1,1))
-dev.off()
 
 loyear<-ggplot(lo.yearout,aes(r_year,as.factor(year)))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("leafout")+
   ylab("")+xlim(-40,40)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))
 
 
 floyear<-ggplot(flo.yearout,aes(r_year,as.factor(year)))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("leafout")+
   ylab("")+xlim(-40,40)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))
 
 bsyear<-ggplot(bs.yearout,aes(r_year,as.factor(year)))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("budset")+
   ylab("")+xlim(-40,40)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+theme(axis.text.y = element_blank(),
                                                                            axis.ticks.y = element_blank())
 
 lcyear<-ggplot(lc.yearout,aes(r_year,as.factor(year)))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("leaf color")+
   ylab("")+xlim(-70,60)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+theme(axis.text.y = element_blank(),
                                                                            axis.ticks.y = element_blank())
 
 pgsyear<-ggplot(pgs.yearout,aes(r_year,as.factor(year)))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("calendar growing season")+
   ylab("")+xlim(-20,20)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+theme(axis.text.y = element_blank(),
                                                                            axis.ticks.y = element_blank())
 
 fgsyear<-ggplot(fgs.yearout,aes(r_year,as.factor(year)))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("calendar growing season")+
   ylab("")+xlim(-40,40)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+theme(axis.text.y = element_blank(),
                                                                            axis.ticks.y = element_blank())
                                                                            
 pgsyearGDD<-ggplot(GDDpgs.yearout,aes(r_year,as.factor(year)))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("thermal growing season")+
   ylab("")+xlim(-400,400)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+theme(axis.text.y = element_blank(),
                                                                            axis.ticks.y = element_blank())
 
 fgsyearGDD<-ggplot(GDDfgs.yearout,aes(r_year,as.factor(year)))+
-  stat_halfeye(.width = c(.5,.9),alpha=0.6)+geom_vline(xintercept=0)+
+  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
   xlab("thermal growing season")+
   ylab("")+xlim(-600,600)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+theme(axis.text.y = element_blank(),
@@ -928,6 +891,21 @@ ggpubr::ggarrange(spcisF,sties2,yrs2,ncol=1,labels=c("a)","b)","c)"),heights=c(2
 dev.off()
 
 save.image("cgseasonmods.Rda")
+
+if(FALSE){
+
+
+
+
+
+
+
+
+
+
+
+
+
 new.daterz<-data.frame(spp=rep(unique(bb.sppout$spp),each=4),site=rep(unique(lo.siteout$site),13))
 
 lopred<- mod.lo %>% 
@@ -1042,3 +1020,4 @@ ggplot(ron,aes(budset,indy,shape=as.factor(year)))+geom_point()
 
 sam<-filter(use.data,spp=="SAMRAC")
 ggplot(sam,aes(budset,indy,shape=as.factor(year)))+geom_point()
+}

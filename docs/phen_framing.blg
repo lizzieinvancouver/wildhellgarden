@@ -1,52 +1,54 @@
-This is BibTeX, Version 0.99d (TeX Live 2021)
+This is BibTeX, Version 0.99d (TeX Live 2025)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: phen_framing.aux
-The style file: ..//refs/styles/ecoletters.bst.bst
-White space in argument---line 41 of file phen_framing.aux
+The style file: ..//refs/styles/nature.bst.bst
+White space in argument---line 26 of file phen_framing.aux
  : \citation{cuny2012life
  :                        michelot2012comparing,Zani2020}
 I'm skipping whatever remains of this command
 Database file #1: ..//refs/wildhell.bib
 Warning--I didn't find a database entry for "chen1999effects"
-You've used 46 entries,
-            2860 wiz_defined-function locations,
-            1004 strings with 18403 characters,
-and the built_in function-call counts, 29929 in all, are:
-= -- 2507
-> -- 2404
-< -- 10
-+ -- 924
-- -- 867
-* -- 3077
-:= -- 5680
-add.period$ -- 137
-call.type$ -- 46
-change.case$ -- 514
-chr.to.int$ -- 45
-cite$ -- 46
-duplicate$ -- 948
-empty$ -- 1456
-format.name$ -- 997
-if$ -- 5392
-int.to.chr$ -- 2
-int.to.str$ -- 1
-missing$ -- 45
-newline$ -- 236
-num.names$ -- 184
-pop$ -- 472
+`volume' is a missing field, not a string, for entry grephon2025
+while executing---line 1016 of file ..//refs/styles/nature.bst.bst
+You've used 42 entries,
+            1865 wiz_defined-function locations,
+            746 strings with 15028 characters,
+and the built_in function-call counts, 12695 in all, are:
+= -- 995
+> -- 929
+< -- 0
++ -- 325
+- -- 283
+* -- 1355
+:= -- 2205
+add.period$ -- 126
+call.type$ -- 42
+change.case$ -- 41
+chr.to.int$ -- 0
+cite$ -- 42
+duplicate$ -- 377
+empty$ -- 992
+format.name$ -- 283
+if$ -- 2613
+int.to.chr$ -- 0
+int.to.str$ -- 42
+missing$ -- 43
+newline$ -- 213
+num.names$ -- 42
+pop$ -- 48
 preamble$ -- 1
-purify$ -- 471
+purify$ -- 0
 quote$ -- 0
-skip$ -- 561
+skip$ -- 129
 stack$ -- 0
-substring$ -- 1487
-swap$ -- 210
+substring$ -- 921
+swap$ -- 42
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 411
+type$ -- 0
 warning$ -- 0
-while$ -- 199
-width$ -- 0
-write$ -- 599
-(There was 1 error message)
+while$ -- 99
+width$ -- 44
+write$ -- 463
+(There were 2 error messages)
