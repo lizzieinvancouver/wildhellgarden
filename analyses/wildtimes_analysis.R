@@ -21,10 +21,12 @@ library(dplyr)
 library(brms)
 library(tidybayes)
 library(tidyr)
+library(ggplot2)
+library(ggthemes)
 
- #source("source/combineWeather.R")
- #source("source/conceptualFigure.R")
-#load("cgseasonmods.Rda")
+ source("source/combineWeather.R")
+ source("source/conceptualFigure.R")
+load("cgseasonmods.Rda")
 
 
 #couM<-cg1 %>% filter(year==2020) %>% group_by(spp) %>%count()
@@ -219,12 +221,30 @@ Pp2_summ <- Pp2 %>%
 
 
 
+###for plottling
+
+cg1$species<-NA
+cg1$species<-ifelse(cg1$spp=="SAMRAC","S. racemosa",cg1$species)
+cg1$species<-ifelse(cg1$spp=="VIBCAS","V. cassinoides",cg1$species)
+cg1$species<-ifelse(cg1$spp=="SPIALB","S. alba",cg1$species)
+cg1$species<-ifelse(cg1$spp=="AMECAN","A. canadensis",cg1$species)
+cg1$species<-ifelse(cg1$spp=="DIELON","D. lonicera",cg1$species)
+cg1$species<-ifelse(cg1$spp=="AROMEL","A. melanocarpa",cg1$species)
+cg1$species<-ifelse(cg1$spp=="SPITOM","S. tomentosa",cg1$species)
+cg1$species<-ifelse(cg1$spp=="BETPOP","B. populifolia",cg1$species)
+cg1$species<-ifelse(cg1$spp=="MYRGAL","M. gale",cg1$species)
+cg1$species<-ifelse(cg1$spp=="BETPAP","B. papyrifera",cg1$species)
+cg1$species<-ifelse(cg1$spp=="BETALL","B. alleghaniensis",cg1$species)
+cg1$species<-ifelse(cg1$spp=="ALNINC","A. incana",cg1$species)
+cg1$species<-ifelse(cg1$spp=="SORAME","S. americana",cg1$species)
+
+cg11<-filter(cg1,!is.na(species))
 
 
 
 aa <- ggplot() +
-  geom_point(data = cg1,
-             aes(x = leafout_cent, y = pgs), size = 0.1) +
+  geom_point(data = cg11,
+             aes(x = leafout_cent, y = pgs,color=species,shape=as.factor(year)), size = 1) +
   geom_ribbon(data = P2_summ,
               aes(x = leafout_cent,
                   ymin = .lower, ymax = .upper),
@@ -232,17 +252,18 @@ aa <- ggplot() +
   geom_line(data = P2_summ,
             aes(x = leafout_cent, y = .epred),
             size = 1) +
+
   ylab("Calendar growing season") +
   coord_cartesian(xlim = c(-20, 20)) +
   ggthemes::theme_few() +
-  xlab("")
+  xlab("")+scale_color_viridis_d()+scale_shape_manual(name="year",values=c(0,1,2))
 
 
 
 bb <- ggplot() +
-  geom_point(data = cg1,
-             aes(x = leafout_cent, y = pgsGDD),
-             size = 0.1) +
+  geom_point(data = cg11,
+             aes(x = leafout_cent, y = pgsGDD,color=species),
+             size = 1) +
   geom_ribbon(data = PGDD2_summ,
               aes(x = leafout_cent,
                   ymin = .lower, ymax = .upper),
@@ -253,31 +274,325 @@ bb <- ggplot() +
   ylab("Thermal growing season") +
   coord_cartesian(xlim = c(-20, 20)) +
   ggthemes::theme_few() +
-  xlab("leafout anomaly \n(days)")
+  xlab("leafout anomaly \n(days)")+scale_color_viridis_d()+scale_shape_manual(name="year",values=c(0,1,2))
+
 
 
 cc <- ggplot(PGGD2_summ,
              aes(leafout_cent, .epred)) +
-  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.5) +
-  geom_line(size = 0.8) +
-  facet_wrap(~factor(species, levels = species_order)) +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper,fill=species), alpha = 0.5) +
+  geom_line(size = 0.8,aes(color=species)) +
+  facet_wrap(~factor(species, levels = species_order),nrow=1) +
   ylab("") + xlab("leafout anomaly \n(days)") +
-  ggthemes::theme_few(base_size = 11) +
-  theme(strip.text = element_text(face = "italic"))
+  ggthemes::theme_few(base_size = 11) + theme(legend.position = "none")+
+  theme(strip.text = element_text(face = "italic"))+scale_fill_viridis_d()+scale_color_viridis_d()
 
 
 dd <- ggplot(Pp2_summ,
              aes(leafout_cent, .epred)) +
-  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.5) +
-  geom_line(size = 0.8) +
-  facet_wrap(~factor(species, levels =species_order)) +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper,fill=species), alpha = 0.5) +
+  geom_line(size = 0.8,aes(color=species)) +
+  facet_wrap(~factor(species, levels =species_order),nrow=1) +
   ylab("") + xlab("") +
+  ggthemes::theme_few(base_size = 11) + theme(legend.position = "none")+
+  theme(strip.text = element_text(face = "italic"))+scale_fill_viridis_d()+scale_color_viridis_d()
+
+##simulate example
+set.seed(123)
+
+n <- 150
+leafout <- runif(n, -20, 20)
+
+# True linear relationships
+# slope is negative so: earlier leafout (more negative) → higher values
+beta_cal  <- -0.5    # calendar season slope
+beta_gdd  <- -5      # thermal season slope
+int_cal   <- 160
+int_gdd   <- 1600
+
+# Expected straight-line means
+mu_cal <- int_cal + beta_cal * leafout
+mu_gdd <- int_gdd + beta_gdd * leafout
+
+# Add Gaussian noise around regression lines
+cal <- rnorm(n, mu_cal, 4)     # calendar days
+gdd <- rnorm(n, mu_gdd, 40)    # GDD
+
+grid <- data.frame(leaf = seq(-20, 20, length.out = 200))
+
+grid <- grid %>%
+  mutate(
+    cal_mu = int_cal + beta_cal * leaf,
+    gdd_mu = int_gdd + beta_gdd * leaf,
+    
+    # simple constant-width uncertainty bands (for illustration)
+    cal_lo = cal_mu - 5,
+    cal_hi = cal_mu + 5,
+    
+    gdd_lo = gdd_mu - 50,
+    gdd_hi = gdd_mu + 50
+  )
+
+r_cal <- range(grid$cal_lo, grid$cal_hi)
+r_gdd <- range(grid$gdd_lo, grid$gdd_hi)
+
+scale <- diff(r_cal) / diff(r_gdd)
+shift <- r_cal[1] - r_gdd[1] * scale
+
+grid <- grid %>%
+  mutate(
+    gdd_mu_scaled = gdd_mu * scale + shift,
+    gdd_lo_scaled = gdd_lo * scale + shift,
+    gdd_hi_scaled = gdd_hi * scale + shift
+  )
+
+library(ggplot2)
+
+S1<-ggplot(grid, aes(x = leaf)) +
+  
+  # --- Calendar (left axis) ---
+  geom_ribbon(aes(ymin = cal_lo, ymax = cal_hi),
+              alpha = 0.5, fill = "navy") +
+  geom_line(aes(y = cal_mu),
+            color = "navy", size = 1) +
+  
+  # --- Thermal (right axis) ---
+  geom_ribbon(aes(ymin = gdd_lo_scaled, ymax = gdd_hi_scaled),
+              alpha = 0.5, fill = "hotpink3") +
+  geom_line(aes(y = gdd_mu_scaled),
+            color = "hotpink3", size = 1, linetype = 2) +
+  
+  scale_y_continuous(
+    name = "Calendar growing season",
+    sec.axis = sec_axis(~ (. - shift) / scale,
+                        name = "Thermal growing season")
+  ) +
+  
+  xlab("Leafout anomaly (days)") +
+  theme_bw(base_size = 14)+coord_cartesian(ylim=c(100,200))
+
+
+#now flat:
+# Load packages
+library(ggplot2)
+library(dplyr)
+
+# ------------------------
+# 1. Parameters
+# ------------------------
+leafout <- seq(-20, 20, length.out = 200)
+
+# Blue line (y1): sloped
+beta_cal <- -0.5
+int_cal  <- 160
+
+# Orange line (y2): flat
+beta_gdd <- 0
+int_gdd  <- 1600
+
+# Ribbon width in left axis units
+ribbon_width_cal <- 5
+
+# ------------------------
+# 2. Create grid
+# ------------------------
+grid <- data.frame(leaf = leafout) %>%
+  mutate(
+    cal_mu = int_cal + beta_cal * leaf,
+    cal_lo = cal_mu - ribbon_width_cal,
+    cal_hi = cal_mu + ribbon_width_cal,
+    
+    gdd_mu = int_gdd,  # flat
+    # placeholder ribbon, will scale next
+    gdd_lo = NA,
+    gdd_hi = NA
+  )
+
+# ------------------------
+# 3. Safe dual-axis scaling
+# ------------------------
+r_cal <- range(grid$cal_lo, grid$cal_hi)
+
+# Check if secondary line is flat
+if(diff(range(grid$gdd_mu)) == 0){
+  # Flat line → use a dummy range to scale ribbon visually
+  scale <- 1
+  shift <- r_cal[1] - grid$gdd_mu[1] * scale
+  # Compute ribbon visually similar to blue ribbon
+  grid$gdd_lo <- grid$gdd_mu - ribbon_width_cal
+  grid$gdd_hi <- grid$gdd_mu + ribbon_width_cal
+} else {
+  r_gdd <- range(grid$gdd_mu)
+  scale <- diff(r_cal)/diff(r_gdd)
+  shift <- r_cal[1] - r_gdd[1] * scale
+  grid$gdd_lo <- grid$gdd_mu - ribbon_width_cal / scale
+  grid$gdd_hi <- grid$gdd_mu + ribbon_width_cal / scale
+}
+
+# Scale for plotting
+grid <- grid %>%
+  mutate(
+    gdd_mu_scaled = gdd_mu * scale + shift,
+    gdd_lo_scaled = gdd_lo * scale + shift,
+    gdd_hi_scaled = gdd_hi * scale + shift
+  )
+
+# ------------------------
+# 4. Plot
+# ------------------------
+S2<-ggplot(grid, aes(x = leaf)) +
+  geom_ribbon(aes(ymin = cal_lo, ymax = cal_hi), fill = "navy", alpha = 0.5) +
+  geom_line(aes(y = cal_mu), color = "navy", size = 1) +
+  geom_ribbon(aes(ymin = gdd_lo_scaled, ymax = gdd_hi_scaled), fill = "hotpink3", alpha = 0.5) +
+  geom_line(aes(y = gdd_mu_scaled), color = "hotpink3", size = 1, linetype = 2) +
+  scale_y_continuous(
+    name = "Calendar growing season",
+    sec.axis = sec_axis(~ (. - shift) / scale, name = "Thermal growing season")
+  ) +
+  xlab("Leafout anomaly (days)") +
+  theme_bw(base_size = 14)+coord_cartesian(ylim=c(100,200))
+
+
+pdf("figures/cept1.pdf",width = 7, height=3)
+ggpubr::ggarrange(S1,S2)
+dev.off()
+#pgs (left axis)  ↔  pgsGDD (right axis)
+
+r1 <- range(cg11$pgs, P2_summ$.lower, P2_summ$.upper)
+r2 <- range(cg11$pgsGDD, PGDD2_summ$.lower, PGDD2_summ$.upper)
+
+# scaling: pgsGDD_scaled = (pgsGDD - min2) * (diff1 / diff2) + min1
+scale <- diff(r1) / diff(r2)
+shift <- r1[1] - r2[1] * scale
+
+cg11$pgsGDD_scaled <- cg11$pgsGDD * scale + shift
+PGDD2_summ$lower_scaled <- PGDD2_summ$.lower * scale + shift
+PGDD2_summ$upper_scaled <- PGDD2_summ$.upper * scale + shift
+PGDD2_summ$epred_scaled <- PGDD2_summ$.epred * scale + shift
+
+
+
+
+
+
+aabb<-ggplot() +
+  ## --- Left axis (pgs) ---
+  geom_jitter(data = cg11,width = 1,height=1,
+             aes(x = leafout_cent, y = pgs,
+                 shape = as.factor(year)),
+             size = 1) +
+  geom_ribbon(data = P2_summ,
+              aes(x = leafout_cent, ymin = .lower, ymax = .upper),
+              alpha = 0.7,fill="navy") +
+  geom_line(data = P2_summ,
+            aes(x = leafout_cent, y = .epred), size = 1) +
+  
+  ## --- Right axis (pgsGDD) ---
+  geom_jitter(data = cg11,width = 1,height=1,
+             aes(x = leafout_cent, y = pgsGDD_scaled,
+                 shape = as.factor(year)),
+             size = 1, alpha = 0.7) +
+  geom_ribbon(data = PGDD2_summ,
+              aes(x = leafout_cent,
+                  ymin = lower_scaled,
+                  ymax = upper_scaled),
+              alpha = 0.7,fill="hotpink3") +
+  geom_line(data = PGDD2_summ,
+            aes(x = leafout_cent, y = epred_scaled),
+            size = 1, linetype = 2) +
+  
+  ## axes
+  scale_y_continuous(
+    name = "Calendar growing season",
+    sec.axis = sec_axis(~ (. - shift) / scale,
+                        name = "Thermal growing season")
+  ) +
+  coord_cartesian(xlim = c(-20, 20)) +
+  scale_color_viridis_d(option = "F") +
+  scale_shape_manual(name = "year", values = c(0, 1, 2)) +
+  ggthemes::theme_few() +
+  xlab("")+theme(legend.position = "top")
+
+
+
+
+
+
+
+
+
+r_left  <- range(Pp2_summ$.lower,  Pp2_summ$.upper,  na.rm = TRUE)
+r_right <- range(PGGD2_summ$.lower, PGGD2_summ$.upper, na.rm = TRUE)
+
+scale_factor <- diff(r_left) / diff(r_right)
+shift_factor <- r_left[1] - r_right[1] * scale_factor
+
+PGGD2_summ$lower_scaled <- PGGD2_summ$.lower * scale_factor + shift_factor
+PGGD2_summ$upper_scaled <- PGGD2_summ$.upper * scale_factor + shift_factor
+PGGD2_summ$epred_scaled <- PGGD2_summ$.epred * scale_factor + shift_factor
+
+
+dual_plot_flipped <- ggplot() +
+  
+  ## --- LEFT AXIS (Pp2_summ; now the primary axis) ---
+  geom_ribbon(data = Pp2_summ,
+              aes(x = leafout_cent,
+                  ymin = .lower, ymax = .upper),fill="navy",
+              alpha = .7) +
+  
+  geom_line(data = Pp2_summ,
+            aes(x = leafout_cent, y = .epred),
+            size = 0.8) +   # solid line for left axis
+  
+  
+  ## --- RIGHT AXIS (PGGD2_summ; scaled to left-space) ---
+  geom_ribbon(data = PGGD2_summ,
+              aes(x = leafout_cent,
+                  ymin = lower_scaled, ymax = upper_scaled), fill="hotpink3",
+              alpha = 0.7) +
+  
+  geom_line(data = PGGD2_summ,
+            aes(x = leafout_cent, y = epred_scaled),
+            size = 0.8,
+            linetype = 2) +  # dashed for right axis
+  
+  
+  ## Facets
+  facet_wrap(~factor(species, levels = species_order), nrow = 3) +
+  
+  ## Axes (flipped!)
+  scale_y_continuous(
+    name = "Calendar growing season",
+    sec.axis = sec_axis(~ (. - shift_factor) / scale_factor,
+                        name = "Thermal growing season")
+  ) +
+  
+  scale_fill_viridis_d() +
+  scale_color_viridis_d() +
+  
   ggthemes::theme_few(base_size = 11) +
-  theme(strip.text = element_text(face = "italic"))
+  theme(
+    legend.position = "none",
+    strip.text = element_text(face = "italic")
+  ) +
+  xlab("leafout anomaly (days)")
 
 ## This is figure 3
-jpeg("figures/primarygrowingseason_modplots.jpeg", height=8,width=9,unit='in',res=200)
-ggpubr::ggarrange(aa,dd,bb,cc,labels = c("a)","b)","c","d)"))
+
+
+
+
+
+
+
+sult<-ggpubr::ggarrange(aabb,dual_plot_flipped,ncol=1)
+
+jpeg("figures/primarygrowingseason_modplots.jpeg", height=9,width=9,unit='in',res=200)
+ggpubr::ggarrange(cept,sult,ncol=1, heights=c(1,2))
+dev.off()
+
+pdf("figures/primarygrowingseason_modplots.pdf",height=8, width=7)
+ggpubr::ggarrange(aabb,dual_plot_flipped,ncol=1)
 dev.off()
 
 ####This is figure Suppliment)
@@ -757,8 +1072,14 @@ flosite<-ggplot(flo.siteout,aes(r_site,population))+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))
 
 
+
+##3update for plot
+bs.siteout$phase<-"budset"
+lo.siteout$phase<-"leafout"
+
+
 bssite<-ggplot(bs.siteout,aes(r_site,population))+
-  stat_pointinterval(.width = c(.9))+geom_vline(xintercept=0)+
+  stat_halfeye(.width = c(.1,.9))+geom_vline(xintercept=0)+
   xlab("budset")+
   ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
@@ -802,11 +1123,16 @@ GDDfgssite<-ggplot(GDDfgs.siteout,aes(r_site,population))+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+theme(axis.text.y = element_blank(),
                                                                               axis.ticks.y = element_blank())
 
-sties<-ggpubr::ggarrange(losite,bssite,pgssite,GDDpgssite,ncol=4,widths = c(4,2,2,2))
+sties<-ggpubr::ggarrange(losite,bssite,ncol=2,widths = c(4,2))
 sties2<-ggpubr::ggarrange(flosite,lcsite,fgssite,GDDfgssite,ncol=4,widths = c(4,2,2,2))
 
 lo.yearout<-mod.lo %>% spread_draws(r_year[year,Intercept])
 bs.yearout<-mod.bs %>% spread_draws(r_year[year,Intercept])
+
+lo.yearout$phase<-"leafout"
+bs.yearout$phase<-"budset"
+
+
 pgs.yearout<-mod.pgs %>% spread_draws(r_year[year,Intercept])
 GDDpgs.yearout<-mod.pgsGDD %>% spread_draws(r_year[year,Intercept])
 
@@ -877,6 +1203,27 @@ fgsyearGDD<-ggplot(GDDfgs.yearout,aes(r_year,as.factor(year)))+
                                                                            axis.ticks.y = element_blank())
 
 
+
+siteout<-rbind(bs.siteout,lo.siteout)
+yearout<-rbind(bs.yearout,lo.yearout)
+
+new2.1<-ggplot(siteout,aes(r_site,population))+
+  stat_halfeye(.width = c(.1,.9),aes(fill=phase,color=phase))+geom_vline(xintercept=0)+
+  xlab("variation")+ylab("")+
+  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+scale_fill_manual(values=c("tan","green4"))+scale_color_manual(values=c("tan3","darkgreen"))+
+  coord_cartesian(xlim=c(-5,5))
+
+
+new2.2<-ggplot(yearout,aes(r_year,as.factor(year)))+
+  stat_halfeye(.width = c(0.1,.9),aes(fill=phase,color=phase))+geom_vline(xintercept=0)+
+  xlab("variation")+
+  ylab("")+xlim(-40,40)+
+  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+
+  scale_fill_manual(values=c("tan","green4"))+scale_color_manual(values=c("tan3","darkgreen"))
+
+pdf("figures/new2.pdf",width=10,height=6)
+ggpubr::ggarrange(new2.1,new2.2,common.legend = TRUE,widths=c(2,1.5))
+dev.off()
 
 yrs<-ggpubr::ggarrange(loyear,bsyear,pgsyear,pgsyearGDD,ncol=4)
 

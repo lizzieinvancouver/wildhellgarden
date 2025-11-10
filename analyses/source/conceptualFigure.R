@@ -6,7 +6,7 @@ library(ggplot2)
 library(viridis)
 library(ggpubr)
 #### below makes the concept figure 
-if(FALSE){
+
   delta<-diff(goo19$GDD_10)
   delta<-c(0,delta)
   goo19$ggdperday<-delta
@@ -36,22 +36,25 @@ if(FALSE){
     geom_rect(xmin=115,xmax=240, ymin=-3, ymax=-1, alpha=0.02,fill="darkgreen")+
     geom_rect(xmin=147,xmax=245, ymin=-6, ymax=-4, alpha=0.02,fill="skyblue1")+
     geom_rect(xmin=127,xmax=240, ymin=-7, ymax=-5, alpha=0.02,fill="skyblue3")+
-    geom_line()+ggthemes::theme_few()+ylab("GDD's per day")+ylim(-8,20)+xlab("day of season")
+    geom_line()+ggthemes::theme_few()+ylab("Daily thermal sums")+ylim(-8,20)+xlab("Day of season")
   
   p2<-ggplot()+geom_line(data=early,aes(x=doy,y=GDD_10),color="darkgreen", linewidth=2)+
     geom_line(data=late,aes(x=doy,y=GDD_10),color="green3",size=2)+
-    ggthemes::theme_few()+ylab("Cumulative GDD's")+xlab("day of season")
+    ggthemes::theme_few()+ylab("Thermal season")+xlab("day of season")
   p3<-ggplot()+geom_line(data=early2,aes(x=doy,y=GDD_10),color="skyblue1", linewidth=2)+
     geom_line(data=late2,aes(x=doy,y=GDD_10),color="skyblue3",size=2)+
-    ggthemes::theme_few()+ylab("Cumulative GDD's")+xlab("day of season")
+    ggthemes::theme_few()+ylab("")+xlab("Day of season")
   
   
-  concept2<-ggpubr::ggarrange(p2,p3,labels=c("b)","c)"))
+  concept2<-ggpubr::ggarrange(p2,p3)
   
-  jpeg("figures/aronia_examp.jpeg", height=7,width=7,unit='in',res=200)
-  ggpubr::ggarrange(p1,concept2,ncol=1,labels=c("a)",""))
+  pdf("figures/aronia_examp.pdf")
+  ggpubr::ggarrange(p1,concept2,ncol=1,heights=c(1,1.3))
   dev.off()
-}
+  
+  ggpubr::ggarrange(p1,concept2,ncol=1,heights=c(1,2))
+  dev.off()
+
 
 ##do some basic plots
 if(FALSE){
