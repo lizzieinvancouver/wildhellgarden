@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+
+\bibitem{Finn2007}
+Finn, G., Straszewski, A., and Peterson, V.
+\newblock A general growth stage key for describing trees and woody plants.
+\newblock {\em Annals of Applied Biology}{ \bf 151}(1), 127--131, Aug  (2007).
+
+\bibitem{Nowosad2019}
+{Jakub Nowosad}.
+\newblock {\em {pollen: Analysis of Aerobiological Data}},  ({2019}).
+
+\bibitem{Burkner2018}
+B{\"u}rkner, P.-C.
+\newblock Advanced bayesian multilevel modeling with the r package brms.
+\newblock {\em R Journal}{ \bf 10}, 395--411, 07  (2018).
+
+\bibitem{R2021}
+{{R Core Team}}.
+\newblock {\em {R: A Language and Environment for Statistical Computing}}.
+\newblock {R Foundation for Statistical Computing}, {Vienna, Austria},
+  ({2021}).
+
+\end{thebibliography}

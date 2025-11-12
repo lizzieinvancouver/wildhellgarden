@@ -40,16 +40,16 @@ library(ggpubr)
   
   p2<-ggplot()+geom_line(data=early,aes(x=doy,y=GDD_10),color="darkgreen", linewidth=2)+
     geom_line(data=late,aes(x=doy,y=GDD_10),color="green3",size=2)+
-    ggthemes::theme_few()+ylab("Thermal season")+xlab("day of season")
-  p3<-ggplot()+geom_line(data=early2,aes(x=doy,y=GDD_10),color="skyblue1", linewidth=2)+
-    geom_line(data=late2,aes(x=doy,y=GDD_10),color="skyblue3",size=2)+
-    ggthemes::theme_few()+ylab("")+xlab("Day of season")
+    ggthemes::theme_few()+ylab("Thermal growing season")+xlab("day of year")
+  p3<-ggplot()+geom_line(data=early2,aes(x=doy,y=GDD_10),color="darkgreen", linewidth=2)+
+    geom_line(data=late2,aes(x=doy,y=GDD_10),color="green3",size=2)+
+    ggthemes::theme_few()+ylab("")+xlab("day of year")
   
   
   concept2<-ggpubr::ggarrange(p2,p3)
   
-  pdf("figures/aronia_examp.pdf")
-  ggpubr::ggarrange(p1,concept2,ncol=1,heights=c(1,1.3))
+  pdf("figures/aronia_examp.pdf",height=4,width=7)
+concept2
   dev.off()
   
   ggpubr::ggarrange(p1,concept2,ncol=1,heights=c(1,2))
@@ -93,3 +93,6 @@ if(FALSE){#more plots
     ggplot(cg2,aes(leafout,fgs))+geom_point(aes(color=site),size=.4)+geom_smooth(method="lm",aes(color=site),se=FALSE),common.legend = TRUE)
   dev.off()
 }
+
+  
+  

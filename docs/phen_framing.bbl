@@ -1,11 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{shanley2024}
-Shanley, C.~S., Graves, R.~A., Drever, C.~R., Schindel, M., Robertson, J.~C.,
-  Case, M.~J., and Biswas, T.
-\newblock Mapping forest-based natural climate solutions.
-\newblock {\em Communications Earth \& Environment}{ \bf 5}(1), 502 (2024).
-
 \bibitem{roe2021}
 Roe, S., Streck, C., Beach, R., Busch, J., Chapman, M., Daioglou, V.,
   Deppermann, A., Doelman, J., Emmet-Booth, J., Engelmann, J., Fricko, O.,
@@ -16,12 +10,6 @@ Roe, S., Streck, C., Beach, R., Busch, J., Chapman, M., Daioglou, V.,
 \newblock Land-based measures to mitigate climate change: Potential and
   feasibility by country.
 \newblock {\em Global Change Biology}{ \bf 27}(23), 6025--6058 (2021).
-
-\bibitem{Churkina2005}
-Churkina, G., Schimel, D., Braswell, B.~H., and Xiao, X.
-\newblock Spatial analysis of growing season length control over net ecosystem
-  exchange.
-\newblock {\em Global Change Biology}{ \bf 11}(10), 1777--1787 (2005).
 
 \bibitem{White1999}
 White, M.~A., Running, S.~W., and Thornton, P.~E.
@@ -39,6 +27,21 @@ Keenan, T.~F., Gray, J., Friedl, M.~A., Toomey, M., Bohrer, G., Hollinger,
   temperate forest phenology.
 \newblock {\em Nature Climate Change}{ \bf 4}(7), 598--604 (2014).
 
+\bibitem{dow2022warm}
+Dow, C., Kim, A.~Y., D'Orangeville, L., Gonzalez-Akre, E.~B., Helcoski, R.,
+  Herrmann, V., Harley, G.~L., Maxwell, J.~T., McGregor, I.~R., McShea, W.~J.,
+  et~al.
+\newblock Warm springs alter timing but not total growth of temperate deciduous
+  trees.
+\newblock {\em Nature}{ \bf 608}(7923), 552--557 (2022).
+
+\bibitem{silvestro2023longer}
+Silvestro, R., Zeng, Q., Butt{\`o}, V., Sylvain, J.-D., Drolet, G., Mencuccini,
+  M., Thiffault, N., Yuan, S., and Rossi, S.
+\newblock A longer wood growing season does not lead to higher carbon
+  sequestration.
+\newblock {\em Scientific reports}{ \bf 13}(1), 4059 (2023).
+
 \bibitem{Zani2020}
 Zani, D., Crowther, T.~W., Mo, L., Renner, S.~S., and Zohner, C.~M.
 \newblock Increased growing-season productivity drives earlier autumn leaf
@@ -51,14 +54,6 @@ Norby, R.~J.
   autumn leaf senescence in temperate trees''.
 \newblock {\em Science}{ \bf 371}(6533), eabg1438 (2021).
 
-\bibitem{dow2022warm}
-Dow, C., Kim, A.~Y., D'Orangeville, L., Gonzalez-Akre, E.~B., Helcoski, R.,
-  Herrmann, V., Harley, G.~L., Maxwell, J.~T., McGregor, I.~R., McShea, W.~J.,
-  et~al.
-\newblock Warm springs alter timing but not total growth of temperate deciduous
-  trees.
-\newblock {\em Nature}{ \bf 608}(7923), 552--557 (2022).
-
 \bibitem{Zohner2023}
 Zohner, C.~M., Mirzagholi, L., Renner, S.~S., Mo, L., Rebindaine, D., Bucher,
   R., Palou{\v s}, D., Vitasse, Y., Fu, Y.~H., Stocker, B.~D., and Crowther,
@@ -66,37 +61,6 @@ Zohner, C.~M., Mirzagholi, L., Renner, S.~S., Mo, L., Rebindaine, D., Bucher,
 \newblock Effect of climate warming on the timing of autumn leaf senescence
   reverses after the summer solstice.
 \newblock {\em Science}{ \bf 381}(6653), eadf5098 (2023).
-
-\bibitem{Korner2023}
-K{\"o}rner, C., M{\"o}hl, P., and Hiltbrunner, E.
-\newblock Four ways to define the growing season.
-\newblock {\em Ecology Letters}{ \bf 26}(8), 1277--1292 (2023).
-
-\bibitem{grephon2025}
-Wolkovich, E.~M., Ettinger, A.~K., Chin, A., Chamberlain, C.~J., Baumgarten,
-  F., Pradhan, K., and Manzanedo, R. D. Hille Ris~Lambers, J.
-\newblock Why longer seasons with climate change may not increase tree growth.
-\newblock {\em Nature Climate Change}{ \bf  ({\emph{in press}}).
-
-\bibitem{norby2021comment}
-Norby, R.~J.
-\newblock Comment on ``increased growing-season productivity drives earlier
-  autumn leaf senescence in temperate trees''.
-\newblock {\em Science}{ \bf 371}(6533), eabg1438 (2021).
-
-\bibitem{camarero2022decoupled}
-Camarero, J.~J., Campelo, F., Colangelo, M., Valeriano, C., Knorre, A.,
-  Sol{\'e}, G., and Rubio-Cuadrado, {\'A}.
-\newblock Decoupled leaf-wood phenology in two pine species from contrasting
-  climates: Longer growing seasons do not mean more radial growth.
-\newblock {\em Agricultural and Forest Meteorology}{ \bf 327}, 109223 (2022).
-
-\bibitem{silvestro2023longer}
-Silvestro, R., Zeng, Q., Butt{\`o}, V., Sylvain, J.-D., Drolet, G., Mencuccini,
-  M., Thiffault, N., Yuan, S., and Rossi, S.
-\newblock A longer wood growing season does not lead to higher carbon
-  sequestration.
-\newblock {\em Scientific reports}{ \bf 13}(1), 4059 (2023).
 
 \bibitem{Grime:1977sw}
 Grime, J.~P.
@@ -128,6 +92,11 @@ Zweifel, R., Sterck, F., Braun, S., Buchmann, N., Eugster, W., Gessler, A.,
   H{\"a}ni, M., Peters, R.~L., Walthert, L., Wilhelm, M., et~al.
 \newblock Why trees grow at night.
 \newblock {\em New Phytologist}{ \bf 231}(6), 2174--2185 (2021).
+
+\bibitem{Korner2023}
+K{\"o}rner, C., M{\"o}hl, P., and Hiltbrunner, E.
+\newblock Four ways to define the growing season.
+\newblock {\em Ecology Letters}{ \bf 26}(8), 1277--1292 (2023).
 
 \bibitem{CHUINE2000337}
 Chuine, I.
@@ -192,18 +161,6 @@ P{\"o}rtner, H.~O., Roberts, D.~C., Tignor, M., Poloczanska, E.~S., Mintenbeck,
   Intergovernmental Panel on Climate Change}.
 \newblock Cambridge University Press,  (2022).
 
-\bibitem{vico2021}
-Vico, G., Karacic, A., Adler, A., Richards, T., and Weih, M.
-\newblock Consistent poplar clone ranking based on leaf phenology and
-  temperature along a latitudinal and climatic gradient in northern europe.
-\newblock {\em BioEnergy Research}{ \bf 14}(2), 445--459 (2021).
-
-\bibitem{Olsen2014}
-Olsen, J.~E., Lee, Y., and Junttila, O.
-\newblock Effect of alternating day and night temperature on short day-induced
-  bud set and subsequent bud burst in long days in norway spruce.
-\newblock {\em Frontiers in Plant Science}{ \bf 5} (2014).
-
 \bibitem{Rohde2011}
 Rohde, A., Bastien, C., Boerjan, W., and Thomas, S.
 \newblock Temperature signals contribute to the timing of photoperiodic growth
@@ -216,19 +173,6 @@ Michelson, I.~H., Ingvarsson, P.~K., Robinson, K.~M., Edlund, E., Eriksson,
 \newblock Autumn senescence in aspen is not triggered by day length.
 \newblock {\em Physiologia Plantarum}{ \bf 162}(1), 123--134 (2018).
 
-\bibitem{Morales-Castilla2024}
-Morales-Castilla, I., Davies, T.~J., Legault, G., Buonaiuto, D.~M.,
-  Chamberlain, C.~J., Ettinger, A.~K., Garner, M., Jones, F. A.~M., Loughnan,
-  D., Pearse, W.~D., Sodhi, D.~S., and Wolkovich, E.~M.
-\newblock Phylogenetic estimates of species-level phenology improve ecological
-  forecasting.
-\newblock {\em Nature Climate Change}{ \bf 14}(9), 989--995 (2024).
-
-\bibitem{GALLINAT2015}
-Gallinat, A.~S., Primack, R.~B., and Wagner, D.~L.
-\newblock Autumn, the neglected season in climate change research.
-\newblock {\em Trends in Ecology & Evolution}{ \bf 30}(3), 169--176 (2015).
-
 \bibitem{cufar2015variations}
 {\v{C}}ufar, K., De~Luis, M., Prislan, P., Gri{\v{c}}ar, J.,
   {\v{C}}repin{\v{s}}ek, Z., Merela, M., and Kajfe{\v{z}}-Bogataj, L.
@@ -236,47 +180,5 @@ Gallinat, A.~S., Primack, R.~B., and Wagner, D.~L.
   \emph{Fagus sylvatica}?}
 \newblock {\em International journal of biometeorology}{ \bf 59}, 1127--1132
   (2015).
-
-\bibitem{Shen2014}
-Shen, M., Tang, Y., Chen, J., Yang, X., Wang, C., Cui, X., Yang, Y., Han, L.,
-  Li, L., Du, J., Zhang, G., and Cong, N.
-\newblock Earlier-season vegetation has greater temperature sensitivity of
-  spring phenology in northern hemisphere.
-\newblock {\em PLOS ONE}{ \bf 9}(2), 1--11, 02  (2014).
-
-\bibitem{Geng2020}
-Geng, X., Fu, Y.~H., Hao, F., Zhou, X., Zhang, X., Yin, G., Vitasse, Y., Piao,
-  S., Niu, K., De~Boeck, H.~J., Menzel, A., and Pe{\~n}uelas, J.
-\newblock Climate warming increases spring phenological differences among
-  temperate trees.
-\newblock {\em Global Change Biology}{ \bf 26}(10), 5979--5987 (2020).
-
-\bibitem{Pettorelli:2005ns}
-Pettorelli, N., Vik, J.~O., Mysterud, A., Gaillard, J.~M., Tucker, C.~J., and
-  Stenseth, N.~C.
-\newblock Using the satellite-derived ndvi to assess ecological responses to
-  environmental change.
-\newblock {\em Trends in Ecology \& Evolution}{ \bf 20}(9), 503--510 (2005).
-
-\bibitem{phenophylo}
-Davies, T.~J., Wolkovich, E.~M., Kraft, N. J.~B., Salamin, N., Allen, J.~M.,
-  Ault, T.~R., Betancourt, J.~L., Bolmgren, K., Cleland, E.~E., Cook, B.~I.,
-  Crimmins, T.~M., Mazer, S.~J., McCabe, G.~J., Pau, S., Regetz, J., Schwartz,
-  M.~D., and Travers, S.~E.
-\newblock Phylogenetic conservatism in plant phenology.
-\newblock {\em Journal of Ecology}{ \bf 101}(6), 1520--1530, November  (2013).
-
-\bibitem{Cleland2012}
-Cleland, E.~E., Allen, J.~M., Crimmins, T.~M., Dunne, J.~A., Pau, S., Travers,
-  S.~E., Zavaleta, E.~S., and Wolkovich, E.~M.
-\newblock Phenological tracking enables positive species responses to climate
-  change.
-\newblock {\em Ecology}{ \bf 93}(8), 1765--1771 (2012).
-
-\bibitem{AUGSPURGER2005}
-AUGSPURGER, C.~K., CHEESEMAN, J.~M., and SALK, C.~F.
-\newblock Light gains and physiological capacity of understorey woody plants
-  during phenological avoidance of canopy shade.
-\newblock {\em Functional Ecology}{ \bf 19}(4), 537--546, 2024/12/03  (2005).
 
 \end{thebibliography}

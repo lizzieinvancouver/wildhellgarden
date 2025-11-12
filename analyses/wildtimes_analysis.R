@@ -1042,6 +1042,10 @@ GDDfgs.siteout$population<-ifelse(GDDfgs.siteout$site=="SH","Saint Hippolyte, QC
 
 lo.siteout$growing_season<-"primary"
 flo.siteout$growing_season<-"full"
+flo.siteout$phase="leafout"
+lc.siteout$phase="leaf coloration"
+siteout2<-rbind(flo.siteout,lc.siteout)
+
 start.siteout<-rbind(lo.siteout,flo.siteout)
 
 bs.siteout$growing_season<-"primary"
@@ -1138,6 +1142,11 @@ GDDpgs.yearout<-mod.pgsGDD %>% spread_draws(r_year[year,Intercept])
 
 flo.yearout<-fmod.lo %>% spread_draws(r_year[year,Intercept])
 lc.yearout<-fmod.lc %>% spread_draws(r_year[year,Intercept])
+lc.yearout$phase<-"leaf coloration"
+flo.yearout$phase<-"leafout"
+yearout2<-rbind(flo.yearout,lc.yearout)
+
+
 fgs.yearout<-mod.fgs %>% spread_draws(r_year[year,Intercept])
 GDDfgs.yearout<-mod.fgsGDD %>% spread_draws(r_year[year,Intercept])
 
@@ -1207,22 +1216,47 @@ fgsyearGDD<-ggplot(GDDfgs.yearout,aes(r_year,as.factor(year)))+
 siteout<-rbind(bs.siteout,lo.siteout)
 yearout<-rbind(bs.yearout,lo.yearout)
 
+
+
+
+
+sup2.2<-ggplot(yearout2,aes(r_year,as.factor(year)))+
+  stat_pointinterval(.width = c(.5,.9),aes(fill=phase,color=phase),position=pd)+geom_vline(xintercept=0)+
+  xlab("effect of year")+
+  ylab("")+xlim(-40,40)+
+  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+
+  scale_fill_manual(values=c("tan4","green4"))+scale_color_manual(values=c("tan2","darkgreen"))
+pd=ggstance::position_dodgev(0.3)
+
+sup2.1<-ggplot(siteout2,aes(r_site,population))+
+  stat_pointinterval(.width = c(.5,.9),aes(fill=phase,color=phase),position=pd)+geom_vline(xintercept=0)+
+  xlab("effect of site")+ylab("")+
+  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+scale_fill_manual(values=c("tan4","green4"))+scale_color_manual(values=c("tan3","darkgreen"))+
+  coord_cartesian(xlim=c(-8,6))
+
+
+
 new2.1<-ggplot(siteout,aes(r_site,population))+
-  stat_halfeye(.width = c(.1,.9),aes(fill=phase,color=phase))+geom_vline(xintercept=0)+
-  xlab("variation")+ylab("")+
-  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+scale_fill_manual(values=c("tan","green4"))+scale_color_manual(values=c("tan3","darkgreen"))+
-  coord_cartesian(xlim=c(-5,5))
+  stat_pointinterval(.width = c(.5,.9),aes(fill=phase,color=phase),position=pd)+geom_vline(xintercept=0)+
+  xlab("effect of site")+ylab("")+
+  ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+scale_fill_manual(values=c("tan4","green4"))+scale_color_manual(values=c("tan3","darkgreen"))+
+  coord_cartesian(xlim=c(-4,4))
+
 
 
 new2.2<-ggplot(yearout,aes(r_year,as.factor(year)))+
-  stat_halfeye(.width = c(0.1,.9),aes(fill=phase,color=phase))+geom_vline(xintercept=0)+
-  xlab("variation")+
+  stat_pointinterval(.width = c(.5,.9),aes(fill=phase,color=phase),position=pd)+geom_vline(xintercept=0)+
+  xlab("effect of year")+
   ylab("")+xlim(-40,40)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+
-  scale_fill_manual(values=c("tan","green4"))+scale_color_manual(values=c("tan3","darkgreen"))
+  scale_fill_manual(values=c("tan4","green4"))+scale_color_manual(values=c("tan3","darkgreen"))
 
 pdf("figures/new2.pdf",width=10,height=6)
 ggpubr::ggarrange(new2.1,new2.2,common.legend = TRUE,widths=c(2,1.5))
+dev.off()
+
+pdf("figures/sup2.pdf",width=10,height=6)
+ggpubr::ggarrange(sup2.1,sup2.2,common.legend = TRUE,widths=c(2,1.5),labels = c("a)","b)"))
 dev.off()
 
 yrs<-ggpubr::ggarrange(loyear,bsyear,pgsyear,pgsyearGDD,ncol=4)
