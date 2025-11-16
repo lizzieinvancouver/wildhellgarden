@@ -30,7 +30,6 @@
 \externaldocument{supple}
 
 \title{Early leafout leads to cooler growing seasons in woody species} % Phenological differences among species explain why early leafout extends the calendar but not thermal growing season
-%dl2024Sept20: I like the idea here, but struggle with the wording---"extends the calendar"--- it might be confusing to a reader unfamiliar with the concept
 
 \author{D.M. Buonaiuto $^{1,2,3}$, C.J. Chamberlain $^{2,3,4}$,
 Deirdre Loughnan$^{5}$, E.M. Wolkovich$^{2,3,5}$}
@@ -234,7 +233,7 @@ These results suggest fundamental gaps in our understanding of how early-season 
 % Some studies have found that calendar growing seasons have lengthened with climate change \citep{Menzel1999,Liu2010}, but several recent studies have found that earlier leafout is often correlated with earlier end-of-season events \citep{Zani2020,Liu2016,Keenan2015}.
 
 % emw6Nov2025 -- anywhere you cite 2 or more papers for one point, try to cut down to one
-The thermal growing season---a period of favorable meteorological conditions for plant growth \citep{Korner2023}---offers an alternative to the calendar growing season. It is also widely used, most commonly in the metric of growing degree days, a temperature derived measure of time that accumulates when temperatures are above a certain minimal threshold \citep{CHUINE2000337,Moore:2014wl,YANG199561}. Because plant photosynthetic rates increase with temperature \citep{Farquhar:1980vm} the thermal growing season is mechanistically related to primary productivity, and thus may be a better proxy than calendar time for relating growing season length to carbon gain. Yet we generally lack plant-level phenological data for the start and end of season to examine how the calendar and thermal seasons of species and populations compare across years. 
+The thermal growing season---a period of favorable meteorological conditions for plant growth \citep{Korner2023}---offers an alternative to the calendar growing season. It is widely used, most commonly in the metric of growing degree days, as a temperature derived measure of time that accumulates when temperatures are above a certain minimal threshold \citep{CHUINE2000337,Moore:2014wl,YANG199561}. Because plant photosynthetic rates increase with temperature \citep{Farquhar:1980vm} the thermal growing season is mechanistically related to primary productivity, and thus may be a better proxy than calendar time for relating growing season length to carbon gain. Yet we generally lack plant-level phenological data for the start and end of season to examine how the calendar and thermal seasons of species and populations compare across years. 
 
 % Importantly, depending on the interannual temperature variation, years with substantially different calendar growing seasons can have very similar thermal growing seasons, or \emph{vice versa}, but we generally lack plant-level phenological data for the start and end of season to examine how the calendar and thermal seasons of species and populations compare across years. 
 % Recent work has suggested early, increased productivity in the calendar growing season drives early senescence \citep{Zani2020}, and proposed that plants adjust their phenological trajectory mid-season based on a combination of growing season temperature and daylength \citep{Zohner2023}, thus maintaining a consistent thermal growing season. 
@@ -254,11 +253,12 @@ Here, we use rarely available plant-level data from three years of a multi-speci
 \fi
 
 % emw6Nov2025 -- we don't have inference at 2 decimal places, can you change throughout to 1 decimal place?
+% dl15Nov2025 you say 18 spp in the abstract
 Across three years and 13 co-occurring species (Tab: \ref{listSp}) collected from four populations across a 4.5$\degree$ latitudinal gradient (Fig:\ref{fig:map}), our common garden (located in Boston, Massachusetts) captured high variation in the timing of both start (leafout) and end of season (budset) events  (Figure \ref{fig:vapar}a,b). Resulting calendar and thermal growing seasons varied almost two-fold across individual trees (2.1x and 1.8x respectively), with earlier leafout leading to longer calendar growing seasons (Fig: \ref{fig:cool1}c,d), as routinely seen with anthropogenic climate change \citep{Menzel1999,Liu2010}. 
 
 % emw6Nov2025 -- Can you add a fig ref for 'This result was driven by an apparent relationship between leafout and budset at the individual level (FIG)'?
 Longer calendar growing seasons did not lead to higher thermal growing seasons, as generally assumed; instead
-early calendar growing seasons led to lower (cooler) thermal growing seasons (Fig: \ref{fig:cool1}c,d, this and other results were similar when we determined the length the growing season length with leaf coloration instead of budset, Figure \ref{fig:leafrel}). This result was driven by an apparent relationship between leafout and budset at the individual level combined with differences in thermal conditions of the early season during leafout and later in the season during budset. When plants leafed out earlier in the spring they stopped growth (budset) earlier, but the additional days of growth in the spring---when temperatures were cool---were rarely offset thermally by the days lost in the later season to earlier budset, which occurred in warmer months (July-August, Figure \ref{fig:vapar}c). 
+early calendar growing seasons led to lower (cooler) thermal growing seasons (Fig: \ref{fig:cool1}c,d, this and other results were similar when we determined the growing season length with leaf coloration instead of budset, Figure \ref{fig:leafrel}). This result was driven by an apparent relationship between leafout and budset at the individual level combined with differences in thermal conditions of the early season during leafout and later in the season during budset. When plants leafed out earlier in the spring they stopped growth (budset) earlier, but the additional days of growth in the spring---when temperatures were cool---were rarely offset thermally by the days lost in the later season to earlier budset, which occurred in warmer months (July-August, Figure \ref{fig:vapar}c). 
 
 % emw6Nov2025 -- I cut the below point because I think it is best explained in the figure (and would take more words here to explain)
 % ', and a relatively small advance in calendar time resulting in a proportionately larger gain in thermal sums'
@@ -269,7 +269,8 @@ These results suggest that some of the apparently conflicting recent findings of
 
 % emw6Nov2025 -- avoid 'plastic' here as some would not use the word the way we do ... 
 % emw6Nov2025 -- save words by not naming the sites
-Beyond species-level variation, we found high variation across years in both leafout and budset. We expected large differences across years in leafout ($\sigma_{year}$: \Sexpr{sig.yr} days $UI_{90}$[\Sexpr{sig.yr.l}, \Sexpr{sig.yr.h}], Fig: \ref{fig:vapar}b), because it varies strongly with local climatic conditions---one of the reasons it is the most consistent biological indicator of anthropogenic climate change \citep{ipcc2022}. In line with this, we also found little variation across populations in leafout ($\sigma_{population}$: \Sexpr{sig.pop}, $UI_{95}$[\Sexpr{sig.pop.l}, \Sexpr{sig.pop.h}], Fig: \ref{fig:vapar}a). Yet our finding of up to 15 fays of variation across years in budset was surprising (\sigma_{year}$:\Sexpr{bs.sig.yr} days, $UI_{90}$[\Sexpr{bs.sig.yr.l}, \Sexpr{bs.sig.yr.h}], Fig: \ref{fig:vapar}b) because budset is generally thought to be strongly locally adapted and controlled by photoperiod, which does not vary year to year \citep{soolanayakanahally2013timing,aitken2016}. We did find evidence of local adaptation ($\sigma_{population}$: \Sexpr{bs.sig.pop} days, $UI_{90}$[\Sexpr{bs.sig.pop.l}, \Sexpr{bs.sig.pop.h}], Fig \ref{fig:vapar}a), with populations from the site with the fewest frost free days (FFD, Figure \ref{fig:ffd}) setting buds approximately two days before the site with next fewest FFD. These differences, however, were weak (Figure \ref{fig:vapar}a) and \Sexpr{yrVpop}X and \Sexpr{spVpop}X smaller than the variation due to year and species (respectively). 
+Beyond species-level variation, we found high variation across years in both leafout and budset. We expected large differences across years in leafout ($\sigma_{year}$: \Sexpr{sig.yr} days $UI_{90}$[\Sexpr{sig.yr.l}, \Sexpr{sig.yr.h}], Fig: \ref{fig:vapar}b), because it varies strongly with local climatic conditions---one of the reasons it is the most consistent biological indicator of anthropogenic climate change \citep{ipcc2022}. In line with this, we also found little variation across populations in leafout ($\sigma_{population}$: \Sexpr{sig.pop}, $UI_{95}$[\Sexpr{sig.pop.l}, \Sexpr{sig.pop.h}], Fig: \ref{fig:vapar}a). Yet our finding of up to 15 fays of variation across years in budset was surprising (\sigma_{year}$:\Sexpr{bs.sig.yr} days, $UI_{90}$[\Sexpr{bs.sig.yr.l}, \Sexpr{bs.sig.yr.h}], Fig: \ref{fig:vapar}b) because budset is generally thought to be strongly locally adapted and controlled by photoperiod, which does not vary year to year \citep{soolanayakanahally2013timing,aitken2016}. %dl15Nov2025: I would specify "local adaptation in budset" just to help the reader stay focused
+We did find evidence of local adaptation ($\sigma_{population}$: \Sexpr{bs.sig.pop} days, $UI_{90}$[\Sexpr{bs.sig.pop.l}, \Sexpr{bs.sig.pop.h}], Fig \ref{fig:vapar}a), with populations from the site with the fewest frost free days (FFD, Figure \ref{fig:ffd}) setting buds approximately two days before the site with next fewest FFD. These differences, however, were weak (Figure \ref{fig:vapar}a) and \Sexpr{yrVpop}X and \Sexpr{spVpop}X smaller than the variation due to year and species (respectively). 
 
 % emw6Nov2025 -- CUTREFS: Olsen2014, vico2021
 The shift in budset with earlier leafout suggests a potential pathway to better understand and predict recent findings, given additional research. While most work on budset has stressed the role of photoperiod \citep{soolanayakanahally2013timing}, other studies have found evidence of temperature control \citep{Rohde2011,Michelson2018}. Our results suggest an additional potential role of leafout timing, which could be confounded with temperature. Teasing apart these potential cues  appears an important next step. Testing these relationships for other end of season events could also help resolve connections between start and end of season events with growth. While we found similar findings using leaf coloring, there are many ways that plants transition from growth to dormancy each year---generally at different times for different events \citep{Michelson2018}---with different implications for carbon gain \citep{Korner2023}.
@@ -326,7 +327,7 @@ Understanding whether the thermal responses are consistent across species with d
 \newpage
 \section{Figures} 
 
-%dl2024Sept20 such a cool result! 
+%dl15Nov2025 I think the legend in panel c needs to be larger, especially the symbols
 %cjc2024Sept25 - agreed, this is awesome!
 \begin{figure}[h!]
     \centering
@@ -340,10 +341,12 @@ Understanding whether the thermal responses are consistent across species with d
 
 \newpage
 
+%dl15Nov2025 I think this legend also needs to be larger in the top panel, also is it possible to move the bottom label in pancel c to be to the right of the green line and not overlapping the y-axis?
 \begin{figure}[h!]
     \centering
  \includegraphics[width=.9\textwidth]{..//analyses/figures/finalfigure2.png}
-    \caption{Difference in leafout and budset  (in days) partitioned populations (a) and years (b). Point represent the median effect size estimate, and thick and thin bars the 50\% and 90\% uncertainty intervals, respectively. Panel (c) demonstrates how thermal conditions can vary across the calendar growing season and can generate a complex relationship between the calendar and thermal growing seasons by depicting the relationship between indivuals of two shurb species with similar life-history strategies. Despite the fact the the early individual (light green line) of \emph{Aronia melanocarpa} leafs out 28 days before it's later con-generic (dark green line) and only sets bud 18 days before it (i.e., it has a 10 day longer calendar growing season) it's thermal growing season is shorter because most of its growth advantage takes place in the unfavorable early spring. In contrast for \emph{Myrica gale} where both the early (light green) and later (dark green) individual leaf out later in the spring, the 15 day head start and 4 day earlier finish of the earlier individual (11 day longer calendar growing season) results in a longer thermal growing season.}
+    \caption{Difference in leafout and budset  (in days) partitioned populations (a) and years (b). Points represent the median effect size estimate, and thick and thin bars the 50\% and 90\% uncertainty intervals, respectively. Panel (c) demonstrates how thermal conditions can vary across the calendar growing season and can generate a complex relationship between the calendar and thermal growing seasons by depicting the relationship between individuals of two shurb species with similar life-history strategies. %dl15Nov2025: I found this next bit a little awkward and suggest the following minor edits:
+    Despite the fact that the early individual (light green line) of \emph{Aronia melanocarpa} leafs out 28 days before it's later con-generic (dark green line) and sets bud only 18 days before it (i.e., it has a 10 day longer calendar growing season), it's thermal growing season is shorter because most of its growth advantage takes place in the unfavorable early spring. In contrast for \emph{Myrica gale} both the early (light green) and later (dark green) individual leaf out later in the spring, as such the 15 day head start and 4 day earlier finish of the earlier individual (creating an 11 day longer calendar growing season) results in a longer thermal growing season.}
 
     \label{fig:vapar}
 \end{figure}
@@ -359,7 +362,7 @@ Understanding whether the thermal responses are consistent across species with d
 \clearpage
 
 
-
+%dl15Nov2025 Double check references for: Liu 2016 and Rhode 2011
 \newpage
 \bibliography{..//refs/wildhell.bib}
 
