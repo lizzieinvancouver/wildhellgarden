@@ -40,10 +40,12 @@ library(ggpubr)
   
   p2<-ggplot()+geom_line(data=early,aes(x=doy,y=GDD_10),color="darkgreen", linewidth=2)+
     geom_line(data=late,aes(x=doy,y=GDD_10),color="green3",size=2)+
-    ggthemes::theme_few()+ylab("Thermal growing season")+xlab("day of year")
+    ggthemes::theme_few()+ylab("Thermal growing season")+xlab("day of year")+coord_cartesian(xlim=c(100,250),ylim=c(0,1250))
+  
+
   p3<-ggplot()+geom_line(data=early2,aes(x=doy,y=GDD_10),color="darkgreen", linewidth=2)+
     geom_line(data=late2,aes(x=doy,y=GDD_10),color="green3",size=2)+
-    ggthemes::theme_few()+ylab("")+xlab("day of year")
+    ggthemes::theme_few()+ylab("")+xlab("day of year")+coord_cartesian(xlim=c(100,250),ylim=c(0,1250))
   
   
   concept2<-ggpubr::ggarrange(p2,p3)

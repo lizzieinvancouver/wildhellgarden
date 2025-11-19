@@ -20,4 +20,9 @@ B{\"u}rkner, P.-C.
 \newblock {R Foundation for Statistical Computing}, {Vienna, Austria},
   ({2021}).
 
+\bibitem{Thornton2020}
+Thornton, M., Shrestha, R., Wei, Y., Thornton, P., and Kao, S.-C.
+\newblock Daymet: Daily surface weather data on a 1-km grid for north america,
+  version 4,  (2020).
+
 \end{thebibliography}
