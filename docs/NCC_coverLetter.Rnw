@@ -1,0 +1,61 @@
+\documentclass{article}[12pt]
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{natbib}
+
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{setspace}
+%\usepackage[backend=bibtex]{biblatex}
+\bibliographystyle{..//refs/styles/nature.bst}
+\setkeys{Gin}{width=0.8\textwidth}
+%\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{10pt}
+\setlength{\belowcaptionskip}{10pt}
+ \topmargin -1.5cm 
+ \oddsidemargin -0.04cm 
+ \evensidemargin -0.04cm 
+ \textwidth 16.59cm
+ \textheight 21.94cm 
+ \parskip 7.2pt 
+\renewcommand{\baselinestretch}{1}
+%\AtBeginEnvironment{thebibliography}{\linespread{1}\selectfont}
+\parindent 0pt
+\usepackage{lineno}
+%\linenumbers % for dissertation
+
+\usepackage{xr-hyper}
+\usepackage{hyperref}
+%\usepackage{xr}
+\externaldocument{supple}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\bibliographystyle{..//..//sub_projs/refs/styles/besjournals.bst}
+\def\labelitemi{--}
+\parindent=24pt
+\noindent\includegraphics[width=0.3\textwidth]{logo.jpg}
+\pagenumbering{gobble}
+\\\\
+\noindent{Dear Dr. ,}\\
+\vspace{1.5ex}
+
+\noindent Please consider this manuscript ``Early leafout leads to cooler growing seasons in woody species" as a Brief Communication in \textit{Nature Climate Change}.\\
+
+\noindent The extension of the growing season in the spring in temperate regions is one the most prominent biological indicators of climate change. Most models of carbon storage assume that earlier growth will result in longer seasons and thereby enhance forest carbon storage, however current findings have challenged this assumption, suggesting rather than plants dynamically adjust the end of their growing season based on their carbon-sink capacity.
+
+
+\noindent We predicted that ff this is the case, variation in the calendar growing season (number of days) should be independent of variation in the thermal growing season (i.e., the period of favorable meteorological conditions for plant growth), which should remain relatively stable across years.We tested this prediction using rarely available plant-scale phenological measurements from a three year common garden with 13 woody species,native to the Eastern United States from four populations of origin. We found that at the community level, earlier leafout was correlated with earlier budset, resulting in a relatively stable calendar growing period over the three years.  Because thermal conditions were lower at the start than end of the season,  the relationship between earlier leafout and budset resulted in shorter thermal growing seasons when leafout was early---a relationship that was strongest in early-leafing species.
+
+\noindent We believe this work would be of broad interest to the readers of \textit{Nature Climate Change}.Our study addresses a timely debate in the field of climate change ecology, and help explain some of the contrasting results of how climate change affects growing season length and productivity. We show how species-levels responses scale up to community level patterns which identifies a clear path forward for improving how phenology is intigrated into model of carbon storage.
+
+\noindent  Following the guideliens for a Brief Communication in \textit{Nature Climate Change}, the main text of this manuscript is X words in length and it contains 2 figures. It is co-authored by C.J. Chamberlain, Deirdre Loughnan abd E.M. Wolkovich and is not under consideration elsewhere. We hope that you will find it suitable for publication in \textit{Nature Climate Change}, and look forward to hearing from you.\\\\ 
+\\Sincerely,\\\\\\\\\\
+
+\noindent Daniel Buonaiuto\\
+
+
+
+
+\end{document}
