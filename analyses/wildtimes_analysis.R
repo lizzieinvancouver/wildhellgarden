@@ -26,7 +26,7 @@ library(ggthemes)
 
  source("source/combineWeather.R")
  source("source/conceptualFigure.R")
-load("cgseasonmods.Rda")
+#load("cgseasonmods.Rda")
 
 
 #couM<-cg1 %>% filter(year==2020) %>% group_by(spp) %>%count()
@@ -94,6 +94,15 @@ round(max(cg1$pgs)/min(cg1$pgs),2)
 round(max(cg1$pgsGDD)/min(cg1$pgsGDD),2)
 
 cg1 %>%filter(year==2020) %>% group_by(spp) %>% count()%>% ungroup() %>% summarise(median(n))
+
+colnames(cg1)
+primary.dat.NCC<-dplyr::select(cg1,spp,year,site,ind,provenance.long,provenance.lat,plot,leafout,budset,pgs,pgsGDD)
+secondary.dat.NCC<-dplyr::select(cg2,spp,year,site,ind,provenance.long,provenance.lat,plot,leafout,leafcolor,fgs,fgsGDD)
+
+write.csv(primary.dat.NCC,"..//public/weldhill_budset.csv")
+write.csv(secondary.dat.NCC,"..//public/weldhill_leafcolor.csv")
+
+
 ####par II models
 ###model is growing season duration ~ dat of leafout centered with partial pooling on species  for slope and intercept
 
