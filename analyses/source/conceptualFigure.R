@@ -36,25 +36,22 @@ library(ggpubr)
     geom_rect(xmin=115,xmax=240, ymin=-3, ymax=-1, alpha=0.02,fill="darkgreen")+
     geom_rect(xmin=147,xmax=245, ymin=-6, ymax=-4, alpha=0.02,fill="skyblue1")+
     geom_rect(xmin=127,xmax=240, ymin=-7, ymax=-5, alpha=0.02,fill="skyblue3")+
-    geom_line()+ggthemes::theme_few()+ylab("Daily thermal sums")+ylim(-8,20)+xlab("Day of season")
+    geom_line()+ggthemes::theme_few()+ylab("Daily thermal sums")+ylim(-8,20)+xlab("Day of year")
   
   p2<-ggplot()+geom_line(data=early,aes(x=doy,y=GDD_10),color="darkgreen", linewidth=2)+
     geom_line(data=late,aes(x=doy,y=GDD_10),color="green3",size=2)+
     ggthemes::theme_few()+ylab("Thermal growing season")+xlab("day of year")+coord_cartesian(xlim=c(100,250),ylim=c(0,1250))
   
 
-  p3<-ggplot()+geom_line(data=early2,aes(x=doy,y=GDD_10),color="darkgreen", linewidth=2)+
-    geom_line(data=late2,aes(x=doy,y=GDD_10),color="green3",size=2)+
+  p3<-ggplot()+geom_line(data=early2,aes(x=doy,y=GDD_10),color="skyblue3", linewidth=2)+
+    geom_line(data=late2,aes(x=doy,y=GDD_10),color="skyblue1",size=2)+
     ggthemes::theme_few()+ylab("")+xlab("day of year")+coord_cartesian(xlim=c(100,250),ylim=c(0,1250))
   
   
   concept2<-ggpubr::ggarrange(p2,p3)
   
-  pdf("figures/aronia_examp.pdf",height=4,width=7)
-concept2
-  dev.off()
-  
-  ggpubr::ggarrange(p1,concept2,ncol=1,heights=c(1,2))
+  pdf("figures/Fig2.pdf",height=6,width=7)
+  ggpubr::ggarrange(p1,concept2,ncol=1,heights=c(1,1))
   dev.off()
 
 
