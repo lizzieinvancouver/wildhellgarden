@@ -103,16 +103,16 @@ Species & functional group & $n$ \\
 
  \begin{figure}[h!]
     \centering
- \includegraphics[width=.8\textwidth]{..//analyses/figures/snew2.pdf}
+ \includegraphics[width=.8\textwidth]{..//analyses/figures/new2.pdf}
     \caption{Difference in leafout and butset partitioned between populations (a) and years (b). Points represent the median effect size estimate, and thick and thin bars the 50\% and 90\% uncertainty intervals.}
     \label{fig:mus}
 \end{figure}
 
- \begin{figure}[h!]
+\begin{figure}[h!]
     \centering
- \includegraphics[width=.8\textwidth]{..//analyses/figures/sup2.pdf}
-    \caption{Difference in leafout and leaf coloration partitioned between populations (a) and years (b). Points represent the median effect size estimate, and thick and thin bars the 50\% and 90\% uncertainty intervals.}
-    \label{fig:alta}
+ \includegraphics[width=.8\textwidth]{..//analyses/figures/fullgrowingseason_modplots.jpeg} 
+    \caption{The relationship between the day of leafout and growing season length (defined by leaf coloration) differs between the calendar growing season and the thermal growing season. Later leafout did not affect calendar growing season (a) but this pattern varied across species in our study (b). Increasingly later leafout resulted in a longer thermal growing season (c) though this effect was stronger for species that typically leafout earlier in the season---panels in c) display in the typical order of leafout among species. The trend lines represent the median effect of leafout timing on growing season length and shaded bars the 90\% uncertainty interval. Points in a), and c) represent the raw data.}
+    \label{fig:leafrel}
 \end{figure}
 
 
@@ -124,11 +124,12 @@ Species & functional group & $n$ \\
 \end{figure}
 
 
-\begin{figure}[h!]
+ \begin{figure}[h!]
     \centering
- \includegraphics[width=.8\textwidth]{..//analyses/figures/fullgrowingseason_modplots.jpeg} 
-    \caption{The relationship between the day of leafout and growing season length (defined by leaf coloration) differs between the calendar growing season and the thermal growing season. Later leafout did not affect calendar growing season (a) but this pattern varied across species in our study (b). Increasingly later leafout resulted in a longer thermal growing season (c) though this effect was stronger for species that typically leafout earlier in the season---panels in c) display in the typical order of leafout among species. The trend lines represent the median effect of leafout timing on growing season length and shaded bars the 90\% uncertainty interval. Points in a), and c) represent the raw data.}
-    \label{fig:leafrel}
+ \includegraphics[width=.8\textwidth]{..//analyses/figures/sup2.pdf}
+    \caption{Difference in leafout and leaf coloration partitioned between populations (a) and years (b). Points represent the median effect size estimate, and thick and thin bars the 50\% and 90\% uncertainty intervals.}
+    \label{fig:alta}
 \end{figure}
+
 
 \end{document}

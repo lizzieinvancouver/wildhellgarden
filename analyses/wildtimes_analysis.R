@@ -26,7 +26,7 @@ library(ggthemes)
 
  source("source/combineWeather.R")
  source("source/conceptualFigure.R")
-#load("cgseasonmods.Rda")
+load("cgseasonmods.Rda")
 
 
 #couM<-cg1 %>% filter(year==2020) %>% group_by(spp) %>%count()
