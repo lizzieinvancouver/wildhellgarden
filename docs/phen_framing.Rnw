@@ -29,7 +29,7 @@
 %\usepackage{xr}
 \externaldocument{supple}
 
-\title{Early leafout leads to cooler growing seasons in woody species} % Phenological differences among species explain why early leafout extends the calendar but not thermal growing season
+\title{Early leafout extends calendar but not thermal growing seasons} % Phenological differences among species explain why early leafout extends the calendar but not thermal growing season
 
 \author{D.M. Buonaiuto $^{1,2,3}$, C.J. Chamberlain $^{2,3,4}$,
 Deirdre Loughnan$^{5}$, E.M. Wolkovich$^{2,3,5}$}
