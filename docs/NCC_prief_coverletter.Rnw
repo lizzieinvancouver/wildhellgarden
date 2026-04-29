@@ -1,0 +1,64 @@
+\documentclass{article}[12pt]
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{natbib}
+\usepackage{gensymb}
+
+
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{setspace}
+%\usepackage[backend=bibtex]{biblatex}
+\bibliographystyle{..//refs/styles/nature.bst}
+\setkeys{Gin}{width=0.8\textwidth}
+%\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{10pt}
+\setlength{\belowcaptionskip}{10pt}
+\topmargin -1.5cm 
+\oddsidemargin -0.04cm 
+\evensidemargin -0.04cm 
+\textwidth 16.59cm
+\textheight 21.94cm 
+\parskip 7.2pt 
+\renewcommand{\baselinestretch}{1.1}
+%\AtBeginEnvironment{thebibliography}{\linespread{1}\selectfont}
+\parindent 0pt
+\usepackage{lineno}
+%\linenumbers % for dissertation
+
+\usepackage{xr-hyper}
+\usepackage{hyperref}
+%\usepackage{xr}
+\externaldocument{supple}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\bibliographystyle{..//..//sub_projs/refs/styles/besjournals.bst}
+\def\labelitemi{--}
+\parindent=24pt
+\noindent\includegraphics[width=0.2\textwidth]{logo.jpg}
+\pagenumbering{gobble}
+\\\\
+\noindent{Dear Dr. X,}
+
+\noindent Please consider this manuscript ``Phenological sensitivity to climate change disrupts species coexistence" as as Perspective in \emph{Nature Climate Change}.
+
+
+Shifts in phenology, the seaonal timing of organisms' life cycle events, are one of the most widespread biological indicators of climate change, yet the strength of these shifts vary substantional amoung species. These phenological differences among taxa have often been overlooked in ecological theory, but growing evidence suggests that they may play a major role in dictating community interactions and shaping the structure and function of ecological communities \citep{Cleland2024,Blackford_2020,volkerisaj}. While this recognition has spurred advances towards integrating phenology into coexistince and community assembly models, current frameworks cannot capture the dynmaic interactions between the physical environment, phenology and competion, and therefore struggle to make inference on how species interacts will shift with climate change.
+
+Here, we integrate emprical data on seed germination phenology with an novel extension of a well established community assembly model to develop a simple and flexible framework to fill this gap. We demonstrate how modeling differences in species' phenological sensitivity (i.e., their phenological response or reaction norm to environmental variation) in place of expressed phenological diffrences themselves can overcome current limitations in community assembly theory. With this subtle, yet essential adjustment, we show any phenologically-mediated patterns of coexistence under historical climate conditions will degrade as climate warms, while providing a biologically realistic mechanism to project changes in phenologically-mediated species interations into the future. 
+
+Importantly, species-level estimates phenologically sensitivity can be readily estimated through simple experiements, and our model can be built out to incorperate multiple, interacting environmental cues, variable environmental stressors, and more complex species interactions, to develop predictive models that can ultimately be effectively used to inform species conservation and ecological management. Our manuscript details a path forward to do this effectively, and advance ecological theory, climate change biology, and the Translation Ecology that links them together.
+
+
+We have previous discussed this manuscript w \emph{Nature Climate Change} Editor Dr. Tegan Armarego-Marriott during the 2024 meeting of Ecological Society of America meeting in Long Beach, CA, and feel it would be of broad interest to the readership of \emph{Nature Climate Change}. The main text of this manuscript is 2001 words in length and it contains two figures. It is co-authored by M.J. Donahue and E.M. Wolkovich and is not under consideration elsewhere. We hope that you will find it suitable for publication in \textit{Nature Climate Change}, and look forward to hearing from you.\\\
+\\Sincerely,\\\\\\
+
+
+
+\newpage
+\bibliography{prief_bibadd.bib}
+
+
+\end{document}

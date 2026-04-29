@@ -40,21 +40,24 @@
 \noindent\includegraphics[width=0.2\textwidth]{logo.jpg}
 \pagenumbering{gobble}
 \\\\
-\noindent{Dear Dr. Knowlton,}
+\noindent{Dear Dr.  Öpik,}
 \vspace{1.5ex}
 
-\noindent Please consider this manuscript ``Early leafout extends calendar but not thermal growing seasons" as a Report in \textit{Current Biology}. We show that longer growing seasons in calendar days lead to shorter thermal growing seasons in woody plants, with implications for how climate change may alter plant growth and carbon storage. 
+\noindent Please consider this manuscript ``Early leafout extends calendar but not thermal growing seasons" as a Letter in \textit{New Phytologist}. We show that longer growing seasons in calendar days lead to shorter thermal growing seasons in woody plants, with implications for how climate change may alter plant growth and carbon storage. 
 % emw: I like the below but am cutting it as it's repetitive; we could alternative cut the second to last paragraph. 
 % We show that longer growing seasons in calendar days lead to shorter thermal growing seasons. These results help explain some of the contrasting results of how climate change affects growing season length and productivity, and challenge current dogma on the drivers of growth cessation in woody plant with implications for how climate change may alter plant growth and carbon storage. 
 
+ \textbf{What hypotheses or questions does this work address?}\\
 \noindent Most models of carbon storage assume that earlier growth will result in longer seasons and thus increase terrestrial carbon sequestration, yet recent findings have challenged this pivotal assumption \citep{dow2022warm,silvestro2023longer}, with some suggesting that woody plants may dynamically adjust the end of their growing season based on their carbon-sink capacity \citep{Zani2020,Zohner2023}.  These observations suggest that variation in the calendar growing season (number of days) should be independent of variation in the thermal growing season \citep[i.e., the period of favorable meteorological conditions for plant growth,][]{Korner2023}. This, however, has not been tested given the paucity of start and end of season phenological events for adult trees. 
 
+\textbf{How does this work advance our current understanding of plant science?}\\
 \noindent Here we report on new data from a multi-species, multi-population common garden that shows longer calendar growing seasons lead to shorter (i.e., cooler) thermal growing seasons. We found that earlier leafout leads to earlier growth cessation (budset, similar results found with leaf colouring), causing longer calendar growing seasons to translate to shorter (cooler) thermal growing seasons. Because thermal conditions in the early spring are far less optimal than later-season conditions, we show that the thermal time gained by early leafout was not offset by the thermal time lost by earlier budset. Our results are based on rarely available plant-scale phenological measurements from three years across 13 woody species, all native and co-occurring in Eastern United States forests, and sampled from four populations spanning 3.5^{\circ}$ latitude. 
 
 \noindent Our findings offer a mechanistic explanation for why multiple studies have failed to find correlations between longer calendar seasons and increased plant growth \citep{dow2022warm,silvestro2023longer}, and questions previous assertions of sink-source control in experiments \citep{Zani2020,norby2021comment,Zohner2023}. At the same time, our results challenge the decades-old dogma that growth cessation is locally adapted and driven mainly by photoperiod. 
 
-\noindent We believe this work would be of broad interest to the readers of \textit{Current Biology} and addresses an important debate in the field of climate change biology. % Our results help explain some of the contrasting results of how climate change affects growing season length and productivity, and our multi-scale approach identifies a clear path forward for improving how phenology is integrated into models of carbon storage. 
-The main text of this manuscript is 1472 words in length and it contains two figures. It is co-authored by C.J. Chamberlain, Deirdre Loughnan and E.M. Wolkovich and is not under consideration elsewhere. We hope that you will find it suitable for publication in \textit{Current Biology}, and look forward to hearing from you.\\\
+\textbf{Why is this work important and timely?}\\
+\noindent We believe this work would be of broad interest to the readers of \textit{New Phytologist} and addresses an important debate in the field of climate change biology. % Our results help explain some of the contrasting results of how climate change affects growing season length and productivity, and our multi-scale approach identifies a clear path forward for improving how phenology is integrated into models of carbon storage. 
+The main text of this manuscript is 1472 words in length and it contains two figures. It is co-authored by C.J. Chamberlain, Deirdre Loughnan and E.M. Wolkovich and is not under consideration elsewhere. We hope that you will find it suitable for publication in \textit{New Phytologist}, and look forward to hearing from you.\\\
 \\Sincerely,\\\\\\
 
 \noindent Daniel Buonaiuto\\
