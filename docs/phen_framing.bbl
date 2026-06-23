@@ -109,6 +109,26 @@ Farquhar, G.~D., von Caemmerer, S., and Berry, J.~A.
   c3 species.
 \newblock {\em Planta}{ \bf 149}(1), 78--90 (1980).
 
+\bibitem{Finn2007}
+Finn, G., Straszewski, A., and Peterson, V.
+\newblock A general growth stage key for describing trees and woody plants.
+\newblock {\em Annals of Applied Biology}{ \bf 151}(1), 127--131, Aug  (2007).
+
+\bibitem{Nowosad2019}
+{Jakub Nowosad}.
+\newblock {\em {pollen: Analysis of Aerobiological Data}},  ({2019}).
+
+\bibitem{Burkner2018}
+B{\"u}rkner, P.-C.
+\newblock Advanced bayesian multilevel modeling with the r package brms.
+\newblock {\em R Journal}{ \bf 10}, 395--411, 07  (2018).
+
+\bibitem{R2021}
+{{R Core Team}}.
+\newblock {\em {R: A Language and Environment for Statistical Computing}}.
+\newblock {R Foundation for Statistical Computing}, {Vienna, Austria},
+  ({2021}).
+
 \bibitem{Menzel1999}
 Menzel, A. and Fabian, P.
 \newblock Growing season extended in europe.
@@ -118,23 +138,6 @@ Menzel, A. and Fabian, P.
 Liu, B., Henderson, M., Zhang, Y., and Xu, M.
 \newblock Spatiotemporal change in china's climatic growing season: 1955--2000.
 \newblock {\em Climatic Change}{ \bf 99}(1), 93--118 (2010).
-
-\bibitem{Keskitalo2005}
-Keskitalo, J., Bergquist, G., Gardestr{\"o}m, P., and Jansson, S.
-\newblock A cellular timetable of autumn senescence.
-\newblock {\em Plant Physiology}{ \bf 139}(4), 1635--1648, 12  (2005).
-
-\bibitem{Tang2016}
-Tang, J., K{\"o}rner, C., Muraoka, H., Piao, S., Shen, M., Thackeray, S.~J.,
-  and Yang, X.
-\newblock Emerging opportunities and challenges in phenology: a review.
-\newblock {\em Ecosphere}{ \bf 7}(8), e01436 (2016).
-
-\bibitem{McKown:2016aa}
-McKown, A.~D., Guy, R.~D., and Quamme, L.~K.
-\newblock Impacts of bud set and lammas phenology on root:shoot biomass
-  partitioning and carbon gain physiology in poplar.
-\newblock {\em Trees}{ \bf 30}(6), 2131--2141 (2016).
 
 \bibitem{Liu2016}
 Liu, Q., Fu, Y.~H., Zhu, Z., Liu, Y., Liu, Z., Huang, M., Janssens, I.~A., and
@@ -157,15 +160,6 @@ Michelot, A., Simard, S., Rathgeber, C., Dufr{\^e}ne, E., and Damesin, C.
   leaf phenology and non-structural carbohydrate dynamics}.
 \newblock {\em Tree physiology}{ \bf 32}(8), 1033--1045 (2012).
 
-\bibitem{ipcc2022}
-P{\"o}rtner, H.~O., Roberts, D.~C., Tignor, M., Poloczanska, E.~S., Mintenbeck,
-  K., Alegr{\'\i}a, A., Craig, M., Langsdorf, S., L{\"o}schke, S., M{\"o}ller,
-  V., Okem, A., and Rama, B.
-\newblock {\em Climate Change 2022: Impacts, Adaptation and Vulnerability.
-  Contribution of Working Group II to the Sixth Assessment Report of the
-  Intergovernmental Panel on Climate Change}.
-\newblock Cambridge University Press,  (2022).
-
 \bibitem{Rohde2011}
 Rohde, A., Bastien, C., Boerjan, W., and Thomas, S.
 \newblock Temperature signals contribute to the timing of photoperiodic growth
@@ -178,24 +172,23 @@ Michelson, I.~H., Ingvarsson, P.~K., Robinson, K.~M., Edlund, E., Eriksson,
 \newblock Autumn senescence in aspen is not triggered by day length.
 \newblock {\em Physiologia Plantarum}{ \bf 162}(1), 123--134 (2018).
 
-\bibitem{Finn2007}
-Finn, G., Straszewski, A., and Peterson, V.
-\newblock A general growth stage key for describing trees and woody plants.
-\newblock {\em Annals of Applied Biology}{ \bf 151}(1), 127--131, Aug  (2007).
+\bibitem{Olsen2014}
+Olsen, J.~E., Lee, Y., and Junttila, O.
+\newblock Effect of alternating day and night temperature on short day-induced
+  bud set and subsequent bud burst in long days in norway spruce.
+\newblock {\em Frontiers in Plant Science}{ \bf 5} (2014).
 
-\bibitem{Nowosad2019}
-{Jakub Nowosad}.
-\newblock {\em {pollen: Analysis of Aerobiological Data}},  ({2019}).
+\bibitem{Morales-Castilla2024}
+Morales-Castilla, I., Davies, T.~J., Legault, G., Buonaiuto, D.~M.,
+  Chamberlain, C.~J., Ettinger, A.~K., Garner, M., Jones, F. A.~M., Loughnan,
+  D., Pearse, W.~D., Sodhi, D.~S., and Wolkovich, E.~M.
+\newblock Phylogenetic estimates of species-level phenology improve ecological
+  forecasting.
+\newblock {\em Nature Climate Change}{ \bf 14}(9), 989--995 (2024).
 
-\bibitem{Burkner2018}
-B{\"u}rkner, P.-C.
-\newblock Advanced bayesian multilevel modeling with the r package brms.
-\newblock {\em R Journal}{ \bf 10}, 395--411, 07  (2018).
-
-\bibitem{R2021}
-{{R Core Team}}.
-\newblock {\em {R: A Language and Environment for Statistical Computing}}.
-\newblock {R Foundation for Statistical Computing}, {Vienna, Austria},
-  ({2021}).
+\bibitem{GALLINAT2015}
+Gallinat, A.~S., Primack, R.~B., and Wagner, D.~L.
+\newblock Autumn, the neglected season in climate change research.
+\newblock {\em Trends in Ecology & Evolution}{ \bf 30}(3), 169--176 (2015).
 
 \end{thebibliography}

@@ -79,12 +79,6 @@ Species & functional group & $n$ \\
 \end{figure}
 
 
- \begin{figure}[h!]
-    \centering
- \includegraphics[width=.8\textwidth]{..//analyses/figures/new2.pdf}
-    \caption{Difference in leafout and butset partitioned between populations (a) and years (b). Points represent the median effect size estimate, and thick and thin bars the 50\% and 90\% uncertainty intervals.}
-    \label{fig:mus}
-\end{figure}
 
 \begin{figure}[h!]
     \centering
