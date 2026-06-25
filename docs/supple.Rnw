@@ -99,7 +99,7 @@ Species & functional group & $n$ \\
  \begin{figure}[h!]
     \centering
  \includegraphics[width=.8\textwidth]{..//analyses/figures/sup2.pdf}
-    \caption{Difference in leafout and leaf coloration partitioned between populations (a) and years (b). Points represent the median effect size estimate, and thick and thin bars the 50\% and 90\% uncertainty intervals.}
+    \caption{Difference in leafout and leaf coloration partitioned between years (a) and populations (b). Points represent the median effect size estimate, and thick and thin bars the 50\% and 90\% uncertainty intervals.}
     \label{fig:alta}
 \end{figure}
 \clearpage

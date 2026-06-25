@@ -92,7 +92,7 @@ Here, using rarely available plant-level phenology from a common garden of 13 wo
 % This relationship was in part explained by positive correlations between leafout and budset where later leafing individuals also set buds later, extending their growth into that later part of the season when thermal conditions were more favorable. 
 \clearpage
 \section{Introduction}
-Terrestrial forests are a major mitigation pathway for climate change, sequestering 20\% of greenhouse gas emissions   \citep{roe2021}. Most models of climate change assume warming will drive longer seasons, more tree growth and, thus, more carbon storage (Figure \ref{fig:cool1}a), following decades of evidence from ecosystem-scale studies \citep{White1999,Keenan2014}. 
+Terrestrial forests are a major mitigation pathway for climate change, sequestering 20\% of greenhouse gas emissions \citep{roe2021}. Most models of climate change assume warming will drive longer seasons, more tree growth and, thus, more carbon storage (Figure \ref{fig:cool1}a), following decades of evidence from ecosystem-scale studies \citep{White1999,Keenan2014}. 
 However, recent findings from  observations of individual trees have questioned this assumption \citep{dow2022warm,silvestro2023longer}. At the same time new experiments on saplings have suggested that plants may adjust their end of season timing dynamically such that longer seasons do not increase total productivity (Figure \ref{fig:cool1}b), though the mechanism---and prevalence---of this effect is unclear \citep{Zani2020,Norby2021,Zohner2023}.
 % CUTREFS: You only need one of {shanley2024, roe2021} and 1-2 of {Churkina2005,White1999,Keenan2014} ... I cut some. 
 % CUTREFS: camarero2022decoupled
@@ -145,7 +145,7 @@ All models were fit in the R package ``brms" \citep{Burkner2018} on 4 chains wit
 % emw6Nov2025 -- we don't have inference at 2 decimal places, can you change throughout to 1 decimal place?
 % dl15Nov2025 you say 18 spp in the abstract
 %\subsection{The relationship between}
-We observed high variation in the timing of both start and end of season events with resulting calendar and thermal growing seasons varied almost two-fold across individual trees (2.1x and 1.8x respectively), with earlier leafout leading to longer calendar growing seasons (Figures \ref{fig:cool1}c,d, \ref{fig:leafrel}), as routinely seen with anthropogenic climate change \citep{Menzel1999,Liu2010}. We observed a positive correlation between leafout and end of season phases (i.e., budset or leaf coloration) with earlier leafout resulting in earlier budset or leaf coloration (DO WE NEED A FIGURE OR NUMBERS).
+Across three years and 13 co-occurring species (Tab: \ref{listSp}) collected from four populations across a 3.5^{\circ}$ latitudinal gradient (Figure \ref{fig:map}), we observed high variation in the timing of both start and end of season events with resulting calendar and thermal growing seasons varied almost two-fold across individual trees (2.1x and 1.8x respectively), with earlier leafout leading to longer calendar growing seasons (Figures \ref{fig:cool1}c,d, \ref{fig:leafrel}), as routinely seen with anthropogenic climate change \citep{Menzel1999,Liu2010}. At the same time, we observed a positive association between leafout and end of season phases (i.e., budset or leaf coloration) with earlier leafout resulting in earlier budset or leaf coloration (Figures \ref{fig:mus}a),\ref{fig:alta}a.)
 
 % emw6Nov2025 -- Can you add a fig ref for 'This result was driven by an apparent relationship between leafout and budset at the individual level (FIG)'?
 %\subsection{The relationship between calendar and thermal growing seasons}
@@ -160,15 +160,15 @@ Differences between thermal and calendar growing seasons were strongest in the e
  Species was the a major predictor of variation in leafout and budset% and growing season length 
 ($\sigma_{species}$ days for leafout: $8.1, $UI_{90}$[5.5, 11.6], days for budset: 9.7, $UI_{90}$[7, 13.6]).% days for season length: 14.4 $UI_{90}$[10.3,19.9).
 Beyond species-level variation, we found high interannual variation in both leafout and budset (%. We expected large differences across years in 
-(leafout: $\sigma_{year}$: 10.7 days, $UI_{90}$[4.9, 20.9],  budset: \sigma_{year}$: 15 days, $UI_{90}$[6.4, 30.8], Figure \ref{fig:mus}b,).
+(leafout: $\sigma_{year}$: 10.7 days, $UI_{90}$[4.9, 20.9],  budset: \sigma_{year}$: 15 days, $UI_{90}$[6.4, 30.8], Figure \ref{fig:mus}a).
 
 
 %because it varies strongly with local climatic conditions---one of the reasons it is the most consistent biological indicator of anthropogenic climate change \citep{ipcc2022}. Similarly, 
-We found little variation across populations in leafout ($\sigma_{population}$: 0.6 days, $UI_{90}$[0, 1.8], Figure \ref{fig:mus}a).% Yet our finding of 15 days of variation across years in budset was surprising because budset is generally thought to be strongly locally adapted and controlled by photoperiod, which does not vary year to year \citep{soolanayakanahally2013timing,aitken2016}. %dl15Nov2025: I would specify "local adaptation in budset" just to help the reader stay focused
-We did find evidence of local adaptation ($\sigma_{population}$: 2.3 days, $UI_{90}$[0.4, 6.1], Figure \ref{fig:mus}a), with populations from the site with the fewest frost free days (FFD, Figure \ref{fig:ffd}) setting buds approximately two days before the site with next fewest FFD. These differences, however, were weak (Figure \ref{fig:mus}a) and 7X and 4X smaller than the variation due to year and species (respectively) We observed similar patterns with leaf coloration as the end of season phase (Figure \ref{fig:alta}). 
+We found little variation across populations in leafout ($\sigma_{population}$: 0.6 days, $UI_{90}$[0, 1.8], Figure \ref{fig:mus}b).% Yet our finding of 15 days of variation across years in budset was surprising because budset is generally thought to be strongly locally adapted and controlled by photoperiod, which does not vary year to year \citep{soolanayakanahally2013timing,aitken2016}. %dl15Nov2025: I would specify "local adaptation in budset" just to help the reader stay focused
+We did find evidence of local adaptation ($\sigma_{population}$: 2.3 days, $UI_{90}$[0.4, 6.1], Figure \ref{fig:mus}a), with populations from the site with the fewest frost free days (FFD, Figure \ref{fig:ffd}) setting buds approximately two days before the site with next fewest FFD. These differences, however, were weak (Figure \ref{fig:mus}a) and 7X and 4X smaller than the variation due to year and species (respectively). We observed similar patterns with leaf coloration as the end of season phase (Figure \ref{fig:alta}). 
 
 \section{Discussion}
-Across three years and 13 co-occurring species (Tab: \ref{listSp}) collected from four populations across a 3.5^{\circ}$ latitudinal gradient (Figure \ref{fig:map}), phenological observations from our common garden showed that earlier leafout does not extend their thermal growing season---a proxy for potential carbon uptake period---despite extending the calendar growing season. This was driven by a relationship between leafout and budset at the individual level combined with differences in thermal conditions of the early season during leafout and later in the season during budset. When plants leafed out earlier in the spring they stopped growth (budset) earlier, but the additional days of growth in the spring---when temperatures were cool---were rarely offset thermally by the days lost in the later season to earlier budset, which occurred in warmer months (July-August, Figure \ref{fig:vapar}). 
+Phenological observations from our common garden showed that earlier leafout does not extend the thermal growing season---a proxy for potential carbon uptake period---despite extending the calendar growing season. This was driven by a relationship between leafout and budset at the individual level combined with differences in thermal conditions of the early season during leafout and later in the season during budset. When plants leafed out earlier in the spring they stopped growth (budset) earlier, but the additional days of growth in the spring---when temperatures were cool---were rarely offset thermally by the days lost in the later season to earlier budset, which occurred in warmer months (July-August, Figure \ref{fig:vapar}). 
 
  %While there is much debate in the literature about which end of season phenological phase best captures the process of senescence \citep{Keskitalo2005,Tang2016}, we choose to use budset as it is the most clearly observable and physiologically related to bimass allocation \citep{McKown:2016aa}.
 These results suggest that some of the apparently conflicting recent findings of whether longer seasons increase growth or productivity may be due to different scales of observation, including the different species they integrate over. Our result that individual trees appear to accelerate their end of season events with earlier start of season events supports other studies conducted on a small number of species \citep[using alternative metrics of senescence,][]{Liu2016,Zani2020}. Thus, we may expect that studies of individual trees could find little relationship between earlier leafout and growth \citep{cuny2012life,michelot2012comparing,Zani2020}, which could be driven by currently unstudied shifts in the thermal seasons. Additionally, because differences between thermal and calendar growing seasons were species-dependent, previous findings may depend on the species studied \citep{cuny2012life,michelot2012comparing}. This cross-species variation  likely scales up to affect ecosystem-level estimates, which generally have one measure of the start of season---for the earliest leafout species---and one for the end of season, likely capturing the later-leafout species. % given the correlations we found between start and end of season events. % Cut for space: Thus, by integrating across species some studies may find stronger correlations between productivity and earlier seasons. 
@@ -176,9 +176,7 @@ These results suggest that some of the apparently conflicting recent findings of
 % emw6Nov2025 -- avoid 'plastic' here as some would not use the word the way we do ... 
 % emw6Nov2025 -- save words by not naming the sites
 % emw6Nov2025 -- CUTREFS: Olsen2014, vico2021
-The shift in budset with earlier leafout suggests a potential pathway to better understand and predict ecosystem dynamics, given additional research. While most work on budset has stressed the role of photoperiod \citep{soolanayakanahally2013timing}, other studies have found evidence of temperature control \citep{Rohde2011,Michelson2018}. Our results suggest an additional potential role of leafout timing, which could be confounded with temperature. Teasing apart these potential cues while also testing these relationships for other end of season events could help resolve connections between start and end of season events with growth. While we found similar findings using leaf coloring, there are many ways that plants transition from growth to dormancy each year \citep{Michelson2018}---with different implications for carbon gain \citep{Korner2023}.
-
-
+%The shift in budset with earlier leafout suggests a potential pathway to better understand and predict ecosystem dynamics, given additional research. While most work on budset has stressed the role of photoperiod \citep{soolanayakanahally2013timing}, other studies have found evidence of temperature control \citep{Rohde2011,Michelson2018}. Our results suggest an additional potential role of leafout timing, which could be confounded with temperature. Teasing apart these potential cues while also testing these relationships for other end of season events could help resolve connections between start and end of season events with growth. While we found similar findings using leaf coloring, there are many ways that plants transition from growth to dormancy each year \citep{Michelson2018}---with different implications for carbon gain \citep{Korner2023}.
 
 The shift in budset with earlier leafout suggests a potential pathway to better understand and predict recent findings, but will require a new approaches to how we view and study budset and other end of season events. Most work on budset in broadleaf species comes from one genus (\emph{Populus spp.}) and has stressed the major control of photoperiod limiting responses to anthropogenic warming. Yet some studies have found evidence of temperature \citep{Olsen2014,Rohde2011,Michelson2018}, contrasting with this prediction. Teasing apart effects of temperature from intrinsic correlations between start and end of season events appears an important next step. Doing so across additional species may be especially helpful, as a focus on single species may not always predict broad scale trends \citep{Morales-Castilla2024}, and our results suggest important variation across species. 
 
@@ -236,7 +234,6 @@ Thanks to Kea Woodruff and Lee Toomey for their help planting and caring for the
 %dl15Nov2025 I think the legend in panel c needs to be larger, especially the symbols
 %cjc2024Sept25 - agreed, this is awesome!
 
-
 \begin{figure}[h!]
     \centering
  \includegraphics[width=.6\textwidth]{..//analyses/figures/finalfigure1.png} 
@@ -245,14 +242,17 @@ Thanks to Kea Woodruff and Lee Toomey for their help planting and caring for the
     \end{singlespace}
     \label{fig:cool1}
 \end{figure}
-
 \newpage
+
  \begin{figure}[h!]
     \centering
  \includegraphics[width=.8\textwidth]{..//analyses/figures/new2.pdf}
-    \caption{Difference in leafout and butset partitioned between populations (a) and years (b). Points represent the median effect size estimate, and thick and thin bars the 50\% and 90\% uncertainty intervals.}
+    \caption{Difference in leafout and butset partitioned between years (a) and populations (b). Points represent the median effect size estimate, and thick and thin bars the 50\% and 90\% uncertainty intervals.}
     \label{fig:mus}
 \end{figure}
+\newpage
+
+
 \newpage
 
 
@@ -268,7 +268,7 @@ Varying thermal conditions across the calendar growing season combined with corr
     \label{fig:vapar}
 \end{figure}
 
- \newpage
+% \newpage
  %\begin{figure}[h!]
 %    \centering
 % \includegraphics[width=.8\textwidth]{..//analyses/figures/aronia_examp.jpeg}

@@ -1227,7 +1227,7 @@ yearout<-rbind(bs.yearout,lo.yearout)
 
 
 
-
+pd<-ggstance::position_dodgev(height=.3)
 
 sup2.2<-ggplot(yearout2,aes(r_year,as.factor(year)))+
   stat_pointinterval(.width = c(.5,.9),aes(fill=phase,color=phase),position=pd)+geom_vline(xintercept=0)+
@@ -1235,7 +1235,7 @@ sup2.2<-ggplot(yearout2,aes(r_year,as.factor(year)))+
   ylab("")+xlim(-40,40)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+
   scale_fill_manual(values=c("tan4","green4"))+scale_color_manual(values=c("tan2","darkgreen"))
-pd=ggstance::position_dodgev(0.3)
+
 
 sup2.1<-ggplot(siteout2,aes(r_site,population))+
   stat_pointinterval(.width = c(.5,.9),aes(fill=phase,color=phase),position=pd)+geom_vline(xintercept=0)+
@@ -1261,11 +1261,11 @@ new2.2<-ggplot(yearout,aes(r_year,as.factor(year)))+
   scale_fill_manual(values=c("tan4","green4"))+scale_color_manual(values=c("tan3","darkgreen"))
 
 pdf("figures/new2.pdf",width=10,height=6)
-ggpubr::ggarrange(new2.1,new2.2,common.legend = TRUE,widths=c(2,1.5))
+ggpubr::ggarrange(new2.2,new2.1,common.legend = TRUE,widths=c(1.5,2))
 dev.off()
 
 pdf("figures/sup2.pdf",width=10,height=6)
-ggpubr::ggarrange(sup2.1,sup2.2,common.legend = TRUE,widths=c(2,1.5),labels = c("a)","b)"))
+ggpubr::ggarrange(sup2.2,sup2.1,common.legend = TRUE,widths=c(1.5,2),labels = c("a)","b)"))
 dev.off()
 
 yrs<-ggpubr::ggarrange(loyear,bsyear,pgsyear,pgsyearGDD,ncol=4)
