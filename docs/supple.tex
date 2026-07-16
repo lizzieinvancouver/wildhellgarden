@@ -7,7 +7,7 @@
 \usepackage{array}
 \usepackage{amsmath}
 %\usepackage[backend=bibtex]{biblatex}
-\bibliographystyle{..//refs/styles/nature.bst}
+\bibliographystyle{..//refs/styles/besjournals.bst}
 \setkeys{Gin}{width=0.8\textwidth}
 %\setlength{\captionmargin}{30pt}
 \setlength{\abovecaptionskip}{10pt}
@@ -24,9 +24,9 @@
 \bibliographystyle{refs/styles/newphyto.bst}
 \renewcommand{\thetable}{S\arabic{table}}
 \renewcommand{\thefigure}{S\arabic{figure}}
-%\usepackage{xr}
-\usepackage{hyperref}
-\usepackage{xr-hyper}
+\usepackage{xr}
+%\usepackage{hyperref}
+%\usepackage{xr-hyper}
 %\usepackage{hyperref}
 \externaldocument{phen_framing}
 \title{Supporting Information for: Early leafout extends calendar but not thermal growing seasons}
@@ -41,8 +41,6 @@
 \section{Tables}
 \begin{table}[ht]
 \centering
-
-\label{listSp}
 \begin{tabular}{lrr}
   \hline
 Species & functional group & $n$ \\ 
@@ -66,7 +64,8 @@ Species & functional group & $n$ \\
  *\emph{Vaccinium myrtilloides} &  shrub & \emph{NA}\\ 
  \emph{Viburnum cassinoides} &  shrub & 25 \\ 
   \end{tabular}
-  \caption{Common garden focal species. In 2017, plantings were randomized between 16 plot blocks. Individuals that were too small to survive outside were maintained in the growth facilities for an additional year and out-planted in the early spring of 2018. Plots were divided between tree plots which included species \textit{Acer pensylvanicum}, \textit{Amelanchier canadensis}, \textit{Alnus incana}, \textit{Betula papyrifera}, \textit{Betula populifolia}, \textit{Beluta alleghaniensis}, \textit{Quercus alba}, and \textit{Quercus rubra} and shrub plots which included the remaining species and shade cloth. * indicates species that were planted but not included in analyses due to low survivorship.} 
+  \caption{Common garden focal species. In 2017, plantings were randomized between 16 plot blocks. Individuals that were too small to survive outside were maintained in the growth facilities for an additional year and out-planted in the early spring of 2018. Plots were divided between tree plots which included species \textit{Acer pensylvanicum}, \textit{Amelanchier canadensis}, \textit{Alnus incana}, \textit{Betula papyrifera}, \textit{Betula populifolia}, \textit{Beluta alleghaniensis}, \textit{Quercus alba}, and \textit{Quercus rubra} and shrub plots which included the remaining species and shade cloth. * indicates species that were planted but not included in analyses due to low survivorship.}
+  \label{listSp}
 \end{table}
 
 \pagebreak
@@ -79,13 +78,13 @@ Species & functional group & $n$ \\
     \label{fig:map}
 \end{figure}
 
-
  \begin{figure}[h!]
     \centering
- \includegraphics[width=.8\textwidth]{..//analyses/figures/new2.pdf}
-    \caption{Difference in leafout and butset partitioned between populations (a) and years (b). Points represent the median effect size estimate, and thick and thin bars the 50\% and 90\% uncertainty intervals.}
-    \label{fig:mus}
+ \includegraphics[width=.8\textwidth]{..//analyses/figures/sup2.pdf}
+    \caption{Difference in leafout and leaf coloration partitioned between years (a) and populations (b). Points represent the median effect size estimate, and thick and thin bars the 50\% and 90\% uncertainty intervals.}
+    \label{fig:alta}
 \end{figure}
+
 
 \begin{figure}[h!]
     \centering
@@ -103,12 +102,7 @@ Species & functional group & $n$ \\
 \end{figure}
 
 
- \begin{figure}[h!]
-    \centering
- \includegraphics[width=.8\textwidth]{..//analyses/figures/sup2.pdf}
-    \caption{Difference in leafout and leaf coloration partitioned between populations (a) and years (b). Points represent the median effect size estimate, and thick and thin bars the 50\% and 90\% uncertainty intervals.}
-    \label{fig:alta}
-\end{figure}
+
 \clearpage
 \bibliography{..//refs/wildhell.bib}
 

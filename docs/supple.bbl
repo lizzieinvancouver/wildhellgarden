@@ -1,8 +1,9 @@
 \begin{thebibliography}{1}
+\providecommand{\natexlab}[1]{#1}
 
-\bibitem{Thornton2020}
-Thornton, M., Shrestha, R., Wei, Y., Thornton, P., and Kao, S.-C.
-\newblock Daymet: Daily surface weather data on a 1-km grid for north america,
-  version 4,  (2020).
+\bibitem[{Thornton \emph{et~al.}(2020)Thornton, Shrestha, Wei, Thornton \&
+  Kao}]{Thornton2020}
+Thornton, M., Shrestha, R., Wei, Y., Thornton, P. \& Kao, S.C. (2020) Daymet:
+  Daily surface weather data on a 1-km grid for north america, version 4.
 
 \end{thebibliography}

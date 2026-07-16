@@ -1,194 +1,179 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{29}
+\providecommand{\natexlab}[1]{#1}
 
-\bibitem{roe2021}
+\bibitem[{Aitken \& Bemmels(2016)}]{aitken2016}
+Aitken, S.N. \& Bemmels, J.B. (2016) Time to get moving: assisted gene flow of
+  forest trees. \emph{Evol Appl} \textbf{9}, 271--90.
+
+\bibitem[{Bauerle \emph{et~al.}(2012)Bauerle, Oren, Way, Qian, Stoy, Thornton,
+  Bowden, Hoffman \& Reynolds}]{bauerle2012photoperiodic}
+Bauerle, W.L., Oren, R., Way, D.A., Qian, S.S., Stoy, P.C., Thornton, P.E.,
+  Bowden, J.D., Hoffman, F.M. \& Reynolds, R.F. (2012) Photoperiodic regulation
+  of the seasonal pattern of photosynthetic capacity and the implications for
+  carbon cycling. \emph{Proceedings of the National Academy of Sciences}
+  \textbf{109}, 8612--8617.
+
+\bibitem[{B{\"u}rkner(2018)}]{Burkner2018}
+B{\"u}rkner, P.C. (2018) Advanced bayesian multilevel modeling with the r
+  package brms. \emph{R Journal} \textbf{10}, 395--411.
+
+\bibitem[{Chuine(2000)}]{CHUINE2000337}
+Chuine, I. (2000) A unified model for budburst of trees. \emph{Journal of
+  Theoretical Biology} \textbf{207}, 337--347.
+
+\bibitem[{Cuny \emph{et~al.}(2012)Cuny, Rathgeber, Lebourgeois, Fortin \&
+  Fournier}]{cuny2012life}
+Cuny, H.E., Rathgeber, C.B., Lebourgeois, F., Fortin, M. \& Fournier, M. (2012)
+  Life strategies in intra-annual dynamics of wood formation: example of three
+  conifer species in a temperate forest in north-east france. \emph{Tree
+  physiology} \textbf{32}, 612--625.
+
+\bibitem[{Dow \emph{et~al.}(2022)Dow, Kim, D'Orangeville, Gonzalez-Akre,
+  Helcoski, Herrmann, Harley, Maxwell, McGregor, McShea
+  \emph{et~al.}}]{dow2022warm}
+Dow, C., Kim, A.Y., D'Orangeville, L., Gonzalez-Akre, E.B., Helcoski, R.,
+  Herrmann, V., Harley, G.L., Maxwell, J.T., McGregor, I.R., McShea, W.J.
+  \emph{et~al.} (2022) Warm springs alter timing but not total growth of
+  temperate deciduous trees. \emph{Nature} \textbf{608}, 552--557.
+
+\bibitem[{Farquhar \emph{et~al.}(1980)Farquhar, von Caemmerer \&
+  Berry}]{Farquhar:1980vm}
+Farquhar, G.D., von Caemmerer, S. \& Berry, J.A. (1980) A biochemical model of
+  photosynthetic co2 assimilation in leaves of c3 species. \emph{Planta}
+  \textbf{149}, 78--90.
+
+\bibitem[{Finn \emph{et~al.}(2007)Finn, Straszewski \& Peterson}]{Finn2007}
+Finn, G., Straszewski, A. \& Peterson, V. (2007) A general growth stage key for
+  describing trees and woody plants. \emph{Annals of Applied Biology}
+  \textbf{151}, 127--131.
+
+\bibitem[{Gallinat \emph{et~al.}(2015)Gallinat, Primack \&
+  Wagner}]{GALLINAT2015}
+Gallinat, A.S., Primack, R.B. \& Wagner, D.L. (2015) Autumn, the neglected
+  season in climate change research. \emph{Trends in Ecology & Evolution}
+  \textbf{30}, 169--176.
+
+\bibitem[{Grime(1977)}]{Grime:1977sw}
+Grime, J.P. (1977) Evidence for existence of 3 primary strategies in plants and
+  its relevance to ecological and evolutionary theory. \emph{American
+  Naturalist} \textbf{111}, 1169--1194.
+
+\bibitem[{{Jakub Nowosad}({2019})}]{Nowosad2019}
+{Jakub Nowosad} ({2019}) \emph{{pollen: Analysis of Aerobiological Data}}.
+
+\bibitem[{Keenan \emph{et~al.}(2014)Keenan, Gray, Friedl, Toomey, Bohrer,
+  Hollinger, Munger, O'Keefe, Schmid, Wing, Yang \& Richardson}]{Keenan2014}
+Keenan, T.F., Gray, J., Friedl, M.A., Toomey, M., Bohrer, G., Hollinger, D.Y.,
+  Munger, J.W., O'Keefe, J., Schmid, H.P., Wing, I.S., Yang, B. \& Richardson,
+  A.D. (2014) Net carbon uptake has increased through warming-induced changes
+  in temperate forest phenology. \emph{Nature Climate Change} \textbf{4},
+  598--604.
+
+\bibitem[{K{\"o}rner \emph{et~al.}(2023)K{\"o}rner, M{\"o}hl \&
+  Hiltbrunner}]{Korner2023}
+K{\"o}rner, C., M{\"o}hl, P. \& Hiltbrunner, E. (2023) Four ways to define the
+  growing season. \emph{Ecology Letters} \textbf{26}, 1277--1292.
+
+\bibitem[{Liu \emph{et~al.}(2010)Liu, Henderson, Zhang \& Xu}]{Liu2010}
+Liu, B., Henderson, M., Zhang, Y. \& Xu, M. (2010) Spatiotemporal change in
+  china's climatic growing season: 1955--2000. \emph{Climatic Change}
+  \textbf{99}, 93--118.
+
+\bibitem[{Liu \emph{et~al.}(2016)Liu, Fu, Zhu, Liu, Liu, Huang, Janssens \&
+  Piao}]{Liu2016}
+Liu, Q., Fu, Y.H., Zhu, Z., Liu, Y., Liu, Z., Huang, M., Janssens, I.A. \&
+  Piao, S. (2016) Delayed autumn phenology in the northern hemisphere is
+  related to change in both climate and spring phenology. \emph{Global Change
+  Biology} \textbf{22}, 3702--3711.
+
+\bibitem[{Menzel \& Fabian(1999)}]{Menzel1999}
+Menzel, A. \& Fabian, P. (1999) Growing season extended in europe.
+  \emph{Nature} \textbf{397}, 659--659.
+
+\bibitem[{Michelot \emph{et~al.}(2012)Michelot, Simard, Rathgeber, Dufr{\^e}ne
+  \& Damesin}]{michelot2012comparing}
+Michelot, A., Simard, S., Rathgeber, C., Dufr{\^e}ne, E. \& Damesin, C. (2012)
+  {Comparing the intra-annual wood formation of three European species
+  (\emph{Fagus sylvatica, Quercus petraea and Pinus sylvestris}) as related to
+  leaf phenology and non-structural carbohydrate dynamics}. \emph{Tree
+  physiology} \textbf{32}, 1033--1045.
+
+\bibitem[{Michelson \emph{et~al.}(2018)Michelson, Ingvarsson, Robinson, Edlund,
+  Eriksson, Nilsson \& Jansson}]{Michelson2018}
+Michelson, I.H., Ingvarsson, P.K., Robinson, K.M., Edlund, E., Eriksson, M.E.,
+  Nilsson, O. \& Jansson, S. (2018) Autumn senescence in aspen is not triggered
+  by day length. \emph{Physiologia Plantarum} \textbf{162}, 123--134.
+
+\bibitem[{Norby(2021)}]{Norby2021}
+Norby, R.J. (2021) Comment on ``increased growing-season productivity drives
+  earlier autumn leaf senescence in temperate trees''. \emph{Science}
+  \textbf{371}, eabg1438.
+
+\bibitem[{Olsen \emph{et~al.}(2014)Olsen, Lee \& Junttila}]{Olsen2014}
+Olsen, J.E., Lee, Y. \& Junttila, O. (2014) Effect of alternating day and night
+  temperature on short day-induced bud set and subsequent bud burst in long
+  days in norway spruce. \emph{Frontiers in Plant Science} \textbf{5}.
+
+\bibitem[{{{R Core Team}}({2021})}]{R2021}
+{{R Core Team}} ({2021}) \emph{{R: A Language and Environment for Statistical
+  Computing}}. {R Foundation for Statistical Computing}, {Vienna, Austria}.
+
+\bibitem[{Roe \emph{et~al.}(2021)Roe, Streck, Beach, Busch, Chapman, Daioglou,
+  Deppermann, Doelman, Emmet-Booth, Engelmann, Fricko, Frischmann, Funk,
+  Grassi, Griscom, Havlik, Hanssen, Humpen{\"o}der, Landholm, Lomax, Lehmann,
+  Mesnildrey, Nabuurs, Popp, Rivard, Sanderman, Sohngen, Smith, Stehfest, Woolf
+  \& Lawrence}]{roe2021}
 Roe, S., Streck, C., Beach, R., Busch, J., Chapman, M., Daioglou, V.,
   Deppermann, A., Doelman, J., Emmet-Booth, J., Engelmann, J., Fricko, O.,
   Frischmann, C., Funk, J., Grassi, G., Griscom, B., Havlik, P., Hanssen, S.,
   Humpen{\"o}der, F., Landholm, D., Lomax, G., Lehmann, J., Mesnildrey, L.,
-  Nabuurs, G.-J., Popp, A., Rivard, C., Sanderman, J., Sohngen, B., Smith, P.,
-  Stehfest, E., Woolf, D., and Lawrence, D.
-\newblock Land-based measures to mitigate climate change: Potential and
-  feasibility by country.
-\newblock {\em Global Change Biology}{ \bf 27}(23), 6025--6058 (2021).
+  Nabuurs, G.J., Popp, A., Rivard, C., Sanderman, J., Sohngen, B., Smith, P.,
+  Stehfest, E., Woolf, D. \& Lawrence, D. (2021) Land-based measures to
+  mitigate climate change: Potential and feasibility by country. \emph{Global
+  Change Biology} \textbf{27}, 6025--6058.
 
-\bibitem{White1999}
-White, M.~A., Running, S.~W., and Thornton, P.~E.
-\newblock The impact of growing-season length variability on carbon
-  assimilation and evapotranspiration over 88 years in the eastern us deciduous
-  forest.
-\newblock {\em International Journal of Biometeorology}{ \bf 42}(3), 139--145
-  (1999).
+\bibitem[{Rohde \emph{et~al.}(2011)Rohde, Bastien, Boerjan \&
+  Thomas}]{Rohde2011}
+Rohde, A., Bastien, C., Boerjan, W. \& Thomas, S. (2011) Temperature signals
+  contribute to the timing of photoperiodic growth cessation and bud set in
+  poplar. \emph{Tree Physiology} \textbf{31}, 472--482.
 
-\bibitem{Keenan2014}
-Keenan, T.~F., Gray, J., Friedl, M.~A., Toomey, M., Bohrer, G., Hollinger,
-  D.~Y., Munger, J.~W., O'Keefe, J., Schmid, H.~P., Wing, I.~S., Yang, B., and
-  Richardson, A.~D.
-\newblock Net carbon uptake has increased through warming-induced changes in
-  temperate forest phenology.
-\newblock {\em Nature Climate Change}{ \bf 4}(7), 598--604 (2014).
+\bibitem[{Silvestro \emph{et~al.}(2023)Silvestro, Zeng, Butt{\`o}, Sylvain,
+  Drolet, Mencuccini, Thiffault, Yuan \& Rossi}]{silvestro2023longer}
+Silvestro, R., Zeng, Q., Butt{\`o}, V., Sylvain, J.D., Drolet, G., Mencuccini,
+  M., Thiffault, N., Yuan, S. \& Rossi, S. (2023) A longer wood growing season
+  does not lead to higher carbon sequestration. \emph{Scientific reports}
+  \textbf{13}, 4059.
 
-\bibitem{dow2022warm}
-Dow, C., Kim, A.~Y., D'Orangeville, L., Gonzalez-Akre, E.~B., Helcoski, R.,
-  Herrmann, V., Harley, G.~L., Maxwell, J.~T., McGregor, I.~R., McShea, W.~J.,
-  et~al.
-\newblock Warm springs alter timing but not total growth of temperate deciduous
-  trees.
-\newblock {\em Nature}{ \bf 608}(7923), 552--557 (2022).
+\bibitem[{Soolanayakanahally \emph{et~al.}(2013)Soolanayakanahally, Guy, Silim
+  \& Song}]{soolanayakanahally2013timing}
+Soolanayakanahally, R.Y., Guy, R.D., Silim, S.N. \& Song, M. (2013) Timing of
+  photoperiodic competency causes phenological mismatch in balsam poplar
+  (populus balsamifera l.). \emph{Plant, cell \& environment} \textbf{36},
+  116--127.
 
-\bibitem{silvestro2023longer}
-Silvestro, R., Zeng, Q., Butt{\`o}, V., Sylvain, J.-D., Drolet, G., Mencuccini,
-  M., Thiffault, N., Yuan, S., and Rossi, S.
-\newblock A longer wood growing season does not lead to higher carbon
-  sequestration.
-\newblock {\em Scientific reports}{ \bf 13}(1), 4059 (2023).
+\bibitem[{White \emph{et~al.}(1999)White, Running \& Thornton}]{White1999}
+White, M.A., Running, S.W. \& Thornton, P.E. (1999) The impact of
+  growing-season length variability on carbon assimilation and
+  evapotranspiration over 88 years in the eastern us deciduous forest.
+  \emph{International Journal of Biometeorology} \textbf{42}, 139--145.
 
-\bibitem{Zani2020}
-Zani, D., Crowther, T.~W., Mo, L., Renner, S.~S., and Zohner, C.~M.
-\newblock Increased growing-season productivity drives earlier autumn leaf
-  senescence in temperate trees.
-\newblock {\em Science}{ \bf 370}(6520), 1066--1071 (2020).
+\bibitem[{Yang \emph{et~al.}(1995)Yang, Logan \& Coffey}]{YANG199561}
+Yang, S., Logan, J. \& Coffey, D.L. (1995) Mathematical formulae for
+  calculating the base temperature for growing degree days. \emph{Agricultural
+  and Forest Meteorology} \textbf{74}, 61--74.
 
-\bibitem{Norby2021}
-Norby, R.~J.
-\newblock Comment on ``increased growing-season productivity drives earlier
-  autumn leaf senescence in temperate trees''.
-\newblock {\em Science}{ \bf 371}(6533), eabg1438 (2021).
+\bibitem[{Zani \emph{et~al.}(2020)Zani, Crowther, Mo, Renner \&
+  Zohner}]{Zani2020}
+Zani, D., Crowther, T.W., Mo, L., Renner, S.S. \& Zohner, C.M. (2020) Increased
+  growing-season productivity drives earlier autumn leaf senescence in
+  temperate trees. \emph{Science} \textbf{370}, 1066--1071.
 
-\bibitem{Zohner2023}
-Zohner, C.~M., Mirzagholi, L., Renner, S.~S., Mo, L., Rebindaine, D., Bucher,
-  R., Palou{\v s}, D., Vitasse, Y., Fu, Y.~H., Stocker, B.~D., and Crowther,
-  T.~W.
-\newblock Effect of climate warming on the timing of autumn leaf senescence
-  reverses after the summer solstice.
-\newblock {\em Science}{ \bf 381}(6653), eadf5098 (2023).
-
-\bibitem{Grime:1977sw}
-Grime, J.~P.
-\newblock Evidence for existence of 3 primary strategies in plants and its
-  relevance to ecological and evolutionary theory.
-\newblock {\em American Naturalist}{ \bf 111}(982), 1169--1194 (1977).
-
-\bibitem{aitken2016}
-Aitken, S.~N. and Bemmels, J.~B.
-\newblock Time to get moving: assisted gene flow of forest trees.
-\newblock {\em Evol Appl}{ \bf 9}(1), 271--90 (2016).
-
-\bibitem{bauerle2012photoperiodic}
-Bauerle, W.~L., Oren, R., Way, D.~A., Qian, S.~S., Stoy, P.~C., Thornton,
-  P.~E., Bowden, J.~D., Hoffman, F.~M., and Reynolds, R.~F.
-\newblock Photoperiodic regulation of the seasonal pattern of photosynthetic
-  capacity and the implications for carbon cycling.
-\newblock {\em Proceedings of the National Academy of Sciences}{ \bf 109}(22),
-  8612--8617 (2012).
-
-\bibitem{soolanayakanahally2013timing}
-Soolanayakanahally, R.~Y., Guy, R.~D., Silim, S.~N., and Song, M.
-\newblock Timing of photoperiodic competency causes phenological mismatch in
-  balsam poplar (populus balsamifera l.).
-\newblock {\em Plant, cell \& environment}{ \bf 36}(1), 116--127 (2013).
-
-\bibitem{Korner2023}
-K{\"o}rner, C., M{\"o}hl, P., and Hiltbrunner, E.
-\newblock Four ways to define the growing season.
-\newblock {\em Ecology Letters}{ \bf 26}(8), 1277--1292 (2023).
-
-\bibitem{CHUINE2000337}
-Chuine, I.
-\newblock A unified model for budburst of trees.
-\newblock {\em Journal of Theoretical Biology}{ \bf 207}(3), 337--347 (2000).
-
-\bibitem{YANG199561}
-Yang, S., Logan, J., and Coffey, D.~L.
-\newblock Mathematical formulae for calculating the base temperature for
-  growing degree days.
-\newblock {\em Agricultural and Forest Meteorology}{ \bf 74}(1), 61--74 (1995).
-
-\bibitem{Farquhar:1980vm}
-Farquhar, G.~D., von Caemmerer, S., and Berry, J.~A.
-\newblock A biochemical model of photosynthetic co2 assimilation in leaves of
-  c3 species.
-\newblock {\em Planta}{ \bf 149}(1), 78--90 (1980).
-
-\bibitem{Finn2007}
-Finn, G., Straszewski, A., and Peterson, V.
-\newblock A general growth stage key for describing trees and woody plants.
-\newblock {\em Annals of Applied Biology}{ \bf 151}(1), 127--131, Aug  (2007).
-
-\bibitem{Nowosad2019}
-{Jakub Nowosad}.
-\newblock {\em {pollen: Analysis of Aerobiological Data}},  ({2019}).
-
-\bibitem{Burkner2018}
-B{\"u}rkner, P.-C.
-\newblock Advanced bayesian multilevel modeling with the r package brms.
-\newblock {\em R Journal}{ \bf 10}, 395--411, 07  (2018).
-
-\bibitem{R2021}
-{{R Core Team}}.
-\newblock {\em {R: A Language and Environment for Statistical Computing}}.
-\newblock {R Foundation for Statistical Computing}, {Vienna, Austria},
-  ({2021}).
-
-\bibitem{Menzel1999}
-Menzel, A. and Fabian, P.
-\newblock Growing season extended in europe.
-\newblock {\em Nature}{ \bf 397}(6721), 659--659 (1999).
-
-\bibitem{Liu2010}
-Liu, B., Henderson, M., Zhang, Y., and Xu, M.
-\newblock Spatiotemporal change in china's climatic growing season: 1955--2000.
-\newblock {\em Climatic Change}{ \bf 99}(1), 93--118 (2010).
-
-\bibitem{Liu2016}
-Liu, Q., Fu, Y.~H., Zhu, Z., Liu, Y., Liu, Z., Huang, M., Janssens, I.~A., and
-  Piao, S.
-\newblock Delayed autumn phenology in the northern hemisphere is related to
-  change in both climate and spring phenology.
-\newblock {\em Global Change Biology}{ \bf 22}(11), 3702--3711, 2024/12/03
-  (2016).
-
-\bibitem{cuny2012life}
-Cuny, H.~E., Rathgeber, C.~B., Lebourgeois, F., Fortin, M., and Fournier, M.
-\newblock Life strategies in intra-annual dynamics of wood formation: example
-  of three conifer species in a temperate forest in north-east france.
-\newblock {\em Tree physiology}{ \bf 32}(5), 612--625 (2012).
-
-\bibitem{michelot2012comparing}
-Michelot, A., Simard, S., Rathgeber, C., Dufr{\^e}ne, E., and Damesin, C.
-\newblock {Comparing the intra-annual wood formation of three European species
-  (\emph{Fagus sylvatica, Quercus petraea and Pinus sylvestris}) as related to
-  leaf phenology and non-structural carbohydrate dynamics}.
-\newblock {\em Tree physiology}{ \bf 32}(8), 1033--1045 (2012).
-
-\bibitem{Rohde2011}
-Rohde, A., Bastien, C., Boerjan, W., and Thomas, S.
-\newblock Temperature signals contribute to the timing of photoperiodic growth
-  cessation and bud set in poplar.
-\newblock {\em Tree Physiology}{ \bf 31}(5), 472--482, 05  (2011).
-
-\bibitem{Michelson2018}
-Michelson, I.~H., Ingvarsson, P.~K., Robinson, K.~M., Edlund, E., Eriksson,
-  M.~E., Nilsson, O., and Jansson, S.
-\newblock Autumn senescence in aspen is not triggered by day length.
-\newblock {\em Physiologia Plantarum}{ \bf 162}(1), 123--134 (2018).
-
-\bibitem{Olsen2014}
-Olsen, J.~E., Lee, Y., and Junttila, O.
-\newblock Effect of alternating day and night temperature on short day-induced
-  bud set and subsequent bud burst in long days in norway spruce.
-\newblock {\em Frontiers in Plant Science}{ \bf 5} (2014).
-
-\bibitem{Morales-Castilla2024}
-Morales-Castilla, I., Davies, T.~J., Legault, G., Buonaiuto, D.~M.,
-  Chamberlain, C.~J., Ettinger, A.~K., Garner, M., Jones, F. A.~M., Loughnan,
-  D., Pearse, W.~D., Sodhi, D.~S., and Wolkovich, E.~M.
-\newblock Phylogenetic estimates of species-level phenology improve ecological
-  forecasting.
-\newblock {\em Nature Climate Change}{ \bf 14}(9), 989--995 (2024).
-
-\bibitem{GALLINAT2015}
-Gallinat, A.~S., Primack, R.~B., and Wagner, D.~L.
-\newblock Autumn, the neglected season in climate change research.
-\newblock {\em Trends in Ecology & Evolution}{ \bf 30}(3), 169--176 (2015).
+\bibitem[{Zohner \emph{et~al.}(2023)Zohner, Mirzagholi, Renner, Mo, Rebindaine,
+  Bucher, Palou{\v s}, Vitasse, Fu, Stocker \& Crowther}]{Zohner2023}
+Zohner, C.M., Mirzagholi, L., Renner, S.S., Mo, L., Rebindaine, D., Bucher, R.,
+  Palou{\v s}, D., Vitasse, Y., Fu, Y.H., Stocker, B.D. \& Crowther, T.W.
+  (2023) Effect of climate warming on the timing of autumn leaf senescence
+  reverses after the summer solstice. \emph{Science} \textbf{381}, eadf5098.
 
 \end{thebibliography}

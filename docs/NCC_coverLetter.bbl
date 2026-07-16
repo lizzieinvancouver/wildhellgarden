@@ -1,43 +1,42 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{6}
+\providecommand{\natexlab}[1]{#1}
 
-\bibitem{dow2022warm}
-Dow, C., Kim, A.~Y., D'Orangeville, L., Gonzalez-Akre, E.~B., Helcoski, R.,
-  Herrmann, V., Harley, G.~L., Maxwell, J.~T., McGregor, I.~R., McShea, W.~J.,
-  et~al.
-\newblock Warm springs alter timing but not total growth of temperate deciduous
-  trees.
-\newblock {\em Nature}{ \bf 608}(7923), 552--557 (2022).
+\bibitem[{Dow \emph{et~al.}(2022)Dow, Kim, D'Orangeville, Gonzalez-Akre,
+  Helcoski, Herrmann, Harley, Maxwell, McGregor, McShea
+  \emph{et~al.}}]{dow2022warm}
+Dow, C., Kim, A.Y., D'Orangeville, L., Gonzalez-Akre, E.B., Helcoski, R.,
+  Herrmann, V., Harley, G.L., Maxwell, J.T., McGregor, I.R., McShea, W.J.
+  \emph{et~al.} (2022) Warm springs alter timing but not total growth of
+  temperate deciduous trees. \emph{Nature} \textbf{608}, 552--557.
 
-\bibitem{silvestro2023longer}
-Silvestro, R., Zeng, Q., Butt{\`o}, V., Sylvain, J.-D., Drolet, G., Mencuccini,
-  M., Thiffault, N., Yuan, S., and Rossi, S.
-\newblock A longer wood growing season does not lead to higher carbon
-  sequestration.
-\newblock {\em Scientific reports}{ \bf 13}(1), 4059 (2023).
+\bibitem[{K{\"o}rner \emph{et~al.}(2023)K{\"o}rner, M{\"o}hl \&
+  Hiltbrunner}]{Korner2023}
+K{\"o}rner, C., M{\"o}hl, P. \& Hiltbrunner, E. (2023) Four ways to define the
+  growing season. \emph{Ecology Letters} \textbf{26}, 1277--1292.
 
-\bibitem{Zani2020}
-Zani, D., Crowther, T.~W., Mo, L., Renner, S.~S., and Zohner, C.~M.
-\newblock Increased growing-season productivity drives earlier autumn leaf
-  senescence in temperate trees.
-\newblock {\em Science}{ \bf 370}(6520), 1066--1071 (2020).
+\bibitem[{Norby(2021)}]{norby2021comment}
+Norby, R.J. (2021) Comment on ``increased growing-season productivity drives
+  earlier autumn leaf senescence in temperate trees''. \emph{Science}
+  \textbf{371}, eabg1438.
 
-\bibitem{Zohner2023}
-Zohner, C.~M., Mirzagholi, L., Renner, S.~S., Mo, L., Rebindaine, D., Bucher,
-  R., Palou{\v s}, D., Vitasse, Y., Fu, Y.~H., Stocker, B.~D., and Crowther,
-  T.~W.
-\newblock Effect of climate warming on the timing of autumn leaf senescence
-  reverses after the summer solstice.
-\newblock {\em Science}{ \bf 381}(6653), eadf5098 (2023).
+\bibitem[{Silvestro \emph{et~al.}(2023)Silvestro, Zeng, Butt{\`o}, Sylvain,
+  Drolet, Mencuccini, Thiffault, Yuan \& Rossi}]{silvestro2023longer}
+Silvestro, R., Zeng, Q., Butt{\`o}, V., Sylvain, J.D., Drolet, G., Mencuccini,
+  M., Thiffault, N., Yuan, S. \& Rossi, S. (2023) A longer wood growing season
+  does not lead to higher carbon sequestration. \emph{Scientific reports}
+  \textbf{13}, 4059.
 
-\bibitem{norby2021comment}
-Norby, R.~J.
-\newblock Comment on ``increased growing-season productivity drives earlier
-  autumn leaf senescence in temperate trees''.
-\newblock {\em Science}{ \bf 371}(6533), eabg1438 (2021).
+\bibitem[{Zani \emph{et~al.}(2020)Zani, Crowther, Mo, Renner \&
+  Zohner}]{Zani2020}
+Zani, D., Crowther, T.W., Mo, L., Renner, S.S. \& Zohner, C.M. (2020) Increased
+  growing-season productivity drives earlier autumn leaf senescence in
+  temperate trees. \emph{Science} \textbf{370}, 1066--1071.
 
-\bibitem{Korner2023}
-K{\"o}rner, C., M{\"o}hl, P., and Hiltbrunner, E.
-\newblock Four ways to define the growing season.
-\newblock {\em Ecology Letters}{ \bf 26}(8), 1277--1292 (2023).
+\bibitem[{Zohner \emph{et~al.}(2023)Zohner, Mirzagholi, Renner, Mo, Rebindaine,
+  Bucher, Palou{\v s}, Vitasse, Fu, Stocker \& Crowther}]{Zohner2023}
+Zohner, C.M., Mirzagholi, L., Renner, S.S., Mo, L., Rebindaine, D., Bucher, R.,
+  Palou{\v s}, D., Vitasse, Y., Fu, Y.H., Stocker, B.D. \& Crowther, T.W.
+  (2023) Effect of climate warming on the timing of autumn leaf senescence
+  reverses after the summer solstice. \emph{Science} \textbf{381}, eadf5098.
 
 \end{thebibliography}

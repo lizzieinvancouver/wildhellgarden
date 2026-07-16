@@ -484,7 +484,7 @@ PGDD2_summ$epred_scaled <- PGDD2_summ$.epred * scale + shift
 
 
 
-aabb<-ggplot() +
+ggplot() +
   ## --- Left axis (pgs) ---
   geom_jitter(data = cg11,width = 1,height=1,
              aes(x = leafout_cent, y = pgs,
@@ -540,14 +540,13 @@ PGGD2_summ$lower_scaled <- PGGD2_summ$.lower * scale_factor + shift_factor
 PGGD2_summ$upper_scaled <- PGGD2_summ$.upper * scale_factor + shift_factor
 PGGD2_summ$epred_scaled <- PGGD2_summ$.epred * scale_factor + shift_factor
 
-
-dual_plot_flipped <- ggplot() +
+ggplot() +
   
   ## --- LEFT AXIS (Pp2_summ; now the primary axis) ---
   geom_ribbon(data = Pp2_summ,
               aes(x = leafout_cent,
                   ymin = .lower, ymax = .upper),fill="navy",
-              alpha = .7) +
+              alpha = .7)+facet_wrap(~species)
   
   geom_line(data = Pp2_summ,
             aes(x = leafout_cent, y = .epred),
@@ -658,13 +657,17 @@ b <- ggplot() +
   xlab("leafout anomaly \n(days)")
 
 
-c <- ggplot(FGGD2_summ,
+
+FGGD2_summ <- FGGD2_summ %>%
+  mutate(species = factor(species, levels = species_order))
+
+c<- ggplot(FGGD2_summ,
              aes(leafout_cent, .epred)) +
   geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.5) +
-  geom_line(size = 0.8) +
-  facet_wrap(~factor(species, levels = species_order)) +
+  #geom_line(size = 0.8) +f
+  facet_wrap(~species) 
   ylab("") + xlab("leafout anomaly \n(days)") +
-  ggthemes::theme_few(base_size = 11) +
+  ggthemes::theme_few(base_size = 11)# +
   theme(strip.text = element_text(face = "italic"))
 
 
@@ -1231,7 +1234,7 @@ pd<-ggstance::position_dodgev(height=.3)
 
 sup2.2<-ggplot(yearout2,aes(r_year,as.factor(year)))+
   stat_pointinterval(.width = c(.5,.9),aes(fill=phase,color=phase),position=pd)+geom_vline(xintercept=0)+
-  xlab("effect of year")+
+  xlab("effect of year \n(days)")+
   ylab("")+xlim(-40,40)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+
   scale_fill_manual(values=c("tan4","green4"))+scale_color_manual(values=c("tan2","darkgreen"))
@@ -1239,7 +1242,7 @@ sup2.2<-ggplot(yearout2,aes(r_year,as.factor(year)))+
 
 sup2.1<-ggplot(siteout2,aes(r_site,population))+
   stat_pointinterval(.width = c(.5,.9),aes(fill=phase,color=phase),position=pd)+geom_vline(xintercept=0)+
-  xlab("effect of site")+ylab("")+
+  xlab("effect of site \n(days)")+ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+scale_fill_manual(values=c("tan4","green4"))+scale_color_manual(values=c("tan3","darkgreen"))+
   coord_cartesian(xlim=c(-8,6))
 
@@ -1247,7 +1250,7 @@ sup2.1<-ggplot(siteout2,aes(r_site,population))+
 
 new2.1<-ggplot(siteout,aes(r_site,population))+
   stat_pointinterval(.width = c(.5,.9),aes(fill=phase,color=phase),position=pd)+geom_vline(xintercept=0)+
-  xlab("effect of site")+ylab("")+
+  xlab("effect of site \n(days)")+ylab("")+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(frostfree))+scale_fill_manual(values=c("tan4","green4"))+scale_color_manual(values=c("tan3","darkgreen"))+
   coord_cartesian(xlim=c(-4,4))
 
@@ -1255,7 +1258,7 @@ new2.1<-ggplot(siteout,aes(r_site,population))+
 
 new2.2<-ggplot(yearout,aes(r_year,as.factor(year)))+
   stat_pointinterval(.width = c(.5,.9),aes(fill=phase,color=phase),position=pd)+geom_vline(xintercept=0)+
-  xlab("effect of year")+
+  xlab("effect of year \n(days)")+
   ylab("")+xlim(-40,40)+
   ggthemes::theme_few()+scale_y_discrete(name="",limits=rev(yorder))+
   scale_fill_manual(values=c("tan4","green4"))+scale_color_manual(values=c("tan3","darkgreen"))
