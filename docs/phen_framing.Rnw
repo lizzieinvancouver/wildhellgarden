@@ -38,15 +38,6 @@ Deirdre Loughnan$^{5}$, E.M. Wolkovich$^{2,3,5}$}
 \SweaveOpts{concordance=TRUE}
 
 
-\maketitle
-
-\noindent \emph{Author affiliations:}\\
-\noindent $^1$Department of Plant Science and Landscape Architecture, University of Maryland, College Park, Maryland, USA. ORCID: 0000-0003-4022-2591\\
-\noindent $^2$Arnold Arboretum of Harvard University, Boston, Massachusetts, USA.\\
-$^3$Department of Organismic and Evolutionary Biology, Harvard University, Cambridge, Massachusetts, USA \\
-$^4$The Nature Conservancy, Cat should add, USA \\
-$^5$Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, Vancouver, British Columbia, Canada\\
-$^a$Corresponding author: 301.405.1061; dbuona@umd.edu\\
 
 
 %\setlength{\parskip}{0.5pt} % 1ex plus 0.5ex minus 0.2ex}
@@ -354,10 +345,6 @@ Understanding whether thermal responses are consistent across species with diffe
 %The thermal growth season is likely a better proxy for carbon gain. Even with very weak carry-over effects between SoS and EoS, phenological advances that drive SoS into less favorable conditions for carbon assimilation in the early spring, trade more carbon gain in mid season for reduced gain in early. 
 % The dynamics may help to explain why phenology advances with climate change have not clearly translated into higher levels of primary productive \citep{}.
 
-
-
-\section*{Acknowledgements:}
-Thanks to Kea Woodruff and Lee Toomey for their help planting and caring for the Weld Hill Common Garden and thank you to Dr. Meghan Blumstein for her thoughts and comments. Additional thanks to Harvard Forest, Dartmouth College and Université de Montreal for use of the field sites.
 
 
 

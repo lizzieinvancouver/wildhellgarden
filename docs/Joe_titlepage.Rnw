@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{natbib}
+\usepackage{gensymb}
+
+
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{setspace}
+%\usepackage[backend=bibtex]{biblatex}
+\bibliographystyle{..//refs/styles/besjournals.bst}
+\setkeys{Gin}{width=0.8\textwidth}
+%\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{10pt}
+\setlength{\belowcaptionskip}{10pt}
+ \topmargin -1.5cm 
+ \oddsidemargin -0.04cm 
+ \evensidemargin -0.04cm 
+ \textwidth 16.59cm
+ \textheight 21.94cm 
+ \parskip 7.2pt 
+\renewcommand{\baselinestretch}{1}
+
+
+\title{Early leafout extends calendar but not thermal growing seasons} % Phenological differences among species explain why early leafout extends the calendar but not thermal growing season
+
+\author{D.M. Buonaiuto $^{1,2,3}$, C.J. Chamberlain $^{2,3,4}$,
+Deirdre Loughnan$^{5}$, E.M. Wolkovich$^{2,3,5}$}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+
+\maketitle
+
+\noindent \emph{Author affiliations:}\\
+\noindent $^1$Department of Plant Science and Landscape Architecture, University of Maryland, College Park, Maryland, USA. ORCID: 0000-0003-4022-2591\\
+\noindent $^2$Arnold Arboretum of Harvard University, Boston, Massachusetts, USA.\\
+$^3$Department of Organismic and Evolutionary Biology, Harvard University, Cambridge, Massachusetts, USA \\
+$^4$The Nature Conservancy, Cat should add, USA \\
+$^5$Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, Vancouver, British Columbia, Canada\\
+$^a$Corresponding author: 301.405.1061; dbuona@umd.edu\\
+
+\section*{Acknowledgements:}
+Thanks to Kea Woodruff and Lee Toomey for their help planting and caring for the Weld Hill Common Garden and thank you to Dr. Meghan Blumstein for her thoughts and comments. Additional thanks to Harvard Forest, Dartmouth College and Université de Montreal for use of the field sites.
+\section*{Author contributions:}
+EMW conceived of the experimental design, DMB, CJC, DL \& EMW developed the research quesiton, DMB \& CJC collected the data, DMB lead the analyses, DMB lead the writing of the manuscript with contributions from CJC, DL \& EMW.
+\section*{Data Availability Statement:}
+The data and code associated with this manuscript will be publicly archived at https://knb.ecoinformatics.org/ at the time of publication.
+\section*{Conflict of Interest Statement:}
+The authors declare no conflicts of interest.
+
+
+\end{document}
